@@ -1,12 +1,10 @@
-# KCNA
-
-# Cloud - podstawy
+# Chapter 2 - Cloud Native Architecture
 ## Skalowanie
 - vertical scaling - dodawanie ramu, CPU...
 - horizontal scaling - nowe instancji aplikacji, np. nowe VM itd. 
 
 
-# Serverless
+## Serverless
 - **Serverless** - dostarczamy kod aplikacji, provider robi resztę
 
 Function as a Service (FaaS). The cloud provider abstracts the underlying infrastructure, so that developers can deploy software by uploading their code for example as .zip files or providing a container image.
@@ -21,7 +19,7 @@ Although there are many advantages to serverless technology, it initially strugg
 
 **CloudEvents** is a specification for describing event data in a common way. CloudEvents seeks to dramatically simplify event declaration and delivery across services, platforms, and beyond!
 
-# Open standards
+## Open standards
 While Docker is often used synonymously with container technologies, the community has committed to the open industry standard of the Open Container Initiative (OCI).
 
 Under the umbrella of the Linux Foundation, the Open Container Initiative provides two standards which define the way how to build and run containers. The image-spec defines how to build and package container images. While the runtime-spec specifies the configuration, execution environment and lifecycle of containers. A more recent addition to the OCI project is the Distribution-Spec, which provides a standard for the distribution of content in general and container images in particular. 
@@ -36,7 +34,7 @@ Open standards like this help and complement other systems like Kubernetes, whic
 
 Following this approach, other systems like Prometheus or OpenTelemetry evolved and thrived in this ecosystem and provide additional standards for monitoring and observability.
 
-# Role - stanowiska pracy? 
+## Role - stanowiska pracy? 
 
 - DevOps Engineer - Often described as a simple combination of developer and administrator, but that doesn't do the role justice. DevOps engineers use tools and processes that balance out software development and operations. Starting with approaches to writing, building, and testing software throughout the deployment lifecycle.
 
@@ -51,15 +49,10 @@ To measure performance and reliability, SREs use three main metrics:
 
 Around these metrics, SREs might define an error budget. An error budget defines the amount (or time) of errors your application can have, before actions are taken, like stopping deployments to production.
 
+# Container Orchestration
 
+## Container Basics
 
+Contrary to popular belief, container technologies are much older than one would expect. One of the earliest ancestors of modern container technologies is the chroot command that was introduced in Version 7 Unix in 1979. The chroot command could be used to isolate a process from the root filesystem and basically "hide" the files from the process and simulate a new root directory. The isolated environment is a so-called chroot jail, where the files can’t be accessed by the process, but are still present on the system.
 
-
-Cloud native applications are ___________? 
-
-    a. Small, decoupled services
-    b. Easy to maintain
-    c. Self-healing
-    d. All of the above
-
-
+![chroot](./pictures/chroot_structure.png)
