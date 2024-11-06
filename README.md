@@ -25,12 +25,11 @@ While Docker is often used synonymously with container technologies, the communi
 Under the umbrella of the Linux Foundation, the Open Container Initiative provides two standards which define the way how to build and run containers. The image-spec defines how to build and package container images. While the runtime-spec specifies the configuration, execution environment and lifecycle of containers. A more recent addition to the OCI project is the Distribution-Spec, which provides a standard for the distribution of content in general and container images in particular. 
 
 Open standards like this help and complement other systems like Kubernetes, which is the de facto standard platform for orchestrating containers. A few standards that will discover in the following chapters are:
-
-    OCI Spec: image, runtime and distribution specification on how to run, build an distribute containers
-    Container Network Interface (CNI): A specification on how to implement networking for Containers.
-    Container Runtime Interface (CRI): A specification on how to implement container runtimes in container orchestration systems.
-    Container Storage Interface (CSI): A specification on how to implement storage in container orchestration systems.
-    Service Mesh Interface (SMI): A specification on how to implement Service Meshes in container orchestration systems with a focus on Kubernetes.
+- OCI Spec: image, runtime and distribution specification on how to run, build an distribute containers
+- Container Network Interface (CNI): A specification on how to implement networking for Containers.
+- Container Runtime Interface (CRI): A specification on how to implement container runtimes in container orchestration systems.
+- Container Storage Interface (CSI): A specification on how to implement storage in container orchestration systems.
+- Service Mesh Interface (SMI): A specification on how to implement Service Meshes in container orchestration systems with a focus on Kubernetes.
 
 Following this approach, other systems like Prometheus or OpenTelemetry evolved and thrived in this ecosystem and provide additional standards for monitoring and observability.
 
@@ -38,16 +37,14 @@ Following this approach, other systems like Prometheus or OpenTelemetry evolved 
 
 - DevOps Engineer - Often described as a simple combination of developer and administrator, but that doesn't do the role justice. DevOps engineers use tools and processes that balance out software development and operations. Starting with approaches to writing, building, and testing software throughout the deployment lifecycle.
 
-- Site Reliability Engineer (SRE)
+- Site Reliability Engineer (SRE) - A role with a stronger definition is the Site Reliability Engineer (SRE). SRE was founded around 2003 at Google and became an important job for many organizations. The overarching goal of SRE is to create and maintain software that is reliable and scalable. To achieve this, software engineering approaches are used to solve operational problems and automate operation tasks.
 
-A role with a stronger definition is the Site Reliability Engineer (SRE). SRE was founded around 2003 at Google and became an important job for many organizations. The overarching goal of SRE is to create and maintain software that is reliable and scalable. To achieve this, software engineering approaches are used to solve operational problems and automate operation tasks.
+    To measure performance and reliability, SREs use three main metrics:
+    - Service Level Objectives (SLO): “Specify a target level for the reliability of your service.” - A goal that is set, for example reaching a service latency of less that 100ms.
+    - Service Level Indicators (SLI): “A carefully defined quantitative measure of some aspect of the level of service that is provided” - For example how long a request actually needs to be answered.
+    - Service Level Agreements (SLA): “An explicit or implicit contract with your users that includes consequences of meeting (or missing) the SLOs they contain. The consequences are most easily recognized when they are financial – a rebate or a penalty – but they can take other forms.” - Answers the question what happens if SLOs are not met.
 
-To measure performance and reliability, SREs use three main metrics:
-- Service Level Objectives (SLO): “Specify a target level for the reliability of your service.” - A goal that is set, for example reaching a service latency of less that 100ms.
-- Service Level Indicators (SLI): “A carefully defined quantitative measure of some aspect of the level of service that is provided” - For example how long a request actually needs to be answered.
-- Service Level Agreements (SLA): “An explicit or implicit contract with your users that includes consequences of meeting (or missing) the SLOs they contain. The consequences are most easily recognized when they are financial – a rebate or a penalty – but they can take other forms.” - Answers the question what happens if SLOs are not met.
-
-Around these metrics, SREs might define an error budget. An error budget defines the amount (or time) of errors your application can have, before actions are taken, like stopping deployments to production.
+    Around these metrics, SREs might define an error budget. An error budget defines the amount (or time) of errors your application can have, before actions are taken, like stopping deployments to production.
 
 # Container Orchestration
 
@@ -56,3 +53,31 @@ Around these metrics, SREs might define an error budget. An error budget defines
 Contrary to popular belief, container technologies are much older than one would expect. One of the earliest ancestors of modern container technologies is the chroot command that was introduced in Version 7 Unix in 1979. The chroot command could be used to isolate a process from the root filesystem and basically "hide" the files from the process and simulate a new root directory. The isolated environment is a so-called chroot jail, where the files can’t be accessed by the process, but are still present on the system.
 
 ![chroot](./pictures/chroot_structure.png)
+
+
+**While chroot is a pretty old technology, it is still in use today by some popular software projects. Container technologies that we have today still embody this very concept, but in a modernized version and with a lot of features on top.**
+
+To isolate a process even more than chroot can do, current Linux kernels provide features like namespaces and cgroups.
+
+Namespaces are used to isolate various resources, for example the network. A network namespace can be used to provide a complete abstraction of network interfaces and routing tables. This allows a process to have its own IP address. The Linux Kernel 5.6 currently provides 8 namespaces:
+
+- pid - process ID provides a process with its own set of process IDs.
+- net - network allows the processes to have their own network stack, including the IP address.
+- mnt - mount abstracts the filesystem view and manages mount points.
+- ipc - inter-process communication provides separation of named shared memory segments.
+- user - provides process with their own set of user IDs and group IDs.
+- uts - Unix time sharing allows processes to have their own hostname and domain name.
+- cgroup - a newer namespace that allows a process to have its own set of cgroup root directories.
+- time - the newest namespace can be used to virtualize the clock of the system. 
+
+cgroups are used to organize processes in hierarchical groups and assign them resources like memory and CPU. When you want to limit your application container to let’s say 4GB of memory, cgroups are used under the hood to ensure these limits.
+
+
+At a first glance, containers seem to be very similar to virtual machines, but it’s crucial to understand that they are very different. While virtual machines emulate a complete machine, including the operating system and a kernel, containers share the kernel of the host machine and, as explained, are only isolated processes.
+
+Virtual machines come with some overhead, be it boot time, size or resource usage to run the operating system. Containers on the other hand are literally processes, like the browser you can start on your machine, therefore they start a lot faster and have a smaller footprint.
+
+![Traditional Deployment vs Virtualized Deployment vs Container Deployment](./pictures/Traditional_Deployment_vs_Virtualized_Deployment_vs_Container%20Deployment.png)
+**Traditional Deployment vs Virtualized Deployment vs Container Deployment**
+
+In many cases it is not a question of whether you are using containers or virtual machines, rather you are using both technologies to benefit from the efficiency that containers have but still use the security advantages that the greater isolation of virtual machines bring to the table.
