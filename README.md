@@ -123,6 +123,8 @@ With the parameters -t my-python-image you can specify a name tag for your image
 
 To distribute these images, you can use a container registry. This is nothing more than a web server where you can upload and download images. Conveniently, Docker has the push and pull commands built-in:
 
+```
 docker push my-registry.com/my-python-image
 docker pull my-registry.com/my-python-image
+```
 
