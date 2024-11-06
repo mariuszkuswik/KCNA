@@ -81,3 +81,48 @@ Virtual machines come with some overhead, be it boot time, size or resource usag
 **Traditional Deployment vs Virtualized Deployment vs Container Deployment**
 
 In many cases it is not a question of whether you are using containers or virtual machines, rather you are using both technologies to benefit from the efficiency that containers have but still use the security advantages that the greater isolation of virtual machines bring to the table.
+
+
+# Building Container Images
+
+![container_images](./pictures/container_images.png)
+**Container Images** 
+
+
+Images can be built by reading the instructions from a buildfile called Dockerfile. The instructions are almost the same as one would use to install an application on a server. Here is an example of a Dockerfile that containerizes a Python script:
+
+```
+# Every container image starts with a base image.
+# This could be your favorite linux distribution
+FROM ubuntu:20.04 
+
+# Run commands to add software and libraries to your image
+# Here we install python3 and the pip package manager
+RUN apt-get update && \
+    apt-get -y install python3 python3-pip 
+
+# The copy command can be used to copy your code to the image
+# Here we copy a script called "my-app.py" to the containers filesystem
+COPY my-app.py /app/ 
+
+# Defines the workdir in which the application runs
+# From this point on everything will be executed in /app
+WORKDIR /app
+
+# The process that should be started when the container runs
+# In this case we start our python app "my-app.py"
+CMD ["python3","my-app.py"]
+```
+
+If you have installed Docker on your machine, you can build the image with the following command:
+
+```
+docker build -t my-python-image -f Dockerfile
+```
+With the parameters -t my-python-image you can specify a name tag for your image, and with -f Dockerfile you specify where your Dockerfile can be found. This gives developers the ability to manage all the dependencies of their application and packaging it ready to run instead of leaving that task to another person or team.
+
+To distribute these images, you can use a container registry. This is nothing more than a web server where you can upload and download images. Conveniently, Docker has the push and pull commands built-in:
+
+docker push my-registry.com/my-python-image
+docker pull my-registry.com/my-python-image
+
