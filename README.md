@@ -140,5 +140,12 @@ A fairly new attack surface that was introduced with containers is the use of pu
 
 ## Container Orchestration Fundamentals
 
-Container orchestration systems provide a way to build a cluster of multiple servers and host the containers on top. Most container orchestration systems consist of two parts: a control plane that is responsible for the management of the containers and worker nodes that actually host the containers.
+Container orchestration systems provide a way to build a cluster of multiple servers and host the containers on top. Most container orchestration systems consist of two parts: a *control plane* that is responsible for the management of the containers and *worker nodes* that actually host the containers.
+
+## Networking
+
+Network namespaces allow each container to have its own unique IP address, therefore multiple applications can open the same network port; for example, you could have multiple containerized web servers that all open port 8080.
+To make the application accessible from outside the host system, containers have the ability to map a port from the container to a port from the host system. 
+
+
 

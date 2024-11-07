@@ -1,6 +1,5 @@
 # Chapter 2 - Cloud Native Architecture
-Question 2.1
-
+## Question 2.1
 Cloud native applications are ___________? 
 
     a. Small, decoupled services
@@ -9,7 +8,7 @@ Cloud native applications are ___________?
     d. All of the above
 d. All of the above
 
-Question 2.2
+## Question 2.2
 What are some characteristics of cloud native architecture?
 
     a. High costs and maintenance
@@ -18,7 +17,7 @@ What are some characteristics of cloud native architecture?
     d. All of the above
 b. High automation and scalability
 
-Question 2.3
+## Question 2.3
 The Open Container Initiative provides container standards for __________.
 
     a. Runtime, image, build
@@ -27,7 +26,7 @@ The Open Container Initiative provides container standards for __________.
     d. Docker, build, image
 b. Runtime, image, distribution
 
-Question 2.4
+## Question 2.4
 What is the most common pattern for autoscaling in cloud environments?
 
     a. Vertical Scaling
@@ -36,7 +35,7 @@ What is the most common pattern for autoscaling in cloud environments?
     d. Parallel Scaling
 c. Horizontal Scaling
 
-Question 2.5
+## Question 2.5
 Serverless computing does not require _______:
 
     a. Servers
@@ -45,7 +44,7 @@ Serverless computing does not require _______:
     d. Network
 b. Provisioning and operating infrastructure
 
-Question 2.6
+## Question 2.6
 The twelve-factor app is a guideline to _______:
 
     a. Develop cloud native applications
@@ -54,7 +53,7 @@ The twelve-factor app is a guideline to _______:
     d. All of the above
 a. Develop cloud native applications
 
-Question 2.7
+## Question 2.7
 Which of the following is not a standard used for container orchestration?
 
     a. Container Network Interface (CNI)
@@ -63,8 +62,7 @@ Which of the following is not a standard used for container orchestration?
     d. Container Storage Interface (CSI)
 b. Container Deployment Interface (CDI)
 
-Question 2.8
-
+## Question 2.8
 Which of the following is not a key metric for Site Reliability Engineers?
 
     a. Service level agreement (SLA)
