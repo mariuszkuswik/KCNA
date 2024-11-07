@@ -128,3 +128,17 @@ docker push my-registry.com/my-python-image
 docker pull my-registry.com/my-python-image
 ```
 
+# Container Orchestration
+## Security
+
+One of the greatest security risks, not only in the container area, is the execution of processes with too many privileges, especially starting processes as root or administrator. Unfortunately, this is a problem that got ignored a lot in the past and there are a lot of containers out there that run as root users. 
+
+A fairly new attack surface that was introduced with containers is the use of public images. Two of the most popular public image registries are Docker Hub and Quay and while it’s great that they provide publicly accessible images, you have to make sure that these images were not modified to include malicious software. 
+
+![Docker security layers](./pictures/Docker_security.png)
+
+
+## Container Orchestration Fundamentals
+
+Container orchestration systems provide a way to build a cluster of multiple servers and host the containers on top. Most container orchestration systems consist of two parts: a control plane that is responsible for the management of the containers and worker nodes that actually host the containers.
+
