@@ -157,4 +157,32 @@ The solution to the problem again is automation. Instead of having a manually ma
 - Key-Value-Store - Using a strongly consistent datastore especially to store information about services. A lot of systems are able to operate highly available with strong failover mechanisms. Popular choices, especially for clustering, are [etcd](https://github.com/etcd-io/etcd), [Consul](https://www.consul.io/) or [Apache Zookeeper](https://zookeeper.apache.org/).
 
 ## Service Mesh
+The software you can use to manage network traffic is called a proxy. This is a server application that sits between a client and server and can modify or filter network traffic before it reaches the server. Popular representatives are nginx, haproxy or envoy.
+
+Taking this idea a step further, a service mesh adds a proxy server to every container that you have in your architecture.
+![Istio architecrure](./pictures/Istio_architecture.png)
+
+**Istio Architecture**, retrieved from [istio.io](https://istio.io/v1.10/docs/ops/deployment/architecture/)
+
+You can now use the proxies to handle network communication between your services.
+
+Let’s take encryption as an example. 
+
+When a service mesh is used, applications don’t talk to each other directly, but the traffic is routed through the proxies instead. The most popular service meshes at the moment are istio and linkerd. While they have differences in implementation, the architecture is the same.
+
+</br>
+The proxies in a service mesh form the *data plane*. This is where networking rules are implemented and shape the traffic flow.
+
+These rules are managed centrally in the *control plane* of the service mesh. This is where you define how traffic flows from service A to service B and what configuration should be applied to the proxies.
+</br>
+
+So instead of writing code and installing libraries, you just write a config file where you tell the service mesh that service A and service B should always communicate encrypted.
+
+The config is then uploaded to the control plane and distributed to the data plane to enforce the new rule.
+
+For a long time the term "service mesh" only described a basic idea of how traffic in container platforms could be handled with proxies. The Service Mesh Interface (SMI) project aims at defining a specification on how a service mesh from various providers can be implemented.
+
+With a strong focus on Kubernetes, their goal is to standardize the end user experience for service meshes, as well as a standard for the providers that want to integrate with Kubernetes. You can find the current specification on [GitHub](https://github.com/servicemeshinterface/smi-spec).
+
+## Storage
 
