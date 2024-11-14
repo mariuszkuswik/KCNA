@@ -1,3 +1,8 @@
+# Main
+- [Play with docker](https://labs.play-with-docker.com/)
+- [killercoda - środowisko + laby](https://killercoda.com/)
+- [Computer Networking Introduction - Ethernet and IP (Heavily Illustrated), by Ivan Velichko (2021)](https://labs.iximiuz.com/courses/computer-networking-fundamentals/from-lan-to-vxlan#lan)
+
 # Chapter 2 - Cloud Native Architecture
 ## Skalowanie
 - vertical scaling - dodawanie ramu, CPU...
@@ -185,4 +190,54 @@ For a long time the term "service mesh" only described a basic idea of how traff
 With a strong focus on Kubernetes, their goal is to standardize the end user experience for service meshes, as well as a standard for the providers that want to integrate with Kubernetes. You can find the current specification on [GitHub](https://github.com/servicemeshinterface/smi-spec).
 
 ## Storage
+From a storage perspective, containers have a significant flaw: they are ephemeral (ulotne).
 
+Generally speaking, container images are read-only and consist of different layers that include everything that you added during the build phase. That ensures that every time you start a container from an image you get the same behavior and functionality.
+To allow writing files, a read-write layer is put on top of the container image when you start a container from an image.
+
+![Container Layers](./pictures/ContainerLayers.png)
+**Container Layers**, retrieved from the [Docker documentation](https://docs.docker.com/engine/storage/drivers/)
+
+The problem here is that this read-write layer is lost when the container is stopped or deleted. Just like the memory of your computer gets erased when you shut it down. To persist data, you need to write it to your disk. 
+
+If a container needs to persist data on a host, a volume can be used to achieve that. The concept and technology for that is quite simple: instead of isolating the whole filesystem of a process, directories that reside on the host are passed through into the container filesystem. If you think that this weakens the isolation of the container, you’re right. When container volumes are used, you effectively give access to the host filesystem.
+
+![Container volumes](./pictures/container_volume_data_share.png)
+**Data is shared between two containers on the same host**
+
+When you orchestrate a lot of containers, persisting the data on the host where the container was started might not be the only challenge. Often, data needs to be accessed by multiple containers that are started on different host systems or when a container gets started on a different host it still should have access to its volume.
+
+
+Container orchestration systems like Kubernetes can help to mitigate these problems, but always require a robust storage system that is attached to the host servers.
+
+![Central storage system](./pictures/central_storage_system.png)
+**Storage is provisioned via a central storage system. Containers on Server A and Server B can share a volume to read and write data**
+
+In order to keep up with the unbroken growth of various storage implementations, again, the solution was to implement a standard. The [Container Storage Interface (CSI)](https://github.com/container-storage-interface/spec) came up to offer a uniform interface which allows attaching different storage systems no matter if it’s cloud or on-premises storage.
+
+Additional Resources
+Learn more about...
+- The History of Containers
+    - [A Brief History of Containers: From the 1970s Till Now, by Rani Osnat (2020) It's Here: Docker 1.0, by Julien Barbier (2014)](https://blog.aquasec.com/a-brief-history-of-containers-from-1970s-chroot-to-docker-2016)
+- Chroot
+    - [chroot](https://wiki.ubuntuusers.de/chroot/)
+- Container Performance
+    - Container Performance Analysis at DockerCon 2017, by Brendan Gregg
+- Best Practices on How to Build Container Images
+    - [Top 20 Dockerfile Best Practices, by Álvaro Iradier (2021)](https://sysdig.com/blog/dockerfile-best-practices/)
+    - [3 simple tricks for smaller Docker images, by Daniele Polencic (2019)](https://learnk8s.io/blog/smaller-docker-images)
+    - [Best practices for building containers](https://cloud.google.com/architecture/application-development)
+- Alternatives to Classic Dockerfile Container Building
+    - Buildpacks vs Jib vs Dockerfile: Comparing containerization methods, by James Ward (2020)
+- Service Discovery
+    - Service Discovery in a Microservices Architecture, by Chris Richardson (2015)
+- Container Networking
+    - Kubernetes Networking Part 1: Networking Essentials, By Simon Kurth (2021)
+    - Life of a Packet (I), by Michael Rubin (2017)
+    - [Computer Networking Introduction - Ethernet and IP (Heavily Illustrated), by Ivan Velichko (2021)](https://labs.iximiuz.com/courses/computer-networking-fundamentals/from-lan-to-vxlan#lan)
+- Container Storage
+    - Managing Persistence for Docker Containers, by Janakiram MSV (2016)
+- Container and Kubernetes Security
+    - Secure containerized environments with updated thread matrix for Kubernetes, by Yossi Weizman (2021)
+- Docker Container Playground
+    - [Play with Docker](https://labs.play-with-docker.com/)
