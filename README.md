@@ -215,7 +215,7 @@ Container orchestration systems like Kubernetes can help to mitigate these probl
 
 In order to keep up with the unbroken growth of various storage implementations, again, the solution was to implement a standard. The [Container Storage Interface (CSI)](https://github.com/container-storage-interface/spec) came up to offer a uniform interface which allows attaching different storage systems no matter if it’s cloud or on-premises storage.
 
-Additional Resources
+Additional Resources  
 Learn more about...
 - The History of Containers
     - [A Brief History of Containers: From the 1970s Till Now, by Rani Osnat (2020) It's Here: Docker 1.0, by Julien Barbier (2014)](https://blog.aquasec.com/a-brief-history-of-containers-from-1970s-chroot-to-docker-2016)
@@ -241,3 +241,19 @@ Learn more about...
     - Secure containerized environments with updated thread matrix for Kubernetes, by Yossi Weizman (2021)
 - Docker Container Playground
     - [Play with Docker](https://labs.play-with-docker.com/)
+
+# Kubernetes Fundamentals 
+To learn even more Kubernetes basics, you can take the Linux Foundation's free [Introduction to Kubernetes (LFS158x) course on edX.](https://training.linuxfoundation.org/training/introduction-to-kubernetes/)
+
+## Kubernetes Architecture
+
+From a high-level perspective, Kubernetes clusters consist of two different server node types that make up a cluster:
+- Control plane node(s)
+    These are the brains of the operation. Control plane nodes contain various components which manage the cluster and control various tasks like deployment, scheduling and self-healing of containerized workloads.
+- Worker nodes
+    The worker nodes are where applications run in your cluster. This is the only job of worker nodes and they don’t have any further logic implemented. Their behavior, like if they should start a container, is completely controlled by the control plane node.
+
+
+![Kubernetes architecture](./pictures/KubernetesArchitecture.png)
+**Kubernetes architecture**
+Similar to a microservice architecture you would choose for your own application, Kubernetes incorporates multiple smaller services that need to be installed on the nodes.
