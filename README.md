@@ -256,14 +256,14 @@ From a high-level perspective, Kubernetes clusters consist of two different serv
 **Kubernetes architecture**
 Similar to a microservice architecture you would choose for your own application, Kubernetes incorporates multiple smaller services that need to be installed on the nodes.
 
-## Control plane nodes typically host the following services...  
+### Control plane nodes typically host the following services...  
 - **kube-apiserver** - This is the centerpiece of Kubernetes. All other components interact with the api-server and this is where users would access the cluster.
 - **etcd** - A database which holds the state of the cluster. [etcd](https://etcd.io/) is a standalone project and not an official part of Kubernetes.
 - **kube-scheduler** - When a new workload should be scheduled, the kube-scheduler chooses a worker node that could fit, based on different properties like CPU and memory.
 - **kube-controller-manager** - Contains different non-terminating control loops that manage the state of the cluster. For example, one of these control loops can make sure that a desired number of your application is available all the time.
 - **cloud-controller-manager (optional)** - Can be used to interact with the API of cloud providers, to create external resources like load balancers, storage or security groups.
 
-## Components of worker nodes  
+### Components of worker nodes  
 - **container runtime** - The container runtime is responsible for running the containers on the worker node. For a long time, Docker was the most popular choice, but is now replaced in favor of other runtimes like [containerd](https://containerd.io/).
 - **kubelet** - A small agent that runs on every worker node in the cluster. The kubelet talks to the api-server and the container runtime to handle the final stage of starting containers.
 - **kube-proxy** - A network proxy that handles inside and outside communication of your cluster. Instead of managing traffic flow on its own, the kube-proxy tries to rely on the networking capabilities of the underlying operating system if possible.
@@ -273,7 +273,7 @@ Similar to a microservice architecture you would choose for your own application
 Kubernetes also has a concept of *namespaces*, which are not to be confused with kernel namespaces that are used to isolate containers. A Kubernetes namespace can be used to divide a cluster into multiple virtual clusters, which can be used for multi-tenancy when multiple teams share a cluster. **Please note that Kubernetes namespaces are not suitable for strong isolation and should more be viewed like a directory on a computer where you can organize objects and manage which user has access to which folder.**
 
 
-Kubernetes Setup
+### Kubernetes Setup
 
 Setting up a Kubernetes cluster can be achieved with a lot of different methods. Creating a test "cluster" can be very easy with the right tools:
 - Minikube
@@ -302,19 +302,11 @@ If you don’t want to install and manage it yourself, you can consume it from a
 #### Interactive Tutorial - Create a Cluster
 You can learn how to set up your own Kubernetes cluster with Minikube in this [interactive tutorial.](https://kubernetes.io/docs/tutorials/kubernetes-basics/create-cluster/cluster-intro/)
 
-## Demo - Kubernetes setup
-
-![Demo - Kuvernetes ](https://drive.google.com/file/d/15pkkaYdvJkrM7XIjp6rtc1EoESAtfGdc/view?usp=drive_link)
-
+#### Demo - Kubernetes setup
+![Demo: Basic setup of Kubernetes cluster](https://drive.google.com/file/d/15pkkaYdvJkrM7XIjp6rtc1EoESAtfGdc/view?usp=drive_link)
 
 
-<!DOCTYPE html>
-<html>
-<body>
-  
-<iframe src="https://drive.google.com/file/d/15pkkaYdvJkrM7XIjp6rtc1EoESAtfGdc/preview" width="640" height="480" allow="autoplay"></iframe>
-  
-<iframe allowfullscreen="allowfullscreen" src="your_page_url/preview" ></iframe>
+## Kubernetes API 
+The Kubernetes API is the most important component of a Kubernetes cluster. Without it, communication with the cluster is not possible, every user and every component of the cluster itself needs the api-server.
 
-</body>
-</html>
+![Access Control Overview](./pictures/AccessControlOverview.png)
