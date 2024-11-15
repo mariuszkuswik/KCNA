@@ -49,7 +49,7 @@ Following this approach, other systems like Prometheus or OpenTelemetry evolved 
 
     Around these metrics, SREs might define an error budget. An error budget defines the amount (or time) of errors your application can have, before actions are taken, like stopping deployments to production.
 
-# Container Orchestration
+# Chapter 3 - Container Orchestration
 ## Container Basics
 Contrary to popular belief, container technologies are much older than one would expect. One of the earliest ancestors of modern container technologies is the chroot command that was introduced in Version 7 Unix in 1979. The chroot command could be used to isolate a process from the root filesystem and basically "hide" the files from the process and simulate a new root directory. The isolated environment is a so-called chroot jail, where the files can’t be accessed by the process, but are still present on the system.
 
@@ -242,7 +242,7 @@ Learn more about...
 - Docker Container Playground
     - [Play with Docker](https://labs.play-with-docker.com/)
 
-# Kubernetes Fundamentals 
+# Chapter 4 - Kubernetes Fundamentals 
 To learn even more Kubernetes basics, you can take the Linux Foundation's free [Introduction to Kubernetes (LFS158x) course on edX.](https://training.linuxfoundation.org/training/introduction-to-kubernetes/)
 
 ## Kubernetes Architecture
