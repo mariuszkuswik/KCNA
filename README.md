@@ -305,3 +305,6 @@ You can learn how to set up your own Kubernetes cluster with Minikube in this [i
 ## Demo - Kubernetes setup
 
 ![Demo - Kuvernetes ](https://drive.google.com/file/d/15pkkaYdvJkrM7XIjp6rtc1EoESAtfGdc/view?usp=drive_link)
+
+
+  <iframe src="https://drive.google.com/file/d/15pkkaYdvJkrM7XIjp6rtc1EoESAtfGdc/preview" width="640" height="480" allow="autoplay"></iframe>
