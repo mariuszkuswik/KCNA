@@ -71,4 +71,88 @@ Which of the following is not a key metric for Site Reliability Engineers?
     d. Service level requirement (SLR)
 d. Service level requirement (SLR)
 
-# Container Orchestration
+# Chapter 3 - Container Orchestration
+## Question 3.1
+Containers can help with __________. Select all correct answers.
+    a. Dependency management of applications
+    b. More efficient use of hardware resources
+    c. Writing secure application code
+    d. All of the above
+a. Dependency management of applications
+b. More efficient use of hardware resources
+
+## Question 3.2
+The usage of containers and virtual machines are mutually exclusive. True or False?
+    a. True
+    b. False
+b. False
+
+## Question 3.3
+Container isolation is achieved by _________.
+    a. Namespaces and cgroups
+    b. Container Network Interface
+    c. Security Groups and Firewall
+    d. Service Mesh
+a. Namespaces and cgroups
+
+## Question 3.4
+A Dockerfile contains instructions on how to _________.
+    a. Install Docker
+    b. Start multiple containers
+    c. Install Kubernetes
+    d. Build a container image
+d. Build a container image
+
+## Question 3.5
+Which command can be used to build a container image with Docker?
+    a. docker build
+    b. docker create
+    c. docker image
+    d. docker start
+a. docker build
+
+## Question 3.6
+Where can you upload container images?
+    a. Podman
+    b. Registry
+    c. Kubernetes
+    d. etcd
+b. Registry
+
+## Question 3.7
+Containers started on the same host share the host system's kernel. True or False?
+    a. True
+    b. False
+a. True
+
+## Question 3.8
+Sort the 4C's of cloud native security, starting from the inside.
+    a. Code, container, cloud, cluster
+    b. Cluster, container, cloud, code
+    c. Code, container, cluster, cloud
+    d. Container, cluster, cloud, code
+c. Code, container, cluster, cloud
+
+## Question 3.9
+Which problems can be solved with a container orchestration system?
+    a. Scheduling containers
+    b. Managing resources like CPU and memroy
+    c. Providing a container network
+    d. All of the above
+d. All of the above
+
+## Question 3.10
+What do you call the automatic process of discovering services on a network?
+    a. Service Mesh
+    b. Service Registry
+    c. Service Discovery
+    d. Service IP
+c. Service Discovery
+
+## Question 3.11
+What are the main parts of a Service Mesh?
+    a. Controller-Manager and DNS
+    b. Data Plane and Control Plane
+    c. Virus and Malware scanner
+    d. Dockerfile and Network
+b. Data Plane and Control Plane

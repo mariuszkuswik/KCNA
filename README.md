@@ -246,14 +246,59 @@ Learn more about...
 To learn even more Kubernetes basics, you can take the Linux Foundation's free [Introduction to Kubernetes (LFS158x) course on edX.](https://training.linuxfoundation.org/training/introduction-to-kubernetes/)
 
 ## Kubernetes Architecture
-
 From a high-level perspective, Kubernetes clusters consist of two different server node types that make up a cluster:
 - Control plane node(s)
     These are the brains of the operation. Control plane nodes contain various components which manage the cluster and control various tasks like deployment, scheduling and self-healing of containerized workloads.
 - Worker nodes
     The worker nodes are where applications run in your cluster. This is the only job of worker nodes and they don’t have any further logic implemented. Their behavior, like if they should start a container, is completely controlled by the control plane node.
 
-
 ![Kubernetes architecture](./pictures/KubernetesArchitecture.png)
 **Kubernetes architecture**
 Similar to a microservice architecture you would choose for your own application, Kubernetes incorporates multiple smaller services that need to be installed on the nodes.
+
+## Control plane nodes typically host the following services...  
+- **kube-apiserver** - This is the centerpiece of Kubernetes. All other components interact with the api-server and this is where users would access the cluster.
+- **etcd** - A database which holds the state of the cluster. [etcd](https://etcd.io/) is a standalone project and not an official part of Kubernetes.
+- **kube-scheduler** - When a new workload should be scheduled, the kube-scheduler chooses a worker node that could fit, based on different properties like CPU and memory.
+- **kube-controller-manager** - Contains different non-terminating control loops that manage the state of the cluster. For example, one of these control loops can make sure that a desired number of your application is available all the time.
+- **cloud-controller-manager (optional)** - Can be used to interact with the API of cloud providers, to create external resources like load balancers, storage or security groups.
+
+## Components of worker nodes  
+- **container runtime** - The container runtime is responsible for running the containers on the worker node. For a long time, Docker was the most popular choice, but is now replaced in favor of other runtimes like [containerd](https://containerd.io/).
+- **kubelet** - A small agent that runs on every worker node in the cluster. The kubelet talks to the api-server and the container runtime to handle the final stage of starting containers.
+- **kube-proxy** - A network proxy that handles inside and outside communication of your cluster. Instead of managing traffic flow on its own, the kube-proxy tries to rely on the networking capabilities of the underlying operating system if possible.
+  
+**It is important to note that this design makes it possible that applications that are already started on a worker node will continue to run even if the control plane is not available. Although a lot of important functionality like scaling, scheduling new applications, etc., will not be possible while the control plane is offline.**
+
+Kubernetes also has a concept of *namespaces*, which are not to be confused with kernel namespaces that are used to isolate containers. A Kubernetes namespace can be used to divide a cluster into multiple virtual clusters, which can be used for multi-tenancy when multiple teams share a cluster. **Please note that Kubernetes namespaces are not suitable for strong isolation and should more be viewed like a directory on a computer where you can organize objects and manage which user has access to which folder.**
+
+
+Kubernetes Setup
+
+Setting up a Kubernetes cluster can be achieved with a lot of different methods. Creating a test "cluster" can be very easy with the right tools:
+- Minikube
+- kind
+- MicroK8s
+  
+If you want to set up a production-grade cluster on your own hardware or virtual machines, you can choose one of the various installers:
+- kubeadm
+- kops
+- kubespray
+  
+A few vendors started packaging Kubernetes into a distribution and even offer commercial support:
+- Rancher
+- k3s
+- OpenShift
+- VMWare Tanzu
+
+The distributions often choose an opinionated approach and offer additional tools while using Kubernetes as the central piece of their framework.
+  
+If you don’t want to install and manage it yourself, you can consume it from a cloud provider:
+- Amazon (EKS)
+- Google (GKE)
+- Microsoft (AKS)
+- DigitalOcean (DOKS)
+
+#### Interactive Tutorial - Create a Cluster
+You can learn how to set up your own Kubernetes cluster with Minikube in this [interactive tutorial.](https://kubernetes.io/docs/tutorials/kubernetes-basics/create-cluster/cluster-intro/)
+
