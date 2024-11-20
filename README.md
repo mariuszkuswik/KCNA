@@ -410,6 +410,7 @@ Kubernetes objects can be distinguished between workload-oriented objects that a
 
 As a user, we can describe these objects in the popular data-serialization language YAML and send them to the api-server, where they get validated before they are created.
 
+*Required fields*
 ```yaml
 apiVersion: apps/v1
 kind: Deployment
@@ -417,7 +418,8 @@ metadata:
   name: nginx-deployment
 spec: 
 ```
-```
+*Required fields*
+```yaml
   selector:
     matchLabels:
       app: nginx
@@ -434,8 +436,7 @@ spec:
         - containerPort: 80
 ```
 
-The fields highlighted in red are required fields. They include:
-
+The required fields include:
 - **apiVersion**: Each object can be versioned. That means the data structure of the object can change between different versions.
 - **kind**: The kind of object that should be created.
 - **metadata**: Data that can be used to identify it. A name is required for each object and must be unique. You can use namespaces if you need multiple objects with the same name.
