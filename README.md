@@ -411,11 +411,13 @@ Kubernetes objects can be distinguished between workload-oriented objects that a
 As a user, we can describe these objects in the popular data-serialization language YAML and send them to the api-server, where they get validated before they are created.
 
 ```yaml
+<span style="color:red;">
 apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: nginx-deployment
 spec: 
+</span>
   selector:
     matchLabels:
       app: nginx
