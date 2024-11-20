@@ -156,3 +156,68 @@ What are the main parts of a Service Mesh?
     c. Virus and Malware scanner
     d. Dockerfile and Network
 b. Data Plane and Control Plane
+
+# Chapter 4 - Kubernetes fundamentals
+## Question 4.1
+Kubernetes was originally designed and developed by _________.
+- a. Google
+- b. Facebook
+- c. Amazon
+- d. The Boring Company
+**Correct Answer:** a. Google
+
+## Question 4.2
+What are the two types of Kubernetes nodes? Select all answers that apply.
+- a. Control Plane Node
+- b. Data Node
+- c. Security Node
+- d. Worker Node
+**Correct Answer:** a. Control Plane Node, d. Worker Node
+
+## Question 4.3
+The Kubernetes agent running on each worker node is called _______.
+- a. systemd
+- b. kubelet
+- c. containerd
+- d. docker
+**Correct Answer:** b. kubelet
+
+## Question 4.4
+What tool can be used to set up a Kubernetes cluster?
+- a. Minikube
+- b. Kubeadm
+- c. Rancher
+- d. All of the above
+**Correct Answer:** d. All of the above
+
+## Question 4.5
+Sort the three stages a request needs to go through in the api-server.
+- a. Admission Control, Authorization, Authentication
+- b. Authentication, Admission Control, Authorization
+- c. Authentication, Authorization, Admission Control
+- d. Authorization, Authentication, Admission Control
+**Correct Answer:** c. Authentication, Authorization, Admission Control
+
+## Question 4.6
+Which container runtime is marked as deprecated by Kubernetes?
+- a. CRI-O
+- b. containerd
+- c. Docker
+- d. gvisor
+**Correct Answer:** c. Docker
+
+## Question 4.7
+Which of the following is NOT a requirement in Kubernetes networking?
+- a. All pods can communicate with each other across nodes
+- b. All nodes can communicate with all pods
+- c. All pods communicate encrypted
+- d. No Network Address Translation (NAT)
+**Correct Answer:** c. All pods communicate encrypted
+
+## Question 4.8
+Which Kubernetes component is responsible for scheduling?
+- a. kube-apiserver
+- b. kube-scheduler
+- c. kube-controller-manager
+- d. kube-proxy
+**Correct Answer:** b. kube-scheduler

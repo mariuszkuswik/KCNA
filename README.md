@@ -395,3 +395,176 @@ Learn more about...
 - Kubernetes Playground
     - [Play with Kubernetes](https://labs.play-with-k8s.com/)
 
+# Working with Kubernetes
+## Chapter Overview
+In this chapter, we will learn about the different Kubernetes objects, their purpose and how to interact with them.
+
+After setting up a cluster or using an already existing one, we can start deploying some workload. The smallest compute unit in Kubernetes is not a container, but a Pod object. That being, a Pod is not the only abstraction we use for workload. Kubernetes has a variety of workload objects that control how Pods are deployed, scaled and managed.
+
+Deploying the workload is not the only task a developer or administrator has to perform. Kubernetes has solutions for some inherent problems with containers and orchestration, be it configuration management, cross-node networking, routing of external traffic, load balancing or scaling of the pods.
+
+## Kubernetes Objects
+One of the core concepts of Kubernetes is providing a lot of mostly abstract resources, also called objects, that you can use to describe how your workload should be handled. Some of them are used to handle problems of container orchestration, like scheduling and self-healing, others are there to solve some inherent problems of containers.
+
+Kubernetes objects can be distinguished between workload-oriented objects that are used for handling container workloads and infrastructure-oriented objects, that for example handle configuration, networking and security. Some of these objects can be put into a namespace, while others are available across the whole cluster.
+
+As a user, we can describe these objects in the popular data-serialization language YAML and send them to the api-server, where they get validated before they are created.
+
+```yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-deployment
+spec: 
+  selector:
+    matchLabels:
+      app: nginx
+  replicas: 2 # tells deployment to run 2 pods matching the template
+  template:
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      containers:
+      - name: nginx
+        image: nginx:1.19
+        ports:
+        - containerPort: 80
+```
+
+The fields highlighted in red are required fields. They include:
+
+- **apiVersion**: Each object can be versioned. That means the data structure of the object can change between different versions.
+- **kind**: The kind of object that should be created.
+- **metadata**: Data that can be used to identify it. A name is required for each object and must be unique. You can use namespaces if you need multiple objects with the same name.
+- **spec**: The specification of the object. Here you can describe your desired state. Be cautious, since the structure for the object can change with its version!
+
+Creating, modifying, or deleting an object is only a record of intent where you describe the state your objects should be in. You’re not actively starting pods or even containers for that matter like you would do on your local machine and get direct feedback if it worked or not.
+
+## Interacting with Kubernetes
+To access the API, users can use the official command line interface client called kubectl. Let's look at some basic commands for everyday Kubernetes usage.
+
+NOTE: You can learn how to install kubectl in the official documentation.
+
+You can list the available objects in your cluster with the following command:
+
+```shell 
+$ kubectl api-resources
+
+NAME                    SHORTNAMES  APIVERSION  NAMESPACED  KIND
+...
+configmaps              cm          v1          true        ConfigMap
+...
+namespaces              ns          v1          false       Namespace
+nodes                   no          v1          false       Node
+persistentvolumeclaims  pvc         v1          true        PersistentVolumeClaim
+...
+pods                    po          v1          true        Pod
+...
+services                svc         v1          true        Service
+```
+
+Note how objects have short names. That is very helpful for objects with longer names like configmaps or persistentvolumeclaims. The table also shows which objects are namespaced and in what version they're available.
+
+If you want to know more about an object, kubectl has a built-in explanation function!
+
+Let's learn more about pods:
+
+```shell
+$ kubectl explain pod
+
+KIND:     Pod
+VERSION:  v1
+
+DESCRIPTION:
+     Pod is a collection of containers that can run on a host. This resource is     
+     created by clients and scheduled onto hosts. 
+
+FIELDS: 
+   apiVersion <string>     
+     APIVersion defines the versioned schema of this representation of an
+     object. Servers should convert recognized schemas to the latest internal         
+     value, and may reject unrecognized values.
+...
+   kind <string>
+...
+   metadata <Object>
+...
+   spec <Object>
+```
+
+To learn more about the pod spec, you can drill down in the object definition. Use the format: <type>.<fieldName>[.<fieldName>].
+
+```shell
+$ kubectl explain pod.spec
+
+KIND:     Pod
+VERSION:  v1 
+
+RESOURCE: spec <Object>  
+
+DESCRIPTION:
+     Specification of the desired behavior of the pod. More info:
+
+https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#spec-and-status      
+
+     PodSpec is a description of a pod. 
+
+FIELDS:
+   activeDeadlineSeconds <integer>     
+     Optional duration in seconds the pod may be active on the node relative to       
+     StartTime before the system will actively try to mark it failed and kill         
+     associated containers. Value must be a positive integer. 
+
+   affinity <object>     
+     If specified, the pod's scheduling constraints 
+
+   automountServiceAccountToken <boolean>     
+     AutomountServiceAccountToken indicates whether a service account token           
+     should be automatically mounted. 
+
+   containers <[]Object> -required-
+...
+```
+Let's take a look at the basic kubectl commands. You can use the --help flag to view them:
+
+```shell
+$ kubectl --help
+
+kubectl controls the Kubernetes cluster manager. 
+
+ Find more information at: https://kubernetes.io/docs/reference/kubectl/overview/ 
+
+Basic Commands (Beginner):
+  create Create a resource from a file or from stdin
+  expose Take a replication controller, service, deployment or pod and expose it as a new Kubernetes service
+  run Run a particular image on the cluster
+  set Set specific features on objects 
+
+Basic Commands (Intermediate):
+  explain Get documentation for a resource
+  get Display one or many resources
+  edit Edit a resource on the server
+  delete Delete resources by file names, stdin, resources and names, or by resources and label selector
+```
+To create an object in Kubernetes from a YAML file you can use the following command:
+
+```shell
+kubectl create -f <your-file>.yaml
+```
+
+There are plenty of graphic user interfaces and dashboards for Kubernetes that allow a visual interaction with the cluster.
+
+![Screenshot of the official Kubernetes Dashboard](./pictures/kubernetes_dashboard.png)
+**Screenshot of the official Kubernetes Dashboard**
+
+Other tools for interaction with Kubernetes:
+
+    kubernetes/dashboard
+    derailed/k9s
+    Lens
+    VMware Tanzu Octant
+
+Despite the numerous CLI tools and GUIs, there are also advanced tools that allow the creation of templates and the packaging of Kubernetes objects. Probably the most frequently used tool in connection with Kubernetes today is Helm.
+
+Helm is a package manager for Kubernetes, which allows easier updates and interaction with objects. Helm packages Kubernetes objects in so-called Charts, which can be shared with others via a registry. To get started with Kubernetes, you can search the ArtifactHub to find your favorite software packages, ready to deploy.
