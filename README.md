@@ -310,3 +310,97 @@ You can learn how to set up your own Kubernetes cluster with Minikube in this [i
 The Kubernetes API is the most important component of a Kubernetes cluster. Without it, communication with the cluster is not possible, every user and every component of the cluster itself needs the api-server.
 
 ![Access Control Overview](./pictures/AccessControlOverview.png)
+
+**Access Control Overview**, retrieved from the [Kubernetes documentation](https://kubernetes.io/docs/concepts/security/controlling-access/)
+
+
+
+
+Before a request is processed by Kubernetes, it has to go through three stages:
+
+    Authentication
+    The requester needs to present a means of identity to authenticate against the API. Commonly done with a digital signed certificate (X.509) or with an external identity management system. Kubernetes users are always externally managed. Service Accounts can be used to authenticate technical users.
+    Authorization
+    It is decided what the requester is allowed to do. In Kubernetes this can be done with Role Based Access Control (RBAC).
+    Admission Control
+    In the last step, admission controllers can be used to modify or validate the request. For example, if a user tries to use a container image from an untrustworthy registry, an admission controller could block this request. Tools like the Open Policy Agent can be used to manage admission control externally.
+
+Like many other APIs, the Kubernetes API is implemented as a RESTful interface that is exposed over HTTPS. Through the API, a user or service can create, modify, delete or retrieve resources that reside in Kubernetes.
+
+
+## Running Containers on Kubernetes
+How does running a container on your local machine differ from running containers in Kubernetes? In Kubernetes, instead of starting containers directly, you define Pods as the smallest compute unit and Kubernetes translates that into a running container. We will learn more about Pods later, for now imagine it as a wrapper around a container.
+
+When you create a Pod object in Kubernetes, several components are involved in that process, until you get containers running a node.
+
+Here is an example using containerd:
+![containerd example](./pictures/containerd_example.png)
+**Running Containers in Kubernetes**
+
+In an effort to allow using other container runtimes than Docker, Kubernetes introduced the Container Runtime Interface (CRI) in 2016.
+
+### Container Runtimes 
+- **containerd** is a lightweight and performant implementation to run containers. Arguably the most popular container runtime right now. It is used by all major cloud providers for the Kubernetes As A Service products.
+- **CRI-O** was created by Red Hat and with a similar code base closely related to podman and buildah.
+- **Docker** - The standard for a long time, but never really made for container orchestration. The usage of Docker as the runtime for Kubernetes has been deprecated and removed in Kubernetes 1.24. Kubernetes has a great blog article that answers all the questions on the matter.
+    
+The idea of containerd and CRI-O was very simple: provide a runtime that only contains the absolutely essentials to run containers. Nevertheless, they have additional features, like the ability to integrate with container runtime sandboxing tools. These tools try to solve the security problem that comes with sharing the kernel between multiple containers. The most common tools at the moment are:
+
+- gvisor - Made by Google, provides an application kernel that sits between the containerized process and the host kernel.
+- Kata Containers - A secure runtime that provides a lightweight virtual machine, but behaves like a container.
+
+## Networking
+Kubernetes networking can be very complicated and hard to understand. A lot of these concepts are not Kubernetes-related and were covered in the Container Orchestration chapter. Again, we have to deal with the problem that a lot of containers need to communicate across a lot of nodes. Kubernetes distinguishes between four different networking problems that need to be solved:
+
+1. Container-to-Container communications - This can be solved by the Pod concept as we'll learn later.
+2. Pod-to-Pod communications - This can be solved with an overlay network.
+3. Pod-to-Service communications - It is implemented by the kube-proxy and packet filter on the node.
+4. External-to-Service communications - It is implemented by the kube-proxy and packet filter on the node.
+  
+There are different ways to implement networking in Kubernetes, but also three important requirements:
+- All pods can communicate with each other across nodes.
+- All nodes can communicate with all pods.
+- No Network Address Translation (NAT).
+  
+To implement networking, you can choose from a variety of network vendors like:
+- Project Calico
+- Weave
+- Cilium
+  
+In Kubernetes, every Pod gets its own IP address, so there is no manual configuration involved. Moreover, most Kubernetes setups include a DNS server add-on called core-dns, which can provide service discovery and name resolution inside the cluster.
+  
+By design, every pod can communicate with other pods on the Kubernetes cluster, however if you want to control the traffic flow at the IP address or port level, then you have to use Network Policies. Network Policies act as cluster internal firewalls. Network Policies can be defined for a set of pods or namespace with the help of a selector to specify what traffic is allowed to and from the pods that match the selector. IP-based Network Policies are defined with IP blocks (CIDR ranges). Network Policies are implemented by the network plugin. To use Network Policies, you must be using a networking solution which supports NetworkPolicy. Creating a NetworkPolicy resource without a controller that implements it will have no effect.
+
+## Scheduling
+In its most basic form, scheduling is a sub-category of container orchestration and describes the process of automatically choosing the right (worker) node to run a containerized workload on. In the past, scheduling was more of a manual task where a system administrator would choose the right server for an application by keeping track of the available servers, their capacity and other properties like where they are located.
+   
+In a Kubernetes cluster, the kube-scheduler is the component that makes the scheduling decision, but is not responsible for actually starting the workload. The scheduling process in Kubernetes always starts when a new Pod object is created. Remember that Kubernetes is using a declarative approach, where the Pod is only described first, then the scheduler selects a node where the Pod actually will get started by the kubelet and the container runtime.
+  
+A common misconception about Kubernetes is that it has some form of "artificial intelligence" analyzing the workload and moving Pods around based on resource consumption, type of workload and other factors. The truth is that a user has to give information about the application requirements, including requests for CPU and memory and properties of a node. For example, a user could request that their application requires two CPU cores, four gigabytes of memory and should preferably be scheduled on a node with fast disks.
+  
+The scheduler will use that information to filter all nodes that fit these requirements. If multiple nodes fit the requirements equally, Kubernetes will schedule the Pod on the node with the least amount of Pods. This is also the default behavior if a user has not specified any further requirements.
+  
+It is possible that the desired state cannot be established, for example, because worker nodes do not have sufficient resources to run your application. In this case, the scheduler will retry to find an appropriate node until the state can be established.
+
+## Additional Resources
+Learn more about...
+- Kubernetes history and the Borg Heritage
+    - From Google to the world: The Kubernetes origin story, by Craig McLuckie (2016)
+    - Large-scale cluster management at Google with Borg, by Abhishek Verma, Luis Pedrosa, Madhukar R. Korupolu, David Oppenheimer, Eric Tune, John Wilkes (2015)
+- Kubernetes Architecture
+    - [Kubernetes Architecture explained | Kubernetes Tutorial 15](https://www.youtube.com/watch?v=umXEmn3cMWY)
+- RBAC
+    - [Demystifying RBAC in Kubernetes, by Kaitlyn Barnard](https://www.cncf.io/blog/2018/08/01/demystifying-rbac-in-kubernetes/)
+- Container Runtime Interface
+    - [Introducing Container Runtime Interface (CRI) in Kubernetes (2016)](https://kubernetes.io/blog/2016/12/container-runtime-interface-cri-in-kubernetes/)
+- Kubernetes networking and CNI
+    - [What is Kubernetes networking?](https://www.vmware.com/topics/glossary/content/kubernetes-networking)
+- Internals of Kubernetes Scheduling
+    - [A Deep Dive into Kubernetes Scheduling, by Ron Sobol (2020)](https://thenewstack.io/a-deep-dive-into-kubernetes-scheduling/)
+- Kubernetes Security Tools
+    - Popeye
+    - kubeaudit
+    - kube-bench
+- Kubernetes Playground
+    - [Play with Kubernetes](https://labs.play-with-k8s.com/)
+
