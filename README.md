@@ -305,7 +305,6 @@ You can learn how to set up your own Kubernetes cluster with Minikube in this [i
 #### Demo - Kubernetes setup
 ![Demo: Basic setup of Kubernetes cluster](https://drive.google.com/file/d/15pkkaYdvJkrM7XIjp6rtc1EoESAtfGdc/view?usp=drive_link)
 
-
 ## Kubernetes API 
 The Kubernetes API is the most important component of a Kubernetes cluster. Without it, communication with the cluster is not possible, every user and every component of the cluster itself needs the api-server.
 
@@ -313,20 +312,12 @@ The Kubernetes API is the most important component of a Kubernetes cluster. With
 
 **Access Control Overview**, retrieved from the [Kubernetes documentation](https://kubernetes.io/docs/concepts/security/controlling-access/)
 
-
-
-
 Before a request is processed by Kubernetes, it has to go through three stages:
-
-    Authentication
-    The requester needs to present a means of identity to authenticate against the API. Commonly done with a digital signed certificate (X.509) or with an external identity management system. Kubernetes users are always externally managed. Service Accounts can be used to authenticate technical users.
-    Authorization
-    It is decided what the requester is allowed to do. In Kubernetes this can be done with Role Based Access Control (RBAC).
-    Admission Control
-    In the last step, admission controllers can be used to modify or validate the request. For example, if a user tries to use a container image from an untrustworthy registry, an admission controller could block this request. Tools like the Open Policy Agent can be used to manage admission control externally.
+- **Authentication** - **The requester needs to present a means of identity to authenticate against the API.** Commonly done with a digital signed certificate (X.509) or with an external identity management system. Kubernetes users are always externally managed. Service Accounts can be used to authenticate technical users.
+- **Authorization** - **It is decided what the requester is allowed to do.** In Kubernetes this can be done with Role Based Access Control (RBAC).
+- **Admission Control** - In the last step, admission controllers can be used to modify or validate the request. For example, if a user tries to use a container image from an untrustworthy registry, an admission controller could block this request. Tools like the Open Policy Agent can be used to manage admission control externally.
 
 Like many other APIs, the Kubernetes API is implemented as a RESTful interface that is exposed over HTTPS. Through the API, a user or service can create, modify, delete or retrieve resources that reside in Kubernetes.
-
 
 ## Running Containers on Kubernetes
 How does running a container on your local machine differ from running containers in Kubernetes? In Kubernetes, instead of starting containers directly, you define Pods as the smallest compute unit and Kubernetes translates that into a running container. We will learn more about Pods later, for now imagine it as a wrapper around a container.
@@ -346,16 +337,16 @@ In an effort to allow using other container runtimes than Docker, Kubernetes int
     
 The idea of containerd and CRI-O was very simple: provide a runtime that only contains the absolutely essentials to run containers. Nevertheless, they have additional features, like the ability to integrate with container runtime sandboxing tools. These tools try to solve the security problem that comes with sharing the kernel between multiple containers. The most common tools at the moment are:
 
-- gvisor - Made by Google, provides an application kernel that sits between the containerized process and the host kernel.
-- Kata Containers - A secure runtime that provides a lightweight virtual machine, but behaves like a container.
+- **gvisor** - Made by Google, provides an application kernel that sits between the containerized process and the host kernel.
+- **Kata Containers** - A secure runtime that provides a lightweight virtual machine, but behaves like a container.
 
 ## Networking
 Kubernetes networking can be very complicated and hard to understand. A lot of these concepts are not Kubernetes-related and were covered in the Container Orchestration chapter. Again, we have to deal with the problem that a lot of containers need to communicate across a lot of nodes. Kubernetes distinguishes between four different networking problems that need to be solved:
 
-1. Container-to-Container communications - This can be solved by the Pod concept as we'll learn later.
-2. Pod-to-Pod communications - This can be solved with an overlay network.
-3. Pod-to-Service communications - It is implemented by the kube-proxy and packet filter on the node.
-4. External-to-Service communications - It is implemented by the kube-proxy and packet filter on the node.
+1. **Container-to-Container communications** - This can be solved by the Pod concept as we'll learn later.
+2. **Pod-to-Pod communications** - This can be solved with an overlay network.
+3. **Pod-to-Service communications** - It is implemented by the kube-proxy and packet filter on the node.
+4. **External-to-Service communications** - It is implemented by the kube-proxy and packet filter on the node.
   
 There are different ways to implement networking in Kubernetes, but also three important requirements:
 - All pods can communicate with each other across nodes.
