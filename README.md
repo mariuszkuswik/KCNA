@@ -568,6 +568,106 @@ Other tools for interaction with Kubernetes:
     Lens
     VMware Tanzu Octant
 
-Despite the numerous CLI tools and GUIs, there are also advanced tools that allow the creation of templates and the packaging of Kubernetes objects. Probably the most frequently used tool in connection with Kubernetes today is Helm.
+Despite the numerous CLI tools and GUIs, there are also advanced tools that allow the creation of templates and the packaging of Kubernetes objects. Probably the most frequently used tool in connection with Kubernetes today is [Helm](https://helm.sh/).
 
-Helm is a package manager for Kubernetes, which allows easier updates and interaction with objects. Helm packages Kubernetes objects in so-called Charts, which can be shared with others via a registry. To get started with Kubernetes, you can search the ArtifactHub to find your favorite software packages, ready to deploy.
+Helm is a package manager for Kubernetes, which allows easier updates and interaction with objects. Helm packages Kubernetes objects in so-called Charts, which can be shared with others via a registry. To get started with Kubernetes, you can search the [ArtifactHub](https://artifacthub.io/) to find your favorite software packages, ready to deploy.
+
+[DEMO - kubectl command](https://drive.google.com/file/d/15YfCK7jRyoZ4uwPkapdZTLvJc5x5Kh6Y/view?usp=drive_link)
+
+
+## Oipis dema - kubectl
+kubectl config view
+
+controlplane $ kubectl config view
+apiVersion: v1
+clusters:
+- cluster:
+    certificate-authority-data: DATA+OMITTED
+    server: https://172.30.1.2:6443
+  name: kubernetes
+contexts:
+- context:
+    cluster: kubernetes
+    user: kubernetes-admin
+  name: kubernetes-admin@kubernetes
+current-context: kubernetes-admin@kubernetes
+kind: Config
+preferences: {}
+users:
+- name: kubernetes-admin
+  user:
+    client-certificate-data: DATA+OMITTED
+    client-key-data: DATA+OMITTED
+controlplane $ kubectl config view
+apiVersion: v1
+clusters:
+- cluster:
+    certificate-authority-data: DATA+OMITTED
+    server: https://172.30.1.2:6443
+  name: kubernetes
+contexts:
+- context:
+    cluster: kubernetes
+    user: kubernetes-admin
+  name: kubernetes-admin@kubernetes
+current-context: kubernetes-admin@kubernetes
+kind: Config
+preferences: {}
+users:
+- name: kubernetes-admin
+  user:
+    client-certificate-data: DATA+OMITTED
+    client-key-data: DATA+OMITTED
+
+
+
+## Pod Concept
+
+The most important object in Kubernetes is a Pod. A pod describes a unit of one or more containers that share an isolation layer of namespaces and cgroups. It is the smallest deployable unit in Kubernetes, which also means that Kubernetes is not interacting with containers directly. The pod concept was introduced to allow running a combination of multiple processes that are interdependent. All containers inside a pod share an IP address and can share via the filesystem.
+
+![Multiple cont namespace](./pictures/multiple_containers_namespace.png)
+
+**Multiple containers share namespaces to form a pod**
+
+Here is an example of a simple Pod object with two containers:
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nginx-with-sidecar
+spec:
+  containers:
+  - name: nginx
+    image: nginx:1.19
+    ports:
+    - containerPort: 80
+  - name: count
+    image: busybox:1.34
+    args: [/bin/sh, -c,
+            'i=0; while true; do echo "$i: $(date)"; i=$((i+1)); sleep 1; done']
+
+You could add as many containers to your main application as you want. But be careful since you lose the ability to scale them individually! Using a second container that supports your main application is called a sidecar container.
+
+All containers defined are started at the same time with no ordering, but you also have the ability to use initContainers to start containers before your main application starts. In this example, the init container init-myservice tries to reach another service. Once it completes, the main container is started.
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: myapp-pod
+  labels:
+    app: myapp
+spec:
+  containers:
+  - name: myapp-container
+    image: busybox
+    command: ['sh', '-c', 'echo The app is running! && sleep 3600']
+  initContainers:
+  - name: init-myservice
+    image: busybox
+    command: ['sh', '-c', 'until nslookup myservice; do echo waiting for myservice; sleep 2; done;']
+
+Make sure to explore the documentation about Pods, since there are many more settings to discover. Some examples of important settings that can be set for every container in a Pod are:
+
+    resources: Set a resource request and a maximum limit for CPU and Memory. 
+    livenessProbe: Configure a health check that periodically checks if your application is still alive. Containers can be restarted if the check fails. 
+    securityContext: Set user & group settings, as well as kernel capabilities.
