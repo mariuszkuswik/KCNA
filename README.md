@@ -562,11 +562,10 @@ There are plenty of graphic user interfaces and dashboards for Kubernetes that a
 **Screenshot of the official Kubernetes Dashboard**
 
 Other tools for interaction with Kubernetes:
-
-    kubernetes/dashboard
-    derailed/k9s
-    Lens
-    VMware Tanzu Octant
+- kubernetes/dashboard
+- derailed/k9s
+- Lens
+- VMware Tanzu Octant
 
 Despite the numerous CLI tools and GUIs, there are also advanced tools that allow the creation of templates and the packaging of Kubernetes objects. Probably the most frequently used tool in connection with Kubernetes today is [Helm](https://helm.sh/).
 
@@ -574,8 +573,8 @@ Helm is a package manager for Kubernetes, which allows easier updates and intera
 
 [DEMO - kubectl command](https://drive.google.com/file/d/15YfCK7jRyoZ4uwPkapdZTLvJc5x5Kh6Y/view?usp=drive_link)
 
-
-## Oipis dema - kubectl
+## Opis dema - kubectl
+```
 kubectl config view
 
 controlplane $ kubectl config view
@@ -618,19 +617,17 @@ users:
   user:
     client-certificate-data: DATA+OMITTED
     client-key-data: DATA+OMITTED
-
-
+```
 
 ## Pod Concept
-
 The most important object in Kubernetes is a Pod. A pod describes a unit of one or more containers that share an isolation layer of namespaces and cgroups. It is the smallest deployable unit in Kubernetes, which also means that Kubernetes is not interacting with containers directly. The pod concept was introduced to allow running a combination of multiple processes that are interdependent. All containers inside a pod share an IP address and can share via the filesystem.
 
 ![Multiple cont namespace](./pictures/multiple_containers_namespace.png)
-
 **Multiple containers share namespaces to form a pod**
 
 Here is an example of a simple Pod object with two containers:
 
+```yaml
 apiVersion: v1
 kind: Pod
 metadata:
@@ -645,11 +642,13 @@ spec:
     image: busybox:1.34
     args: [/bin/sh, -c,
             'i=0; while true; do echo "$i: $(date)"; i=$((i+1)); sleep 1; done']
+```
 
-You could add as many containers to your main application as you want. But be careful since you lose the ability to scale them individually! Using a second container that supports your main application is called a sidecar container.
+You could add as many containers to your main application as you want. But be careful since you lose the ability to scale them individually! Using a second container that supports your main application is called a **sidecar container**.
 
-All containers defined are started at the same time with no ordering, but you also have the ability to use initContainers to start containers before your main application starts. In this example, the init container init-myservice tries to reach another service. Once it completes, the main container is started.
+All containers defined are started at the same time with no ordering, but you also have the ability to use **initContainers** to start containers before your main application starts. In this example, the init container *init-myservice* tries to reach another service. Once it completes, the main container is started.
 
+```yaml
 apiVersion: v1
 kind: Pod
 metadata:
@@ -661,13 +660,46 @@ spec:
   - name: myapp-container
     image: busybox
     command: ['sh', '-c', 'echo The app is running! && sleep 3600']
+  # HERE is the initContainer!
   initContainers:
   - name: init-myservice
     image: busybox
     command: ['sh', '-c', 'until nslookup myservice; do echo waiting for myservice; sleep 2; done;']
+```
 
 Make sure to explore the documentation about Pods, since there are many more settings to discover. Some examples of important settings that can be set for every container in a Pod are:
+- **resources**: Set a resource request and a maximum limit for CPU and Memory. 
+- **livenessProbe**: Configure a health check that periodically checks if your application is still alive. Containers can be restarted if the check fails. 
+- **securityContext**: Set user & group settings, as well as kernel capabilities.
 
-    resources: Set a resource request and a maximum limit for CPU and Memory. 
-    livenessProbe: Configure a health check that periodically checks if your application is still alive. Containers can be restarted if the check fails. 
-    securityContext: Set user & group settings, as well as kernel capabilities.
+## Pod Lifecycle
+Pods follow a defined lifecycle, starting in the Pending phase, moving through Running if at least one of its primary containers starts OK, and then through either the Succeeded or Failed phases depending on whether any container in the Pod terminated in failure.
+
+### Pod Lifecycle Phases
+- Pending - The Pod has been accepted by the Kubernetes cluster, but one or more of the containers has not been set up and made ready to run. This includes time a Pod spends waiting to be scheduled, as well as the time spent downloading container images over the network.
+- Running - The Pod has been bound to a node, and all of the containers have been created. At least one container is still running, or is in the process of starting or restarting.
+- Succeeded - All containers in the Pod have terminated in success, and will not be restarted.
+- Failed - All containers in the Pod have terminated, and at least one container has terminated in failure. That is, the container either exited with non-zero status or was terminated by the system.
+- Unknown - For some reason, the state of the Pod could not be obtained. This phase typically occurs due to an error in communicating with the node where the Pod should be running.
+
+
+
+## Workload Objects
+
+Working just with Pods would not be flexible enough in a container orchestration platform. For example, if a Pod is lost because a node failed, it is gone forever. To make sure that a defined number of Pod copies runs all the time, we can use controller objects that manage the pod for us.
+
+### Kubernetes Objects
+- ReplicaSet - A controller object that ensures a desired number of pods is running at any given time. ReplicaSets can be used to scale out applications and improve their availability. They do this by starting multiple copies of a pod definition.
+- Deployment - The most feature-rich object in Kubernetes. A Deployment can be used to describe the complete application lifecycle, they do this by managing multiple ReplicaSets that get updated when the application is changed by providing a new container image, for example. Deployments are perfect to run stateless applications in Kubernetes.
+- StatefulSet - Considered a bad practice for a long time, StatefulSets can be used to run stateful applications like databases on Kubernetes. Stateful applications have special requirements that don't fit the ephemeral nature of pods and containers. In contrast to Deployments, StatefulSets try to retain IP addresses of pods and give them a stable name, persistent storage and more graceful handling of scaling and updates.
+- DaemonSet - Ensures that a copy of a Pod runs on all (or some) nodes of your cluster. DaemonSets are perfect to run infrastructure-related workload, for example monitoring or logging tools.
+- Job - Creates one or more Pods that execute a task and terminate afterwards. Job objects are perfect to run one-shot scripts like database migrations or administrative tasks.
+- Cronjob - CronJobs add a time-based configuration to jobs. This allows running Jobs periodically, for example doing a backup job every night at 4am.
+
+Interactive Tutorial - Deploy an App and explore it
+
+You can learn how to deploy an application in your Minikube cluster in the [second part of the interactive tutorial available in the Kubernetes documentation.](https://kubernetes.io/docs/tutorials/kubernetes-basics/deploy-app/deploy-intro/)
+
+Apply what you have learned from "Interacting with Kubernetes" to explore your app in the [third part of the interactive tutorial.](https://kubernetes.io/docs/tutorials/kubernetes-basics/explore/explore-intro/)
+
+
