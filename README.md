@@ -855,10 +855,10 @@ spec:
 
 The example shows a PersistentVolume that uses an AWS EBS volume implemented with a CSI driver. After the PersistentVolume is provisioned, a developer can reserve it with a PersistentVolumeClaim. The last step is using the PVC as a volume in a Pod, just like the hostPath example we saw before.
 
-It is possible to operate storage clusters directly in Kubernetes. Projects like Rook provide cloud-native storage orchestration and integrate with battle tested storage solutions like Ceph.
+It is possible to operate storage clusters directly in Kubernetes. Projects like [Rook](https://rook.io/) provide cloud-native storage orchestration and integrate with battle tested storage solutions like Ceph.
 
 <p align="center">
   <img src="https://drive.usercontent.google.com/download?id=1grp-pxewADV2JUg8LWGI21w3Np75nxwF" alt="RookArchitecture" style="display:block; margin-left:auto; margin-right:auto; width:100%; height:auto;">
 </p>
 
-**Rook Architecture**, retrieved from the Rook documentation
+**Rook Architecture**, retrieved from the [Rook documentation](https://rook.io/docs/rook/v1.7/ceph-storage.html)
