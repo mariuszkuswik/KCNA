@@ -741,6 +741,7 @@ If you need even more flexibility to expose applications, you can use an Ingress
 <p align="center">
   <img src="./pictures/networking-objects/Ingress.png" alt="Ingress" style="auto; height:auto;">
 </p>
+
 **Example of where an Ingress sends all its traffic to one Service, retrieved from the [Kubernetes documentation](https://kubernetes.io/docs/concepts/services-networking/ingress/)**
 
 Standard features of ingress controllers may include:
