@@ -717,7 +717,9 @@ Services can be used to expose a set of pods as a network service.
 ### Service Types
 - ClusterIP - The most common service type. A ClusterIP is a virtual IP inside Kubernetes that can be used as a single endpoint for a set of pods. This service type can be used as a round-robin load balancer.
 
-<img src="./pictures/networking-objects/ClusterIP.png" alt="ClusterIP" style="width:70%; height:auto;">
+<p align="center">
+  <img src="./pictures/networking-objects/ClusterIP.png" alt="ClusterIP" style="width:70%; height:auto;">
+</p>
 - NodePort - The NodePort service type extends the ClusterIP by adding simple routing rules. It opens a port (default between 30000-32767) on every node in the cluster and maps it to the ClusterIP. This service type allows routing external traffic to the cluster.
 - LoadBalancer - The LoadBalancer service type extends the NodePort by deploying an external LoadBalancer instance. This will only work if you’re in an environment that has an API to configure a LoadBalancer instance, like GCP, AWS, Azure or even OpenStack.
 - ExternalName - A special service type that has no routing whatsoever. ExternalName is using the Kubernetes internal DNS server to create a DNS alias. You can use this to create a simple alias to resolve a rather complicated hostname like: my-cool-database-az1-uid123.cloud-provider-i-like.com. This is especially useful if you want to reach external resources from your Kubernetes cluster.
