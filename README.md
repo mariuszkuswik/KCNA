@@ -618,7 +618,6 @@ users:
     client-certificate-data: DATA+OMITTED
     client-key-data: DATA+OMITTED
 ```
-
 ## Pod Concept
 The most important object in Kubernetes is a Pod. A pod describes a unit of one or more containers that share an isolation layer of namespaces and cgroups. It is the smallest deployable unit in Kubernetes, which also means that Kubernetes is not interacting with containers directly. The pod concept was introduced to allow running a combination of multiple processes that are interdependent. All containers inside a pod share an IP address and can share via the filesystem.
 
@@ -682,10 +681,7 @@ Pods follow a defined lifecycle, starting in the Pending phase, moving through R
 - Failed - All containers in the Pod have terminated, and at least one container has terminated in failure. That is, the container either exited with non-zero status or was terminated by the system.
 - Unknown - For some reason, the state of the Pod could not be obtained. This phase typically occurs due to an error in communicating with the node where the Pod should be running.
 
-
-
 ## Workload Objects
-
 Working just with Pods would not be flexible enough in a container orchestration platform. For example, if a Pod is lost because a node failed, it is gone forever. To make sure that a defined number of Pod copies runs all the time, we can use controller objects that manage the pod for us.
 
 ### Kubernetes Objects
@@ -702,13 +698,10 @@ You can learn how to deploy an application in your Minikube cluster in the [seco
 
 Apply what you have learned from "Interacting with Kubernetes" to explore your app in the [third part of the interactive tutorial.](https://kubernetes.io/docs/tutorials/kubernetes-basics/explore/explore-intro/)
 
-
 ### Demo: Workload Objects
 [Demo: Workload Objects](https://drive.google.com/file/d/1NH-BjGr5qer0NHjNb5mjbRhfP5I7oSZD/view?usp=drive_link)
 
-
 ## Networking Objects
-
 Since a lot of Pods would require a lot of manual network configuration, we can use Service and Ingress objects to define and abstract networking.
 
 Services can be used to expose a set of pods as a network service. 
@@ -735,13 +728,15 @@ Example: A StatefulSet controller can use the Headless Service to control the do
   <img src="./pictures/networking-objects/ClusterIPNodePortandLoadBalancerextendeachother.png" alt="ClusterIP, NodePort and LoadBalancer extend each other" style="display:block; margin-left:auto; margin-right:auto; width:40%; height:auto;">
 </p>
 
-If you need even more flexibility to expose applications, you can use an Ingress object. Ingress provides a means to expose HTTP and HTTPS routes from outside of the cluster for a service within the cluster. It does this by configuring routing rules that a user can set and implement with an ingress controller.
+**ClusterIP, NodePort and LoadBalancer extend each other**
+
+If you need even more flexibility to expose applications, you can use an *Ingress object*. Ingress provides a means to expose HTTP and HTTPS routes from outside of the cluster for a service within the cluster. It does this by configuring routing rules that a user can set and implement with an *ingress controller*.
 
 <p align="center">
-  <img src="./pictures/networking-objects/Ingress.png" alt="Ingress" style="display:block; margin-left:auto; margin-right:auto; width:40%; height:auto;">
+  <img src="./pictures/networking-objects/Ingress.png" alt="Ingress" style="display:block; margin-left:auto; margin-right:auto; width:100%; height:auto;">
 </p>
 
-**Example of where an Ingress sends all its traffic to one Service, retrieved from the [Kubernetes documentation](https://kubernetes.io/docs/concepts/services-networking/ingress/)**
+**Example of where an Ingress sends all its traffic to one Service**, retrieved from the [Kubernetes documentation](https://kubernetes.io/docs/concepts/services-networking/ingress/)
 
 Standard features of ingress controllers may include:
 - LoadBalancing
@@ -763,3 +758,102 @@ Kubernetes also provides a cluster internal firewall with the NetworkPolicy conc
 
 ### Interactive Tutorial - Expose Your App
 You can now learn how to [expose your application with a Service](https://kubernetes.io/docs/tutorials/kubernetes-basics/expose/expose-intro/) in the fourth part of the interactive tutorial available in the Kubernetes documentation.
+
+## Demo - Using Services
+[DEMO - Using Services](https://drive.google.com/file/d/191pmFUytUkJ0pZWGOU0cAo8acRzhc_mV/view?usp=drive_link)
+
+## Volume & Storage Objects
+As mentioned earlier, containers were not designed with persistent storage in mind, especially when that storage spans across multiple nodes. Kubernetes introduces a few solutions, but note that these solutions do not automatically remove all of the complexities of managing storage with containers.
+
+Containers already had the concept of mounting volumes, but since we’re not working with containers directly, Kubernetes made volumes part of a Pod, just like containers are.
+
+Here’s an example of a hostPath volume mount that is similar to a host mount introduced by Docker:
+
+```yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: test-pd
+spec:
+  containers:
+  - image: k8s.gcr.io/test-webserver
+    name: test-container
+    volumeMounts:
+    - mountPath: /test-pd
+      name: test-volume
+  volumes:
+  - name: test-volume
+    hostPath:
+      # directory location on host
+      path: /data
+      # this field is optional
+      type: Directory
+```
+
+![hostPath Volume Mount](https://drive.google.com/file/d/1lp2s6eE6P3EOVvMiAT_FEjGXgf6MZrcV/view?usp=drive_link)
+```hostPath``` **Volume Mount**
+
+Volumes allow sharing data between multiple pods in the cluster and also between multiple containers within the same Pod. This concept allows for great flexibility when you want to use a sidecar pattern. The second purpose they serve is preventing data loss when a Pod crashes and is restarted on the same node. Pods are started in a clean state, but all data is lost unless written to a volume.
+
+Unfortunately, a cluster environment with multiple servers requires even more flexibility when it comes to persistent storage. Depending on the environment, we can use cloud block storage like Amazon EBS, Google Persistent Disks, Azure Disk Storage or consume from storage systems like Ceph, GlusterFS or more traditional systems like NFS.
+
+These are only a few examples of storage that can be used in Kubernetes. To make the user experience more uniform, Kubernetes is using the Container Storage Interface (CSI) which allows the storage vendor to write a plugin (storage driver) that can be used in Kubernetes.
+
+To use this abstraction, we have two more objects that can be used:
+- PersistentVolumes (PV)
+An abstract description for a slice of storage. The object configuration holds information like type of volume, volume size, access mode and unique identifiers and information how to mount it.
+- PersistentVolumeClaims (PVC)
+A request for storage by a user. If the cluster has multiple persistent volumes, the user can create a PVC which will reserve a persistent volume according to the user's needs. 
+
+```yaml
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: test-pv
+spec:
+  capacity:
+    storage: 50Gi
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteOnce
+  csi:
+    driver: ebs.csi.aws.com
+    volumeHandle: vol-05786ec9ec9526b67
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: ebs-claim
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 50Gi
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: app
+spec:
+  containers:
+    - name: app
+      image: centos
+      command: ["/bin/sh"]
+      args:
+        ["-c", "while true; do echo $(date -u) >> /data/out.txt; sleep 5; done"]
+      volumeMounts:
+        - name: persistent-storage
+          mountPath: /data
+  volumes:
+    - name: persistent-storage
+      persistentVolumeClaim:
+        claimName: ebs-claim
+```
+
+The example shows a PersistentVolume that uses an AWS EBS volume implemented with a CSI driver. After the PersistentVolume is provisioned, a developer can reserve it with a PersistentVolumeClaim. The last step is using the PVC as a volume in a Pod, just like the hostPath example we saw before.
+
+It is possible to operate storage clusters directly in Kubernetes. Projects like Rook provide cloud-native storage orchestration and integrate with battle tested storage solutions like Ceph.
+
+![RookArchitecture](https://drive.google.com/file/d/1grp-pxewADV2JUg8LWGI21w3Np75nxwF/view?usp=drive_link)
+**Rook Architecture**, retrieved from the Rook documentation
