@@ -855,6 +855,8 @@ The example shows a PersistentVolume that uses an AWS EBS volume implemented wit
 
 It is possible to operate storage clusters directly in Kubernetes. Projects like Rook provide cloud-native storage orchestration and integrate with battle tested storage solutions like Ceph.
 
+<p align="center">
+  <img src="https://drive.usercontent.google.com/download?id=1grp-pxewADV2JUg8LWGI21w3Np75nxwF" alt="RookArchitecture" style="display:block; margin-left:auto; margin-right:auto; width:50%; height:auto;">
+</p>
 
-![RookArchitecture](https://drive.usercontent.google.com/download?id=1grp-pxewADV2JUg8LWGI21w3Np75nxwF)
 **Rook Architecture**, retrieved from the Rook documentation
