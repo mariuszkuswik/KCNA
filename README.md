@@ -789,8 +789,10 @@ spec:
       # this field is optional
       type: Directory
 ```
+<p align="center">
+  <img src="https://drive.usercontent.google.com/download?id=1lp2s6eE6P3EOVvMiAT_FEjGXgf6MZrcV" alt="hostPath Volume Mount" style="display:block; margin-left:auto; margin-right:auto; width:50%; height:auto;">
+</p>
 
-![hostPath Volume Mount](https://drive.usercontent.google.com/download?id=1lp2s6eE6P3EOVvMiAT_FEjGXgf6MZrcV)
 ```hostPath``` **Volume Mount**
 
 Volumes allow sharing data between multiple pods in the cluster and also between multiple containers within the same Pod. This concept allows for great flexibility when you want to use a sidecar pattern. The second purpose they serve is preventing data loss when a Pod crashes and is restarted on the same node. Pods are started in a clean state, but all data is lost unless written to a volume.
@@ -856,7 +858,7 @@ The example shows a PersistentVolume that uses an AWS EBS volume implemented wit
 It is possible to operate storage clusters directly in Kubernetes. Projects like Rook provide cloud-native storage orchestration and integrate with battle tested storage solutions like Ceph.
 
 <p align="center">
-  <img src="https://drive.usercontent.google.com/download?id=1grp-pxewADV2JUg8LWGI21w3Np75nxwF" alt="RookArchitecture" style="display:block; margin-left:auto; margin-right:auto; width:50%; height:auto;">
+  <img src="https://drive.usercontent.google.com/download?id=1grp-pxewADV2JUg8LWGI21w3Np75nxwF" alt="RookArchitecture" style="display:block; margin-left:auto; margin-right:auto; width:100%; height:auto;">
 </p>
 
 **Rook Architecture**, retrieved from the Rook documentation
