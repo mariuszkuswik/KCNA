@@ -731,13 +731,16 @@ For headless Services, a cluster IP is not allocated, kube-proxy does not handle
 
 Example: A StatefulSet controller can use the Headless Service to control the domain of its pods, where stable network id is the need and not load-balancing.
 
-
-<img src="./pictures/networking-objects/ClusterIPNodePortandLoadBalancerextendeachother.png" alt="ClusterIP, NodePort and LoadBalancer extend each other" style="width:40%; height:auto;">
+<p align="center">
+  <img src="./pictures/networking-objects/ClusterIPNodePortandLoadBalancerextendeachother.png" alt="ClusterIP, NodePort and LoadBalancer extend each other" style="width:40%; height:auto;">
 **ClusterIP, NodePort and LoadBalancer extend each other**
+</p>
 
 If you need even more flexibility to expose applications, you can use an Ingress object. Ingress provides a means to expose HTTP and HTTPS routes from outside of the cluster for a service within the cluster. It does this by configuring routing rules that a user can set and implement with an ingress controller.
 
-<img src="./pictures/networking-objects/Ingress.png" alt="Ingress" style="auto; height:auto;">
+<p align="center">
+  <img src="./pictures/networking-objects/Ingress.png" alt="Ingress" style="auto; height:auto;">
+</p>
 **Example of where an Ingress sends all its traffic to one Service, retrieved from the [Kubernetes documentation](https://kubernetes.io/docs/concepts/services-networking/ingress/)**
 
 Standard features of ingress controllers may include:
