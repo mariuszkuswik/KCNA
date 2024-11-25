@@ -717,7 +717,7 @@ Services can be used to expose a set of pods as a network service.
 ### Service Types
 - ClusterIP - The most common service type. A ClusterIP is a virtual IP inside Kubernetes that can be used as a single endpoint for a set of pods. This service type can be used as a round-robin load balancer.
 
-<img src="./pictures/networking-objects/ClusterIP.png" alt="ClusterIP" style="width:50%; height:auto;">
+<img src="./pictures/networking-objects/ClusterIP.png" alt="ClusterIP" style="width:70%; height:auto;">
 - NodePort - The NodePort service type extends the ClusterIP by adding simple routing rules. It opens a port (default between 30000-32767) on every node in the cluster and maps it to the ClusterIP. This service type allows routing external traffic to the cluster.
 - LoadBalancer - The LoadBalancer service type extends the NodePort by deploying an external LoadBalancer instance. This will only work if you’re in an environment that has an API to configure a LoadBalancer instance, like GCP, AWS, Azure or even OpenStack.
 - ExternalName - A special service type that has no routing whatsoever. ExternalName is using the Kubernetes internal DNS server to create a DNS alias. You can use this to create a simple alias to resolve a rather complicated hostname like: my-cool-database-az1-uid123.cloud-provider-i-like.com. This is especially useful if you want to reach external resources from your Kubernetes cluster.
@@ -730,7 +730,7 @@ For headless Services, a cluster IP is not allocated, kube-proxy does not handle
 Example: A StatefulSet controller can use the Headless Service to control the domain of its pods, where stable network id is the need and not load-balancing.
 
 
-<img src="./pictures/networking-objects/ClusterIPNodePortandLoadBalancerextendeachother.png" alt="Sample Image" style="width:50%; height:auto;">
+<img src="./pictures/networking-objects/ClusterIPNodePortandLoadBalancerextendeachother.png" alt="ClusterIP, NodePort and LoadBalancer extend each other" style="width:40%; height:auto;">
 **ClusterIP, NodePort and LoadBalancer extend each other**
 
 If you need even more flexibility to expose applications, you can use an Ingress object. Ingress provides a means to expose HTTP and HTTPS routes from outside of the cluster for a service within the cluster. It does this by configuring routing rules that a user can set and implement with an ingress controller.
