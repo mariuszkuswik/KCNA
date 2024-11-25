@@ -703,3 +703,56 @@ You can learn how to deploy an application in your Minikube cluster in the [seco
 Apply what you have learned from "Interacting with Kubernetes" to explore your app in the [third part of the interactive tutorial.](https://kubernetes.io/docs/tutorials/kubernetes-basics/explore/explore-intro/)
 
 
+### Demo: Workload Objects
+[Demo: Workload Objects](https://drive.google.com/file/d/1NH-BjGr5qer0NHjNb5mjbRhfP5I7oSZD/view?usp=drive_link)
+
+
+## Networking Objects
+
+Since a lot of Pods would require a lot of manual network configuration, we can use Service and Ingress objects to define and abstract networking.
+
+Services can be used to expose a set of pods as a network service. 
+
+
+### Service Types
+- ClusterIP - The most common service type. A ClusterIP is a virtual IP inside Kubernetes that can be used as a single endpoint for a set of pods. This service type can be used as a round-robin load balancer.
+![ClusterIP](./pictures/networking-objects/ClusterIP.png)
+- NodePort - The NodePort service type extends the ClusterIP by adding simple routing rules. It opens a port (default between 30000-32767) on every node in the cluster and maps it to the ClusterIP. This service type allows routing external traffic to the cluster.
+- LoadBalancer - The LoadBalancer service type extends the NodePort by deploying an external LoadBalancer instance. This will only work if you’re in an environment that has an API to configure a LoadBalancer instance, like GCP, AWS, Azure or even OpenStack.
+- ExternalName - A special service type that has no routing whatsoever. ExternalName is using the Kubernetes internal DNS server to create a DNS alias. You can use this to create a simple alias to resolve a rather complicated hostname like: my-cool-database-az1-uid123.cloud-provider-i-like.com. This is especially useful if you want to reach external resources from your Kubernetes cluster.
+- Headless Services - Sometimes you don't need load-balancing and a single Service IP. In this case, you can create what are termed "headless" Services, by explicitly specifying "None" for the cluster IP (.spec.clusterIP).
+
+You can use a headless Service to interface with other service discovery mechanisms, without being tied to Kubernetes' implementation.
+
+For headless Services, a cluster IP is not allocated, kube-proxy does not handle these Services, and there is no load balancing or proxying done by the platform for them. How DNS is automatically configured depends on whether the Service has selectors defined with or without selectors.
+
+Example: A StatefulSet controller can use the Headless Service to control the domain of its pods, where stable network id is the need and not load-balancing.
+
+![ClusterIPNodePortandLoadBalancerextendeachother](./pictures/networking-objects/ClusterIPNodePortandLoadBalancerextendeachother.png)
+ClusterIP, NodePort and LoadBalancer extend each other
+
+If you need even more flexibility to expose applications, you can use an Ingress object. Ingress provides a means to expose HTTP and HTTPS routes from outside of the cluster for a service within the cluster. It does this by configuring routing rules that a user can set and implement with an ingress controller.
+
+![Ingress](./pictures/networking-objects/Ingress.png)
+Example of where an Ingress sends all its traffic to one Service, retrieved from the [Kubernetes documentation](https://kubernetes.io/docs/concepts/services-networking/ingress/)
+
+Standard features of ingress controllers may include:
+- LoadBalancing
+- TLS offloading/termination
+- Name-based virtual hosting
+- Path-based routing
+
+A lot of ingress controllers even provide more features, like:
+- Redirects
+- Custom errors
+- Authentication
+- Session affinity
+- Monitoring
+- Logging
+- Weighted routing
+- Rate limiting.
+
+Kubernetes also provides a cluster internal firewall with the NetworkPolicy concept. NetworkPolicies are a simple IP firewall (OSI Layer 3 or 4) that can control traffic based on rules. You can define rules for incoming (ingress) and outgoing traffic (egress). A typical use case for NetworkPolicies would be restricting the traffic between two different namespaces.
+
+### Interactive Tutorial - Expose Your App
+You can now learn how to [expose your application with a Service](https://kubernetes.io/docs/tutorials/kubernetes-basics/expose/expose-intro/) in the fourth part of the interactive tutorial available in the Kubernetes documentation.
