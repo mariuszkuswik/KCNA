@@ -418,7 +418,7 @@ metadata:
   name: nginx-deployment
 spec: 
 ```
-*Required fields*
+*NOT Required fields*
 ```yaml
   selector:
     matchLabels:
