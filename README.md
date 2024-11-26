@@ -930,11 +930,55 @@ In cloud-native environments purpose-built secret management tools have emerged 
 - **Cluster Autoscaler** - Of course, there is no point in starting more and more Replicas of Pods, if the Cluster capacity is fixed. The [Cluster Autoscaler](https://github.com/kubernetes/autoscaler/tree/master/cluster-autoscaler) can add new worker nodes to the cluster if the demand increases. The Cluster Autoscaler works great in tandem with the Horizontal Autoscaler.
 - **Vertical Pod Autoscaler** - [The Vertical Pod Autoscaler](https://github.com/kubernetes/autoscaler/tree/master/vertical-pod-autoscaler) is relatively new and allows Pods to increase the resource requests and limits dynamically. As we discussed earlier, vertical scaling is limited by the node capacity.
 
-Unfortunately, (horizontal) autoscaling in Kubernetes is NOT available out of the box and requires installing an add-on called metrics-server.
+Unfortunately, (horizontal) autoscaling in Kubernetes is NOT available out of the box and requires installing an add-on called [metrics-server](https://github.com/kubernetes-sigs/metrics-server).
 
-It is possible though to replace the metrics-server with Prometheus Adapter for Kubernetes Metrics APIs. The prometheus-adapter allows you to use custom metrics in Kubernetes and scale up or down based on things like requests or number of users on your system.
+It is possible though to replace the metrics-server with [Prometheus Adapter for Kubernetes Metrics APIs](https://github.com/kubernetes-sigs/prometheus-adapter). The prometheus-adapter allows you to use custom metrics in Kubernetes and scale up or down based on things like requests or number of users on your system.
 
-Rather than relying solely on metrics, projects like KEDA can be used to scale the Kubernetes workload based on events triggered by external systems. KEDA stands for Kubernetes-based Event Driven Autoscaler and was started in 2019 as a partnership between Microsoft and Red Hat. Similar to the HPA, KEDA can scale deployments, ReplicaSets, pods, etc., but also other objects such as Kubernetes jobs. With a large selection of out-of-the-box scalers, KEDA can scale to special triggers such as a database query or even the number of pods in a Kubernetes cluster.
+Rather than relying solely on metrics, projects like [KEDA](https://keda.sh/) can be used to scale the Kubernetes workload based on events triggered by external systems. KEDA stands for Kubernetes-based Event Driven Autoscaler and was started in 2019 as a partnership between Microsoft and Red Hat. Similar to the HPA, KEDA can scale deployments, ReplicaSets, pods, etc., but also other objects such as Kubernetes jobs. With a large selection of out-of-the-box scalers, KEDA can scale to special triggers such as a database query or even the number of pods in a Kubernetes cluster.
 
 ### Interactive Tutorial - Scale Your App
 You can learn how to scale up your application manually in the fifth part of the interactive tutorial: [Running Multiple Instances of Your App](https://kubernetes.io/docs/tutorials/kubernetes-basics/scale/scale-intro/).
+
+## Scheduling Objects
+
+The scheduler is the control process which assigns Pods to Nodes. The scheduler determines which Nodes are valid placements for each Pod in the scheduling queue according to constraints and available resources. The scheduler then ranks each valid Node and binds the Pod to a suitable Node. Multiple different schedulers may be used within a cluster; kube-scheduler is the default implementation.
+
+The default scheduler does a good job of scheduling the pods across the nodes in the cluster, however there are scenarios where you want to restrict the pod on particular nodes or prefer to run on particular nodes. There are several ways of doing this, the recommended way is to make use of Label Selectors to facilitate the selection.
+
+### Methods
+- **nodeSelector field matching against node labels** - nodeSelector is the simplest recommended form of node selection constraint. You can add the nodeSelector field to your Pod specification and specify the node labels you want the target node to have. Kubernetes only schedules the Pod onto nodes that have each of the labels you specify.
+- **Affinity and anti-affinity** - Affinity and anti-affinity expands the types of constraints you can define and give you more control over the selection logic. You can indicate that a rule is soft or preferred, so that the scheduler still schedules the Pod even if it can't find a matching node.
+- **nodeName field** - nodeName is a more direct form of node selection than affinity or nodeSelector. nodeName is a field in the Pod spec. If the nodeName field is not empty, the scheduler ignores the Pod and the kubelet on the named node tries to place the Pod on that node. Using nodeName overrules using nodeSelector or affinity and anti-affinity rules.
+- **Pod topology spread constraints** - You can use topology spread constraints to control how Pods are spread across your cluster among failure-domains such as regions, zones, nodes, or among any other topology domains that you define. You might do this to improve performance, expected availability, or overall utilization.
+
+### Taints and Tolerations
+Node affinity is a property of Pods that attracts them to a set of nodes (either as a preference or a hard requirement). Taints are the opposite -- they allow a node to repel a set of pods. 
+
+Tolerations are applied to pods. Tolerations allow the scheduler to schedule pods with matching taints. Tolerations allow scheduling, but don't guarantee scheduling: the scheduler also evaluates other parameters as part of its function. 
+
+Taints and tolerations work together to ensure that pods are not scheduled onto inappropriate nodes. One or more taints are applied to a node; this marks that the node should not accept any pods that do not tolerate the taints.
+
+A taint consists of a key, value, and effect. As an argument here, it is expressed as key=value:effect.
+
+For example:
+
+```shell
+kubectl taint node worker region=useast2:NoSchedule
+```
+The key must begin with a letter or number, and may contain letters, numbers, hyphens, dots, and underscores, up to 253 characters.
+
+The value is optional. If given, it must begin with a letter or number, and may contain letters, numbers, hyphens, dots, and underscores, up to 63 characters.
+
+The effect must be NoSchedule, PreferNoSchedule or NoExecute and Currently taint can only apply to nodes.
+
+Toleration for a pod is specified in the PodSpec. A toleration "matches" a taint if the keys are the same and the effects are the same, and thus a pod with toleration would be able to schedule onto nodes.
+
+For example:
+
+```yaml
+tolerations:
+- key: "region"
+  operator: "Equal"
+  value: "useast2"
+  effect: "NoSchedule" 
+```
