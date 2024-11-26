@@ -799,12 +799,12 @@ Volumes allow sharing data between multiple pods in the cluster and also between
 
 Unfortunately, a cluster environment with multiple servers requires even more flexibility when it comes to persistent storage. Depending on the environment, we can use cloud block storage like Amazon EBS, Google Persistent Disks, Azure Disk Storage or consume from storage systems like Ceph, GlusterFS or more traditional systems like NFS.
 
-These are only a few examples of storage that can be used in Kubernetes. To make the user experience more uniform, Kubernetes is using the Container Storage Interface (CSI) which allows the storage vendor to write a plugin (storage driver) that can be used in Kubernetes.
+These are only a few examples of storage that can be used in Kubernetes. To make the user experience more uniform, Kubernetes is using the [Container Storage Interface (CSI)](https://github.com/container-storage-interface/spec) which allows the storage vendor to write a plugin (storage driver) that can be used in Kubernetes.
 
 To use this abstraction, we have two more objects that can be used:
-- PersistentVolumes (PV)
+- **PersistentVolumes (PV)**
 An abstract description for a slice of storage. The object configuration holds information like type of volume, volume size, access mode and unique identifiers and information how to mount it.
-- PersistentVolumeClaims (PVC)
+- **PersistentVolumeClaims (PVC)**
 A request for storage by a user. If the cluster has multiple persistent volumes, the user can create a PVC which will reserve a persistent volume according to the user's needs. 
 
 ```yaml
@@ -862,3 +862,79 @@ It is possible to operate storage clusters directly in Kubernetes. Projects like
 </p>
 
 **Rook Architecture**, retrieved from the [Rook documentation](https://rook.io/docs/rook/v1.7/ceph-storage.html)
+
+
+## Configuration Objects
+The twelve factor app recommends [storing configuration in the environment](https://12factor.net/config). But what does that mean exactly? Running an application requires more than the application code and some libraries. Applications have config files, connect to other services, databases, storage systems or caches and that requires configuration like [connection strings](https://en.wikipedia.org/wiki/Connection_string).
+
+It is considered bad practice to incorporate the configuration directly into the container build. Any configuration change would require the entire image to be rebuilt and the entire container or pod to be redeployed. This problem gets only worse when multiple environments (development, staging, production) are used and images are being built for each and every environment. The twelve factor app explains this problem in more detail: [Dev/prod parity](https://12factor.net/dev-prod-parity).
+
+In Kubernetes, this problem is solved by decoupling the configuration from the Pods with a ConfigMap. ConfigMaps can be used to store whole configuration files or variables as key-value pairs. There are two possible ways to use a ConfigMap:
+
+- Mount a ConfigMap as a volume in Pod
+- Map variables from a ConfigMap to environment variables of a Pod.
+
+Here is an example of a ConfigMap that contains a nginx configuration:
+
+```yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: nginx-conf
+data:
+  nginx.conf: |
+    user nginx;
+    worker_processes 3;
+    error_log /var/log/nginx/error.log;
+...
+      server {
+          listen     80;
+          server_name _;
+          location / {
+              root   html;
+              index  index.html index.htm; } } }
+```
+
+Once the ConfigMap is created you can use it in a Pod:
+
+```yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nginx
+spec:
+  containers:
+  - name: nginx
+    image: nginx:1.19
+    ports:
+    - containerPort: 80
+    volumeMounts:
+    - mountPath: /etc/nginx
+      name: nginx-conf
+  volumes:
+  - name: nginx-conf
+    configMap:
+      name: nginx-conf
+```
+
+Right from the beginning Kubernetes also provided an object to store sensitive information like passwords, keys or other credentials. These objects are called *Secrets*. Secrets are very much related to ConfigMaps and basically their only difference is that secrets are base64 encoded.
+
+There is an on-going debate about the risk of using Secrets, since their - in contrast to their name - not considered secure.
+
+In cloud-native environments purpose-built secret management tools have emerged that integrate very well with Kubernetes. One example would be [HashiCorp Vault](https://www.vaultproject.io/).
+
+## Autoscaling Objects
+
+### Autoscaling Mechanisms
+- **Horizontal Pod Autoscaler (HPA)** - [Horizontal Pod Autoscaler (HPA)](https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale/) is the most used autoscaler in Kubernetes. The HPA can watch Deployments or ReplicaSets and increase the number of Replicas if a certain threshold is reached. Imaging your Pod can use 500MiB of memory and you configured a threshold of 80%. If the usage is over 400MiB (80%), a second Pod will get scheduled. Now you have a capacity of 1000MiB. If 800MiB is used, a third Pod will get scheduled and so on.
+- **Cluster Autoscaler** - Of course, there is no point in starting more and more Replicas of Pods, if the Cluster capacity is fixed. The [Cluster Autoscaler](https://github.com/kubernetes/autoscaler/tree/master/cluster-autoscaler) can add new worker nodes to the cluster if the demand increases. The Cluster Autoscaler works great in tandem with the Horizontal Autoscaler.
+- **Vertical Pod Autoscaler** - [The Vertical Pod Autoscaler](https://github.com/kubernetes/autoscaler/tree/master/vertical-pod-autoscaler) is relatively new and allows Pods to increase the resource requests and limits dynamically. As we discussed earlier, vertical scaling is limited by the node capacity.
+
+Unfortunately, (horizontal) autoscaling in Kubernetes is NOT available out of the box and requires installing an add-on called metrics-server.
+
+It is possible though to replace the metrics-server with Prometheus Adapter for Kubernetes Metrics APIs. The prometheus-adapter allows you to use custom metrics in Kubernetes and scale up or down based on things like requests or number of users on your system.
+
+Rather than relying solely on metrics, projects like KEDA can be used to scale the Kubernetes workload based on events triggered by external systems. KEDA stands for Kubernetes-based Event Driven Autoscaler and was started in 2019 as a partnership between Microsoft and Red Hat. Similar to the HPA, KEDA can scale deployments, ReplicaSets, pods, etc., but also other objects such as Kubernetes jobs. With a large selection of out-of-the-box scalers, KEDA can scale to special triggers such as a database query or even the number of pods in a Kubernetes cluster.
+
+### Interactive Tutorial - Scale Your App
+You can learn how to scale up your application manually in the fifth part of the interactive tutorial: [Running Multiple Instances of Your App](https://kubernetes.io/docs/tutorials/kubernetes-basics/scale/scale-intro/).
