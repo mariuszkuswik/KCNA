@@ -1132,3 +1132,19 @@ The ArgoCD architecture gives a good overview of how GitOps can be implemented.
 Kubernetes is particularly well suited for GitOps, since it provides an API and is designed for declarative provisioning and changes of resources right from the beginning. You might notice that Kubernetes is using a similar idea as the pull based approach: A database is watched for changes and the changes are applied to the running state if it doesn’t match the desired state.
 
 To learn more about GitOps in action and the usage of ArgoCD and Flux, consider enrolling for the free course [Introduction To GitOps (LFS169)](https://training.linuxfoundation.org/training/introduction-to-gitops-lfs169/).
+
+
+### TODO - zrobić jako pierwsze
+## Additional Resources
+Learn more about...
+- 10 Deploys Per Day - Start of the DevOps movement at Flickr
+  - [Velocity 09: John Allspaw and Paul Hammond, "10+ Deploys Per Day"](https://www.youtube.com/watch?v=LdOe18KhtT4)
+  - [10+ Deploys Per Day: Dev and Ops Cooperation at Flickr, by John Allspaw and Paul Hammond](https://www.slideshare.net/jallspaw/10-deploys-per-day-dev-and-ops-cooperation-at-flickr)
+- Learn git in a playful way
+  - [Oh My Git! An open source game about learning Git!](https://ohmygit.org/)
+  - [Learn Git Branching](https://learngitbranching.js.org/)
+- Infrastructure as Code
+  - [Delivering Cloud Native Infrastructure as Code](https://www.pulumi.com/why-pulumi/delivering-cloud-native-infrastructure-as-code/)
+  - [Unlocking the Cloud Operating Model: Provisioning](https://www.hashicorp.com/resources/unlocking-the-cloud-operating-model-provisioning)
+- Beginners guide to CI/CD
+  - [GitLab's guide to CI/CD for beginners](https://about.gitlab.com/blog/2020/07/06/beginner-guide-ci-cd/)
