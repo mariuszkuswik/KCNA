@@ -222,6 +222,7 @@ Which Kubernetes component is responsible for scheduling?
 - d. kube-proxy
 **Correct Answer:** b. kube-scheduler
 
+# Chapter 5 - Working with Kubernetes
 
 ## Question 5.1
 Kubernetes objects can be described in a data-serialization language called _____________.
@@ -341,4 +342,74 @@ Which autoscalers are available in Kubernetes?
     d. All of the above
 
 **Correct Answer:** d. All of the above
+
+# Chapter 6 - Cloud native application delivery
+
+Question 6.1
+
+What is the name of a popular version control tool?
+
+**Correct Answer**
+
+- a. Docker
+- b. git
+  - Your Answer: Correct
+- c. Kubernetes
+- d. containerd
+
+Question 6.2
+
+Version control systems can be used as a basis to manage __________.
+
+**Correct Answer**
+
+- a. Source code
+- b. Configuration
+- c. Infrastructure
+- d. All of the above
+
+Question 6.3
+
+What does CI/CD stand for?
+
+**Correct Answer**
+
+- a. Continuous Installation/Continuous Downtime
+- b. Continuous Integration/Continuous Delivery
+  - Your Answer: Correct
+- c. Container Interface/Container Deployment
+- d. Continuous Infrastructure/Continuous Deployment
+
+Question 6.4
+
+How can you automate the build, test, and deployment of an application?
+
+**Correct Answer**
+
+- a. CI/CD pipeline
+  - Your Answer: Correct
+- b. CI/CD branch
+- c. CI/CD repository
+- d. CI/CD network
+
+Question 6.5
+
+Flux is built with the ____________.
+
+**Correct Answer**
+
+- a. Ci/CD Toolkit
+- b. Cluster Toolkit
+- c. GitOps Toolkit
+  - Your Answer: Correct
+- d. Infrastructure Toolkit
+
+Question 6.6
+
+Flux and ArgoCD are popular GitOps tools. They use a push-based approach. True or False?
+
+- a. True
+  - Your Answer: Incorrect
+- b. False
+  - Correct Answer
 

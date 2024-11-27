@@ -1148,3 +1148,37 @@ Learn more about...
   - [Unlocking the Cloud Operating Model: Provisioning](https://www.hashicorp.com/resources/unlocking-the-cloud-operating-model-provisioning)
 - Beginners guide to CI/CD
   - [GitLab's guide to CI/CD for beginners](https://about.gitlab.com/blog/2020/07/06/beginner-guide-ci-cd/)
+
+# Cloud native observability
+## Chapter Overview
+The term cloud native observability might sound like another buzzword that is used to sell new tools. And that might be true to the fact that we have a lot of new tools that emerged to solve the problems of monitoring container infrastructure.
+
+Conventional monitoring for servers may include collecting basic metrics of the system like CPU and memory resource usage and logging of processes and the operating system. A new challenge for a microservice architecture is monitoring requests that move through a distributed system. That discipline is called tracing and is especially useful when a lot of services are involved in answering a request.
+
+In this chapter, we will learn how container infrastructure is still relying on collecting metrics and logs, but changes the requirements quite a bit. There is a lot more focus on network problems like latency, throughput, retrying of requests or application start time, while the sheer volume of metrics, logs, and traces in distributed systems calls for a different approach to managing these systems.
+
+## Learning Objectives
+By the end of this chapter, you should be able to:
+- Explain why observability is a key discipline of cloud computing
+- Discuss metrics, logs and traces
+- Understand how to show logs of containerized applications
+- Explain how Prometheus can be used to collect and store metrics
+- Understand how to optimize cloud costs
+
+## Observability
+Observability is often used synonymously with monitoring, but monitoring is only one of the subcategories of cloud native observability and does not do justice to its scope. The term observability is closely related to the [control theory](https://en.wikipedia.org/wiki/Control_theory) which deals with behavior of dynamic systems. In essence, the control theory describes how external outputs of systems can be measured to manipulate the behavior of the system.
+
+A popular example is the cruise control system of a car. You set the desired speed of the car, which is constantly measured and which can be observed by a person with the speedometer. In order to maintain the speed in changed conditions, e.g. when driving up a mountain, the power of the motor must be adapted to maintain the speed.
+
+In IT systems the same principle can be applied for autoscaling. You set the desired utilization of the system and trigger scaling events based on the load of the system.
+
+Automating your systems in such a way can be very challenging and is not the most important usage of observability. When we deal with container orchestration and microservices, the biggest challenge is keeping track of the systems, how they interact with each other and how they behave when under load or in an error state.
+
+Observability should give answers to questions like:
+- Is the system stable or does it change its state when manipulated?
+- Is the system sensitive to change, e.g. if some services have high latency?
+- Do certain metrics in the system exceed their limits?
+- Why does a request to the system fail?
+- Are there any bottlenecks in the system?
+
+The higher goal of observability is to allow **analysis** of the collected data. This helps to get a better understanding of the system and react to error states. This more technological side of things is closely related to modern agile software development that also uses feedback loops in which you analyze the behavior of software and adapt it constantly based on the outcome.
