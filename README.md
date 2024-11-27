@@ -1052,3 +1052,12 @@ Learn more about...
 ### Autoscaling in Kubernetes
 - [Architecting Kubernetes clusters - choosing the best autoscaling strategy, by Daniele Polencic (2021)](https://learnk8s.io/kubernetes-autoscaling-strategies)
 
+# Cloud Native Application Delivery 
+## Introduction
+Deploying an application on any kind of platform has gone a long way over the years. In the beginning, applications maybe would be executed on the same machine they were written on, later transported by physical medium (floppy disk, usb-stick, CD), and now we're checking in code on a server, that builds and application, put it in a container and directly deploy it to a platform like Kubernetes.
+
+The way we deliver our applications is heavily influenced by the DevOps movement that had its breakthrough in the late 2000s. The DevOps movement is a culture change that brought a lot of new methods and technologies to the industry.
+
+Arguably the most important change was the automation of the deployment process, which allowed very fast, more frequent and higher quality software deployments. In this chapter, we will learn about these methods also known as Continuous Integration/Continuous Delivery (CI/CD) and how they further advanced in new tools and practices like GitOps.
+
+
