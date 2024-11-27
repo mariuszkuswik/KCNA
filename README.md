@@ -1166,7 +1166,7 @@ By the end of this chapter, you should be able to:
 - Understand how to optimize cloud costs
 
 ## Observability
-Observability is often used synonymously with monitoring, but monitoring is only one of the subcategories of cloud native observability and does not do justice to its scope. The term observability is closely related to the [control theory](https://en.wikipedia.org/wiki/Control_theory) which deals with behavior of dynamic systems. In essence, the control theory describes how external outputs of systems can be measured to manipulate the behavior of the system.
+Observability is often used synonymously with monitoring, but monitoring is only one of the subcategories of cloud native observability and does not do justice to its scope. The term *observability* is closely related to the [control theory](https://en.wikipedia.org/wiki/Control_theory) which deals with behavior of dynamic systems. In essence, the control theory describes how external outputs of systems can be measured to manipulate the behavior of the system.
 
 A popular example is the cruise control system of a car. You set the desired speed of the car, which is constantly measured and which can be observed by a person with the speedometer. In order to maintain the speed in changed conditions, e.g. when driving up a mountain, the power of the motor must be adapted to maintain the speed.
 
@@ -1182,3 +1182,17 @@ Observability should give answers to questions like:
 - Are there any bottlenecks in the system?
 
 The higher goal of observability is to allow **analysis** of the collected data. This helps to get a better understanding of the system and react to error states. This more technological side of things is closely related to modern agile software development that also uses feedback loops in which you analyze the behavior of software and adapt it constantly based on the outcome.
+
+## Telemetry
+The term telemetry has Greek roots and means remote or distance (tele) and measuring (metry). Measuring and collecting data points and then transferring it to another system is of course not exclusive to cloud native or even IT systems. A good example would be a weather station with a data-logger that measures the temperature, humidity, wind speed and more at a certain point and then transmits it to another system that can process and display the data.
+
+In container systems, each and every application should have tools built in that generate information data, which is then collected and transferred in a centralized system. The data can be divided into three categories.
+
+- **LOGS**: These are messages that are emitted from an application when errors, warnings or debug information should be presented. A simple log entry could be the start and end of a specific task that the application performed.
+- **METRICS**: Metrics are quantitative measurements taken over time. This could be the number of requests or an error rate.
+- **TRACES**: They track the progression of a request while it’s passing through the system. Traces are used in a distributed system that can provide information about when a request was processed by a service and how long it took.
+
+A lot of traditional systems didn’t even bother to transmit the data like logs to a centralized system and to view the logs you had to connect to the system and read it directly from files.
+
+In a distributed system with hundreds or thousands of services, this would mean a lot of effort and troubleshooting would be very time consuming.
+
