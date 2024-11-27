@@ -221,3 +221,124 @@ Which Kubernetes component is responsible for scheduling?
 - c. kube-controller-manager
 - d. kube-proxy
 **Correct Answer:** b. kube-scheduler
+
+
+## Question 5.1
+Kubernetes objects can be described in a data-serialization language called _____________.
+
+    a. HTML
+    b. PHP
+    c. YAML
+    d. Python
+
+**Correct Answer:** c. YAML
+
+
+## Question 5.2
+Which of the following is not a required field in a Kubernetes object?
+
+    a. kind
+    b. spec
+    c. containers
+    d. metadata
+
+**Correct Answer:** c. containers
+
+
+## Question 5.3
+What is the name of the official Kubernetes command line interface?
+
+    a. containerctl
+    b. kubectl
+    c. kube-tool
+    d. podctl
+
+**Correct Answer:** b. kubectl
+
+
+## Question 5.4
+What is the smallest deployable compute unit of Kubernetes?
+
+    a. Container
+    b. Deployment
+    c. Pod
+    d. ReplicaSet
+
+**Correct Answer:** c. Pod
+
+
+## Question 5.5
+How do you configure a container to run in a pod before your main container(s)?
+
+    a. bootstrapContainer
+    b. initContainer
+    c. priorityContainer
+    d. startContainer
+
+**Correct Answer:** b. initContainer
+
+
+## Question 5.6
+Which workload object does not exist in Kubernetes?
+
+    a. ReplicaSet
+    b. Deployment
+    c. ApplicationSet
+    d. StatefulSet
+
+**Correct Answer:** c. ApplicationSet
+
+
+## Question 5.7
+Which service types exist in Kubernetes?
+
+    a. NodePort
+    b. ClusterIP
+    c. LoadBalancer
+    d. ExternalName
+    e. All of the above
+
+**Correct Answer:** e. All of the above
+
+
+## Question 5.8
+Ingress objects can be used to configure HTTP(S) routing rules. True or False?
+
+    a. True
+    b. False
+
+**Correct Answer:** a. True
+
+
+## Question 5.9
+Which Kubernetes object can be used to request storage?
+
+    a. Container Storage Interface
+    b. PersistentVolume
+    c. PersistentVolumeClaim
+    d. StorageClass
+
+**Correct Answer:** c. PersistentVolumeClaim
+
+
+## Question 5.10
+What is the main difference between ConfigMaps and Secrets?
+
+    a. Base64 encoding
+    b. Pretty formatting
+    c. Encryption
+    d. Syntax Highlighting
+
+**Correct Answer:** a. Base64 encoding
+
+
+## Question 5.11
+Which autoscalers are available in Kubernetes?
+
+    a. Horizontal Pod Autoscaler
+    b. Cluster Autoscaler
+    c. Vertical Pod Autoscaler
+    d. All of the above
+
+**Correct Answer:** d. All of the above
+
