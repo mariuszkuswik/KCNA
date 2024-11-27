@@ -1034,3 +1034,21 @@ The first controller is Initializers, which will allow dynamic modification of t
 Also, tools like the [Open Policy Agent](https://www.openpolicyagent.org/) can be used to manage admission control externally. The Open Policy Agent (OPA, pronounced “oh-pa”) is an open source, general-purpose policy engine that unifies policy enforcement across the stack. OPA provides a high-level declarative language that lets you specify policy as code and simple APIs to offload policy decision-making from your software. You can use OPA to enforce policies in microservices, Kubernetes, CI/CD pipelines, API gateways, and more.
 
 OPA was originally created by Styra and is a graduated project in the Cloud Native Computing Foundation (CNCF) landscape.
+
+## Additional Resources
+Learn more about...
+
+### Differences between Containers and Pods
+- [What are Kubernetes Pods Anyway?, by Ian Lewis (2017)](https://www.ianlewis.org/en/what-are-kubernetes-pods-anyway)
+- [Containers vs. Pods - Taking a Deeper Look, by Ivan Velichko (2021)](https://iximiuz.com/en/posts/containers-vs-pods/)
+
+### kubectl tips & tricks
+- [kubectl Cheat Sheet](https://kubernetes.io/docs/reference/kubectl/cheatsheet/)
+
+### Storage and CSI in Kubernetes
+- [Container Storage Interface (CSI) for Kubernetes GA, by Saad Ali (2019)](https://kubernetes.io/blog/2019/01/15/container-storage-interface-ga/)
+- [Kubernetes Storage: Ephemeral Inline Volumes, Volume Cloning, Snapshots and more!, by Henning Eggers (2020)](https://www.inovex.de/de/blog/kubernetes-storage-volume-cloning-ephemeral-inline-volumes-snapshots/)
+
+### Autoscaling in Kubernetes
+- [Architecting Kubernetes clusters - choosing the best autoscaling strategy, by Daniele Polencic (2021)](https://learnk8s.io/kubernetes-autoscaling-strategies)
+
