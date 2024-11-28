@@ -1276,3 +1276,78 @@ To make logs easy to process and searchable make sure you log in a structured fo
 - [Structured logging (Google Cloud documentation)](https://cloud.google.com/logging/docs/structured-logging)
 - [Structured logging (Microsoft Azure documentation)](https://learn.microsoft.com/en-us/azure/architecture/best-practices/monitoring#structured-logging)
 
+## Prometheus
+Prometheus is an open source monitoring system, originally developed at SoundCloud, which became the second CNCF hosted project in 2016. Over time, it became a very popular monitoring solution and is now a standard tool that integrates especially well in the Kubernetes and container ecosystem.
+
+Prometheus can collect metrics that were emitted by applications and servers as time series data - these are very simple sets of data that include a timestamp, label and the measurement itself. The Prometheus data model provides four core metrics:
+- Counter: A value that increases, like a request or error count
+- Gauge: Values that increase or decrease, like memory size
+- Histogram: A sample of observations, like request duration or response size
+- Summary: Similar to a histogram, but also provides the total count of observations.
+
+To expose these metrics, applications can expose an HTTP endpoint under /metrics instead of implementing it yourself. You can use the existing client libraries:
+- Go
+- Java or Scala
+- Python
+- Ruby.
+
+You can also use one of the many unofficial client libraries listed in the Prometheus documentation.
+
+The data exposed could look like this:
+
+```
+# HELP queue_length The number of items in the queue.
+# TYPE queue_length
+gauge queue_length 42
+# HELP http_requests_total The total number of handled HTTP requests.
+# TYPE http_requests_total counter
+http_requests_total 7734
+# HELP http_request_duration_seconds A histogram of the HTTP request durations in seconds.
+# TYPE http_request_duration_seconds histogram http_request_duration_seconds_bucket{le="0.05"} 4599
+http_request_duration_seconds_sum 88364.234
+http_request_duration_seconds_count 227420
+# HELP http_request_duration_seconds A summary of the HTTP request durations in seconds.
+# TYPE http_request_duration_seconds summary
+http_request_duration_seconds{quantile="0.5"} 0.052
+http_request_duration_seconds_sum 88364.234
+http_request_duration_seconds_count 227420
+```
+
+Prometheus has built-in support for Kubernetes and can be configured to automatically discover all services in your cluster and collect the metric data in a defined interval to save them in a time series database.
+
+To query data that is stored in the time series database, Prometheus provides a querying language called PromQL (Prometheus Query Language). A user can use PromQL to select and aggregate data in real time and view it in the built-in Prometheus user interface, which offers a simple graphical or tabular view.
+
+Here are some examples taken from the Prometheus documentation:
+```
+# Return all time series with the metric http_requests_total and the given job and handler labels:
+http_requests_total{job="apiserver", handler="/api/comments"}
+```
+
+Or a sample function that gives a rate over time:
+```
+# Return the per-second rate for all time series with the http_requests_total metric name, as measured over the last 5 minutes:
+rate(http_requests_total[5m])
+```
+
+You can use these functions to get an indication on how a certain value increases or decreases over time. That will help in analyzing errors or predicting failures for an application.
+
+Of course, monitoring only makes sense if you use the data collected. The most used companion for Prometheus is Grafana, which can be used to build dashboards from the collected metrics. You can use Grafana for many more data sources and not only Prometheus, although that is the most used one.
+
+
+![Grafana Dashboard](./pictures/Grafanadashboard.png)
+Grafana Dashboard, retrieved from the Grafana website
+
+Another tool from the Prometheus ecosystem is the Alertmanager. The Prometheus server itself allows you to configure alerts when certain metrics reach or pass a threshold. When the alert is firing, Alertmanager can send a notification out to your favorite persistent chat tool, e-mail or specialized tools that are made for alerting and on-call management.
+
+Here is an example for a alerting rule in Prometheus:
+```
+groups:
+- name: example
+  rules:
+  - alert: HighRequestLatency
+    expr: job:request_latency_seconds:mean5m{job="myjob"} > 0.5 for: 10m
+    labels:
+      severity: page
+    annotations:
+      summary: High request latency
+```
