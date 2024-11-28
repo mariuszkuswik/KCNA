@@ -6,7 +6,10 @@ Cloud native applications are ___________?
     b. Easy to maintain
     c. Self-healing
     d. All of the above
-d. All of the above
+<details>
+    <summary>Spoiler</summary>
+    d. All of the above
+</details>
 
 ## Question 2.2
 What are some characteristics of cloud native architecture?
@@ -15,7 +18,10 @@ What are some characteristics of cloud native architecture?
     b. High automation and scalability
     c. High security risk and complexity
     d. All of the above
-b. High automation and scalability
+<details>
+    <summary>Spoiler</summary>
+    b. High automation and scalability
+</details>
 
 ## Question 2.3
 The Open Container Initiative provides container standards for __________.
@@ -24,7 +30,10 @@ The Open Container Initiative provides container standards for __________.
     b. Runtime, image, distribution
     c. Image, build, distribution
     d. Docker, build, image
-b. Runtime, image, distribution
+<details>
+    <summary>Spoiler</summary>
+    b. Runtime, image, distribution
+</details>
 
 ## Question 2.4
 What is the most common pattern for autoscaling in cloud environments?
@@ -33,7 +42,10 @@ What is the most common pattern for autoscaling in cloud environments?
     b. Diagonal Scaling
     c. Horizontal Scaling
     d. Parallel Scaling
-c. Horizontal Scaling
+<details>
+    <summary>Spoiler</summary>
+    c. Horizontal Scaling
+</details>
 
 ## Question 2.5
 Serverless computing does not require _______:
@@ -42,7 +54,10 @@ Serverless computing does not require _______:
     b. Provisioning and operating infrastructure
     c. Application Code
     d. Network
-b. Provisioning and operating infrastructure
+<details>
+    <summary>Spoiler</summary>
+    b. Provisioning and operating infrastructure
+</details>
 
 ## Question 2.6
 The twelve-factor app is a guideline to _______:
@@ -51,7 +66,10 @@ The twelve-factor app is a guideline to _______:
     b. Build containers
     c. Deploy on Kubernetes
     d. All of the above
-a. Develop cloud native applications
+<details>
+    <summary>Spoiler</summary>
+    a. Develop cloud native applications
+</details>
 
 ## Question 2.7
 Which of the following is not a standard used for container orchestration?
@@ -60,7 +78,10 @@ Which of the following is not a standard used for container orchestration?
     b. Container Deployment Interface (CDI)
     c. Container Runtime Interface (CRI)
     d. Container Storage Interface (CSI)
-b. Container Deployment Interface (CDI)
+<details>
+    <summary>Spoiler</summary>
+    b. Container Deployment Interface (CDI)
+</details>
 
 ## Question 2.8
 Which of the following is not a key metric for Site Reliability Engineers?
@@ -69,7 +90,10 @@ Which of the following is not a key metric for Site Reliability Engineers?
     b. Service level indicator (SLI)
     c. Service level objective (SLO)
     d. Service level requirement (SLR)
-d. Service level requirement (SLR)
+<details>
+    <summary>Spoiler</summary>
+    d. Service level requirement (SLR)
+</details>
 
 # Chapter 3 - Container Orchestration
 ## Question 3.1
@@ -78,14 +102,20 @@ Containers can help with __________. Select all correct answers.
     b. More efficient use of hardware resources
     c. Writing secure application code
     d. All of the above
-a. Dependency management of applications
-b. More efficient use of hardware resources
+<details>
+    <summary>Spoiler</summary>
+    a. Dependency management of applications
+    b. More efficient use of hardware resources
+</details>
 
 ## Question 3.2
 The usage of containers and virtual machines are mutually exclusive. True or False?
     a. True
     b. False
-b. False
+<details>
+    <summary>Spoiler</summary>
+    b. False
+</details>
 
 ## Question 3.3
 Container isolation is achieved by _________.
@@ -93,7 +123,10 @@ Container isolation is achieved by _________.
     b. Container Network Interface
     c. Security Groups and Firewall
     d. Service Mesh
-a. Namespaces and cgroups
+<details>
+    <summary>Spoiler</summary>
+    a. Namespaces and cgroups
+</details>
 
 ## Question 3.4
 A Dockerfile contains instructions on how to _________.
@@ -101,7 +134,10 @@ A Dockerfile contains instructions on how to _________.
     b. Start multiple containers
     c. Install Kubernetes
     d. Build a container image
-d. Build a container image
+<details>
+    <summary>Spoiler</summary>
+    d. Build a container image
+</details>
 
 ## Question 3.5
 Which command can be used to build a container image with Docker?
@@ -109,7 +145,10 @@ Which command can be used to build a container image with Docker?
     b. docker create
     c. docker image
     d. docker start
-a. docker build
+<details>
+    <summary>Spoiler</summary>
+    a. docker build
+</details>
 
 ## Question 3.6
 Where can you upload container images?
@@ -117,13 +156,19 @@ Where can you upload container images?
     b. Registry
     c. Kubernetes
     d. etcd
-b. Registry
+<details>
+    <summary>Spoiler</summary>
+    b. Registry
+</details>
 
 ## Question 3.7
 Containers started on the same host share the host system's kernel. True or False?
     a. True
     b. False
-a. True
+<details>
+    <summary>Spoiler</summary>
+    a. True
+</details>
 
 ## Question 3.8
 Sort the 4C's of cloud native security, starting from the inside.
@@ -131,7 +176,10 @@ Sort the 4C's of cloud native security, starting from the inside.
     b. Cluster, container, cloud, code
     c. Code, container, cluster, cloud
     d. Container, cluster, cloud, code
-c. Code, container, cluster, cloud
+<details>
+    <summary>Spoiler</summary>
+    c. Code, container, cluster, cloud
+</details>
 
 ## Question 3.9
 Which problems can be solved with a container orchestration system?
@@ -139,7 +187,10 @@ Which problems can be solved with a container orchestration system?
     b. Managing resources like CPU and memroy
     c. Providing a container network
     d. All of the above
-d. All of the above
+<details>
+    <summary>Spoiler</summary>
+    d. All of the above
+</details>
 
 ## Question 3.10
 What do you call the automatic process of discovering services on a network?
@@ -147,7 +198,10 @@ What do you call the automatic process of discovering services on a network?
     b. Service Registry
     c. Service Discovery
     d. Service IP
-c. Service Discovery
+<details>
+    <summary>Spoiler</summary>
+    c. Service Discovery
+</details>
 
 ## Question 3.11
 What are the main parts of a Service Mesh?
@@ -155,7 +209,10 @@ What are the main parts of a Service Mesh?
     b. Data Plane and Control Plane
     c. Virus and Malware scanner
     d. Dockerfile and Network
-b. Data Plane and Control Plane
+<details>
+    <summary>Spoiler</summary>
+    b. Data Plane and Control Plane
+</details>
 
 # Chapter 4 - Kubernetes fundamentals
 ## Question 4.1
@@ -164,7 +221,10 @@ Kubernetes was originally designed and developed by _________.
 - b. Facebook
 - c. Amazon
 - d. The Boring Company
-**Correct Answer:** a. Google
+<details>
+    <summary>Spoiler</summary>
+    a. Google
+</details>
 
 ## Question 4.2
 What are the two types of Kubernetes nodes? Select all answers that apply.
@@ -172,7 +232,10 @@ What are the two types of Kubernetes nodes? Select all answers that apply.
 - b. Data Node
 - c. Security Node
 - d. Worker Node
-**Correct Answer:** a. Control Plane Node, d. Worker Node
+<details>
+    <summary>Spoiler</summary>
+    a. Control Plane Node, d. Worker Node
+</details>
 
 ## Question 4.3
 The Kubernetes agent running on each worker node is called _______.
@@ -180,7 +243,10 @@ The Kubernetes agent running on each worker node is called _______.
 - b. kubelet
 - c. containerd
 - d. docker
-**Correct Answer:** b. kubelet
+<details>
+    <summary>Spoiler</summary>
+    b. kubelet
+</details>
 
 ## Question 4.4
 What tool can be used to set up a Kubernetes cluster?
@@ -188,7 +254,10 @@ What tool can be used to set up a Kubernetes cluster?
 - b. Kubeadm
 - c. Rancher
 - d. All of the above
-**Correct Answer:** d. All of the above
+<details>
+    <summary>Spoiler</summary>
+    d. All of the above
+</details>
 
 ## Question 4.5
 Sort the three stages a request needs to go through in the api-server.
@@ -196,7 +265,10 @@ Sort the three stages a request needs to go through in the api-server.
 - b. Authentication, Admission Control, Authorization
 - c. Authentication, Authorization, Admission Control
 - d. Authorization, Authentication, Admission Control
-**Correct Answer:** c. Authentication, Authorization, Admission Control
+<details>
+    <summary>Spoiler</summary>
+    c. Authentication, Authorization, Admission Control
+</details>
 
 ## Question 4.6
 Which container runtime is marked as deprecated by Kubernetes?
@@ -204,7 +276,10 @@ Which container runtime is marked as deprecated by Kubernetes?
 - b. containerd
 - c. Docker
 - d. gvisor
-**Correct Answer:** c. Docker
+<details>
+    <summary>Spoiler</summary>
+    c. Docker
+</details>
 
 ## Question 4.7
 Which of the following is NOT a requirement in Kubernetes networking?
@@ -212,7 +287,10 @@ Which of the following is NOT a requirement in Kubernetes networking?
 - b. All nodes can communicate with all pods
 - c. All pods communicate encrypted
 - d. No Network Address Translation (NAT)
-**Correct Answer:** c. All pods communicate encrypted
+<details>
+    <summary>Spoiler</summary>
+    c. All pods communicate encrypted
+</details>
 
 ## Question 4.8
 Which Kubernetes component is responsible for scheduling?
@@ -220,189 +298,205 @@ Which Kubernetes component is responsible for scheduling?
 - b. kube-scheduler
 - c. kube-controller-manager
 - d. kube-proxy
-**Correct Answer:** b. kube-scheduler
+<details>
+    <summary>Spoiler</summary>
+    b. kube-scheduler
+</details>
 
 # Chapter 5 - Working with Kubernetes
-
 ## Question 5.1
 Kubernetes objects can be described in a data-serialization language called _____________.
 
-    a. HTML
-    b. PHP
-    c. YAML
-    d. Python
-
-**Correct Answer:** c. YAML
-
+    - a. HTML
+    - b. PHP
+    - c. YAML
+    - d. Python
+<details>
+    <summary>Spoiler</summary>
+    - c. YAML
+</details>
 
 ## Question 5.2
 Which of the following is not a required field in a Kubernetes object?
 
-    a. kind
-    b. spec
-    c. containers
-    d. metadata
-
-**Correct Answer:** c. containers
-
+    - a. kind
+    - b. spec
+    - c. containers
+    - d. metadata
+<details>
+    <summary>Spoiler</summary>
+    - c. containers
+</details>
 
 ## Question 5.3
 What is the name of the official Kubernetes command line interface?
 
-    a. containerctl
-    b. kubectl
-    c. kube-tool
-    d. podctl
-
-**Correct Answer:** b. kubectl
-
+    - a. containerctl
+    - b. kubectl
+    - c. kube-tool
+    - d. podctl
+<details>
+    <summary>Spoiler</summary>
+    - b. kubectl
+</details>
 
 ## Question 5.4
 What is the smallest deployable compute unit of Kubernetes?
 
-    a. Container
-    b. Deployment
-    c. Pod
-    d. ReplicaSet
-
-**Correct Answer:** c. Pod
-
+    - a. Container
+    - b. Deployment
+    - c. Pod
+    - d. ReplicaSet
+<details>
+    <summary>Spoiler</summary>
+    - c. Pod
+</details>
 
 ## Question 5.5
 How do you configure a container to run in a pod before your main container(s)?
 
-    a. bootstrapContainer
-    b. initContainer
-    c. priorityContainer
-    d. startContainer
-
-**Correct Answer:** b. initContainer
-
+    - a. bootstrapContainer
+    - b. initContainer
+    - c. priorityContainer
+    - d. startContainer
+<details>
+    <summary>Spoiler</summary>
+    - b. initContainer
+</details>
 
 ## Question 5.6
 Which workload object does not exist in Kubernetes?
 
-    a. ReplicaSet
-    b. Deployment
-    c. ApplicationSet
-    d. StatefulSet
-
-**Correct Answer:** c. ApplicationSet
-
+    - a. ReplicaSet
+    - b. Deployment
+    - c. ApplicationSet
+    - d. StatefulSet
+<details>
+    <summary>Spoiler</summary>
+    - c. ApplicationSet
+</details>
 
 ## Question 5.7
 Which service types exist in Kubernetes?
 
-    a. NodePort
-    b. ClusterIP
-    c. LoadBalancer
-    d. ExternalName
+- a. NodePort
+- b. ClusterIP
+- c. LoadBalancer
+- d. ExternalName
+- e. All of the above
+<details>
+    <summary>Spoiler</summary>
     e. All of the above
-
-**Correct Answer:** e. All of the above
-
+</details>
 
 ## Question 5.8
 Ingress objects can be used to configure HTTP(S) routing rules. True or False?
 
-    a. True
-    b. False
+- a. True
+- b. False
 
-**Correct Answer:** a. True
-
+<details>
+    <summary>Spoiler</summary>
+    - a. True
+</details>
 
 ## Question 5.9
 Which Kubernetes object can be used to request storage?
 
-    a. Container Storage Interface
-    b. PersistentVolume
-    c. PersistentVolumeClaim
-    d. StorageClass
+- a. Container Storage Interface
+- b. PersistentVolume
+- c. PersistentVolumeClaim
+- d. StorageClass
 
-**Correct Answer:** c. PersistentVolumeClaim
-
+<details>
+    <summary>Spoiler</summary>
+    - c. PersistentVolumeClaim
+</details>
 
 ## Question 5.10
 What is the main difference between ConfigMaps and Secrets?
 
-    a. Base64 encoding
-    b. Pretty formatting
-    c. Encryption
-    d. Syntax Highlighting
+- a. Base64 encoding
+- b. Pretty formatting
+- c. Encryption
+- d. Syntax Highlighting
 
-**Correct Answer:** a. Base64 encoding
-
+<details>
+    <summary>Spoiler</summary>
+    - a. Base64 encoding
+</details>
 
 ## Question 5.11
 Which autoscalers are available in Kubernetes?
 
-    a. Horizontal Pod Autoscaler
-    b. Cluster Autoscaler
-    c. Vertical Pod Autoscaler
-    d. All of the above
+- a. Horizontal Pod Autoscaler
+- b. Cluster Autoscaler
+- c. Vertical Pod Autoscaler
+- d. All of the above
 
-**Correct Answer:** d. All of the above
+<details>
+    <summary>Spoiler</summary>
+    - d. All of the above
+</details>
 
 # Chapter 6 - Cloud native application delivery
 
-Question 6.1
-
+## Question 6.1
 What is the name of a popular version control tool?
-
-**Correct Answer**
-
 - a. Docker
 - b. git
-  - Your Answer: Correct
 - c. Kubernetes
 - d. containerd
+<details>
+  <summary>Spoiler</summary>
+    - b. git
+  </details>
 
-Question 6.2
-
+## Question 6.2
 Version control systems can be used as a basis to manage __________.
-
-**Correct Answer**
-
 - a. Source code
 - b. Configuration
 - c. Infrastructure
 - d. All of the above
+<details>
+    <summary>Spoiler</summary>
+    - d. All of the above
+</details>
 
-Question 6.3
-
+## Question 6.3
 What does CI/CD stand for?
-
-**Correct Answer**
-
 - a. Continuous Installation/Continuous Downtime
 - b. Continuous Integration/Continuous Delivery
-  - Your Answer: Correct
 - c. Container Interface/Container Deployment
 - d. Continuous Infrastructure/Continuous Deployment
+<details>
+    <summary>spoiler</summary>
+    - b. continuous integration/continuous delivery
+</details>
 
-Question 6.4
-
+## Question 6.4
 How can you automate the build, test, and deployment of an application?
-
-**Correct Answer**
-
 - a. CI/CD pipeline
-  - Your Answer: Correct
 - b. CI/CD branch
 - c. CI/CD repository
 - d. CI/CD network
+<details>
+    <summary>spoiler</summary>
+    - a. ci/cd pipeline
+</details>
 
-Question 6.5
-
+## Question 6.5
 Flux is built with the ____________.
-
-**Correct Answer**
-
 - a. Ci/CD Toolkit
 - b. Cluster Toolkit
 - c. GitOps Toolkit
-  - Your Answer: Correct
 - d. Infrastructure Toolkit
+<details>
+    <summary>spoiler</summary>
+    - a. ci/cd pipeline
+</details>
+
+    - c. GitOps Toolkit
 
 Question 6.6
 
@@ -411,7 +505,12 @@ Flux and ArgoCD are popular GitOps tools. They use a push-based approach. True o
 - a. True
   - Your Answer: Incorrect
 - b. False
+  - Correct Answer:
   - Correct Answer
+<details>
+    <summary>spoiler</summary>
+    - a. ci/cd pipeline
+</details>
 
 
 # Chapter 7 - Cloud native observability
@@ -422,6 +521,12 @@ a. True
 b. False  
 Answer: b. False
 
+    - b. False
+<details>
+    <summary>spoiler</summary>
+    - a. ci/cd pipeline
+</details>
+
 ## Question 7.2
 Which of the following is typical telemetry data?
 
@@ -429,6 +534,11 @@ a. Metrics
 b. Logs  
 c. Traces  
 d. All of the above  
+<details>
+    <summary>spoiler</summary>
+    - a. ci/cd pipeline
+</details>
+
 Answer: d. All of the above
 
 ## Question 7.3
@@ -438,25 +548,38 @@ a. kubectl logs web-1 ruby
 b. kubectl logs -p web-1 ruby  
 c. kubectl web-1 ruby -p  
 d. kubectl logs -p -c ruby web-1  
+<details>
+    <summary>spoiler</summary>
+    - a. ci/cd pipeline
+</details>
+
+    - b. kubectl logs -p web-1 ruby
 Answer: b. kubectl logs -p web-1 ruby
 
 ## Question 7.4
 What do you call the pattern where you add a second container to your pod to collect and ship logs?
 
-a. Cluster-level logging  
-b. Node-level logging  
-c. Sidecar container logging  
-d. Application-level logging
+- a. Cluster-level logging  
+- b. Node-level logging  
+- c. Sidecar container logging  
+- d. Application-level logging
 Answer: c. Sidecar container logging
+<details>
+    <summary>spoiler</summary>
+    - a. ci/cd pipeline
+</details>
 
 ## Question 7.5
 What is a good format for structured logging?
 
-a. YAML  
-b. JSON  
-c. XML  
-d. HTML
-Answer: b. JSON
+- a. YAML  
+- b. JSON  
+- c. XML  
+- d. HTML
+<details>
+    <summary>spoiler</summary>
+    - Answer: b. JSON
+</details>
 
 ## Question 7.6
 What kind of software is Prometheus?
@@ -465,7 +588,10 @@ a. Software to manage containers
 b. Software to collect and store metrics  
 c. Software to manage virtual machines  
 d. Software to collect and store logs
-Answer: b. Software to collect and store metrics
+<details>
+    <summary>spoiler</summary>
+    - Answer: b. Software to collect and store metrics
+</details>
 
 ## Question 7.7
 Which Prometheus metric type should be used for a value that only increases (e.g., an error_count)?
@@ -474,7 +600,10 @@ a. Histogram
 b. Gauge  
 c. Counter  
 d. Summary
-Answer: c. Counter
+<details>
+    <summary>spoiler</summary>
+    - Answer: c. Counter
+</details>
 
 ## Question 7.8
 Which methods can be used to optimize cloud costs? Select all answers that apply.
@@ -483,5 +612,8 @@ a. Buying dedicated bare-metal servers
 b. Right-Sizing  
 c. Geo-replication  
 d. Reserving instances
-Answer: b. Right-Sizing, d. Reserving instances
+<details>
+    <summary>spoiler</summary>
+    - b. Right-Sizing, d. Reserving instances
+</details>
 
