@@ -1279,7 +1279,7 @@ To make logs easy to process and searchable make sure you log in a structured fo
 ## Prometheus
 Prometheus is an open source monitoring system, originally developed at SoundCloud, which became the second CNCF hosted project in 2016. Over time, it became a very popular monitoring solution and is now a standard tool that integrates especially well in the Kubernetes and container ecosystem.
 
-Prometheus can collect metrics that were emitted by applications and servers as time series data - these are very simple sets of data that include a timestamp, label and the measurement itself. The Prometheus data model provides four core metrics:
+Prometheus can collect metrics that were emitted by applications and servers as time series data - these are very simple sets of data that include a timestamp, label and the measurement itself. The Prometheus data model provides [four core metrics](https://prometheus.io/docs/concepts/metric_types/):
 - Counter: A value that increases, like a request or error count
 - Gauge: Values that increase or decrease, like memory size
 - Histogram: A sample of observations, like request duration or response size
@@ -1315,9 +1315,9 @@ http_request_duration_seconds_count 227420
 
 Prometheus has built-in support for Kubernetes and can be configured to automatically discover all services in your cluster and collect the metric data in a defined interval to save them in a time series database.
 
-To query data that is stored in the time series database, Prometheus provides a querying language called PromQL (Prometheus Query Language). A user can use PromQL to select and aggregate data in real time and view it in the built-in Prometheus user interface, which offers a simple graphical or tabular view.
+To query data that is stored in the time series database, Prometheus provides a querying language called [PromQL (Prometheus Query Language)](https://prometheus.io/docs/prometheus/latest/querying/basics/). A user can use PromQL to select and aggregate data in real time and view it in the built-in Prometheus user interface, which offers a simple graphical or tabular view.
 
-Here are some examples taken from the Prometheus documentation:
+Here are some examples taken from the [Prometheus documentation](https://prometheus.io/docs/prometheus/latest/querying/examples/):
 ```
 # Return all time series with the metric http_requests_total and the given job and handler labels:
 http_requests_total{job="apiserver", handler="/api/comments"}
@@ -1337,10 +1337,10 @@ Of course, monitoring only makes sense if you use the data collected. The most u
 ![Grafana Dashboard](./pictures/Grafanadashboard.png)
 Grafana Dashboard, retrieved from the Grafana website
 
-Another tool from the Prometheus ecosystem is the Alertmanager. The Prometheus server itself allows you to configure alerts when certain metrics reach or pass a threshold. When the alert is firing, Alertmanager can send a notification out to your favorite persistent chat tool, e-mail or specialized tools that are made for alerting and on-call management.
+Another tool from the Prometheus ecosystem is the [Alertmanager](https://prometheus.io/docs/alerting/latest/alertmanager/). The Prometheus server itself allows you to configure alerts when certain metrics reach or pass a threshold. When the alert is firing, Alertmanager can send a notification out to your favorite persistent chat tool, e-mail or specialized tools that are made for alerting and on-call management.
 
 Here is an example for a alerting rule in Prometheus:
-```
+```yaml
 groups:
 - name: example
   rules:
@@ -1351,19 +1351,45 @@ groups:
     annotations:
       summary: High request latency
 ```
-### TODO - dodac linki powyzej i ponizej
 
 ## Tracing
 Logging and Monitoring with the collection of metrics are not particularly new methods. The same thing cannot be said for (distributed) tracing. Metrics and logs are essential and can give a good overview of individual services, but to understand how a request is processed in a microservice architecture, traces can be of good use.
 
 A trace describes the tracking of a request while it passes through the services. A trace consists of multiple units of work which represent the different events that occur while the request is passing the system. Each application can contribute a span to the trace, which can include information like start and finish time, name, tags or a log message.
 
-These traces can be stored and analyzed in a tracing system like Jaeger.
+These traces can be stored and analyzed in a tracing system like [Jaeger](https://www.jaegertracing.io/).
 
 ![trace-detail](./pictures/trace-detail-ss.png)
 **Trace Detail**, retrieved from the Jaeger website
 
+While tracing was a new technology and method that was geared towards cloud native environments, there were again problems in the area of standardization. In 2019, the [OpenTracing](https://opentracing.io/) and [OpenCensus](https://opencensus.io/) projects merged to form the [OpenTelemetry](https://opentelemetry.io/) project, which is now also a CNCF project.
 
-While tracing was a new technology and method that was geared towards cloud native environments, there were again problems in the area of standardization. In 2019, the OpenTracing and OpenCensus projects merged to form the OpenTelemetry project, which is now also a CNCF project.
+OpenTelemetry is a set of application programming interfaces (APIs), software development kits (SDKs) and tools that can be used to integrate telemetry such as metrics, protocols, but especially traces into applications and infrastructures. The OpenTelemetry clients can be used to export telemetry data in a standardized format to central platforms like Jaeger. Existing tools can be found in the [OpenTelemetry documentation](https://opentelemetry.io/docs/).
 
-OpenTelemetry is a set of application programming interfaces (APIs), software development kits (SDKs) and tools that can be used to integrate telemetry such as metrics, protocols, but especially traces into applications and infrastructures. The OpenTelemetry clients can be used to export telemetry data in a standardized format to central platforms like Jaeger. Existing tools can be found in the OpenTelemetry documentation.
+## Cost Management
+The possibilities of cloud computing allow us to draw from a theoretically infinite pool of resources and only pay for them when they are really needed. Since cloud providers don’t offer their services "pro-bono", the key to cost optimization in the cloud is to analyze what is **really** needed and, if possible, automate the scheduling of the resources needed.
+
+### Automatic and Manual Optimizations
+- **Identify wasted and unused resources** - With a good monitoring of your resource usage, it is very easy to find unused resources or servers that don’t have a lot of idle time. A lot of cloud vendors have cost explorers that can break down costs for individual services. Autoscaling helps to shut down instances that are not needed.
+- **Right-Sizing** - When you start out, it can be a good idea to choose servers and systems with a lot more power than actually needed. Again, good monitoring can give you indications over time of how much resources are actually needed for your application. This is an ongoing process where you should always adapt to the load you really need. Don’t buy powerful machines if you only need half of their capacity.
+- **Reserved Instances** - On-demand pricing models are great if you really need resources on-demand. Otherwise, you’re probably paying a lot for the "on-demand" service. A method to save a lot of money is to reserve resources and even pay for them upfront. This is a great pricing model if you have a good estimate about the resources you need, maybe even for years in advance.
+- **Spot Instances** - If you have a batch job or heavy load for a short amount of time, you can use spot instances to save money. The idea of spot instances is that you get unused resources that have been over-provisioned by the cloud vendor for very low prices. The "problem" is that these resources are not reserved for you, and can be terminated on short notice to be used by someone else paying "full price".
+
+All these methods can be combined to be more cost-efficient. It is usually no problem to mix on-demand, reserved and spot instances.
+
+
+## Additional Resources
+
+Learn more about...
+- Cloud Native Observability
+  - [The Cloud Native Landscape: Observability and Analysis](https://thenewstack.io/cloud-native/the-cloud-native-landscape-observability-and-analysis/)
+- Prometheus
+  - [Prometheus Cheat Sheet - Basics (Metrics, Labels, Time Series, Scraping), by Ivan Velichko (2021)](https://iximiuz.com/en/posts/prometheus-metrics-labels-time-series/)
+- Prometheus at scale
+  - [Thanos](https://thanos.io/)
+  - [Cortex](https://cortexmetrics.io/)
+- Logging for Containers
+  - [Use the native logging mechanisms of containers (Google Cloud)](https://cloud.google.com/architecture/best-practices-for-operating-containers#use_the_native_logging_mechanisms_of_containers)
+- Right-Sizing and cost optimization
+  - [Right Sizing (Amazon AWS)](https://aws.amazon.com/aws-cost-management/aws-cost-optimization/right-sizing/)
+  - [Cloud cost optimization: principles for lasting success (Google Cloud)](https://cloud.google.com/blog/topics/cost-management/principles-of-cloud-cost-optimization)

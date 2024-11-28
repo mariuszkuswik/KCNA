@@ -413,3 +413,75 @@ Flux and ArgoCD are popular GitOps tools. They use a push-based approach. True o
 - b. False
   - Correct Answer
 
+
+# Chapter 7 - Cloud native observability
+## Question 7.1
+Observability is the same as monitoring. True or False?
+
+a. True  
+b. False  
+Answer: b. False
+
+## Question 7.2
+Which of the following is typical telemetry data?
+
+a. Metrics  
+b. Logs  
+c. Traces  
+d. All of the above  
+Answer: d. All of the above
+
+## Question 7.3
+How can you show the logs of a previously terminated container named ruby in the web-1 pod?
+
+a. kubectl logs web-1 ruby  
+b. kubectl logs -p web-1 ruby  
+c. kubectl web-1 ruby -p  
+d. kubectl logs -p -c ruby web-1  
+Answer: b. kubectl logs -p web-1 ruby
+
+## Question 7.4
+What do you call the pattern where you add a second container to your pod to collect and ship logs?
+
+a. Cluster-level logging  
+b. Node-level logging  
+c. Sidecar container logging  
+d. Application-level logging
+Answer: c. Sidecar container logging
+
+## Question 7.5
+What is a good format for structured logging?
+
+a. YAML  
+b. JSON  
+c. XML  
+d. HTML
+Answer: b. JSON
+
+## Question 7.6
+What kind of software is Prometheus?
+
+a. Software to manage containers  
+b. Software to collect and store metrics  
+c. Software to manage virtual machines  
+d. Software to collect and store logs
+Answer: b. Software to collect and store metrics
+
+## Question 7.7
+Which Prometheus metric type should be used for a value that only increases (e.g., an error_count)?
+
+a. Histogram  
+b. Gauge  
+c. Counter  
+d. Summary
+Answer: c. Counter
+
+## Question 7.8
+Which methods can be used to optimize cloud costs? Select all answers that apply.
+
+a. Buying dedicated bare-metal servers  
+b. Right-Sizing  
+c. Geo-replication  
+d. Reserving instances
+Answer: b. Right-Sizing, d. Reserving instances
+
