@@ -1351,3 +1351,19 @@ groups:
     annotations:
       summary: High request latency
 ```
+### TODO - dodac linki powyzej i ponizej
+
+## Tracing
+Logging and Monitoring with the collection of metrics are not particularly new methods. The same thing cannot be said for (distributed) tracing. Metrics and logs are essential and can give a good overview of individual services, but to understand how a request is processed in a microservice architecture, traces can be of good use.
+
+A trace describes the tracking of a request while it passes through the services. A trace consists of multiple units of work which represent the different events that occur while the request is passing the system. Each application can contribute a span to the trace, which can include information like start and finish time, name, tags or a log message.
+
+These traces can be stored and analyzed in a tracing system like Jaeger.
+
+![trace-detail](./pictures/trace-detail-ss.png)
+**Trace Detail**, retrieved from the Jaeger website
+
+
+While tracing was a new technology and method that was geared towards cloud native environments, there were again problems in the area of standardization. In 2019, the OpenTracing and OpenCensus projects merged to form the OpenTelemetry project, which is now also a CNCF project.
+
+OpenTelemetry is a set of application programming interfaces (APIs), software development kits (SDKs) and tools that can be used to integrate telemetry such as metrics, protocols, but especially traces into applications and infrastructures. The OpenTelemetry clients can be used to export telemetry data in a standardized format to central platforms like Jaeger. Existing tools can be found in the OpenTelemetry documentation.
