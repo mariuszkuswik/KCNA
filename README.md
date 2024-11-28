@@ -1196,3 +1196,83 @@ A lot of traditional systems didn’t even bother to transmit the data like logs
 
 In a distributed system with hundreds or thousands of services, this would mean a lot of effort and troubleshooting would be very time consuming.
 
+## Logging
+
+Today, application frameworks and programming languages come with extensive logging tools built-in, which makes it very easy to log to a file with different log levels based on the severity of the log message.
+
+The documentation for the Python programming language provides the following [example](https://docs.python.org/3/howto/logging.html#logging-to-a-file):
+
+```python
+import logging
+logging.basicConfig(filename='example.log', encoding='utf-8', level=logging.DEBUG)
+logging.debug('This message should go to the log file')
+logging.info('So should this')
+logging.warning('And this, too')
+logging.error('And non-ASCII stuff, too, like Øresund and Malmö')
+```
+
+Unix and Linux programs provide three I/O streams from which two can be used to output logs from a container:
+- standard input (stdin): Input to a program e.g. via keyboard
+- standard output (stdout): The output a program writes on the screen
+- standard error (stderr): Errors that a program writes on the screen
+
+If you want to learn more about I/O streams and how they originated, make sure to visit the [stdin(3)](https://man7.org/linux/man-pages/man3/stdout.3.html) - Linux manual page.
+
+Command line tools like docker, kubectl or podman provide a command to show the logs of containerized processes if you let them log directly to the console or to /dev/stdout and /dev/stderr.
+
+An example to view the logs of a container named nginx:
+
+```shell
+$ docker logs nginx
+
+/docker-entrypoint.sh: /docker-entrypoint.d/ is not empty, will attempt to perform configuration
+/docker-entrypoint.sh: Looking for shell scripts in /docker-entrypoint.d/
+/docker-entrypoint.sh: Launching
+/docker-entrypoint.d/10-listen-on-ipv6-by-default.sh
+10-listen-on-ipv6-by-default.sh: info: Getting the checksum of /etc/nginx/conf.d/default.conf
+10-listen-on-ipv6-by-default.sh: info: Enabled listen on IPv6 in /etc/nginx/conf.d/default.conf
+/docker-entrypoint.sh: Launching
+/docker-entrypoint.d/20-envsubst-on-templates.sh
+/docker-entrypoint.sh: Launching
+/docker-entrypoint.d/30-tune-worker-processes.sh
+/docker-entrypoint.sh: Configuration complete; ready for start up
+2021/10/20 13:22:44 [notice] 1#1: using the "epoll" event method
+2021/10/20 13:22:44 [notice] 1#1: nginx/1.21.3
+```
+
+To stream the logs in real time, you could add the -f parameter to the command. Kubernetes provides the same functionality with the kubectl command line tool. The documentation of the [kubectl logs](https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands#logs) command provides some examples:
+
+```shell
+# Return snapshot logs from pod nginx with only one container
+kubectl logs nginx 
+
+# Return snapshot of previous terminated ruby container logs from pod web-1
+kubectl logs -p -c ruby web-1 
+
+# Begin streaming the logs of the ruby container in pod web-1
+kubectl logs -f -c ruby web-1 
+
+# Display only the most recent 20 lines of output in pod nginx
+kubectl logs --tail=20 nginx 
+
+# Show all logs from pod nginx written in the last hour
+kubectl logs --since=1h nginx
+```
+
+These methods allow for a direct interaction with a single container. But to manage the huge amount of data, these logs need to be shipped to a system that stores the logs. To ship the logs, different methods can be used:
+
+- **Node-level logging**
+  The most efficient way to collect logs. An administrator configures a log shipping tool that collects logs and ships them to a central store.
+- **Logging via sidecar container**
+  The application has a sidecar container that collects the logs and ships them to a central store.
+- **Application-level logging**
+  The application pushes the logs directly to the central store. While this seems very convenient at first, it requires configuring the logging adapter in every application that runs in a cluster.
+
+There are several tools to choose from to ship and store the logs. The first two methods can be done by tools like [fluentd](https://www.fluentd.org/) or [filebeat](https://www.elastic.co/beats/filebeat).
+
+Popular choices to store logs are [OpenSearch](https://opensearch.org/) or [Grafana Loki](https://grafana.com/oss/loki/). To find more datastores, you can visit the [fluentd documentation](https://www.fluentd.org/dataoutputs) on possible log targets.
+
+To make logs easy to process and searchable make sure you log in a structured format like JSON instead of plaintext. The major cloud vendors provide good documentation on the importance of structured logging and how to implement it:
+- [Structured logging (Google Cloud documentation)](https://cloud.google.com/logging/docs/structured-logging)
+- [Structured logging (Microsoft Azure documentation)](https://learn.microsoft.com/en-us/azure/architecture/best-practices/monitoring#structured-logging)
+
