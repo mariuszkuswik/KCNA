@@ -1,216 +1,214 @@
 # Chapter 2 - Cloud Native Architecture
 ## Question 2.1
 Cloud native applications are ___________? 
-
-    a. Small, decoupled services
-    b. Easy to maintain
-    c. Self-healing
-    d. All of the above
+- a. Small, decoupled services
+- b. Easy to maintain
+- c. Self-healing
+- d. All of the above
 <details>
-    <summary>Spoiler</summary>
+    <summary>Answear</summary>
     d. All of the above
 </details>
 
 ## Question 2.2
 What are some characteristics of cloud native architecture?
-
-    a. High costs and maintenance
-    b. High automation and scalability
-    c. High security risk and complexity
-    d. All of the above
+- a. High costs and maintenance
+- b. High automation and scalability
+- c. High security risk and complexity
+- d. All of the above
 <details>
-    <summary>Spoiler</summary>
+    <summary>Answear</summary>
     b. High automation and scalability
 </details>
 
 ## Question 2.3
 The Open Container Initiative provides container standards for __________.
 
-    a. Runtime, image, build
-    b. Runtime, image, distribution
-    c. Image, build, distribution
-    d. Docker, build, image
+- a. Runtime, image, build
+- b. Runtime, image, distribution
+- c. Image, build, distribution
+- d. Docker, build, image
 <details>
-    <summary>Spoiler</summary>
+    <summary>Answear</summary>
     b. Runtime, image, distribution
 </details>
 
 ## Question 2.4
 What is the most common pattern for autoscaling in cloud environments?
 
-    a. Vertical Scaling
-    b. Diagonal Scaling
-    c. Horizontal Scaling
-    d. Parallel Scaling
+- a. Vertical Scaling
+- b. Diagonal Scaling
+- c. Horizontal Scaling
+- d. Parallel Scaling
 <details>
-    <summary>Spoiler</summary>
+    <summary>Answear</summary>
     c. Horizontal Scaling
 </details>
 
 ## Question 2.5
 Serverless computing does not require _______:
 
-    a. Servers
-    b. Provisioning and operating infrastructure
-    c. Application Code
-    d. Network
+- a. Servers
+- b. Provisioning and operating infrastructure
+- c. Application Code
+- d. Network
 <details>
-    <summary>Spoiler</summary>
+    <summary>Answear</summary>
     b. Provisioning and operating infrastructure
 </details>
 
 ## Question 2.6
 The twelve-factor app is a guideline to _______:
 
-    a. Develop cloud native applications
-    b. Build containers
-    c. Deploy on Kubernetes
-    d. All of the above
+- a. Develop cloud native applications
+- b. Build containers
+- c. Deploy on Kubernetes
+- d. All of the above
 <details>
-    <summary>Spoiler</summary>
+    <summary>Answear</summary>
     a. Develop cloud native applications
 </details>
 
 ## Question 2.7
 Which of the following is not a standard used for container orchestration?
 
-    a. Container Network Interface (CNI)
-    b. Container Deployment Interface (CDI)
-    c. Container Runtime Interface (CRI)
-    d. Container Storage Interface (CSI)
+- a. Container Network Interface (CNI)
+- b. Container Deployment Interface (CDI)
+- c. Container Runtime Interface (CRI)
+- d. Container Storage Interface (CSI)
 <details>
-    <summary>Spoiler</summary>
+    <summary>Answear</summary>
     b. Container Deployment Interface (CDI)
 </details>
 
 ## Question 2.8
 Which of the following is not a key metric for Site Reliability Engineers?
 
-    a. Service level agreement (SLA)
-    b. Service level indicator (SLI)
-    c. Service level objective (SLO)
-    d. Service level requirement (SLR)
+- a. Service level agreement (SLA)
+- b. Service level indicator (SLI)
+- c. Service level objective (SLO)
+- d. Service level requirement (SLR)
 <details>
-    <summary>Spoiler</summary>
+    <summary>Answear</summary>
     d. Service level requirement (SLR)
 </details>
 
 # Chapter 3 - Container Orchestration
 ## Question 3.1
 Containers can help with __________. Select all correct answers.
-    a. Dependency management of applications
-    b. More efficient use of hardware resources
-    c. Writing secure application code
-    d. All of the above
+- a. Dependency management of applications
+- b. More efficient use of hardware resources
+- c. Writing secure application code
+ d. All of the above
 <details>
-    <summary>Spoiler</summary>
-    a. Dependency management of applications
-    b. More efficient use of hardware resources
+    <summary>Answear</summary>
+    - a. Dependency management of applications
+    - b. More efficient use of hardware resources
 </details>
 
 ## Question 3.2
 The usage of containers and virtual machines are mutually exclusive. True or False?
-    a. True
-    b. False
+- a. True
+- b. False
 <details>
-    <summary>Spoiler</summary>
-    b. False
+    <summary>Answear</summary>
+    - b. False
 </details>
 
 ## Question 3.3
 Container isolation is achieved by _________.
-    a. Namespaces and cgroups
-    b. Container Network Interface
-    c. Security Groups and Firewall
-    d. Service Mesh
+- a. Namespaces and cgroups
+- b. Container Network Interface
+- c. Security Groups and Firewall
+- d. Service Mesh
 <details>
-    <summary>Spoiler</summary>
-    a. Namespaces and cgroups
+    <summary>Answear</summary>
+    - a. Namespaces and cgroups
 </details>
 
 ## Question 3.4
 A Dockerfile contains instructions on how to _________.
-    a. Install Docker
-    b. Start multiple containers
-    c. Install Kubernetes
-    d. Build a container image
+- a. Install Docker
+- b. Start multiple containers
+- c. Install Kubernetes
+- d. Build a container image
 <details>
-    <summary>Spoiler</summary>
+    <summary>Answear</summary>
     d. Build a container image
 </details>
 
 ## Question 3.5
 Which command can be used to build a container image with Docker?
-    a. docker build
-    b. docker create
-    c. docker image
-    d. docker start
+- a. docker build
+- b. docker create
+- c. docker image
+- d. docker start
 <details>
-    <summary>Spoiler</summary>
+    <summary>Answear</summary>
     a. docker build
 </details>
 
 ## Question 3.6
 Where can you upload container images?
-    a. Podman
-    b. Registry
-    c. Kubernetes
-    d. etcd
+- a. Podman
+- b. Registry
+- c. Kubernetes
+- d. etcd
 <details>
-    <summary>Spoiler</summary>
+    <summary>Answear</summary>
     b. Registry
 </details>
 
 ## Question 3.7
 Containers started on the same host share the host system's kernel. True or False?
-    a. True
-    b. False
+- a. True
+- b. False
 <details>
-    <summary>Spoiler</summary>
+    <summary>Answear</summary>
     a. True
 </details>
 
 ## Question 3.8
 Sort the 4C's of cloud native security, starting from the inside.
-    a. Code, container, cloud, cluster
-    b. Cluster, container, cloud, code
-    c. Code, container, cluster, cloud
-    d. Container, cluster, cloud, code
+- a. Code, container, cloud, cluster
+- b. Cluster, container, cloud, code
+- c. Code, container, cluster, cloud
+- d. Container, cluster, cloud, code
 <details>
-    <summary>Spoiler</summary>
+    <summary>Answear</summary>
     c. Code, container, cluster, cloud
 </details>
 
 ## Question 3.9
 Which problems can be solved with a container orchestration system?
-    a. Scheduling containers
-    b. Managing resources like CPU and memroy
-    c. Providing a container network
-    d. All of the above
+- a. Scheduling containers
+- b. Managing resources like CPU and memroy
+- c. Providing a container network
+- d. All of the above
 <details>
-    <summary>Spoiler</summary>
+    <summary>Answear</summary>
     d. All of the above
 </details>
 
 ## Question 3.10
 What do you call the automatic process of discovering services on a network?
-    a. Service Mesh
-    b. Service Registry
-    c. Service Discovery
-    d. Service IP
+- a. Service Mesh
+- b. Service Registry
+- c. Service Discovery
+- d. Service IP
 <details>
-    <summary>Spoiler</summary>
+    <summary>Answear</summary>
     c. Service Discovery
 </details>
 
 ## Question 3.11
 What are the main parts of a Service Mesh?
-    a. Controller-Manager and DNS
-    b. Data Plane and Control Plane
-    c. Virus and Malware scanner
-    d. Dockerfile and Network
+- a. Controller-Manager and DNS
+- b. Data Plane and Control Plane
+- c. Virus and Malware scanner
+- d. Dockerfile and Network
 <details>
-    <summary>Spoiler</summary>
+    <summary>Answear</summary>
     b. Data Plane and Control Plane
 </details>
 
@@ -222,7 +220,7 @@ Kubernetes was originally designed and developed by _________.
 - c. Amazon
 - d. The Boring Company
 <details>
-    <summary>Spoiler</summary>
+    <summary>Answear</summary>
     a. Google
 </details>
 
@@ -233,7 +231,7 @@ What are the two types of Kubernetes nodes? Select all answers that apply.
 - c. Security Node
 - d. Worker Node
 <details>
-    <summary>Spoiler</summary>
+    <summary>Answear</summary>
     a. Control Plane Node, d. Worker Node
 </details>
 
@@ -244,7 +242,7 @@ The Kubernetes agent running on each worker node is called _______.
 - c. containerd
 - d. docker
 <details>
-    <summary>Spoiler</summary>
+    <summary>Answear</summary>
     b. kubelet
 </details>
 
@@ -255,7 +253,7 @@ What tool can be used to set up a Kubernetes cluster?
 - c. Rancher
 - d. All of the above
 <details>
-    <summary>Spoiler</summary>
+    <summary>Answear</summary>
     d. All of the above
 </details>
 
@@ -266,7 +264,7 @@ Sort the three stages a request needs to go through in the api-server.
 - c. Authentication, Authorization, Admission Control
 - d. Authorization, Authentication, Admission Control
 <details>
-    <summary>Spoiler</summary>
+    <summary>Answear</summary>
     c. Authentication, Authorization, Admission Control
 </details>
 
@@ -277,7 +275,7 @@ Which container runtime is marked as deprecated by Kubernetes?
 - c. Docker
 - d. gvisor
 <details>
-    <summary>Spoiler</summary>
+    <summary>Answear</summary>
     c. Docker
 </details>
 
@@ -288,7 +286,7 @@ Which of the following is NOT a requirement in Kubernetes networking?
 - c. All pods communicate encrypted
 - d. No Network Address Translation (NAT)
 <details>
-    <summary>Spoiler</summary>
+    <summary>Answear</summary>
     c. All pods communicate encrypted
 </details>
 
@@ -299,80 +297,74 @@ Which Kubernetes component is responsible for scheduling?
 - c. kube-controller-manager
 - d. kube-proxy
 <details>
-    <summary>Spoiler</summary>
+    <summary>Answear</summary>
     b. kube-scheduler
 </details>
 
 # Chapter 5 - Working with Kubernetes
 ## Question 5.1
 Kubernetes objects can be described in a data-serialization language called _____________.
-
-    - a. HTML
-    - b. PHP
-    - c. YAML
-    - d. Python
+- a. HTML
+- b. PHP
+- c. YAML
+- d. Python
 <details>
-    <summary>Spoiler</summary>
+    <summary>Answear</summary>
     - c. YAML
 </details>
 
 ## Question 5.2
 Which of the following is not a required field in a Kubernetes object?
-
-    - a. kind
-    - b. spec
-    - c. containers
-    - d. metadata
+- a. kind
+- b. spec
+- c. containers
+- d. metadata
 <details>
-    <summary>Spoiler</summary>
+    <summary>Answear</summary>
     - c. containers
 </details>
 
 ## Question 5.3
 What is the name of the official Kubernetes command line interface?
-
-    - a. containerctl
-    - b. kubectl
-    - c. kube-tool
-    - d. podctl
+- a. containerctl
+- b. kubectl
+- c. kube-tool
+- d. podctl
 <details>
-    <summary>Spoiler</summary>
+    <summary>Answear</summary>
     - b. kubectl
 </details>
 
 ## Question 5.4
 What is the smallest deployable compute unit of Kubernetes?
-
-    - a. Container
-    - b. Deployment
-    - c. Pod
-    - d. ReplicaSet
+- a. Container
+- b. Deployment
+- c. Pod
+- d. ReplicaSet
 <details>
-    <summary>Spoiler</summary>
+    <summary>Answear</summary>
     - c. Pod
 </details>
 
 ## Question 5.5
 How do you configure a container to run in a pod before your main container(s)?
-
-    - a. bootstrapContainer
-    - b. initContainer
-    - c. priorityContainer
-    - d. startContainer
+- a. bootstrapContainer
+- b. initContainer
+- c. priorityContainer
+- d. startContainer
 <details>
-    <summary>Spoiler</summary>
+    <summary>Answear</summary>
     - b. initContainer
 </details>
 
 ## Question 5.6
 Which workload object does not exist in Kubernetes?
-
-    - a. ReplicaSet
-    - b. Deployment
-    - c. ApplicationSet
-    - d. StatefulSet
+- a. ReplicaSet
+- b. Deployment
+- c. ApplicationSet
+- d. StatefulSet
 <details>
-    <summary>Spoiler</summary>
+    <summary>Answear</summary>
     - c. ApplicationSet
 </details>
 
@@ -385,7 +377,7 @@ Which service types exist in Kubernetes?
 - d. ExternalName
 - e. All of the above
 <details>
-    <summary>Spoiler</summary>
+    <summary>Answear</summary>
     e. All of the above
 </details>
 
@@ -396,7 +388,7 @@ Ingress objects can be used to configure HTTP(S) routing rules. True or False?
 - b. False
 
 <details>
-    <summary>Spoiler</summary>
+    <summary>Answear</summary>
     - a. True
 </details>
 
@@ -409,7 +401,7 @@ Which Kubernetes object can be used to request storage?
 - d. StorageClass
 
 <details>
-    <summary>Spoiler</summary>
+    <summary>Answear</summary>
     - c. PersistentVolumeClaim
 </details>
 
@@ -422,7 +414,7 @@ What is the main difference between ConfigMaps and Secrets?
 - d. Syntax Highlighting
 
 <details>
-    <summary>Spoiler</summary>
+    <summary>Answear</summary>
     - a. Base64 encoding
 </details>
 
@@ -435,7 +427,7 @@ Which autoscalers are available in Kubernetes?
 - d. All of the above
 
 <details>
-    <summary>Spoiler</summary>
+    <summary>Answear</summary>
     - d. All of the above
 </details>
 
@@ -448,7 +440,7 @@ What is the name of a popular version control tool?
 - c. Kubernetes
 - d. containerd
 <details>
-  <summary>Spoiler</summary>
+  <summary>Answear</summary>
     - b. git
   </details>
 
@@ -459,7 +451,7 @@ Version control systems can be used as a basis to manage __________.
 - c. Infrastructure
 - d. All of the above
 <details>
-    <summary>Spoiler</summary>
+    <summary>Answear</summary>
     - d. All of the above
 </details>
 
@@ -470,7 +462,7 @@ What does CI/CD stand for?
 - c. Container Interface/Container Deployment
 - d. Continuous Infrastructure/Continuous Deployment
 <details>
-    <summary>spoiler</summary>
+    <summary>Answear</summary>
     - b. continuous integration/continuous delivery
 </details>
 
@@ -481,7 +473,7 @@ How can you automate the build, test, and deployment of an application?
 - c. CI/CD repository
 - d. CI/CD network
 <details>
-    <summary>spoiler</summary>
+    <summary>Answear</summary>
     - a. ci/cd pipeline
 </details>
 
@@ -492,69 +484,53 @@ Flux is built with the ____________.
 - c. GitOps Toolkit
 - d. Infrastructure Toolkit
 <details>
-    <summary>spoiler</summary>
-    - a. ci/cd pipeline
-</details>
-
+    <summary>Answear</summary>
     - c. GitOps Toolkit
-
-Question 6.6
-
-Flux and ArgoCD are popular GitOps tools. They use a push-based approach. True or False?
-
-- a. True
-  - Your Answer: Incorrect
-- b. False
-  - Correct Answer:
-  - Correct Answer
-<details>
-    <summary>spoiler</summary>
-    - a. ci/cd pipeline
 </details>
 
+## Question 6.6
+Flux and ArgoCD are popular GitOps tools. They use a push-based approach. True or False?
+- a. True
+- b. False
+<details>
+    <summary>Answear</summary>
+    - b. False
+</details>
 
 # Chapter 7 - Cloud native observability
 ## Question 7.1
 Observability is the same as monitoring. True or False?
-
-a. True  
-b. False  
+- a. True  
+- b. False  
 Answer: b. False
 
-    - b. False
 <details>
-    <summary>spoiler</summary>
-    - a. ci/cd pipeline
+    <summary>Answear</summary>
+    - b. False
 </details>
 
 ## Question 7.2
 Which of the following is typical telemetry data?
-
-a. Metrics  
-b. Logs  
-c. Traces  
-d. All of the above  
+- a. Metrics  
+- b. Logs  
+- c. Traces  
+- d. All of the above  
 <details>
-    <summary>spoiler</summary>
-    - a. ci/cd pipeline
+    <summary>Answear</summary>
+    - Answer: d. All of the above
 </details>
 
-Answer: d. All of the above
 
 ## Question 7.3
 How can you show the logs of a previously terminated container named ruby in the web-1 pod?
-
-a. kubectl logs web-1 ruby  
-b. kubectl logs -p web-1 ruby  
-c. kubectl web-1 ruby -p  
-d. kubectl logs -p -c ruby web-1  
+- a. kubectl logs web-1 ruby  
+- b. kubectl logs -p web-1 ruby  
+- c. kubectl web-1 ruby -p  
+- d. kubectl logs -p -c ruby web-1  
 <details>
-    <summary>spoiler</summary>
-    - a. ci/cd pipeline
+    <summary>Answear</summary>
+    - Answer: b. kubectl logs -p web-1 ruby
 </details>
-
-    - b. kubectl logs -p web-1 ruby
-Answer: b. kubectl logs -p web-1 ruby
 
 ## Question 7.4
 What do you call the pattern where you add a second container to your pod to collect and ship logs?
@@ -565,7 +541,7 @@ What do you call the pattern where you add a second container to your pod to col
 - d. Application-level logging
 Answer: c. Sidecar container logging
 <details>
-    <summary>spoiler</summary>
+    <summary>Answear</summary>
     - a. ci/cd pipeline
 </details>
 
@@ -577,43 +553,39 @@ What is a good format for structured logging?
 - c. XML  
 - d. HTML
 <details>
-    <summary>spoiler</summary>
+    <summary>Answear</summary>
     - Answer: b. JSON
 </details>
 
 ## Question 7.6
 What kind of software is Prometheus?
-
-a. Software to manage containers  
-b. Software to collect and store metrics  
-c. Software to manage virtual machines  
-d. Software to collect and store logs
+- a. Software to manage containers  
+- b. Software to collect and store metrics  
+- c. Software to manage virtual machines  
+- d. Software to collect and store logs
 <details>
-    <summary>spoiler</summary>
+    <summary>Answear</summary>
     - Answer: b. Software to collect and store metrics
 </details>
 
 ## Question 7.7
 Which Prometheus metric type should be used for a value that only increases (e.g., an error_count)?
-
-a. Histogram  
-b. Gauge  
-c. Counter  
-d. Summary
+- a. Histogram  
+- b. Gauge  
+- c. Counter  
+- d. Summary
 <details>
-    <summary>spoiler</summary>
+    <summary>Answear</summary>
     - Answer: c. Counter
 </details>
 
 ## Question 7.8
 Which methods can be used to optimize cloud costs? Select all answers that apply.
-
-a. Buying dedicated bare-metal servers  
-b. Right-Sizing  
-c. Geo-replication  
-d. Reserving instances
+- a. Buying dedicated bare-metal servers  
+- b. Right-Sizing  
+- c. Geo-replication  
+- d. Reserving instances
 <details>
-    <summary>spoiler</summary>
+    <summary>Answear</summary>
     - b. Right-Sizing, d. Reserving instances
 </details>
-
