@@ -1,3 +1,17 @@
+1. https://www.examtopics.com/discussions/linux-foundation/view/122253-exam-kcna-topic-1-question-1-discussion/
+5. https://www.examtopics.com/discussions/linux-foundation/view/119231-exam-kcna-topic-1-question-5-discussion/
+6. https://www.examtopics.com/discussions/linux-foundation/view/119233-exam-kcna-topic-1-question-6-discussion/
+7. https://www.examtopics.com/discussions/linux-foundation/view/119235-exam-kcna-topic-1-question-7-discussion/
+8. 
+
+13. https://www.examtopics.com/discussions/linux-foundation/view/119236-exam-kcna-topic-1-question-13-discussion/
+14. https://www.examtopics.com/discussions/linux-foundation/view/119237-exam-kcna-topic-1-question-14-discussion/
+15. https://www.examtopics.com/discussions/linux-foundation/view/119238-exam-kcna-topic-1-question-15-discussion/
+
+18. https://www.examtopics.com/discussions/linux-foundation/view/119240-exam-kcna-topic-1-question-18-discussion/
+19. https://www.examtopics.com/discussions/linux-foundation/view/119239-exam-kcna-topic-1-question-19-discussion/
+20. https://www.examtopics.com/discussions/linux-foundation/view/119241-exam-kcna-topic-1-question-20-discussion/
+
 # Chapter 2 - Cloud Native Architecture
 ## Question 2.1
 Cloud native applications are ___________? 
