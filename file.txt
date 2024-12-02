@@ -1,0 +1,948 @@
+<!DOCTYPE html>
+<html lang="en">
+    <!-- RubyOnRails - formstatic / kaminari -->
+    <head>
+        
+        <meta content="authenticity_token" name="csrf-param" />
+        <meta content="4sWPhTlJAds1IcfNq1FCybbssAVhHqjiDCKRXOgOQock=" name="csrf-token" />
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-119892649-1"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag() {
+                dataLayer.push(arguments);
+            }
+            gtag('js', new Date());
+
+            gtag('config', 'UA-119892649-1');
+			gtag('config', 'AW-634926850');
+			gtag('config', 'G-2Y1TJKMJTN');
+        </script>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-NPZ5XJCD');</script>
+<!-- End Google Tag Manager -->
+        <meta name="google-site-verification" content="F930_I7rZrRYlNHqblq5P9QvwAEKasart2HpzlnYsSQ" />
+		<meta name="facebook-domain-verification" content="h1xurj1a9tb4tm6plgrg4it4yrlpr6" />
+
+        <!-- meta tag -->
+        <meta charset="utf-8">
+        <title>ExamTopics - Error</title>
+        <meta name="description" content="">
+        <!-- responsive tag -->
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <!-- favicon -->
+        <link rel="apple-touch-icon" sizes="57x57" href="/assets/images/et/favicon/apple-icon-57x57.png">
+        <link rel="apple-touch-icon" sizes="60x60" href="/assets/images/et/favicon/apple-icon-60x60.png">
+        <link rel="apple-touch-icon" sizes="72x72" href="/assets/images/et/favicon/apple-icon-72x72.png">
+        <link rel="apple-touch-icon" sizes="76x76" href="/assets/images/et/favicon/apple-icon-76x76.png">
+        <link rel="apple-touch-icon" sizes="114x114" href="/assets/images/et/favicon/apple-icon-114x114.png">
+        <link rel="apple-touch-icon" sizes="120x120" href="/assets/images/et/favicon/apple-icon-120x120.png">
+        <link rel="apple-touch-icon" sizes="144x144" href="/assets/images/et/favicon/apple-icon-144x144.png">
+        <link rel="apple-touch-icon" sizes="152x152" href="/assets/images/et/favicon/apple-icon-152x152.png">
+        <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/et/favicon/apple-icon-180x180.png">
+        <link rel="icon" type="image/png" sizes="192x192"  href="/assets/images/et/favicon/android-icon-192x192.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/et/favicon/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="96x96" href="/assets/images/et/favicon/favicon-96x96.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/et/favicon/favicon-16x16.png">
+        <link rel="manifest" href="/assets/images/et/favicon/manifest.json">
+        <meta name="msapplication-TileColor" content="#007bff">
+        <meta name="msapplication-TileImage" content="/assets/images/et/favicon/ms-icon-144x144.png">
+        <meta name="theme-color" content="#ffffff">
+
+            <!-- deflink == defered link (loaded later by jquery) -->
+            <!-- bootstrap v4 css -->
+            <link rel="stylesheet" type="text/css" href="/assets/css/bootstrap.min.css" />
+            <!-- font-awesome css -->
+            <link rel="stylesheet" type="text/css" defhref="/assets/css/font-awesome.min.css" />
+            <!-- animate css -->
+            <link rel="stylesheet" type="text/css" defhref="/assets/css/animate.css" />
+            <!-- owl.carousel css -->
+            <link rel="stylesheet" type="text/css" defhref="/assets/css/owl.carousel.css" />
+            <!-- slick css -->
+            <link rel="stylesheet" type="text/css" defhref="/assets/css/slick.css" />
+            <!-- rsmenu CSS -->
+            <link rel="stylesheet" type="text/css" href="/assets/css/rsmenu-main.css" />
+            <!-- rsmenu transitions CSS -->
+            <link rel="stylesheet" type="text/css" defhref="/assets/css/rsmenu-transitions.css" />
+            <!-- magnific popup css -->
+            <link rel="stylesheet" type="text/css" defhref="/assets/css/magnific-popup.css" />
+
+            <!-- flaticon css  -->
+            <link rel="stylesheet" type="text/css" defhref="/assets/fonts/flaticon.css" />
+            <!-- flaticon2 css  -->
+            <link rel="stylesheet" type="text/css" defhref="/assets/fonts/fonts2/flaticon.css" />
+
+            <link rel="stylesheet" type="text/css" href="/assets/css/style.css?ver=1" />
+            <!-- Switch style CSS
+            <link rel="stylesheet" href="/assets/css/color-style.css">-->
+            <link rel="stylesheet" type="text/css" href="/assets/css/color/default.css" />
+            <!-- style css -->
+            <!-- switch color presets css
+            <link id="switch_style" href="#" rel="stylesheet" type="text/css"> -->
+            <!-- responsive css -->
+            <link rel="stylesheet" type="text/css" href="/assets/css/responsive.css" />
+
+        <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+            <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+        <![endif]-->
+        
+<style>
+    .error-container {
+        padding: 45px;
+    }
+
+    .error-container, .error-container *{
+        /* padding: 45px; */
+        letter-spacing: 1px;
+        font-size: 17px;
+        text-align: left;
+        font-family: 'Roboto Condensed', sans-serif;
+    }
+
+    .error-container ul {
+        list-style-type: circle;
+        margin: 12px 0 12px 20px;
+    }
+</style>
+
+<!-- Meta Pixel Code -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '1915380481930084');
+fbq('track', 'PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=1915380481930084&ev=PageView&noscript=1"
+/></noscript>
+<!-- End Meta Pixel Code -->
+
+<script type="text/javascript">
+    (function(c,l,a,r,i,t,y){
+        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "j5qqkpglmm");
+</script>
+
+<!-- Start VWO Async SmartCode -->
+<link rel="preconnect" href="https://dev.visualwebsiteoptimizer.com" />
+<script type='text/javascript' id='vwoCode'>
+window._vwo_code=window._vwo_code || (function() {
+var account_id=782917,
+version = 1.5,
+settings_tolerance=2000,
+library_tolerance=2500,
+use_existing_jquery=false,
+is_spa=1,
+hide_element='body',
+hide_element_style = 'opacity:0 !important;filter:alpha(opacity=0) !important;background:none !important',
+/* DO NOT EDIT BELOW THIS LINE */
+f=false,w=window,d=document,vwoCodeEl=d.querySelector('#vwoCode'),code={use_existing_jquery:function(){return use_existing_jquery},library_tolerance:function(){return library_tolerance},hide_element_style:function(){return'{'+hide_element_style+'}'},finish:function(){if(!f){f=true;var e=d.getElementById('_vis_opt_path_hides');if(e)e.parentNode.removeChild(e)}},finished:function(){return f},load:function(e){var t=d.createElement('script');t.fetchPriority='high';t.src=e;t.type='text/javascript';t.onerror=function(){_vwo_code.finish()};d.getElementsByTagName('head')[0].appendChild(t)},getVersion:function(){return version},getMatchedCookies:function(e){var t=[];if(document.cookie){t=document.cookie.match(e)||[]}return t},getCombinationCookie:function(){var e=code.getMatchedCookies(/(?:^|;)\s?(_vis_opt_exp_\d+_combi=[^;$]*)/gi);e=e.map(function(e){try{var t=decodeURIComponent(e);if(!/_vis_opt_exp_\d+_combi=(?:\d+,?)+\s*$/.test(t)){return''}return t}catch(e){return''}});var i=[];e.forEach(function(e){var t=e.match(/([\d,]+)/g);t&&i.push(t.join('-'))});return i.join('|')},init:function(){if(d.URL.indexOf('__vwo_disable__')>-1)return;w.settings_timer=setTimeout(function(){_vwo_code.finish()},settings_tolerance);var e=d.currentScript,t=d.createElement('style'),i=e&&!e.async?hide_element?hide_element+'{'+hide_element_style+'}':'':code.lA=1,n=d.getElementsByTagName('head')[0];t.setAttribute('id','_vis_opt_path_hides');vwoCodeEl&&t.setAttribute('nonce',vwoCodeEl.nonce);t.setAttribute('type','text/css');if(t.styleSheet)t.styleSheet.cssText=i;else t.appendChild(d.createTextNode(i));n.appendChild(t);var o=this.getCombinationCookie();this.load('https://dev.visualwebsiteoptimizer.com/j.php?a='+account_id+'&u='+encodeURIComponent(d.URL)+'&f='+ +is_spa+'&vn='+version+(o?'&c='+o:''));return settings_timer}};w._vwo_settings_timer = code.init();return code;}());
+</script>
+<!-- End VWO Async SmartCode -->
+
+
+    </head>
+    <body class="home2">
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NPZ5XJCD"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+        
+<!--Full width header Start-->
+<div class="full-width-header">
+<!-- Toolbar Start -->
+<div class="rs-toolbar">
+	<div class="container">
+		<div class="row d-print-none">
+			<div class="col-md-6">
+				<!-- <div class="rs-toolbar-left">
+					<div class="welcome-message">
+					<i class="fa fa-bank"></i><span>Welcome to ExamTopics</span>
+					</div>
+				</div> -->
+			</div>
+			<div class="col-md-6">
+				<div class="rs-toolbar-right">
+					<div class="account-menu">
+					<ul>
+						
+							<li><a href="/login/" data-toggle="modal"
+								   data-target="#login-modal" class="mr-2">Login</a> |</li>
+							<li><a href="/signup/">Sign up</a></li>
+						
+						<li class="spacer"></li>
+					</ul>
+					</div>
+					<!-- <div class="toolbar-share-icon">
+					<ul>
+					
+						<li><a href="https://www.facebook.com/ExamTopicsOnline/"><i class="fa fa-facebook"></i></a></li>
+					
+						<li><a href="https://twitter.com/TopicsExam"><i class="fa fa-twitter"></i></a></li>
+					
+						<li><a href="https://www.youtube.com/channel/UC4CThW97vf8rHFYcvK2disg"><i class="fa fa-youtube"></i></a></li>
+					
+						<li><a href="https://www.reddit.com/r/ExamTopics/"><i class="fa fa-reddit"></i></a></li>
+					
+						<li><a href="https://www.pinterest.com/examtopics/"><i class="fa fa-pinterest"></i></a></li>
+					
+					</ul>
+					</div> -->
+					<!--<a href="#" class="apply-btn">Apply Now</a>-->
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- Toolbar End -->
+
+<!--Header Start-->
+<header id="rs-header" class="rs-header">
+<!-- Header Top Start -->
+<div class="rs-header-top">
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-5 col-md-12 rs-vertical-middle">
+				<div class="logo-area">
+					<img src="/assets/images/et/ExamTopics-Logo-Smaller.png" alt="ExamTopics Logo">
+					<br class="hidden-desktop"/>
+					<!-- <span class="moto hypen-separator hidden-mobile">-</span> -->
+					<!-- <span class="moto">Expert Verified, Online, <strong>Free</strong>.</span> -->
+				</div>
+			</div>
+			<div class="col-lg-7 col-md-12 d-print-none">
+				<div class="row">
+					<div class="col-sm-4">
+						<!-- Placeholder -->
+					</div>
+					<div class="col-sm-4">
+						<div class="header-contact">
+							<div id="info-details" class="widget-text">
+								<i class="glyph-icon flaticon-email"></i>
+								<div class="info-text">
+								<a href="/cdn-cgi/l/email-protection#3b4f5e5a567b5e435a564f544b52584815585456"><span>Mail Us</span><span class="__cf_email__" data-cfemail="027667636f42677a636f766d726b61712c616d6f">[email&#160;protected]</span></a>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-sm-4">
+						<div class="header-contact">
+							<div id="address-details" class="widget-text">
+
+
+
+
+
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- Header Top End -->
+
+	<!-- Menu Start -->
+	<div class="menu-area menu-sticky d-print-none">
+		<div class="container">
+			<div class="main-menu">
+				<div class="row">
+					<div class="col-sm-12">
+						<!-- <div id="logo-sticky" class="text-center">
+							<a href="index.html"><img src="/assets/images/logo.png" alt="logo"></a>
+						</div> -->
+						<a class="rs-menu-toggle"><i class="fa fa-bars"></i>Menu</a>
+						<nav class="rs-menu rs-menu-close">
+							<ul class="nav-menu">
+								<!-- Home -->
+								<li class="current-menu-item current_page_item"><a href="/" class="home">Home</a></li>
+								<!-- End Home -->
+								<!-- <li><a href="https://unlimited.examtopics.com/">EXAMTOPICS PRO</a></li> -->
+								<!-- Drop Down Pages Start -->
+								<li class="rs-mega-menu mega-rs"><a href="#">Popular Exams</a>
+									<ul class="mega-menu">
+										<li class="mega-menu-container">
+											<div class="mega-menu-innner">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="single-magemenu">
+	<ul class="sub-menu">
+	
+		
+		<li><a href="/exams/amazon/">Amazon</a></li>
+	
+		
+		<li><a href="/exams/comptia/">CompTIA</a></li>
+	
+		
+		<li><a href="/exams/salesforce/">Salesforce</a></li>
+	
+		
+		<li><a href="/exams/fortinet/">Fortinet</a></li>
+	
+		
+		<li><a href="/exams/juniper/">Juniper</a></li>
+	
+	</ul>
+</div>
+
+
+
+<div class="single-magemenu">
+	<ul class="sub-menu">
+	
+		
+		<li><a href="/exams/cisco/">Cisco</a></li>
+	
+		
+		<li><a href="/exams/isaca/">Isaca</a></li>
+	
+		
+		<li><a href="/exams/vmware/">VMware</a></li>
+	
+		
+		<li><a href="/exams/isc/">ISC</a></li>
+	
+		
+		<li><a href="/exams/servicenow/">ServiceNow</a></li>
+	
+	</ul>
+</div>
+
+
+
+<div class="single-magemenu">
+	<ul class="sub-menu">
+	
+		
+		<li><a href="/exams/microsoft/">Microsoft</a></li>
+	
+		
+		<li><a href="/exams/google/">Google</a></li>
+	
+		
+		<li><a href="/exams/eccouncil/">ECCouncil</a></li>
+	
+		
+		<li><a href="/exams/oracle/">Oracle</a></li>
+	
+		
+		<li><a href="/exams/palo-alto-networks/">Palo Alto Networks</a></li>
+	
+	</ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+											</div>
+										</li>
+									</ul>
+								</li>
+								<!--Drop Down Pages End -->
+<style>
+.nav__new {
+  font-size: 14px;
+  line-height: 18px;
+  background: #0095eb;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 50px;
+  height: 25px;
+  color: #fff;
+  position: absolute;
+  top: 0;
+  right: 50%;
+  cursor: default;
+  pointer-events: none;
+  transform: translate(10%, -50%);
+}
+@media(max-width: 992px){
+.rs-menu li{
+width: fit-content
+}
+}
+</style>
+					<li><a href="/exams/">View All Exams</a></li>
+					<!-- <li><a href="https://courses.examtopics.com/" onClick="return coursesClick();">Training Courses</a><span class="nav__new">NEW</span></li> -->
+					<!-- <li><a href="/news/">News</a></li> -->
+					<!-- <li><a href="/discussions/">Forum</a></li> -->
+					<li><a href="/cdn-cgi/l/email-protection#7b0f1e1a163b1e031a160f140b12180855181416">Contact</a></li>
+					<!-- <li><a href="/#about-us">About</a></li> -->
+
+					
+						<li class="d-md-none"><a href="/login/" data-toggle="modal" data-target="#login-modal">Login</a></li>
+						<li class="d-md-none"><a href="/signup/">Sign up</a></li>
+					
+					</ul>
+					</nav>
+					<a class="hidden-xs rs-search" data-target=".search-modal" data-toggle="modal" href="#"><i class="fa fa-search"></i></a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Menu End -->
+</header>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script type="text/javascript">
+function coursesClick()
+{
+	dataLayer.push({ ecommerce: null });  // Clear the previous ecommerce object.
+	dataLayer.push({
+	  event: "nav_click_courses"
+	});
+	return true;
+}
+</script>
+<!--Header End-->
+
+</div>
+<!--Full width header End-->
+
+
+
+
+
+
+
+<!-- notlogged -->
+	
+<!-- endof notlogged -->
+
+    
+        <!--Full width header End-->
+        <div class="error-page-area sec-spacer">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 error-page-message">
+                        <div class="error-page">
+                            <h2>General Server Error</h2>
+                            
+                            <span class="error-code">
+                                Error Code: 1003
+                            </span> <br />
+                            
+                            
+                            <span class="extra-info">
+                                Extra Info: IP 93.159.156.167
+                            </span> <br />
+                            
+                            <div class="error-container">
+
+                                We are sorry, but it seems that something wrong has happened.<br/>
+                                If you're seeing this message, it could mean one of the following occurred:
+
+                                <ul>
+                                    <li>Our server is currently under heavy load or maintenance.</li>
+                                    <li>You or your browser did something to upset our server, or there is too much traffic coming from you.</li>
+                                    <li>There is some bug in our server.</li>
+                                </ul>
+
+                                If this error persists, please try again in 24 hours.
+
+
+                                <br /><br />
+                                Yours,  <br/>
+                                ExamTopics Team.
+
+                            </div>
+                            <div class="home-page">
+                                <a href="/">Go to Home Page</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+<!-- 
+<style>
+.footer-cert {background: url(https://www.examtopics.com/assets/images/footer-girl.webp);background-repeat: no-repeat;background-size: cover;padding: 120px 0 200px 0;margin-bottom: -1px;}.footer-cert__wrapper {display: flex;justify-content: flex-end;}.footer-cert__info {color: #fff;display: flex;flex-direction: column;row-gap: 12px;max-width: 550px;}.footer-cert__info h3 {font-size: 27px;font-weight: 700;color: #fff;margin-bottom: 0;}.footer-cert__info p {font-size: 18px;line-height: 26px;padding-bottom: 12px;margin-bottom: 0;}.footer-cert__info a, .footer-cert__info button {color: #fff;border-radius: 2px;font-size: 18px;font-weight: 700;background: #fda00a;height: 48px;width: 240px;display: flex;align-items: center;justify-content: center;}@media (max-width: 992px) {.footer-cert__wrapper {justify-content: flex-start;}}@media (max-width: 768px) {.footer-cert {padding: 80px 0;}.footer-cert__info {row-gap: 17px;}}@media (max-width: 460px) {.footer-cert {padding: 60px 0;}.footer-cert__info a, .footer-cert__info button {width: 100%;}}
+</style>
+<div class="footer-cert">
+  <div class="container">
+    <div class="footer-cert__wrapper">
+      <div class="footer-cert__info">
+        <h3>Get IT Certification</h3>
+        <p>
+          Unlock free, top-quality video courses on ExamTopics with a simple registration. Elevate
+          your learning journey with our expertly curated content. Register now to access a diverse
+          range of educational resources designed for your success. Start learning today with
+          ExamTopics!
+        </p>
+        <a href="https://courses.examtopics.com/" target="_blank">Start Learning for free</a>
+      </div>
+    </div>
+  </div>
+</div>
+ -->
+<!-- Footer Start -->
+<footer id="rs-footer" class="bg3 rs-footer" style="margin-top:0"><!-- <footer id="rs-footer" class="bg3 rs-footer"> -->
+<!-- 
+<div class="container d-print-none">
+	<div>
+		<div class="row footer-contact-desc">
+			<div class="col-md-6">
+				<div class="contact-inner">
+					<i class="fa fa-users"></i>
+					<h4 class="contact-title">Social Media</h4>
+					<p class="contact-desc">
+					
+					<a href="https://www.facebook.com/ExamTopicsOnline/" class="social-media-contact-link">Facebook</a>
+					
+					,
+					
+					
+					<a href="https://twitter.com/TopicsExam" class="social-media-contact-link">Twitter</a>
+					
+					<br>
+					
+					
+					<a href="https://www.youtube.com/channel/UC4CThW97vf8rHFYcvK2disg" class="social-media-contact-link">YouTube</a>
+					
+					,
+					
+					
+					<a href="https://www.reddit.com/r/ExamTopics/" class="social-media-contact-link">Reddit</a>
+					
+					<br>
+					
+					
+					<a href="https://www.pinterest.com/examtopics/" class="social-media-contact-link">Pinterest</a>
+					
+					
+					</p>
+				</div>
+			</div>
+			<div class="col-md-6">
+				<div class="contact-inner" id="contact-us">
+				<i class="fa fa-envelope"></i>
+				<h4 class="contact-title">Email Address</h4>
+				<p class="contact-desc">
+				<a href="mailto:team@examtopics.com">team@examtopics.com</a><br>
+				www.examtopics.com
+				</p>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+ -->
+<!-- Footer Top -->
+<div class="footer-top d-print-none" style="padding-top:20px;">
+	<div class="container">
+		<img src="/assets/images/et/ExamTopics-Logo-Small-White.png" alt="ExamTopics Certifications" style="margin-bottom: 20px;"><br>
+		<div class="row">
+			<!-- <div class="col-lg-3 col-md-12">
+				<div class="about-widget">
+				<img src="/assets/images/et/ExamTopics-Logo-Small-White.png" alt="ExamTopics Certifications">
+				<p>We are the biggest and most updated IT certification exam material website.</p>
+				<p class="margin-remove">Using our own resources, we strive to strengthen the IT professionals community for free.</p>
+				</div>
+			</div>
+			<!-- <div class="col-lg-3 col-md-12">
+				<h5 class="footer-title">RECENT ARTICLES</h5>
+				<div class="recent-post-widget">
+					
+					<div class="post-item">
+						<div class="post-date">
+						<span>13</span>
+						<span>June</span>
+						</div>
+						<div class="post-desc">
+						<h5 class="post-title"><a href="https://www.examtopics.com/news/new-version-gcp-professional-cloud-architect-certificate-helpful-information/">New Version GCP Professional Cloud Architect Certificate &amp; Helpful Information</a></h5>
+						<span class="post-category">IT Certifications</span>
+						</div>
+					</div>
+					
+					<div class="post-item">
+						<div class="post-date">
+						<span>20</span>
+						<span>September</span>
+						</div>
+						<div class="post-desc">
+						<h5 class="post-title"><a href="https://www.examtopics.com/news/the-5-most-in-demand-project-management-certifications-of-2019/">The 5 Most In-Demand Project Management Certifications of 2019</a></h5>
+						<span class="post-category">IT Certifications</span>
+						</div>
+					</div>
+					
+				</div>
+			</div> -->
+<style>
+.sitemap-widget{
+display: flex;
+flex-direction: column;
+}
+</style>
+			<div class="col-lg-3 col-md-12">
+				<h5 class="footer-title">Platform</h5>
+				<ul class="sitemap-widget">
+				<li class="active"><a href="/"><i class="fa fa-angle-right" aria-hidden="true"></i>Home</a></li>
+				<li><a href="/exams/"><i class="fa fa-angle-right" aria-hidden="true"></i>All Exams</a></li>
+				<li><a href="https://unlimited.examtopics.com/" target="_blank"><i class="fa fa-angle-right" aria-hidden="true"></i>Examtopics PRO</a></li>
+				<li><a href="https://courses.examtopics.com/"><i class="fa fa-angle-right" aria-hidden="true"></i>Training Courses</a></li>
+				</ul>
+			</div>
+			<div class="col-lg-3 col-md-12">
+				<h5 class="footer-title">Account</h5>
+				<ul class="sitemap-widget">
+				
+					<li><a href="/login/"><i class="fa fa-angle-right" aria-hidden="true"></i>Login</a></li>
+					<li><a href="/signup/"><i class="fa fa-angle-right" aria-hidden="true"></i>Sign up</a></li>
+				
+				<li>
+				<li><a href="/reset-password/"><i class="fa fa-angle-right" aria-hidden="true"></i>Reset Password</a></li>
+				</li>
+				</ul>
+			</div>
+			<div class="col-lg-3 col-md-12">
+				<h5 class="footer-title">Company</h5>
+				<ul class="sitemap-widget">
+				<li><a href="/cdn-cgi/l/email-protection#c5b1a0a4a885a0bda4a8b1aab5aca6b6eba6aaa8"><i class="fa fa-angle-right" aria-hidden="true"></i>Contact Us</a>
+				<li><a href="/#about-us"><i class="fa fa-angle-right" aria-hidden="true"></i>About Us</a></li>
+				<li><a href="/terms/"><i class="fa fa-angle-right" aria-hidden="true"></i>Terms</a></li>
+				<li><a href="/terms/"><i class="fa fa-angle-right" aria-hidden="true"></i>Privacy Policy</a></li>
+				</ul>
+			</div>
+			<div class="col-lg-3 col-md-12">
+				<h5 class="footer-title">Resources</h5>
+				<ul class="sitemap-widget">
+				<li><a href="/discussions/"><i class="fa fa-angle-right" aria-hidden="true"></i>Forum</a>
+				<li><a href="/news/"><i class="fa fa-angle-right" aria-hidden="true"></i>News</a></li>
+				<li><a href="/dmca/"><i class="fa fa-angle-right" aria-hidden="true"></i>DMCA</a></li>
+				</ul>
+			</div>
+
+			<div class="col-lg-3 col-md-12">
+
+			</div>
+		</div>
+		<div class="footer-share">
+			<ul>
+			<li><a href="https://www.facebook.com/ExamTopicsOnline/"><i class="fa fa-facebook"></i></a></li>
+			<!--<li><a href="#"><i class="fa fa-google-plus"></i></a></li>-->
+			<li><a href="https://twitter.com/TopicsExam"><i class="fa fa-twitter"></i></a></li>
+			<li><a href="https://www.youtube.com/channel/UC4CThW97vf8rHFYcvK2disg"><i class="fa fa-youtube"></i></a></li>
+			<li><a href="https://www.reddit.com/r/ExamTopics/"><i class="fa fa-reddit"></i></a></li>
+			<li><a href="https://www.pinterest.com/examtopics/"><i class="fa fa-pinterest"></i></a></li>
+			</ul>
+		</div>
+	</div>
+</div>
+
+<!-- Footer Bottom -->
+<div class="footer-bottom d-print-none">
+	<div class="container">
+		<div class="copyright">
+		<p>&copy; 2024 ExamTopics<!-- . <a href="mailto:team@examtopics.com">team@examtopics.com</a> --></p>
+		<!-- <p>ExamTopics doesn't offer Real Microsoft Exam Questions. ExamTopics doesn't offer Real Amazon Exam Questions. ExamTopics Materials do not
+			contain actual questions and answers from Cisco's Certification Exams. </p>
+		<p>CFA Institute does not endorse, promote or warrant the accuracy or quality of ExamTopics. CFA® and Chartered Financial Analyst® are registered trademarks owned by CFA Institute.</p> -->
+		</div>
+	</div>
+</div>
+</footer>
+<!-- Footer End -->
+
+    <!-- start scrollUp  -->
+    <div id="scrollUp" class="d-print-none">
+        <i class="fa fa-angle-up"></i>
+    </div>
+
+    <!-- Search Modal Start -->
+    <div aria-hidden="true" class="modal fade search-modal" role="dialog" tabindex="-1">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true" class="fa fa-close"></span>
+        </button>
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="search-block clearfix">
+				<form action="/search/" id="modal-keyword-search-form">
+				<div class="form-group">
+					<input id="modal-keyword-search" class="form-control" placeholder="Exam name or code..." type="text" name="query" autocomplete="off">
+				</div>
+				</form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="login-modal" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="loginModalLabel">Log in to ExamTopics</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="login-wrapper col-lg-10 offset-lg-1 col-md-12">
+    <h4 class="mb-30 text-left">Sign in:</h4><!-- l-f -->
+    
+        <form action="/login/" method="post">
+    
+    <div class="card-text mb-30">
+        
+        <div class="input-group input-group-lg mb-3">
+            <div class="input-group-prepend">
+                    <span class="input-group-text bg-theme-blue text-white"
+                          id="basic-addon1">
+                        <i class="fa fa-user" style="width: 20px; height: 20px"></i>
+                    </span>
+            </div>
+            <input type="text" name="email" class="form-control username-text" placeholder="Email or nickname" aria-label="Username" aria-describedby="basic-addon1" id="etemail">
+        </div>
+    </div>
+    <div class="card-text mb-30">
+        <div class="input-group input-group-lg mb-1">
+            <div class="input-group-prepend">
+                    <span class="input-group-text bg-theme-blue text-white"
+                          id="basic-addon2">
+                        <i class="fa fa-key" style="width: 20px; height: 20px"></i>
+                    </span>
+            </div>
+            <input type="password" name="password" class="form-control password-text" placeholder="Password" aria-label="Password" aria-describedby="basic-addon2" id="etpass">
+        </div>
+        <div class="mb-30 text-left"><a href="/reset-password/">Forgot my password</a></div>
+    </div>
+
+    <button class="btn btn-primary btn-lg login-button" type="submit" onclick="validateUserPass(event);">Log in</button>
+    <input type="hidden" name="csrfmiddlewaretoken" value="nonlteLZkzT2ApqqjRkc7YaMpJeyzcFGyXqJh3il60gZodZ8EafzbqnF4Fkfec0P">
+    </form>
+    <div class="login-footer mt-30">
+        <span>Don't have an account yet? just <a href="/signup/">sign-up</a>.</span>
+        <br />
+        <span>
+            <i class="fa fa-envelope-o"></i>
+            <a href="/resend-activation/">Resend activation email</a>
+        </span>
+    </div>
+</div> <!-- / Login wrapper -->
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script type="application/javascript">
+    function validateUserPass(e) {
+        let username = $('.username-text').val().trim();
+        let password = $('.password-text').val().trim();
+        if ((!username) || (!password)) {
+            bootbox.alert("Username or password are missing");
+            e.preventDefault();
+        }
+    }
+//
+function getHTTPObject(){
+	if (window.ActiveXObject) 
+		return new ActiveXObject("Microsoft.XMLHTTP");
+	else if (window.XMLHttpRequest) 
+		return new XMLHttpRequest();
+	else 
+	{
+		//alert("Your browser does not support AJAX technology.");
+		return null;
+	}
+}
+//
+function examtopicsLogin(id,name,sess)
+{
+//	email=document.getElementById('etemail').value;
+//	password=document.getElementById('etpass').value;
+//	if (sess=='')
+//		sess=window.location;	
+	httpObject = getHTTPObject();
+	if (httpObject != null) 
+	{
+		httpObject.open('POST', 'https://certification.examtopics.com/login.php?id='+id+'&name='+name+'&sess='+sess, true);		
+		httpObject.send(null);
+	}
+	return true;
+}
+
+</script>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary mt-15" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+        <!-- Popper JS -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+        <!-- modernizr js -->
+        <script src="/assets/js/modernizr-2.8.3.min.js"></script>
+        <!-- jquery latest version -->
+        <script src="/assets/js/jquery.min.js"></script>
+        <!-- bootstrap js -->
+        <script src="/assets/js/bootstrap.min.js"></script>
+        <!-- owl.carousel js
+        <script src="/assets/js/owl.carousel.min.js"></script>-->
+		<!-- slick.min js -->
+        <script src="/assets/js/slick.min.js"></script>
+        <!-- isotope.pkgd.min js -->
+        <script src="/assets/js/isotope.pkgd.min.js"></script>
+        <!-- imagesloaded.pkgd.min js -->
+        <script src="/assets/js/imagesloaded.pkgd.min.js"></script>
+        <!-- wow js -->
+        <script src="/assets/js/wow.min.js"></script>
+        <!-- counter top js -->
+        <script src="/assets/js/waypoints.min.js"></script>
+
+        <script src="/assets/js/jquery.counterup.min.js"></script>
+        <!-- magnific popup -->
+        <script src="/assets/js/jquery.magnific-popup.min.js"></script>
+        <!-- rsmenu js -->
+        <script src="/assets/js/rsmenu-main.js"></script>
+        <!-- plugins js -->
+        <script src="/assets/js/plugins.js"></script>
+        <!-- Switch js -->
+        <script src="/assets/js/color-style.js"></script>
+        <!-- main js -->
+        <script src="/assets/js/main.js"></script>
+
+        <script src="/assets/js/bootbox.min.js"></script>
+
+        <script src="/assets/js/bootstrap3-typeahead.min.js" async defer>
+        </script>
+
+        <script type="text/javascript">
+            // Activate tooltips
+            $(function () {
+                $('[data-toggle="tooltip"]').tooltip();
+            })
+
+            // CSS Loading
+            function loadStyleSheet(src) {
+                if (document.createStyleSheet){
+                    document.createStyleSheet(src);
+                }
+                else {
+                    $("head").append($("<link rel='stylesheet' href='"+src+"' type='text/css' media='screen' />"));
+                }
+            };
+
+            $(document).ready(function () {
+                // Login modal refer set:
+                var login_modal_form = $('.modal .login-wrapper form');
+                login_modal_form.attr('action', login_modal_form.attr('action')+'?next=/discussions/linux-foundation/view/119238-exam-kcna-topic-1-question-15-discussion/')
+
+                // Load stylesheets in a deferred way:
+                $('link[defhref]').each(function() {
+                    $(this).attr('href', $(this).attr('defhref'));
+                    //var src = $(this).attr('href');
+                    //loadStyleSheet(src);
+                });
+
+                // Load mobile images in a deferred way:
+                var isMobile = window.matchMedia("only screen and (max-width: 490px)").matches;
+                if (isMobile) {
+                    $('img[mobile-defsrc]').each(function () {
+                        $(this).attr('src', $(this).attr('mobile-defsrc')).removeAttr('defsrc');
+                    });
+                }
+
+                // Load images in a deferred way:
+                $('img[defsrc]').each(function() {
+                    $(this).attr('src',$(this).attr('defsrc'));
+                });
+
+
+                function delayedStart() {
+                    // Typeahead start
+
+                    // Register typeahead element:
+                    $('#header-keyword-search, #modal-keyword-search').typeahead({
+                        source: autoCompleteQuery,
+                        autoSelect: true,
+                        delay: 150,
+                        selectOnBlur: false,
+                        afterSelect: function(param) {$(this.$element).closest('form').submit()}
+                    });
+
+                    // Query ajax function:
+                    function autoCompleteQuery(query, callback) {
+                        return $.get("/ajax/autocomplete/suggestions/?query=" + query).done(callback);
+                    }
+                    // Typeahead end
+                }
+                setTimeout(delayedStart, 1500);
+
+                // Don't submit empty search query
+                $('#modal-keyword-search-form').submit(function() {
+                    if (!$('#modal-keyword-search').val()) {
+                        return false;
+                    }
+                });
+
+                // Auto focus on search box when search-modal is opened
+                $('.search-modal').on('shown.bs.modal', function (e) {
+                    $(this).find('input[type=text]').focus();
+                });
+
+
+            });
+
+			jQuery(document).bind("keyup keydown", function(e){
+				if (e.ctrlKey && e.keyCode == 80){
+					return false;
+				}
+			});
+
+        </script>
+
+        
+        
+
+        <input type="hidden" class="is-logged-in" value="0">
+
+
+
+    </body>
+</html>
+
