@@ -1393,3 +1393,403 @@ Learn more about...
 - Right-Sizing and cost optimization
   - [Right Sizing (Amazon AWS)](https://aws.amazon.com/aws-cost-management/aws-cost-optimization/right-sizing/)
   - [Cloud cost optimization: principles for lasting success (Google Cloud)](https://cloud.google.com/blog/topics/cost-management/principles-of-cloud-cost-optimization)
+
+
+### Do nauczenia
+- Daemon set, StatefulSet itd.
+- Kiedy używamy deploymenów a kiedy innych
+- CronJobs jako kawalek kubernetesa - sprawdzic
+- Poznac inne rzeczy monitoringowe, Nagios, Splunk, dalej prometheus, Grafana
+- Which CNCF project provides a platform for distributed tracing, monitoring, and performance optimization in microservices architectures?
+- Co odpowiada za dostarczanie DNSa w Kubernetesie? - CoreDNS
+- Czym dokładnie są grupy SIG?
+- Which CNCF project focuses on providing a unified framework for generating, managing, and analyzing logs, metrics, and traces through a comprehensive set of tools, APIs, and SDKs? - OpenTelemetry
+- nauczyć się tych standardów, typu Open Network interface, to samo dla Sotorage itd. 
+- Service Proxy i Service Mesh - różnice i czym są ogólnie
+- SRE i DEVops - czym są te role, różnice 
+- za co odpowiada API Server a za co ControlManager? 
+- Jakie są usługi - w rodzaju kubelet, apiserver itd. i za co odpowiadają
+  - kube-controller-manager - co to jest?
+  - In a Kubernetes cluster, which component is responsible for integrating the cluster with the API of the cloud provider, enabling seamless interaction with cloud-specific resources and services?
+    - clound-controller-manager - co to jest?
+- Jeszcze raz powtórzyć vertical i horizontal scaling
+- Admission Controllers - czym są 
+- In a Kubernetes YAML manifest file, which attribute controls the behavior of the kubelet when pulling a specified container image?
+  - ImagePullPolicy - opisać coś 
+### Quiz-Kubernetes Resources
+
+- Which approach is used to specify specific actions and how should they be performed in Kubernetes?
+	- Imperative approach
+
+- When using a replication controller in Kubernetes, how can you specify the number of replicas (instances) of a pod that should be running?
+  - Specify the number of replicas in the "replicas" property under the pod's spec section.
+
+What is the default deployment strategy in Kubernetes where the application never goes down during the update?
+		
+
+Rolling update strategy
+
+How can you view detailed information about a specific pod named "my-app-pod" in Kubernetes?
+		
+
+Run the command "kubectl describe pod my-app-pod".
+
+What does the 'kubectl apply' command do in the declarative approach of managing objects in Kubernetes?
+		
+
+Creates a new object based on the provided configuration,Updates an existing object based on the provided configuration
+
+Which of the following fields are required in a Kubernetes definition file?
+		
+
+apiVersion, kind, metadata, spec
+
+Is the “selector” field a required field in a ReplicationController?
+		
+
+No, the selector field is not a required field in a ReplicationController.
+
+What parameter is used with the "kubectl run" command to specify the application image when deploying a Docker container as a pod?
+		
+
+--image
+
+Where should the user input be specified for the labels in a ReplicaSet's selector?
+		
+
+matchLabels
+
+How can you view pods in all namespaces in Kubernetes?
+		
+
+Use the kubectl get pods --all-namespaces command.
+
+By default, when a Docker container is deployed within a pod, how can users access the application?
+		
+
+Only through direct SSH access to the container
+
+How can you rollback a Kubernetes deployment to a previous revision?
+		
+
+kubectl rollout undo deployment/my-deployment
+
+Which of the following commands are considered as imperative approaches to managing objects in Kubernetes?
+		
+
+kubectl run,kubectl create -f,kubectl delete -f
+
+Regardless of the approach used to create an object in Kubernetes, what does Kubernetes use to store information about the object internally?
+		
+
+Live configuration on the Kubernetes cluster
+
+Why is the "last applied configuration" feature useful in Kubernetes?
+		
+
+It helps identify fields that have been removed from the local configuration file.
+
+When you create a deployment in Kubernetes, what additional objects are automatically created alongside the deployment?
+		
+
+ReplicaSet and Pods
+
+
+
+
+What can be done to manually schedule a pod to a specific node in Kubernetes when there is no scheduler monitoring and scheduling the nodes?
+		
+
+Set the NodeName field in the pod manifest to the desired node name.
+
+What is the minimum value that can be set for CPU resource requests in Kubernetes?
+		
+
+1m CPU
+
+What is the primary purpose of using annotations in Kubernetes?
+		
+
+To record additional details or metadata for informational purposes
+
+How can you change the default resource limit for containers in Kubernetes?
+		
+
+Add a ‘limit’ section under the resources section in the pod definition file.
+
+What does the taint effect determine for pods that do not tolerate the taint in Kubernetes?
+		
+
+The scheduling behavior of the pods
+
+What is one way to manually assign a node to an existing pod in Kubernetes by mimicking the behavior of the scheduler?
+		
+
+Create a binding object with the target node's name and send a post request to the pod's binding API.
+
+Where are the labels defined for the pods in a ReplicaSet?
+		
+
+Under the template section of the Replicaset definition file.
+
+To connect a ReplicaSet to the desired pods, which field in the ReplicaSet specification is used to match the labels defined on the pod?
+		
+
+selector
+
+How can you limit a pod to run on a specific node in Kubernetes?
+		
+
+Add a label to the node and use nodeSelector in the pod's spec section.
+
+How can you taint a node in Kubernetes using the kubectl command?
+		
+
+kubectl taint nodes node-name key=value:taint-effect,kubectl taint node node-name key=value:taint-effect
+
+The Kubernetes API server is aware of the static pods created by the kubelet.
+		
+
+True
+
+What is the default assumption made by Kubernetes regarding the resource request for a container?
+		
+
+0.5 CPU and 256 MiB memory
+
+How can you select pods based on labels using the kubectl command?
+		
+
+Use the kubectl get pods --selector command followed by the label key-value pair.
+
+How can you modify the resource requests for a pod in Kubernetes?
+		
+
+Specify the new values in the pod or deployment definition file under the "resources" section.
+
+What approach can be used to specify the path for static pod definition files when not directly specifying it in the kubelet.service file?
+		
+
+Creating a separate config file and defining the directory path as ‘staticPodPath’
+
+How is 1 count of CPU (1 CPU) defined in Kubernetes?
+		
+
+All of the options are correct
+
+What does the taint effect "NoExecute" indicate in Kubernetes?
+		
+
+Pods will be evicted immediately from the node, if they do not tolerate the taint
+
+
+
+
+What command should you run to delete a persistent volume claim?
+		
+
+kubectl delete persistentvolumeclaim <claim-name\>
+
+What are the different access modes available for a volume in Kubernetes?
+		
+
+readonlymany, readwriteonce, readwritemany
+
+Which of the following are common storage drivers used by Docker?
+		
+
+AUFS, ZFS, BTRFS, Device Mapper
+
+How can you specify a preferred volume driver plugin solution for Docker volumes?
+		
+
+Use the --volume-driver option with the docker run command.
+
+Which of the following container orchestrators have adopted the Container Storage Interface (CSI)?
+		
+
+All of the options are correct
+
+Which option is used to mount a volume in read-write mode inside a Docker container?
+		
+
+-v
+
+What happens when you modify a source file in a Docker image layer?
+		
+
+Docker automatically creates a copy of the file in the read-write layer.
+
+Which section of the pod definition file is used to mount the created volume to a specific storage solution in the host?
+		
+
+hostPath
+
+Which of the following are common Container Storage Interface (CSI) drivers used for container orchestrators?
+		
+
+Portworx, Amazon EBS, GlusterFs, Dell EMS
+
+Which of the following are examples of third-party volume driver plugins for Docker?
+		
+
+Azure file storage, Convoy, DigitalOcean block storage
+
+What is a bind mount in Docker and where can it be mounted from?
+		
+
+A bind mount is a type of volume that is mounted from a specific location on the Docker host.
+
+
+
+Which auto scaling feature of Kubernetes allows businesses to adjust the number of pods running in a deployment based on demand?
+		
+
+Horizontal Pod Autoscaler
+
+What does the container runtime specification, governed by the OCI, include?
+		
+
+Details on downloading, unpacking, and running the file system bundle using an OCI-compliant runtime
+
+What is the significance of the provisional status in the KEP workflow?
+		
+
+The KEP has been suggested and is being discussed.
+
+
+
+
+How can a developer update the Kubernetes manifest repository after pushing a newly built image to the container registry?
+		
+
+Modify the YAML files referencing the image and commit the changes
+
+What is the key advantage of using GitOps for managing infrastructure changes?
+		
+
+Greater efficiency and accuracy
+
+Which GitOps tool covers the entire CI/CD process and is relatively simple to deploy?
+		
+
+Jenkins X
+
+What is the main benefit of Continuous Deployment (CD) in the context of delivering new features to users?
+		
+
+It automates the deployment process to production environments.
+
+How is the desired state of an application versioned in GitOps?
+		
+
+By creating a new version of the YAML file for each update
+
+What is a potential drawback of the pull-based deployment approach?
+		
+
+Being bound to specific tools and requiring agent installation/configuration for each cluster
+
+Which tool allows multiple Git repositories and deployments to different Kubernetes namespaces?
+		
+
+Argo
+
+In a pull-based deployment approach, how are updates to the cluster initiated?
+		
+
+Updates are initiated internally from within the cluster.
+
+Which GitOps tool was developed by Weaveworks and is now a graduated CNCF project?
+		
+
+Flux
+
+What is the purpose of GitOps?
+		
+
+To track and version infrastructure changes
+
+
+
+
+### Egzamin 
+In Kubernetes, which Higher Level construct is primarily responsible for managing the desired state of identical, stateless pods and overseeing their lifecycle?
+		
+
+Deployment
+
+In Kubernetes, which component was specifically introduced to supersede the outdated ReplicationControllers?
+		
+
+Deployments
+
+Which Kubernetes component enables developers to schedule jobs based on user-defined time intervals?
+		
+
+CronJobs
+
+Which component in Kubernetes continuously monitors the state of the cluster, detects any deviations from the desired state, and initiates or requests changes to ensure the cluster remains in the desired state?
+		
+
+Controller
+
+Which CNCF project provides a platform for distributed tracing, monitoring, and performance optimization in microservices architectures?
+		
+
+Jaeger
+
+Within the collaborative landscape of Kubernetes, what defines Special Interest Groups (SIGs)?
+		
+
+Exclusive teams focusing on specific areas or domains of the project.
+
+Which CNCF project focuses on providing a unified framework for generating, managing, and analyzing logs, metrics, and traces through a comprehensive set of tools, APIs, and SDKs?
+		
+
+OpenTelemetry
+
+Which Kubernetes components play a pivotal role in mediating communication between the control plane nodes and worker nodes in a cluster?
+		
+
+kube-proxy
+
+In the realm of Kubernetes, which serverless framework stands out for its exceptional speed, developer-centric approach, and optimal performance, aiming to enhance developer productivity?
+		
+
+Fission
+
+Which mechanism in Kubernetes enables you to specify criteria for selecting information based on fields such as name, namespace, or status of a Kubernetes object?
+		
+
+Field Selectors
+
+Which approach in DevOps involves managing infrastructure changes by storing them as code in a version control repository, followed by automated processes that deploy and update the infrastructure accordingly?
+		
+
+GitOps
+
+Which kubectl command allows you to retrieve a list of all available API groups in a Kubernetes cluster?
+		
+
+kubectl api-resources
+
+In the context of application deployment, which term refers to a self-contained software package that includes all the necessary components and dependencies to run the application?
+		
+
+Container Image
+
+In the context of containerized applications, which networking approach employs a Sidecar pattern, co-locating an auxiliary container with the primary container, to handle port mapping and traffic management tasks?
+		
+
+Service Mesh
+
+In a Kubernetes YAML manifest file, which attribute controls the behavior of the kubelet when pulling a specified container image?
+		
+
+ImagePullPolicy
+
+In a Kubernetes cluster, which component is responsible for integrating the cluster with the API of the cloud provider, enabling seamless interaction with cloud-specific resources and services?
+		
+
+cloud-controller-manager
