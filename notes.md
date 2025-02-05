@@ -34,6 +34,7 @@ Zipkin is a distributed tracing system. It helps gather timing data needed to tr
 - [Grafana](https://grafana.com/grafana/)
 - Grafana is a visualization tool.
 
+### Loki
 
 ## CI/CD
 ### Which CNCF project for continuous integration and continuous delivery (CI/CD) comes with both a CLI and Web UI?
