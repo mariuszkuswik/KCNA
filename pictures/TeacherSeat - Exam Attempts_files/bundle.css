@@ -1,0 +1,2 @@
+html[data-theme=light] .logo { background-image: url(https://assets.teacherseat.com/bd84f2e7-0f4c-42b3-b76f-6104fcdb0ae6/assets/logo-light.svg) }
+html[data-theme=dark] .logo { background-image: url(https://assets.teacherseat.com/bd84f2e7-0f4c-42b3-b76f-6104fcdb0ae6/assets/logo-dark.svg) }

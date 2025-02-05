@@ -1,0 +1,340 @@
+Question: What native runtime is Open Container Initiative (OCI) compliant? Possible answers: 
+A. runC
+B. runV
+C. kata-containers
+D. gvisor;;Good answer: A. runC;;;
+Question: Which API object is the recommended way to run a scalable, stateless application on your cluster? Possible answers: 
+A. ReplicaSet
+B. Deployment
+C. DaemonSet
+D. Pod;;Good answer: B. Deployment;;;
+Question: What is the purpose of the kubelet component within a Kubernetes cluster? Possible answers: 
+A. A dashboard for Kubernetes Clusters that allows management and troubleshooting of applications.
+B. A network proxy that runs on each node in your cluster, implementing part of the Kubernetes Service concept.
+C. A component that watches for newly created Pods with no assigned node, and selects a node for them to run on.
+D. An agent that runs on each node in the cluster. It makes sure that containers are running in a Pod.;;Good answer: D. An agent that runs on each node in the cluster. It makes sure that containers are running in a Pod.;;;
+Question: What is the default value for authorization-mode in Kubernetes API server? Possible answers: 
+A. --authorization-mode=RBAC
+B. --authorization-mode=AlwaysAllow
+C. --authorization-mode=AlwaysDeny
+D. --authorization-mode=ABAC;;Good answer: B. --authorization-mode=AlwaysAllow;;;
+Question: Let's assume that an organization needs to process large amounts of data in bursts, on a cloud-based Kubernetes cluster. For instance: each Monday morning, they need to run a batch of 1000 compute jobs of 1 hour each, and these jobs must be completed by Monday night. What's going to be the most cost-effective method? Possible answers: 
+A. Run a group of nodes with the exact required size to complete the batch on time, and use a combination of taints, tolerations, and nodeSelectors to reserve these nodes to the batch jobs.
+B. Leverage the Kubernetes Cluster Autoscaler to automatically start and stop nodes as they're needed.
+C. Commit to a specific level of spending to get discounted prices (with e.g. “reserved instances” or similar mechanisms).
+D. Use PriorityСlasses so that the weekly batch job gets priority over other workloads running on the cluster, and can be completed on time.;;Good answer: B. Leverage the Kubernetes Cluster Autoscaler to automatically start and stop nodes as they're needed.;;;
+Question: What is a Kubernetes service with no cluster IP address called? Possible answers: 
+A. Headless Service
+B. Nodeless Service
+C. IPLess Service
+D. Specless Service;;Good answer: A. Headless Service;;;
+Question: CI/CD stands for: Possible answers: 
+A. Continuous Information / Continuous Development
+B. Continuous Integration / Continuous Development
+C. Cloud Integration / Cloud Development
+D. Continuous Integration / Continuous Deployment;;Good answer: D. Continuous Integration / Continuous Deployment;;;
+Question: What default level of protection is applied to the data in Secrets in the Kubernetes API? Possible answers: 
+A. The values use AES Symmetric Encryption
+B. The values are stored in plain text
+C. The values are encoded with SHA256 hashes
+D. The values are base64 encoded;;Good answer: D. The values are base64 encoded;;;
+Question: What function does kube-proxy provide to a cluster? Possible answers: 
+A. Implementing the Ingress resource type for application traffic.
+B. Forwarding data to the correct endpoints for Services.
+C. Managing data egress from the cluster nodes to the network.
+D. Managing access to the Kubernetes API.;;Good answer: B. Forwarding data to the correct endpoints for Services.;;;
+Question: How long should a stable API element in Kubernetes be supported (at minimum) after deprecation? Possible answers: 
+A. 9 months
+B. 24 months
+C. 12 months
+D. 6 months;;Good answer: C. 12 months;;;
+Question: What is the name of the lightweight Kubernetes distribution built for IoT and edge computing? Possible answers: 
+A. OpenShift
+B. k3s
+C. RKE
+D. k1s;;Good answer: B. k3s;;;
+Question: Kubernetes ___ allows you to automatically manage the number of nodes in your cluster to meet demand. Possible answers: 
+A. Node Autoscaler
+B. Cluster Autoscaler
+C. Horizontal Pod Autoscaler
+D. Vertical Pod Autoscaler;;Good answer: B. Cluster Autoscaler;;;
+Question: Which of the following statements is correct concerning Open Policy Agent (OPA)? Possible answers: 
+A. The policies must be written in Python language.
+B. Kubernetes can use it to validate requests and apply policies.
+C. Policies can only be tested when published.
+D. It cannot be used outside Kubernetes.;;Good answer: B. Kubernetes can use it to validate requests and apply policies.;;;
+Question: In a cloud native world, what does the IaC abbreviation stands for? Possible answers: 
+A. Infrastructure and Code
+B. Infrastructure as Code
+C. Infrastructure above Code
+D. Infrastructure across Code;;Good answer: B. Infrastructure as Code;;;
+Question: In which framework do the developers no longer have to deal with capacity, deployments, scaling and fault tolerance, and OS? Possible answers: 
+A. Docker Swam
+B. Kubernetes
+C. Mesos
+D. Serverless;;Good answer: D. Serverless;;;
+Question: Which of the following characteristics is associated with container orchestration? Possible answers: 
+A. Application message distribution
+B. Dynamic scheduling
+C. Deploying application JAR files
+D. Virtual Machine distribution;;Good answer: B. Dynamic scheduling;;;
+Question: Which of the following workload require a headless service while deploying into the namespace? Possible answers: 
+A. StatefulSet
+B. CronJob
+C. Deployment
+D. DaemonSet;;Good answer: A. StatefulSet;;;
+Question: What is Helm? Possible answers: 
+A. An open source dashboard for Kubernetes.
+B. A package manager for Kubernetes applications.
+C. A custom scheduler for Kubernetes.
+D. An end to end testing project for Kubernetes applications.;;Good answer: B. A package manager for Kubernetes applications.;;;
+Question: Which is the correct kubectl command to display logs in real time? Possible answers: 
+A. kubectl logs -p test-container-1
+B. kubectl logs -c test-container-1
+C. kubectl logs -l test-container-1
+D. kubectl logs -f test-container-1;;Good answer: D. kubectl logs -f test-container-1;;;
+Question: How to load and generate data required before the Pod startup? Possible answers: 
+A. Use an init container with shared file storage.
+B. Use a PVC volume.
+C. Use a sidecar container with shared volume.
+D. Use another pod with a PVC.;;Good answer: A. Use an init container with shared file storage.;;;
+Question: Which Kubernetes resource workload ensures that all (or some) nodes run a copy of a Pod? Possible answers: 
+A. ReplicaSet
+B. StatefulSet
+C. DaemonSet
+D. Deployment;;Good answer: C. DaemonSet;;;
+Question: We can extend the Kubernetes API with Kubernetes API Aggregation Layer and CRDs. What is CRD? Possible answers: 
+A. Custom Resource Definition
+B. Custom Restricted Definition
+C. Customized RUST Definition
+D. Custom RUST Definition;;Good answer: A. Custom Resource Definition;;;
+Question: The Kubernetes project work is carried primarily by SIGs. What does SIG stand for? Possible answers: 
+A. Special Interest Group
+B. Software Installation Guide
+C. Support and Information Group
+D. Strategy Implementation Group;;Good answer: A. Special Interest Group;;;
+Question: What is the order of 4C’s in Cloud Native Security, starting with the layer that a user has the most control over? Possible answers: 
+A. Cloud -> Container -> Cluster -> Code
+B. Container -> Cluster -> Code -> Cloud
+C. Cluster -> Container -> Code -> Cloud
+D. Code -> Container -> Cluster -> Cloud;;Good answer: D. Code -> Container -> Cluster -> Cloud;;;
+Question: Which group of container runtimes provides additional sandboxed isolation and elevated security? Possible answers: 
+A. rune, cgroups
+B. docker, containerd
+C. runsc, kata
+D. crun, cri-o;;Good answer: C. runsc, kata;;;
+Question: What feature must a CNI support to control specific traffic flows for workloads running in Kubernetes? Possible answers: 
+A. Border Gateway Protocol
+B. IP Address Management
+C. Pod Security Policy
+D. Network Policies;;Good answer: D. Network Policies;;;
+Question: Which statement about Ingress is correct? Possible answers: 
+A. Ingress provides a simple way to track network endpoints within a cluster.
+B. Ingress is a Service type like NodePort and ClusterIP.
+C. Ingress is a construct that allows you to specify how a Pod is allowed to communicate.
+D. Ingress exposes routes from outside the cluster to services in the cluster.;;Good answer: D. Ingress exposes routes from outside the cluster to services in the cluster.;;;
+Question: Which statement about Ingress is correct? Possible answers: 
+A. Ingress provides a simple way to track network endpoints within a cluster.
+B. Ingress is a Service type like NodePort and ClusterIP.
+C. Ingress is a construct that allows you to specify how a Pod is allowed to communicate.
+D. Ingress exposes routes from outside the cluster to services in the cluster.;;Good answer: D. Ingress exposes routes from outside the cluster to services in the cluster.;;;
+Question: What components are common in a service mesh? Possible answers: 
+A. tracing and log storage
+B. circuit breaking and Pod scheduling
+C. data plane and runtime plane
+D. service proxy and control plane;;Good answer: D. service proxy and control plane;;;
+Question: Which storage operator in Kubernetes can help the system to self-scale, self-heal, etc? Possible answers: 
+A. Rook
+B. Kubernetes
+C. Helm
+D. Container Storage Interface (CSI);;Good answer: A. Rook;;;
+Question: Which of the following would fall under the responsibilities of an SRE? Possible answers: 
+A. Developing a new application feature.
+B. Creating a monitoring baseline for an application.
+C. Submitting a budget for running an application in a cloud.
+D. Writing policy on how to submit a code change.;;Good answer: B. Creating a monitoring baseline for an application.;;;
+Question: What are the initial namespaces that Kubernetes starts with? Possible answers: 
+A. default, kube-system, kube-public, kube-node-lease
+B. default, system, kube-public
+C. kube-default, kube-system, kube-main, kube-node-lease
+D. kube-default, system, kube-main, kube-primary;;Good answer: A. default, kube-system, kube-public, kube-node-lease;;;
+Question: What is a probe within Kubernetes? Possible answers: 
+A. A monitoring mechanism of the Kubernetes API.
+B. A pre-operational scope issued by the kubectl agent.
+C. A diagnostic performed periodically by the kubelet on a container.
+D. A logging mechanism of the Kubernetes API.;;Good answer: C. A diagnostic performed periodically by the kubelet on a container.;;;
+Question: Which feature enables Image Placement Policies to be mapped to target clusters? Possible answers: 
+A. YAML
+B. Labels
+C. JSON
+D. Categories;;Good answer: D. Categories;;;
+Question: What feature must a CNI support to control specific traffic flows for workloads running in Kubernetes? Possible answers: 
+A. Border Gateway Protocol
+B. IP Address Management
+C. Pod Security Policy
+D. Network Policies;;Good answer: D. Network Policies;;;
+Question: What is the main role of the Kubernetes DNS within a cluster? Possible answers: 
+A. Acts as a DNS server for virtual machines that are running outside the cluster.
+B. Provides a DNS as a Service, allowing users to create zones and registries for domains that they own.
+C. Allows Pods running in dual stack to convert IPv6 calls into IPv4 calls.
+D. Provides consistent DNS Names for Pods and Services for workloads that need to communicate with each other.;;Good answer: D. Provides consistent DNS Names for Pods and Services for workloads that need to communicate with each other.;;;
+Question: Scenario: You have a Kubernetes cluster hosted in a public cloud provider. When trying to create a Service of type LoadBalancer, the external-ip is stuck in the "Pending" state. Which Kubernetes component is failing in this scenario? Possible answers: 
+A. Cloud Controller Manager
+B. Load Balancer Manager
+C. Cloud Architecture Manager
+D. Cloud Load Balancer Manager;;Good answer: A. Cloud Controller Manager;;;
+Question: What are the characteristics for building every cloud-native application? Possible answers: 
+A. Resiliency, Operability, Observability, Availability
+B. Resiliency, Containerd, Observability, Agility
+C. Kubernetes, Operability, Observability, Availability
+D. Resiliency, Agility, Operability, Observability;;Good answer: D. Resiliency, Agility, Operability, Observability;;;
+Question: What does CNCF stand for? Possible answers: 
+A. Cloud Native Community Foundation
+B. Cloud Native Computing Foundation
+C. Cloud Neutral Computing Foundation
+D. Cloud Neutral Community Foundation;;Good answer: B. Cloud Native Computing Foundation;;;
+Question: Kubernetes supports multiple virtual clusters backed by the same physical cluster. These virtual clusters are called: Possible answers: 
+A. namespaces
+B. containers
+C. hypervisors
+D. cgroups;;Good answer: A. namespaces;;;
+Question: What component enables end users, different parts of the Kubernetes cluster, and external components to communicate with one another? Possible answers: 
+A. kubectl
+B. AWS Management Console
+C. Kubernetes API
+D. Google Cloud SDK;;Good answer: C. Kubernetes API;;;
+Question: Which command will list the resource types that exist within a cluster? Possible answers: 
+A. kubectl api-resources
+B. kubectl get namespaces
+C. kubectl api-versions
+D. curl https://kubectrl/namespaces;;Good answer: A. kubectl api-resources;;;
+Question: What is a key feature of a container network? Possible answers: 
+A. Proxying REST requests across a set of containers.
+B. Allowing containers running on separate hosts to communicate.
+C. Allowing containers on the same host to communicate.
+D. Caching remote disk access.;;Good answer: B. Allowing containers running on separate hosts to communicate.;;;
+Question: How can you monitor the progress for an updated Deployment/DaemonSets/StatefulSets? Possible answers: 
+A. kubectl rollout watch
+B. kubectl rollout progress
+C. kubectl rollout state
+D. kubectl rollout status;;Good answer: D. kubectl rollout status;;;
+Question: What is the goal of load balancing? Possible answers: 
+A. Automatically measure request performance across instances of an application.
+B. Automatically distribute requests across different versions of an application.
+C. Automatically distribute instances of an application across the cluster.
+D. Automatically distribute requests across instances of an application.;;Good answer: D. Automatically distribute requests across instances of an application.;;;
+Question: How are ReplicaSets and Deployments related? Possible answers: 
+A. Deployments manage ReplicaSets and provide declarative updates to Pods.
+B. ReplicaSets manage stateful applications, Deployments manage stateless applications.
+C. Deployments are runtime instances of ReplicaSets.
+D. ReplicaSets are subsets of Jobs and CronJobs which use imperative Deployments.;;Good answer: A. Deployments manage ReplicaSets and provide declarative updates to Pods.;;;
+Question: What is the primary mechanism to identify grouped objects in a Kubernetes cluster? Possible answers: 
+A. Custom Resources
+B. Labels
+C. Label Selector
+D. Pod;;Good answer: B. Labels;;;
+Question: What is the name of the Kubernetes resource used to expose an application? Possible answers: 
+A. Port
+B. Service
+C. DNS
+D. Deployment;;Good answer: B. Service;;;
+Question: What is a DaemonSet? Possible answers: 
+A. It's a type of workload that ensures a specific set of nodes run a copy of a Pod.
+B. It's a type of workload responsible for maintaining a stable set of replica Pods running in any node.
+C. It's a type of workload that needs to be run periodically on a given schedule.
+D. It's a type of workload that provides guarantees about ordering, uniqueness, and identity of a set of Pods.;;Good answer: A. It's a type of workload that ensures a specific set of nodes run a copy of a Pod.;;;
+Question: What is the telemetry component that represents a series of related distributed events that encode the end-to-end request flow through a distributed system? Possible answers: 
+A. Metrics
+B. Logs
+C. Spans
+D. Traces;;Good answer: D. Traces;;;
+Question: In the Kubernetes platform, which component is responsible for running containers? Possible answers: 
+A. etcd
+B. CRI-O
+C. cloud-controller-manager
+D. kube-controller-manager;;Good answer: B. CRI-O;;;
+Question: Services and Pods in Kubernetes are ______ objects. Possible answers: 
+A. JSON
+B. YAML
+C. Java
+D. REST;;Good answer: D. REST;;;
+Question: What Kubernetes component handles network communications inside and outside of a cluster, using operating system packet filtering if available? Possible answers: 
+A. kube-proxy
+B. kubelet
+C. etcd
+D. kube-controller-manager;;Good answer: A. kube-proxy;;;
+Question: Which of these commands is used to retrieve the documentation and field definitions for a Kubernetes resource? Possible answers: 
+A. kubectl explain
+B. kubectl api-resources
+C. kubectl get --help
+D. kubectl show;;Good answer: A. kubectl explain;;;
+Question: Which of the following is a lightweight tool that manages traffic flows between services, enforces access policies, and aggregates telemetry data, all without requiring changes to application code? Possible answers: 
+A. NetworkPolicy
+B. Linkerd
+C. kube-proxy
+D. Nginx;;Good answer: B. Linkerd;;;
+Question: Which Kubernetes resource uses immutable: true boolean field? Possible answers: 
+A. Deployment
+B. Pod
+C. ConfigMap
+D. ReplicaSet;;Good answer: C. ConfigMap;;;
+Question: Which statement about the Kubernetes network model is correct? Possible answers: 
+A. Pods can only communicate with Pods exposed via a Service.
+B. Pods can communicate with all Pods without NAT.
+C. The Pod IP is only visible inside a Pod.
+D. The Service IP is used for the communication between Services.;;Good answer: B. Pods can communicate with all Pods without NAT.;;;
+Question: Can a Kubernetes Service expose multiple ports? Possible answers: 
+A. No, you can only expose one port per each Service.
+B. Yes, but you must specify an unambiguous name for each port.
+C. Yes, the only requirement is to use different port numbers.
+D. No, because the only port you can expose is port number 443.;;Good answer: B. Yes, but you must specify an unambiguous name for each port.;;;
+Question: Which command provides information about the field replicas within the spec resource of a deployment object? Possible answers: 
+A. kubectl get deployment.spec.replicas
+B. kubectl explain deployment.spec.replicas
+C. kubectl describe deployment.spec.replicas
+D. kubectl explain deployment --spec.replicas;;Good answer: B. kubectl explain deployment.spec.replicas;;;
+Question: Which of the following is a responsibility of the governance board of an open source project? Possible answers: 
+A. Decide about the marketing strategy of the project.
+B. Review the pull requests in the main branch.
+C. Outline the project's “terms of engagement”.
+D. Define the license to be used in the project.;;Good answer: C. Outline the project's “terms of engagement”.;;;
+Question: What is the role of a NetworkPolicy in Kubernetes? Possible answers: 
+A. The ability to cryptic and obscure all traffic.
+B. The ability to classify the Pods as isolated and non isolated.
+C. The ability to prevent loopback or incoming host traffic.
+D. The ability to log network security events.;;Good answer: B. The ability to classify the Pods as isolated and non isolated.;;;
+Question: What are the most important resources to guarantee the performance of an etcd cluster? Possible answers: 
+A. CPU and disk capacity.
+B. Network throughput and disk I/O.
+C. CPU and RAM memory.
+D. Network throughput and CPU.;;Good answer: B. Network throughput and disk I/O.;;;
+Question: How do you perform a command in a running container of a Pod? Possible answers: 
+A. kubectl exec --
+B. docker exec
+C. kubectl run --
+D. kubectl attach -i;;Good answer: A. kubectl exec --;;;
+Question: How to create a headless service? Possible answers: 
+A. By specifying .spec.ClusterIP: headless
+B. By specifying .spec.clusterIP: None
+C. By specifying .spec.ClusterIP: 0.0.0.0
+D. By specifying .spec.ClusterIP: localhost;;Good answer: B. By specifying .spec.clusterIP: None;;;
+Question: How does dynamic storage provisioning work? Possible answers: 
+A. A user requests dynamically provisioned storage by including an existing storage class in their PersistentVolumeClaim.
+B. An administrator creates a storage class and includes it in their pod YAML definition file without creating a PersistentVolumeClaim.
+C. A pod requests dynamically provisioned storage by including a storage class and the pod name in their PersistentVolumeClaim.
+D. An administrator creates a PersistentVolume and includes the name of the PersistentVolume in their pod YAML definition file.;;Good answer: A. A user requests dynamically provisioned storage by including an existing storage class in their PersistentVolumeClaim.;;;
+Question: What is a Kubernetes Service Endpoint? Possible answers: 
+A. It is the API Endpoint of our Kubernetes cluster.
+B. It is a name of special Pod in kube-system namespace.
+C. It is an IP address that we can access from the Internet.
+D. It is an object that gets IP addresses of individual Pods assigned to it.;;Good answer: D. It is an object that gets IP addresses of individual Pods assigned to it.;;;
+Question: Which of the following capabilities are you allowed to add to a container using the Restricted policy? Possible answers: 
+A. CHOWN
+B. SYS_CHROOT
+C. SETUID
+D. NET_BIND_SERVICE;;Good answer: D. NET_BIND_SERVICE;;;
+Question: Which component of the node is responsible to run workloads? Possible answers: 
+A. The kubelet.
+B. The kubeproxy.
+C. The kube-apiserver.
+D. The container runtime.;;Good answer: D. The container runtime.;;;
