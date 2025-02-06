@@ -182,3 +182,38 @@ Tags
 	
 
 Labels
+
+
+
+
+
+
+    Shuffle
+    Toggle On
+    Alphabetize
+    Toggle Off
+    Front First
+    Toggle On
+    Read
+    Toggle Off
+
+    Right
+    0%0
+    Wrong -1
+
+    Wrong
+    100%1
+
+Question:
+Front
+
+### TODO - niech GPT wyjasni pytanie
+Question: Let's assume that an organization needs to process large amounts of data in bursts, on a cloud-based Kubernetes cluster. For instance: each Monday morning, they need to run a batch of 1000 compute jobs of 1 hour each, and these jobs must be completed by Monday night. What's going to be the most cost-effective method? Possible answers:
+A. Run a group of nodes with the exact required size to complete the batch on time, and use a combination of taints, tolerations, and nodeSelectors to reserve these nodes to the batch jobs.
+B. Leverage the Kubernetes Cluster Autoscaler to automatically start and stop nodes as they're needed.
+C. Commit to a specific level of spending to get discounted prices (with e.g. “reserved instances” or similar mechanisms).
+D. Use PriorityСlasses so that the weekly batch job gets priority over other workloads running on the cluster, and can be completed on time.
+
+
+Poprawne B
+
