@@ -1,5 +1,8 @@
 
 # Gitops
+- [What is GitOps by RedHat](https://www.redhat.com/en/topics/devops/what-is-gitops)
+- [GitOps vs DevOps by RedHat](https://www.redhat.com/en/topics/devops/what-is-gitops#gitops-vs-devops)
+
 ## Monitoring
 ### Prometheus 
 - [Prometheus vs OpenTelemetry](https://signoz.io/blog/opentelemetry-vs-prometheus/)
@@ -41,6 +44,7 @@ Zipkin is a distributed tracing system. It helps gather timing data needed to tr
 ### Argo
 - [Argo CD vs Flux](https://rajputvaibhav.medium.com/argo-cd-vs-flux-cd-right-gitops-tool-for-your-kubernetes-cluster-c71cff489d26)
 Argo comes with a powerful UI that helps visualize relations between different objects and monitor them better while with Flux you rely completely on CLI. You can add on the web UI to Flux but it still stays experimental.
+Ma WEB UI
 
 ### Jenkins X
 - [Jenkins X](https://jenkins-x.io/)
@@ -48,7 +52,8 @@ Jenkins X is opinionated and built to work better with technologies like Docker 
 
 ### Flux
 - [Argo CD vs Flux](https://rajputvaibhav.medium.com/argo-cd-vs-flux-cd-right-gitops-tool-for-your-kubernetes-cluster-c71cff489d26)
-
+Flux is a more direct approach to GitOps with lesser human interference. 
+Nie ma WEB UI
 
 # Kubernetes packaging?
 ## two ways to package, deploy, and manage a Kubernetes application?
@@ -75,6 +80,71 @@ Operators are geared toward site reliability engineering teams to manage the com
 Kubernetes operators build on custom resources and controllers. In plain terms, an IT admin can define their resources in Kubernetes and publish logic -- via an operator -- that can handle CRUD operations for the custom resource. These custom resources can model a complex application or a standard templatized application; the operators maintain the resource's lifecycle.
 
 
+## Deployment strategy 
+### Blue/Green
+This deployment strategy involves having two identical environments, one hosting the current version of the application (blue) and the other hosting the new version (green). Once the new version is ready and tested in the green environment, the traffic is switched from blue to green. While this method allows for quick rollbacks and minimal downtime, it doesn't inherently support rolling out features to a small subset of users first; instead, it switches all users from the old version to the new one at once.
+
+### Recreate deployments
+In this method, the existing version of the application is taken down, and the new version is rolled out. This approach involves downtime, as there is a period when the application is not available to users. Like blue/green deployments, it does not support gradual rollout to a subset of users. Instead, it replaces the old version with the new one for all users simultaneously.
+
+### Canary
+Canary deployments involve releasing the new version of an application to a small subset of the user base initially, rather than rolling it out to all users at once. This strategy allows developers and operations teams to monitor the performance and stability of the new release and ensure it behaves as expected under real-world conditions. If the new version proves to be stable and effective, it can then be gradually rolled out to the rest of the user base.
+
+### Red/Black deployment
+Similar to blue/green deployments, red/black deployments involve two identical production environments: one that is active (red) and one that is idle (black). Once the new version is ready, traffic is switched from the red environment to the black environment. This strategy is designed for fast rollbacks and zero downtime but, like blue/green deployments, does not target a small subset of users initially; it switches the entire user base to the new version at once.
+
 
 # IAM 
 ### RBAC itd.
+
+# Containers
+### Docker
+
+### containerd
+
+### cri-o
+
+### LXC
+- [Linux Containers](https://linuxcontainers.org/)
+LXC is a well-known Linux container runtime that consists of tools, templates, and library and language bindings. It's pretty low level, very flexible and covers just about every containment feature supported by the upstream kernel.
+
+
+
+# A Kubernetes developer wants to prevent a job from living after a certain amount of time when it has finished execution. 
+
+- [TTL-after-finished Controller](https://kubernetes.io/docs/concepts/workloads/controllers/ttlafterfinished/)
+### Do opisania/sprawdzenia
+- DaemonSets
+- TerminateAfterMs property within Manifest File
+- TTL property within Deployment file
+
+
+# Kubernetes - architektura
+- [Kubernetes components](https://kubernetes.io/docs/concepts/overview/components/)
+
+
+
+## Serwisy 
+### CoreDNS 
+- [Coredns website](https://coredns.io/)
+- [Understanding CoreDNS YouTube](https://www.youtube.com/watch?v=qRiLmLACYSY)
+
+CoreDNS has been the default name Domain Name System (DNS) since K8s 1.3
+
+### Kube-dns
+- [KubeDNS](https://kubernetes.io/docs/concepts/services-networking/dns-pod-service/)
+
+
+
+### Kubelet
+An agent that runs on each node in the cluster. It makes sure that containers are running in a Pod.
+
+- [Kubelet](https://kubernetes.io/docs/concepts/overview/components/#kubelet)
+
+
+## What are two Kubernetes components that are essential for worker nodes?
+
+
+### Scheduler 
+- [Scheduler](https://kubernetes.io/docs/concepts/scheduling-eviction/kube-scheduler/)
+A scheduler watches for newly created Pods that have no Node assigned. For every Pod that the scheduler discovers, the scheduler becomes responsible for finding the best Node for that Pod to run on. The scheduler reaches this placement decision taking into account the scheduling principles described below.
