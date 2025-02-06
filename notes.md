@@ -128,23 +128,34 @@ LXC is a well-known Linux container runtime that consists of tools, templates, a
 ### CoreDNS 
 - [Coredns website](https://coredns.io/)
 - [Understanding CoreDNS YouTube](https://www.youtube.com/watch?v=qRiLmLACYSY)
-
 CoreDNS has been the default name Domain Name System (DNS) since K8s 1.3
 
 ### Kube-dns
 - [KubeDNS](https://kubernetes.io/docs/concepts/services-networking/dns-pod-service/)
 
-
-
 ### Kubelet
 An agent that runs on each node in the cluster. It makes sure that containers are running in a Pod.
 
 - [Kubelet](https://kubernetes.io/docs/concepts/overview/components/#kubelet)
-
-
 ## What are two Kubernetes components that are essential for worker nodes?
-
 
 ### Scheduler 
 - [Scheduler](https://kubernetes.io/docs/concepts/scheduling-eviction/kube-scheduler/)
 A scheduler watches for newly created Pods that have no Node assigned. For every Pod that the scheduler discovers, the scheduler becomes responsible for finding the best Node for that Pod to run on. The scheduler reaches this placement decision taking into account the scheduling principles described below.
+
+### Controller Manager
+Control plane component that runs controller processes.
+https://kubernetes.io/docs/concepts/overview/components/#kube-controller-manager
+
+
+### Cloud Controller Manager
+A Kubernetes control plane component that embeds cloud-specific control logic. The cloud controller manager lets you link your cluster into your cloud provider's API, and separates out the components that interact with that cloud platform from components that only interact with your cluster.
+https://kubernetes.io/docs/concepts/overview/components/#kube-controller-manager
+
+### The API server
+API server is a component of the Kubernetes control plane that exposes the Kubernetes API.
+https://kubernetes.io/docs/concepts/overview/components/#kube-apiserver
+
+### Kube Proxy
+kube-proxy is a network proxy that runs on each node in your cluster, implementing part of the Kubernetes Service concept.
+https://kubernetes.io/docs/concepts/overview/components/#kube-proxy
