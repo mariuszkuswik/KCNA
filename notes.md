@@ -159,3 +159,26 @@ https://kubernetes.io/docs/concepts/overview/components/#kube-apiserver
 ### Kube Proxy
 kube-proxy is a network proxy that runs on each node in your cluster, implementing part of the Kubernetes Service concept.
 https://kubernetes.io/docs/concepts/overview/components/#kube-proxy
+
+
+
+What are two ways to attach metadata to Kubernetes Objects?
+	
+
+UserData - 
+	 
+	
+
+Annotations
+	
+	
+
+MetaData
+	
+	
+
+Tags
+
+	
+
+Labels
