@@ -93,8 +93,6 @@ Canary deployments involve releasing the new version of an application to a smal
 ### Red/Black deployment
 Similar to blue/green deployments, red/black deployments involve two identical production environments: one that is active (red) and one that is idle (black). Once the new version is ready, traffic is switched from the red environment to the black environment. This strategy is designed for fast rollbacks and zero downtime but, like blue/green deployments, does not target a small subset of users initially; it switches the entire user base to the new version at once.
 
-
-
 ## IAM w Kubernetesie i RBAC
 ### **IAM w Kubernetesie**
 IAM w Kubernetesie obejmuje:
@@ -154,35 +152,33 @@ Kubernetes oferuje jeszcze kilka innych mechanizmów kontroli dostępu i zarząd
 
 5. **Open Policy Agent (OPA)**: To narzędzie open-source, które można zintegrować z Kubernetes do definiowania i egzekwowania polityk w całym stosie[4].
 
-
-# Containers
+# Container runtimes
 ### Docker
+Docker to platforma do konteneryzacji, która umożliwia tworzenie, wdrażanie i uruchamianie aplikacji w odizolowanych środowiskach zwanych kontenerami. Kontenery są lekkie, przenośne i działają na wspólnym jądrze systemu operacyjnego hosta, co czyni je bardziej efektywnymi niż tradycyjne maszyny wirtualne. Docker upraszcza zarządzanie zależnościami aplikacji i zapewnia ich spójność między różnymi środowiskami[1][5][9].
 
 ### containerd
+Containerd to lekki i wydajny runtime kontenerów, który zarządza cyklem życia kontenerów, w tym ich tworzeniem, uruchamianiem, zatrzymywaniem i usuwaniem. Jest to projekt open-source rozwijany przez CNCF (Cloud Native Computing Foundation) i używany jako backend przez Dockera oraz inne systemy, takie jak Kubernetes. Containerd obsługuje standard OCI (Open Container Initiative), co zapewnia kompatybilność z różnymi runtime'ami kontenerów, takimi jak runc czy Kata Containers[4].
 
-### cri-o
+### CRI-O
+CRI-O to silnik kontenerowy zaprojektowany specjalnie dla Kubernetes. Implementuje interfejs Kubernetes CRI (Container Runtime Interface), umożliwiając uruchamianie kontenerów za pomocą dowolnego runtime zgodnego z OCI (np. runc lub Kata Containers). Jest lekką alternatywą dla Dockera i skupia się na uproszczeniu oraz zwiększeniu wydajności w środowiskach Kubernetes[3][7].
 
-### kata
+### Kata Containers
+Kata Containers to projekt open-source łączący lekkość tradycyjnych kontenerów z bezpieczeństwem maszyn wirtualnych. Każdy kontener uruchamiany jest wewnątrz lekkiej maszyny wirtualnej, co zapewnia izolację na poziomie sprzętowym. Kata Containers są zgodne z OCI i integrują się z Kubernetes poprzez CRI. Są idealne do zastosowań wymagających wysokiego poziomu bezpieczeństwa i izolacji[4][8].
 
 ### LXC
 - [Linux Containers](https://linuxcontainers.org/)
 LXC is a well-known Linux container runtime that consists of tools, templates, and library and language bindings. It's pretty low level, very flexible and covers just about every containment feature supported by the upstream kernel.
 
 
-
 # A Kubernetes developer wants to prevent a job from living after a certain amount of time when it has finished execution. 
-
 - [TTL-after-finished Controller](https://kubernetes.io/docs/concepts/workloads/controllers/ttlafterfinished/)
 ### Do opisania/sprawdzenia
 - DaemonSets
 - TerminateAfterMs property within Manifest File
 - TTL property within Deployment file
 
-
 # Kubernetes - architektura
 - [Kubernetes components](https://kubernetes.io/docs/concepts/overview/components/)
-
-
 
 ## Serwisy 
 ### CoreDNS 
@@ -221,51 +217,37 @@ kube-proxy is a network proxy that runs on each node in your cluster, implementi
 https://kubernetes.io/docs/concepts/overview/components/#kube-proxy
 
 
+# Losowe
+In Kubernetes, two primary ways to attach metadata to objects are **Labels** and **Annotations**:
 
-What are two ways to attach metadata to Kubernetes Objects?
-	
+1. **Labels**:
+   - Labels are key-value pairs used to identify and organize Kubernetes objects.
+   - They are primarily used for selection and grouping of objects (e.g., using selectors in deployments or services).
+   - Example use cases: marking pods as part of a specific application, version, or environment.
+   - Example YAML:
+     ```yaml
+     metadata:
+       labels:
+         app: my-app
+         version: v1
+     ```
 
-UserData - 
-	 
-	
+2. **Annotations**:
+   - Annotations are key-value pairs used to attach arbitrary, non-identifying metadata to objects.
+   - Unlike labels, annotations cannot be used for selecting or grouping objects.
+   - They are often used for storing additional information, such as build details, deployment history, or pointers to external systems.
+   - Example YAML:
+     ```yaml
+     metadata:
+       annotations:
+         buildVersion: "1.0.0"
+         owner: "team-a"
+     ```
 
-Annotations
-	
-	
+Both labels and annotations are defined under the `metadata` section of Kubernetes objects and serve different purposes in managing and organizing resources within a cluster[1][2][7].
 
-MetaData
-	
-	
+# TODO
 
-Tags
-
-	
-
-Labels
-
-
-
-
-
-
-    Shuffle
-    Toggle On
-    Alphabetize
-    Toggle Off
-    Front First
-    Toggle On
-    Read
-    Toggle Off
-
-    Right
-    0%0
-    Wrong -1
-
-    Wrong
-    100%1
-
-Question:
-Front
 
 ### TODO - niech GPT wyjasni pytanie
 Question: Let's assume that an organization needs to process large amounts of data in bursts, on a cloud-based Kubernetes cluster. For instance: each Monday morning, they need to run a batch of 1000 compute jobs of 1 hour each, and these jobs must be completed by Monday night. What's going to be the most cost-effective method? Possible answers:
