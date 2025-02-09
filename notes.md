@@ -217,3 +217,91 @@ D. Use PriorityСlasses so that the weekly batch job gets priority over other wo
 
 Poprawne B
 
+
+
+
+# Kontenery, cri-o, kata? itd. czym się charakteryzują
+
+
+
+### TODO 
+
+Question: Which statement about Ingress is correct? Possible answers:
+A. Ingress provides a simple way to track network endpoints within a cluster.
+B. Ingress is a Service type like NodePort and ClusterIP.
+C. Ingress is a construct that allows you to specify how a Pod is allowed to communicate.
+D. Ingress exposes routes from outside the cluster to services in the cluster.
+
+Poprawne D
+
+
+This is correct because:
+Ingress is defined as an API object that manages external access to services within a Kubernetes cluster15.
+It acts as a single entry point for incoming traffic, routing it to the appropriate services based on the routing rules set by the developer1.
+Ingress provides routing rules to manage access to the services within a Kubernetes cluster, typically using HTTP and HTTPS protocols35.
+It allows you to expose multiple services under the same IP address, providing features like SSL termination, load balancing, and name-based virtual hosting69.
+The other options are incorrect:
+A. This is not the primary function of Ingress.
+B. Ingress is not a Service type, but rather a separate API object26.
+C. This description is more applicable to NetworkPolicies, not Ingress.
+
+Question: Which storage operator in Kubernetes can help the system to self-scale, self-heal, etc? Possible answers:
+A. Rook
+B. Kubernetes
+C. Helm
+D. Container Storage Interface (CSI)
+
+
+Poprawne A
+
+
+
+
+Question: What are the initial namespaces that Kubernetes starts with? Possible answers:
+A. default, kube-system, kube-public, kube-node-lease
+B. default, system, kube-public
+C. kube-default, kube-system, kube-main, kube-node-lease
+D. kube-default, system, kube-main, kube-primary
+
+Poprawne A
+
+
+
+
+Question: What is a probe within Kubernetes? Possible answers:
+A. A monitoring mechanism of the Kubernetes API.
+B. A pre-operational scope issued by the kubectl agent.
+C. A diagnostic performed periodically by the kubelet on a container.
+D. A logging mechanism of the Kubernetes API.
+
+Poprawne C
+
+
+
+
+Question: Which feature enables Image Placement Policies to be mapped to target clusters? Possible answers:
+A. YAML
+B. Labels
+C. JSON
+D. Categories
+
+Poprawne D
+
+
+ What native runtime is Open Container Initiative (OCI) compliant?
+
+    A. runC Most Voted
+    B. runV
+    C. kata-containers
+    D. gvisor
+
+A
+
+Question: What feature must a CNI support to control specific traffic flows for workloads running in Kubernetes? Possible answers: 
+A. Border Gateway Protocol
+B. IP Address Management
+C. Pod Security Policy
+D. Network Policies;;
+
+Good answer: 
+D. Network Policies;;;
