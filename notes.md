@@ -94,14 +94,66 @@ Canary deployments involve releasing the new version of an application to a smal
 Similar to blue/green deployments, red/black deployments involve two identical production environments: one that is active (red) and one that is idle (black). Once the new version is ready, traffic is switched from the red environment to the black environment. This strategy is designed for fast rollbacks and zero downtime but, like blue/green deployments, does not target a small subset of users initially; it switches the entire user base to the new version at once.
 
 
-# IAM 
-IAM w Kubernetesie obejmuje mechanizmy uwierzytelniania i autoryzacji, które określają:
-- **Kto** (np. użytkownik, grupa lub konto usługi) ma dostęp do zasobów.
-- **Co może** zrobić (np. odczyt, zapis, usunięcie).
-- **Gdzie** (np. w danym namespace).
+
+## IAM w Kubernetesie i RBAC
+### **IAM w Kubernetesie**
+IAM w Kubernetesie obejmuje:
+1. **Kto** (np. użytkownik, grupa lub konto usługi) ma dostęp do zasobów.
+2. **Co** może zrobić (np. odczyt, zapis, usunięcie).
+3. **Gdzie** (np. w danym namespace).
+
+### **RBAC - Role-Based Access Control**
+RBAC to mechanizm zarządzania dostępem oparty na rolach, który umożliwia przypisywanie uprawnień użytkownikom lub usługom w Kubernetesie.
+
+#### **Kluczowe komponenty RBAC**
+1. **Role**: Definiuje uprawnienia dla zasobów w obrębie jednego namespace.
+   - Przykład: Dostęp do odczytu podów w namespace `development`.
+2. **ClusterRole**: Podobna do Role, ale działa na poziomie całego klastra lub zasobów niezwiązanych z namespace.
+   - Przykład: Dostęp do wszystkich podów we wszystkich namespaces.
+3. **RoleBinding**: Przypisuje Role użytkownikowi, grupie lub kontu usługi w danym namespace.
+4. **ClusterRoleBinding**: Przypisuje ClusterRole na poziomie całego klastra.
+
+#### **Proces RBAC**
+1. **Uwierzytelnianie (Authentication)**: Weryfikacja tożsamości użytkownika za pomocą certyfikatów X.509, tokenów lub innych metod.
+2. **Autoryzacja (Authorization)**: Sprawdzanie, czy użytkownik ma odpowiednie uprawnienia zdefiniowane w Role/ClusterRole.
+3. **Admission Control**: Ostateczna walidacja i modyfikacja żądań zgodnie z politykami.
+
+#### **Przykład definicji RBAC w YAML**
+```yaml
+kind: Role
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  namespace: development
+  name: pod-reader
+rules:
+- apiGroups: [""]
+  resources: ["pods"]
+  verbs: ["get", "list", "watch"]
+```
+Powyższa rola pozwala na odczyt podów w namespace `development`.
+
+### **Porównanie RBAC i ABAC**
+- **RBAC** opiera się na rolach przypisanych użytkownikom i grupom.
+- **ABAC (Attribute-Based Access Control)** umożliwia bardziej dynamiczne polityki dostępu oparte na atrybutach (np. czas, lokalizacja)[9].
+
+### **Najlepsze praktyki RBAC**
+1. Zasada najmniejszych uprawnień (**Least Privilege Principle**) – przyznawaj minimalne wymagane uprawnienia.
+2. Wersjonowanie polityk dostępu jako kodu – łatwiejsze zarządzanie i audyt.
+3. Regularny przegląd ról i uprawnień – uniknięcie nadmiarowych dostępów.
+[9] https://kapitanhack.pl/2023/08/16/id-sec/co-to-jest-rbac-porownanie-rbac-z-abac/
 
 
-### RBAC itd.
+Kubernetes oferuje jeszcze kilka innych mechanizmów kontroli dostępu i zarządzania tożsamością:
+1. **Network Policies**: Umożliwiają kontrolę przepływu ruchu między podami oraz między podami a punktami końcowymi sieci, zapewniając mikrosegmentację i zwiększając bezpieczeństwo aplikacji.
+
+2. **Service Accounts**: Pozwalają na przypisanie specyficznych uprawnień do podów, umożliwiając szczegółową kontrolę dostępu i audyt[1].
+
+3. **Admission Controllers**: Są to wtyczki, które przechwytują żądania do serwera API Kubernetes przed trwałym zapisem obiektu, ale po uwierzytelnieniu i autoryzacji żądania. Mogą one modyfikować lub odrzucać żądania na podstawie zdefiniowanych polityk[2].
+
+4. **Pod Security Policies (PSP)**: Chociaż są one wycofywane, wciąż są używane w niektórych środowiskach. PSP definiują zestaw warunków, które pod musi spełnić, aby został zaakceptowany przez system[2].
+
+5. **Open Policy Agent (OPA)**: To narzędzie open-source, które można zintegrować z Kubernetes do definiowania i egzekwowania polityk w całym stosie[4].
+
 
 # Containers
 ### Docker
