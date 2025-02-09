@@ -95,6 +95,12 @@ Similar to blue/green deployments, red/black deployments involve two identical p
 
 
 # IAM 
+IAM w Kubernetesie obejmuje mechanizmy uwierzytelniania i autoryzacji, które określają:
+- **Kto** (np. użytkownik, grupa lub konto usługi) ma dostęp do zasobów.
+- **Co może** zrobić (np. odczyt, zapis, usunięcie).
+- **Gdzie** (np. w danym namespace).
+
+
 ### RBAC itd.
 
 # Containers
@@ -103,6 +109,8 @@ Similar to blue/green deployments, red/black deployments involve two identical p
 ### containerd
 
 ### cri-o
+
+### kata
 
 ### LXC
 - [Linux Containers](https://linuxcontainers.org/)
@@ -217,13 +225,6 @@ D. Use PriorityСlasses so that the weekly batch job gets priority over other wo
 
 Poprawne B
 
-
-
-
-# Kontenery, cri-o, kata? itd. czym się charakteryzują
-
-
-
 ### TODO 
 
 Question: Which statement about Ingress is correct? Possible answers:
@@ -305,3 +306,31 @@ D. Network Policies;;
 
 Good answer: 
 D. Network Policies;;;
+
+
+
+Question: What is the main role of the Kubernetes DNS within a cluster? Possible answers:
+A. Acts as a DNS server for virtual machines that are running outside the cluster.
+B. Provides a DNS as a Service, allowing users to create zones and registries for domains that they own.
+C. Allows Pods running in dual stack to convert IPv6 calls into IPv4 calls.
+D. Provides consistent DNS Names for Pods and Services for workloads that need to communicate with each other.
+
+Good answer: D. Provides consistent DNS Names for Pods and Services for workloads that need to communicate with each other.
+
+
+Question: Scenario: You have a Kubernetes cluster hosted in a public cloud provider. When trying to create a Service of type LoadBalancer, the external-ip is stuck in the "Pending" state. Which Kubernetes component is failing in this scenario? Possible answers:
+A. Cloud Controller Manager
+B. Load Balancer Manager
+C. Cloud Architecture Manager
+D. Cloud Load Balancer Manager
+
+Poprawne A
+
+
+Question: What are the characteristics for building every cloud-native application? Possible answers:
+A. Resiliency, Operability, Observability, Availability
+B. Resiliency, Containerd, Observability, Agility
+C. Kubernetes, Operability, Observability, Availability
+D. Resiliency, Agility, Operability, Observability
+
+Poprawne D
