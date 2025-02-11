@@ -83,7 +83,7 @@
 84. a
 85. a
 86. https://www.examtopics.com/discussions/linux-foundation/view/135368-exam-kcna-topic-1-question-86-discussion/
-87. a
+87. https://www.examtopics.com/discussions/linux-foundation/view/154441-exam-kcna-topic-1-question-87-discussion/
 88. a
 89. a
 90. a
