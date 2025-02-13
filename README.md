@@ -137,7 +137,7 @@ LXC is a well-known Linux container runtime that consists of tools, templates, a
 ## Networking
 Kubernetes distinguishes between four different networking problems that need to be solved:
 
-1. **Container-to-Container communications** - This can be solved by the Pod concept as we'll learn later.
+1. **Container-to-Container communications** - Can be solved by the Pod concept.
 2. **Pod-to-Pod communications** - This can be solved with an overlay network.
 3. **Pod-to-Service communications** - It is implemented by the kube-proxy and packet filter on the node.
 4. **External-to-Service communications** - It is implemented by the kube-proxy and packet filter on the node.
