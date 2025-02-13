@@ -89,6 +89,31 @@ Similar to blue/green deployments, red/black deployments involve two identical p
 # Kubernetes
 ## Kubernetes - architektura
 - [Kubernetes components](https://kubernetes.io/docs/concepts/overview/components/)
+From a high-level perspective, Kubernetes clusters consist of two different server node types that make up a cluster:
+- Control plane node(s)
+    These are the brains of the operation. Control plane nodes contain various components which manage the cluster and control various tasks like deployment, scheduling and self-healing of containerized workloads.
+- Worker nodes
+    The worker nodes are where applications run in your cluster. This is the only job of worker nodes and they don’t have any further logic implemented. Their behavior, like if they should start a container, is completely controlled by the control plane node.
+
+![Kubernetes architecture](./pictures/KubernetesArchitecture.png)
+**Kubernetes architecture**
+Similar to a microservice architecture you would choose for your own application, Kubernetes incorporates multiple smaller services that need to be installed on the nodes.
+
+### Control plane nodes typically host the following services...  
+- **kube-apiserver** - This is the centerpiece of Kubernetes. All other components interact with the api-server and this is where users would access the cluster.
+- **etcd** - A database which holds the state of the cluster. [etcd](https://etcd.io/) is a standalone project and not an official part of Kubernetes.
+- **kube-scheduler** - When a new workload should be scheduled, the kube-scheduler chooses a worker node that could fit, based on different properties like CPU and memory.
+- **kube-controller-manager** - Contains different non-terminating control loops that manage the state of the cluster. For example, one of these control loops can make sure that a desired number of your application is available all the time.
+- **cloud-controller-manager (optional)** - Can be used to interact with the API of cloud providers, to create external resources like load balancers, storage or security groups.
+
+### Components of worker nodes  
+- **container runtime** - The container runtime is responsible for running the containers on the worker node. For a long time, Docker was the most popular choice, but is now replaced in favor of other runtimes like [containerd](https://containerd.io/).
+- **kubelet** - A small agent that runs on every worker node in the cluster. The kubelet talks to the api-server and the container runtime to handle the final stage of starting containers.
+- **kube-proxy** - A network proxy that handles inside and outside communication of your cluster. Instead of managing traffic flow on its own, the kube-proxy tries to rely on the networking capabilities of the underlying operating system if possible.
+
+---
+**Namespaces** - Kubernetes also has a concept of *namespaces*, which are not to be confused with kernel namespaces that are used to isolate containers. A Kubernetes namespace can be used to divide a cluster into multiple virtual clusters, which can be used for multi-tenancy when multiple teams share a cluster. **Please note that Kubernetes namespaces are not suitable for strong isolation and should more be viewed like a directory on a computer where you can organize objects and manage which user has access to which folder.**
+
 
 
 ## Kubectl cheat sheet 
@@ -106,6 +131,28 @@ apiregistration.k8s.io/v1beta1
 ...
 
 ## Kubernetes API 
+The Kubernetes API is the most important component of a Kubernetes cluster. Without it, communication with the cluster is not possible, every user and every component of the cluster itself needs the api-server.
+
+![Access Control Overview](./pictures/AccessControlOverview.png)
+
+**Access Control Overview**, retrieved from the [Kubernetes documentation](https://kubernetes.io/docs/concepts/security/controlling-access/)
+
+
+Before a request is processed by Kubernetes, it has to go through three stages:
+- **Authentication** - **The requester needs to present a means of identity to authenticate against the API.** Commonly done with a digital signed certificate (X.509) or with an external identity management system. Kubernetes users are always externally managed. Service Accounts can be used to authenticate technical users.
+- **Authorization** - **It is decided what the requester is allowed to do.** In Kubernetes this can be done with Role Based Access Control (RBAC).
+- **Admission Control** - In the last step, admission controllers can be used to modify or validate the request. For example, if a user tries to use a container image from an untrustworthy registry, an admission controller could block this request. Tools like the Open Policy Agent can be used to manage admission control externally.
+
+Like many other APIs, the Kubernetes API is implemented as a RESTful interface that is exposed over HTTPS. Through the API, a user or service can create, modify, delete or retrieve resources that reside in Kubernetes.
+
+## Running Containers on Kubernetes
+When you create a Pod object in Kubernetes, several components are involved in that process, until you get containers running a node.
+
+Here is an example using containerd:
+![containerd example](./pictures/containerd_example.png)
+**Running Containers in Kubernetes**
+
+
 ### Kubernetes API Basics - Resources, Kinds, and Objects
 - [Working with kubernetes API](https://iximiuz.com/en/series/working-with-kubernetes-api/)
 #### Resources and Verbs

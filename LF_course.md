@@ -274,7 +274,6 @@ Kubernetes also has a concept of *namespaces*, which are not to be confused with
 
 
 ### Kubernetes Setup
-
 Setting up a Kubernetes cluster can be achieved with a lot of different methods. Creating a test "cluster" can be very easy with the right tools:
 - Minikube
 - kind
