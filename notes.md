@@ -69,7 +69,7 @@ CRI-O to silnik kontenerowy zaprojektowany specjalnie dla Kubernetes. Implementu
 Kata Containers to projekt open-source łączący lekkość tradycyjnych kontenerów z bezpieczeństwem maszyn wirtualnych. Każdy kontener uruchamiany jest wewnątrz lekkiej maszyny wirtualnej, co zapewnia izolację na poziomie sprzętowym. Kata Containers są zgodne z OCI i integrują się z Kubernetes poprzez CRI. Są idealne do zastosowań wymagających wysokiego poziomu bezpieczeństwa i izolacji[4][8].
 
 ### LXC
-- [Linux Containers](https://linuxcontainers.org/)
+[Linux Containers](https://linuxcontainers.org/)
 LXC is a well-known Linux container runtime that consists of tools, templates, and library and language bindings. It's pretty low level, very flexible and covers just about every containment feature supported by the upstream kernel.
 
 ## Deployment strategy 
@@ -86,8 +86,49 @@ Canary deployments involve releasing the new version of an application to a smal
 Similar to blue/green deployments, red/black deployments involve two identical production environments: one that is active (red) and one that is idle (black). Once the new version is ready, traffic is switched from the red environment to the black environment. This strategy is designed for fast rollbacks and zero downtime but, like blue/green deployments, does not target a small subset of users initially; it switches the entire user base to the new version at once.
 
 # Kubernetes
+## Kubernetes - architektura
+- [Kubernetes components](https://kubernetes.io/docs/concepts/overview/components/)
+
+## Serwisy 
+### CoreDNS 
+- [Coredns website](https://coredns.io/)
+- [Understanding CoreDNS YouTube](https://www.youtube.com/watch?v=qRiLmLACYSY)
+CoreDNS has been the default name Domain Name System (DNS) since K8s 1.3
+
+### Kube-dns
+- [KubeDNS](https://kubernetes.io/docs/concepts/services-networking/dns-pod-service/)
+
+### Kubelet
+An agent that runs on each node in the cluster. It makes sure that containers are running in a Pod.
+
+- [Kubelet](https://kubernetes.io/docs/concepts/overview/components/#kubelet)
+## What are two Kubernetes components that are essential for worker nodes?
+
+### Scheduler 
+- [Scheduler](https://kubernetes.io/docs/concepts/scheduling-eviction/kube-scheduler/)
+A scheduler watches for newly created Pods that have no Node assigned. For every Pod that the scheduler discovers, the scheduler becomes responsible for finding the best Node for that Pod to run on. The scheduler reaches this placement decision taking into account the scheduling principles described below.
+
+### Controller Manager
+Control plane component that runs controller processes.
+https://kubernetes.io/docs/concepts/overview/components/#kube-controller-manager
+
+
+### Cloud Controller Manager
+A Kubernetes control plane component that embeds cloud-specific control logic. The cloud controller manager lets you link your cluster into your cloud provider's API, and separates out the components that interact with that cloud platform from components that only interact with your cluster.
+https://kubernetes.io/docs/concepts/overview/components/#kube-controller-manager
+
+### The API server
+API server is a component of the Kubernetes control plane that exposes the Kubernetes API.
+https://kubernetes.io/docs/concepts/overview/components/#kube-apiserver
+
+### Kube Proxy
+kube-proxy is a network proxy that runs on each node in your cluster, implementing part of the Kubernetes Service concept.
+https://kubernetes.io/docs/concepts/overview/components/#kube-proxy
+
+
+
 ## Kubernetes packaging
-- [When to use Kubernetes operators vs. Helm charts](https://www.techtarget.com/searchitoperations/tip/When-to-use-Kubernetes-operators-vs-Helm-charts) 
+[When to use Kubernetes operators vs. Helm charts](https://www.techtarget.com/searchitoperations/tip/When-to-use-Kubernetes-operators-vs-Helm-charts) 
   
 TL;DR; Helm is great for simple applications, packaging, and quick deployments using templated YAML manifests. Operators are better for complex applications with custom configurations and automation requirements, essentially encapsulating operational expertise into code. You can even use both together! 
 
@@ -105,7 +146,7 @@ Operators are geared toward site reliability engineering teams to manage the com
   
 Kubernetes operators build on custom resources and controllers. In plain terms, an IT admin can define their resources in Kubernetes and publish logic -- via an operator -- that can handle CRUD operations for the custom resource. These custom resources can model a complex application or a standard templatized application; the operators maintain the resource's lifecycle.
 
-## IAM w Kubernetesie i RBAC
+## IAM w Kubernetesie
 ### **IAM w Kubernetesie**
 IAM w Kubernetesie obejmuje:
 1. **Kto** (np. użytkownik, grupa lub konto usługi) ma dostęp do zasobów.
@@ -213,7 +254,7 @@ Time-based Jobs that run periodically
 - Schedule Jobs to run periodically
 - Ideal for automated tasks, backups, or report generation
 
-## ReplicaSets
+### ReplicaSets
 Ensure a specified number of pod replicas are running.
 - Ensure a specified number of pod replicas are running at any given time
 - Often used indirectly through Deployments
@@ -240,45 +281,6 @@ The smallest deployable units in Kubernetes, often managed by higher-level contr
 ### Do opisania/sprawdzenia
 - TerminateAfterMs property within Manifest File
 - TTL property within Deployment file
-
-## Kubernetes - architektura
-- [Kubernetes components](https://kubernetes.io/docs/concepts/overview/components/)
-
-## Serwisy 
-### CoreDNS 
-- [Coredns website](https://coredns.io/)
-- [Understanding CoreDNS YouTube](https://www.youtube.com/watch?v=qRiLmLACYSY)
-CoreDNS has been the default name Domain Name System (DNS) since K8s 1.3
-
-### Kube-dns
-- [KubeDNS](https://kubernetes.io/docs/concepts/services-networking/dns-pod-service/)
-
-### Kubelet
-An agent that runs on each node in the cluster. It makes sure that containers are running in a Pod.
-
-- [Kubelet](https://kubernetes.io/docs/concepts/overview/components/#kubelet)
-## What are two Kubernetes components that are essential for worker nodes?
-
-### Scheduler 
-- [Scheduler](https://kubernetes.io/docs/concepts/scheduling-eviction/kube-scheduler/)
-A scheduler watches for newly created Pods that have no Node assigned. For every Pod that the scheduler discovers, the scheduler becomes responsible for finding the best Node for that Pod to run on. The scheduler reaches this placement decision taking into account the scheduling principles described below.
-
-### Controller Manager
-Control plane component that runs controller processes.
-https://kubernetes.io/docs/concepts/overview/components/#kube-controller-manager
-
-
-### Cloud Controller Manager
-A Kubernetes control plane component that embeds cloud-specific control logic. The cloud controller manager lets you link your cluster into your cloud provider's API, and separates out the components that interact with that cloud platform from components that only interact with your cluster.
-https://kubernetes.io/docs/concepts/overview/components/#kube-controller-manager
-
-### The API server
-API server is a component of the Kubernetes control plane that exposes the Kubernetes API.
-https://kubernetes.io/docs/concepts/overview/components/#kube-apiserver
-
-### Kube Proxy
-kube-proxy is a network proxy that runs on each node in your cluster, implementing part of the Kubernetes Service concept.
-https://kubernetes.io/docs/concepts/overview/components/#kube-proxy
 
 
 # Losowe
