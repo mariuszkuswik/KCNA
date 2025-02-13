@@ -55,7 +55,38 @@ Jenkins X is opinionated and built to work better with technologies like Docker 
 Flux is a more direct approach to GitOps with lesser human interference. 
 Nie ma WEB UI
 
-# Kubernetes packaging?
+# Container runtimes
+### Docker
+Docker to platforma do konteneryzacji, która umożliwia tworzenie, wdrażanie i uruchamianie aplikacji w odizolowanych środowiskach zwanych kontenerami. Kontenery są lekkie, przenośne i działają na wspólnym jądrze systemu operacyjnego hosta, co czyni je bardziej efektywnymi niż tradycyjne maszyny wirtualne. Docker upraszcza zarządzanie zależnościami aplikacji i zapewnia ich spójność między różnymi środowiskami[1][5][9].
+
+### containerd
+Containerd to lekki i wydajny runtime kontenerów, który zarządza cyklem życia kontenerów, w tym ich tworzeniem, uruchamianiem, zatrzymywaniem i usuwaniem. Jest to projekt open-source rozwijany przez CNCF (Cloud Native Computing Foundation) i używany jako backend przez Dockera oraz inne systemy, takie jak Kubernetes. Containerd obsługuje standard OCI (Open Container Initiative), co zapewnia kompatybilność z różnymi runtime'ami kontenerów, takimi jak runc czy Kata Containers[4].
+
+### CRI-O
+CRI-O to silnik kontenerowy zaprojektowany specjalnie dla Kubernetes. Implementuje interfejs Kubernetes CRI (Container Runtime Interface), umożliwiając uruchamianie kontenerów za pomocą dowolnego runtime zgodnego z OCI (np. runc lub Kata Containers). Jest lekką alternatywą dla Dockera i skupia się na uproszczeniu oraz zwiększeniu wydajności w środowiskach Kubernetes[3][7].
+
+### Kata Containers
+Kata Containers to projekt open-source łączący lekkość tradycyjnych kontenerów z bezpieczeństwem maszyn wirtualnych. Każdy kontener uruchamiany jest wewnątrz lekkiej maszyny wirtualnej, co zapewnia izolację na poziomie sprzętowym. Kata Containers są zgodne z OCI i integrują się z Kubernetes poprzez CRI. Są idealne do zastosowań wymagających wysokiego poziomu bezpieczeństwa i izolacji[4][8].
+
+### LXC
+- [Linux Containers](https://linuxcontainers.org/)
+LXC is a well-known Linux container runtime that consists of tools, templates, and library and language bindings. It's pretty low level, very flexible and covers just about every containment feature supported by the upstream kernel.
+
+## Deployment strategy 
+### Blue/Green
+This deployment strategy involves having two identical environments, one hosting the current version of the application (blue) and the other hosting the new version (green). Once the new version is ready and tested in the green environment, the traffic is switched from blue to green. While this method allows for quick rollbacks and minimal downtime, it doesn't inherently support rolling out features to a small subset of users first; instead, it switches all users from the old version to the new one at once.
+
+### Recreate deployments
+In this method, the existing version of the application is taken down, and the new version is rolled out. This approach involves downtime, as there is a period when the application is not available to users. Like blue/green deployments, it does not support gradual rollout to a subset of users. Instead, it replaces the old version with the new one for all users simultaneously.
+
+### Canary
+Canary deployments involve releasing the new version of an application to a small subset of the user base initially, rather than rolling it out to all users at once. This strategy allows developers and operations teams to monitor the performance and stability of the new release and ensure it behaves as expected under real-world conditions. If the new version proves to be stable and effective, it can then be gradually rolled out to the rest of the user base.
+
+### Red/Black deployment
+Similar to blue/green deployments, red/black deployments involve two identical production environments: one that is active (red) and one that is idle (black). Once the new version is ready, traffic is switched from the red environment to the black environment. This strategy is designed for fast rollbacks and zero downtime but, like blue/green deployments, does not target a small subset of users initially; it switches the entire user base to the new version at once.
+
+# Kubernetes
+## Kubernetes packaging
 ## two ways to package, deploy, and manage a Kubernetes application?
 - Kubernetes operators and Helm charts are tools that stir up confusion in the industry -- they seem to fill the same role, but they do slightly different things.
 - [When to use Kubernetes operators vs. Helm charts](https://www.techtarget.com/searchitoperations/tip/When-to-use-Kubernetes-operators-vs-Helm-charts)
@@ -78,20 +109,6 @@ Helm also retains a release history of all deployed charts, so IT teams can go b
 Operators are geared toward site reliability engineering teams to manage the complex runbooks that orchestrate the deployment of a complex application, along with automating mundane tasks for the Kubernetes platform.
   
 Kubernetes operators build on custom resources and controllers. In plain terms, an IT admin can define their resources in Kubernetes and publish logic -- via an operator -- that can handle CRUD operations for the custom resource. These custom resources can model a complex application or a standard templatized application; the operators maintain the resource's lifecycle.
-
-
-## Deployment strategy 
-### Blue/Green
-This deployment strategy involves having two identical environments, one hosting the current version of the application (blue) and the other hosting the new version (green). Once the new version is ready and tested in the green environment, the traffic is switched from blue to green. While this method allows for quick rollbacks and minimal downtime, it doesn't inherently support rolling out features to a small subset of users first; instead, it switches all users from the old version to the new one at once.
-
-### Recreate deployments
-In this method, the existing version of the application is taken down, and the new version is rolled out. This approach involves downtime, as there is a period when the application is not available to users. Like blue/green deployments, it does not support gradual rollout to a subset of users. Instead, it replaces the old version with the new one for all users simultaneously.
-
-### Canary
-Canary deployments involve releasing the new version of an application to a small subset of the user base initially, rather than rolling it out to all users at once. This strategy allows developers and operations teams to monitor the performance and stability of the new release and ensure it behaves as expected under real-world conditions. If the new version proves to be stable and effective, it can then be gradually rolled out to the rest of the user base.
-
-### Red/Black deployment
-Similar to blue/green deployments, red/black deployments involve two identical production environments: one that is active (red) and one that is idle (black). Once the new version is ready, traffic is switched from the red environment to the black environment. This strategy is designed for fast rollbacks and zero downtime but, like blue/green deployments, does not target a small subset of users initially; it switches the entire user base to the new version at once.
 
 ## IAM w Kubernetesie i RBAC
 ### **IAM w Kubernetesie**
@@ -152,32 +169,84 @@ Kubernetes oferuje jeszcze kilka innych mechanizmów kontroli dostępu i zarząd
 
 5. **Open Policy Agent (OPA)**: To narzędzie open-source, które można zintegrować z Kubernetes do definiowania i egzekwowania polityk w całym stosie[4].
 
-# Container runtimes
-### Docker
-Docker to platforma do konteneryzacji, która umożliwia tworzenie, wdrażanie i uruchamianie aplikacji w odizolowanych środowiskach zwanych kontenerami. Kontenery są lekkie, przenośne i działają na wspólnym jądrze systemu operacyjnego hosta, co czyni je bardziej efektywnymi niż tradycyjne maszyny wirtualne. Docker upraszcza zarządzanie zależnościami aplikacji i zapewnia ich spójność między różnymi środowiskami[1][5][9].
+## Workload management
+### Deployments
+Deployments are the primary method for managing stateless applications in Kubernetes. They:
+- Provide declarative updates for Pods and ReplicaSets
+- Allow easy scaling of applications
+- Support rolling updates and rollbacks
+- Manage the desired state of the application, ensuring the specified number of replicas are running
+Deployments are ideal for stateless applications that don't require persistent storage or stable network identities[1][4].
 
-### containerd
-Containerd to lekki i wydajny runtime kontenerów, który zarządza cyklem życia kontenerów, w tym ich tworzeniem, uruchamianiem, zatrzymywaniem i usuwaniem. Jest to projekt open-source rozwijany przez CNCF (Cloud Native Computing Foundation) i używany jako backend przez Dockera oraz inne systemy, takie jak Kubernetes. Containerd obsługuje standard OCI (Open Container Initiative), co zapewnia kompatybilność z różnymi runtime'ami kontenerów, takimi jak runc czy Kata Containers[4].
+### StatefulSets
+StatefulSets are designed to manage stateful applications in Kubernetes. Key features include:
+- Stable, unique network identifiers for each pod
+- Ordered deployment and scaling of pods
+- Persistent storage management
+- Integration with Persistent Volumes for data persistence
+StatefulSets are perfect for applications like databases, distributed systems, or any workload requiring stable network identity and persistent storage[2][5].
 
-### CRI-O
-CRI-O to silnik kontenerowy zaprojektowany specjalnie dla Kubernetes. Implementuje interfejs Kubernetes CRI (Container Runtime Interface), umożliwiając uruchamianie kontenerów za pomocą dowolnego runtime zgodnego z OCI (np. runc lub Kata Containers). Jest lekką alternatywą dla Dockera i skupia się na uproszczeniu oraz zwiększeniu wydajności w środowiskach Kubernetes[3][7].
+### DaemonSets
+DaemonSets ensure that a copy of a pod runs on all (or some) nodes in a Kubernetes cluster. They are useful for:
+- Deploying cluster-wide services (e.g., monitoring agents, log collectors)
+- Running a pod on every node automatically
+- Ensuring specific pods are present on nodes with certain characteristics
+DaemonSets are ideal for cluster-level operations and services that need to run on all or specific nodes[1].
 
-### Kata Containers
-Kata Containers to projekt open-source łączący lekkość tradycyjnych kontenerów z bezpieczeństwem maszyn wirtualnych. Każdy kontener uruchamiany jest wewnątrz lekkiej maszyny wirtualnej, co zapewnia izolację na poziomie sprzętowym. Kata Containers są zgodne z OCI i integrują się z Kubernetes poprzez CRI. Są idealne do zastosowań wymagających wysokiego poziomu bezpieczeństwa i izolacji[4][8].
+### Vertical Pod Autoscaler (VPA)
+The Vertical Pod Autoscaler automatically adjusts the CPU and memory reservations for pods to optimize resource utilization. It:
+- Analyzes the historical and current resource usage of pods
+- Recommends and can automatically apply optimal CPU and memory requests
+- Helps improve cluster resource utilization and application performance
+VPA is particularly useful for applications with varying resource needs or those that are difficult to manually tune.
 
-### LXC
-- [Linux Containers](https://linuxcontainers.org/)
-LXC is a well-known Linux container runtime that consists of tools, templates, and library and language bindings. It's pretty low level, very flexible and covers just about every containment feature supported by the upstream kernel.
+### ReplicationController
+ReplicationController is an older Kubernetes resource for ensuring a specified number of pod replicas are running. Key aspects include:
+- Maintains a stable set of replica pods running at any given time
+- Ensures the specified number of pods are always available
+- Replaces pods if they fail, are deleted, or are terminated
 
+### Jobs
+Run-to-completion workloads for batch processes or one-time tasks[1].
+- Run-to-completion workloads
+- Ensure a specified number of pods successfully terminate
+- Useful for batch processes, data migrations, or one-time tasks
 
+### CronJobs
+Time-based Jobs that run periodically
+- Time-based Jobs
+- Schedule Jobs to run periodically
+- Ideal for automated tasks, backups, or report generation
+
+## ReplicaSets
+Ensure a specified number of pod replicas are running.
+- Ensure a specified number of pod replicas are running at any given time
+- Often used indirectly through Deployments
+- Provide pod redundancy and scaling capabilities
+
+### Horizontal Pod Autoscaler (HPA)
+Automatically scales the number of pods based on CPU utilization or custom metrics.
+- Automatically scales the number of pods in a Deployment, ReplicaSet, or StatefulSet
+- Based on observed CPU utilization or custom metrics
+
+### Custom Resources and Operators
+Extend Kubernetes API to define and manage application-specific resources.
+- Extend Kubernetes API to define and manage application-specific resources
+- Allow for complex, stateful applications to be managed natively in Kubernetes
+
+### Pods
+The smallest deployable units in Kubernetes, often managed by higher-level controllers.
+- The smallest deployable units in Kubernetes
+- Can be created and managed directly, though it's usually better to use controllers
+
+### TODO
 # A Kubernetes developer wants to prevent a job from living after a certain amount of time when it has finished execution. 
 - [TTL-after-finished Controller](https://kubernetes.io/docs/concepts/workloads/controllers/ttlafterfinished/)
 ### Do opisania/sprawdzenia
-- DaemonSets
 - TerminateAfterMs property within Manifest File
 - TTL property within Deployment file
 
-# Kubernetes - architektura
+## Kubernetes - architektura
 - [Kubernetes components](https://kubernetes.io/docs/concepts/overview/components/)
 
 ## Serwisy 
