@@ -56,22 +56,6 @@ Jenkins X is opinionated and built to work better with technologies like Docker 
 Flux is a more direct approach to GitOps with lesser human interference. 
 Nie ma WEB UI
 
-# Container runtimes
-### Docker
-Docker to platforma do konteneryzacji, która umożliwia tworzenie, wdrażanie i uruchamianie aplikacji w odizolowanych środowiskach zwanych kontenerami. Kontenery są lekkie, przenośne i działają na wspólnym jądrze systemu operacyjnego hosta, co czyni je bardziej efektywnymi niż tradycyjne maszyny wirtualne. Docker upraszcza zarządzanie zależnościami aplikacji i zapewnia ich spójność między różnymi środowiskami[1][5][9].
-
-### containerd
-Containerd to lekki i wydajny runtime kontenerów, który zarządza cyklem życia kontenerów, w tym ich tworzeniem, uruchamianiem, zatrzymywaniem i usuwaniem. Jest to projekt open-source rozwijany przez CNCF (Cloud Native Computing Foundation) i używany jako backend przez Dockera oraz inne systemy, takie jak Kubernetes. Containerd obsługuje standard OCI (Open Container Initiative), co zapewnia kompatybilność z różnymi runtime'ami kontenerów, takimi jak runc czy Kata Containers[4].
-
-### CRI-O
-CRI-O to silnik kontenerowy zaprojektowany specjalnie dla Kubernetes. Implementuje interfejs Kubernetes CRI (Container Runtime Interface), umożliwiając uruchamianie kontenerów za pomocą dowolnego runtime zgodnego z OCI (np. runc lub Kata Containers). Jest lekką alternatywą dla Dockera i skupia się na uproszczeniu oraz zwiększeniu wydajności w środowiskach Kubernetes[3][7].
-
-### Kata Containers
-Kata Containers to projekt open-source łączący lekkość tradycyjnych kontenerów z bezpieczeństwem maszyn wirtualnych. Każdy kontener uruchamiany jest wewnątrz lekkiej maszyny wirtualnej, co zapewnia izolację na poziomie sprzętowym. Kata Containers są zgodne z OCI i integrują się z Kubernetes poprzez CRI. Są idealne do zastosowań wymagających wysokiego poziomu bezpieczeństwa i izolacji[4][8].
-
-### LXC
-[Linux Containers](https://linuxcontainers.org/)
-LXC is a well-known Linux container runtime that consists of tools, templates, and library and language bindings. It's pretty low level, very flexible and covers just about every containment feature supported by the upstream kernel.
 
 ## Deployment strategy 
 ### Blue/Green
@@ -114,22 +98,6 @@ Similar to a microservice architecture you would choose for your own application
 ---
 **Namespaces** - Kubernetes also has a concept of *namespaces*, which are not to be confused with kernel namespaces that are used to isolate containers. A Kubernetes namespace can be used to divide a cluster into multiple virtual clusters, which can be used for multi-tenancy when multiple teams share a cluster. **Please note that Kubernetes namespaces are not suitable for strong isolation and should more be viewed like a directory on a computer where you can organize objects and manage which user has access to which folder.**
 
-
-
-## Kubectl cheat sheet 
-- ```kubectl api-resources``` -  It provides a comprehensive list of all the resource types available in the cluster along with their names, shortnames, API groups, namespaced status, and kind. It's a helpful command for understanding the resources available for use in Kubernetes but does not directly list the API groups alone.
-
-- ```kubectl api-version``` -  it is specifically designed to list all the API versions that are available on the server, which include the groups and versions in the format <group>/<version>. This command helps users understand the different API versions and groups that their Kubernetes cluster supports, enabling them to use the appropriate API version for their resources and operations.
-
-To list the available API groups and their versions you can run kubectl with the “api-versions” option:
-
-kubectl api-versions |more
-admissionregistration.k8s.io/v1beta1
-apiextensions.k8s.io/v1beta1
-apiregistration.k8s.io/v1
-apiregistration.k8s.io/v1beta1
-...
-
 ## Kubernetes API 
 The Kubernetes API is the most important component of a Kubernetes cluster. Without it, communication with the cluster is not possible, every user and every component of the cluster itself needs the api-server.
 
@@ -151,6 +119,25 @@ When you create a Pod object in Kubernetes, several components are involved in t
 Here is an example using containerd:
 ![containerd example](./pictures/containerd_example.png)
 **Running Containers in Kubernetes**
+
+### Container Runtimes 
+- **containerd** is a lightweight and performant implementation to run containers. Arguably the most popular container runtime right now. It is used by all major cloud providers for the Kubernetes As A Service products.
+Jest to projekt open-source rozwijany przez CNCF (Cloud Native Computing Foundation) i używany jako backend przez Dockera oraz inne systemy, takie jak Kubernetes. Containerd obsługuje standard OCI (Open Container Initiative), co zapewnia kompatybilność z różnymi runtime'ami kontenerów, takimi jak runc czy Kata Containers.
+- **CRI-O** was created by Red Hat and with a similar code base closely related to podman and buildah. Implementuje interfejs Kubernetes CRI (Container Runtime Interface), umożliwiając uruchamianie kontenerów za pomocą dowolnego runtime zgodnego z OCI (np. runc lub Kata Containers). Jest lekką alternatywą dla Dockera i skupia się na uproszczeniu oraz zwiększeniu wydajności w środowiskach Kubernetes.
+- **Docker** - The standard for a long time, but never really made for container orchestration. The usage of Docker as the runtime for Kubernetes has been deprecated and removed in Kubernetes 1.24. Kubernetes has a great blog article that answers all the questions on the matter.
+    
+The idea of containerd and CRI-O was very simple: provide a runtime that only contains the absolutely essentials to run containers. Nevertheless, they have additional features, like the ability to integrate with container runtime sandboxing tools. These tools try to solve the security problem that comes with sharing the kernel between multiple containers. The most common tools at the moment are:
+  
+- **gvisor** - Made by Google, provides an application kernel that sits between the containerized process and the host kernel.
+- **Kata Containers** - A secure runtime that provides a lightweight virtual machine, but behaves like a container.
+Kata Containers to projekt open-source łączący lekkość tradycyjnych kontenerów z bezpieczeństwem maszyn wirtualnych. Każdy kontener uruchamiany jest wewnątrz lekkiej maszyny wirtualnej, co zapewnia izolację na poziomie sprzętowym. Kata Containers są zgodne z OCI i integrują się z Kubernetes poprzez CRI. Są idealne do zastosowań wymagających wysokiego poziomu bezpieczeństwa i izolacji.
+- **LXC** [Linux Containers](https://linuxcontainers.org/)
+LXC is a well-known Linux container runtime that consists of tools, templates, and library and language bindings. It's pretty low level, very flexible and covers just about every containment feature supported by the upstream kernel.
+
+## Networking
+
+
+
 
 
 ### Kubernetes API Basics - Resources, Kinds, and Objects
@@ -225,6 +212,19 @@ https://kubernetes.io/docs/concepts/overview/components/#kube-apiserver
 kube-proxy is a network proxy that runs on each node in your cluster, implementing part of the Kubernetes Service concept.
 https://kubernetes.io/docs/concepts/overview/components/#kube-proxy
 
+## Kubectl cheat sheet 
+- ```kubectl api-resources``` -  It provides a comprehensive list of all the resource types available in the cluster along with their names, shortnames, API groups, namespaced status, and kind. It's a helpful command for understanding the resources available for use in Kubernetes but does not directly list the API groups alone.
+
+- ```kubectl api-version``` -  it is specifically designed to list all the API versions that are available on the server, which include the groups and versions in the format <group>/<version>. This command helps users understand the different API versions and groups that their Kubernetes cluster supports, enabling them to use the appropriate API version for their resources and operations.
+
+To list the available API groups and their versions you can run kubectl with the “api-versions” option:
+
+kubectl api-versions |more
+admissionregistration.k8s.io/v1beta1
+apiextensions.k8s.io/v1beta1
+apiregistration.k8s.io/v1
+apiregistration.k8s.io/v1beta1
+...
 
 
 ## Kubernetes packaging
