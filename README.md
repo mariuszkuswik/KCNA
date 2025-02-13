@@ -135,9 +135,22 @@ Kata Containers to projekt open-source łączący lekkość tradycyjnych kontene
 LXC is a well-known Linux container runtime that consists of tools, templates, and library and language bindings. It's pretty low level, very flexible and covers just about every containment feature supported by the upstream kernel.
 
 ## Networking
+Kubernetes distinguishes between four different networking problems that need to be solved:
 
+1. **Container-to-Container communications** - This can be solved by the Pod concept as we'll learn later.
+2. **Pod-to-Pod communications** - This can be solved with an overlay network.
+3. **Pod-to-Service communications** - It is implemented by the kube-proxy and packet filter on the node.
+4. **External-to-Service communications** - It is implemented by the kube-proxy and packet filter on the node.
 
-
+There are different ways to implement networking in Kubernetes, but also three important requirements:
+- All pods can communicate with each other across nodes.
+- All nodes can communicate with all pods.
+- No Network Address Translation (NAT).
+  
+To implement networking, you can choose from a variety of network vendors like:
+- Project Calico
+- Weave
+- Cilium
 
 
 ### Kubernetes API Basics - Resources, Kinds, and Objects
