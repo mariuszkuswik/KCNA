@@ -88,7 +88,7 @@ Similar to blue/green deployments, red/black deployments involve two identical p
 
 # Kubernetes
 ## Kubernetes - architektura
-- [Kubernetes components](https://kubernetes.io/docs/concepts/overview/components/)
+[Kubernetes components](https://kubernetes.io/docs/concepts/overview/components/)
 From a high-level perspective, Kubernetes clusters consist of two different server node types that make up a cluster:
 - Control plane node(s)
     These are the brains of the operation. Control plane nodes contain various components which manage the cluster and control various tasks like deployment, scheduling and self-healing of containerized workloads.
