@@ -2,6 +2,7 @@
 # Gitops
 - [What is GitOps by RedHat](https://www.redhat.com/en/topics/devops/what-is-gitops)
 - [GitOps vs DevOps by RedHat](https://www.redhat.com/en/topics/devops/what-is-gitops#gitops-vs-devops)
+- [KCNA Github](https://github.com/walidshaari/Kubernetes-and-Cloud-Native-Associate#kubernetes-fundamentals---46)
 
 ## Monitoring
 ### Prometheus 
@@ -90,10 +91,10 @@ Similar to blue/green deployments, red/black deployments involve two identical p
 - [Kubernetes components](https://kubernetes.io/docs/concepts/overview/components/)
 
 
-## Kubernetes cheat sheet 
-kubectl api-resources -  It provides a comprehensive list of all the resource types available in the cluster along with their names, shortnames, API groups, namespaced status, and kind. It's a helpful command for understanding the resources available for use in Kubernetes but does not directly list the API groups alone.
+## Kubectl cheat sheet 
+- ```kubectl api-resources``` -  It provides a comprehensive list of all the resource types available in the cluster along with their names, shortnames, API groups, namespaced status, and kind. It's a helpful command for understanding the resources available for use in Kubernetes but does not directly list the API groups alone.
 
-kubectl api-version -  it is specifically designed to list all the API versions that are available on the server, which include the groups and versions in the format <group>/<version>. This command helps users understand the different API versions and groups that their Kubernetes cluster supports, enabling them to use the appropriate API version for their resources and operations.
+- ```kubectl api-version``` -  it is specifically designed to list all the API versions that are available on the server, which include the groups and versions in the format <group>/<version>. This command helps users understand the different API versions and groups that their Kubernetes cluster supports, enabling them to use the appropriate API version for their resources and operations.
 
 To list the available API groups and their versions you can run kubectl with the “api-versions” option:
 
@@ -103,6 +104,42 @@ apiextensions.k8s.io/v1beta1
 apiregistration.k8s.io/v1
 apiregistration.k8s.io/v1beta1
 ...
+
+## Kubernetes API 
+### Kubernetes API Basics - Resources, Kinds, and Objects
+- [Working with kubernetes API](https://iximiuz.com/en/series/working-with-kubernetes-api/)
+#### Resources and Verbs
+[Kubernetes API structure and terminology](https://iximiuz.com/en/posts/kubernetes-api-structure-and-terminology/)
+Since it's a RESTful land, we'll be operating in terms of resources (loosely, objects of a certain structure) and verbs (actions on these objects).
+
+When resources are discussed, it's important to differentiate a resource as a certain kind of objects from a resource as a particular instance of some kind. 
+Thus, **Kubernetes API endpoints are officially named resource types** to avoid ambiguity with the resource instances. 
+However, in the wild, **endpoints are often called just resources**, and the actual meaning of the word is derived from the context.
+
+For extensibility reasons, **resource types are organized into API groups**, and the groups are versioned independently from each other:
+
+```shell
+$ kubectl api-resources
+NAME                     SHORTNAMES   APIVERSION   NAMESPACED   KIND
+bindings                              v1           true         Binding
+componentstatuses        cs           v1           false        ComponentStatus
+configmaps               cm           v1           true         ConfigMap
+endpoints                ep           v1           true         Endpoints
+events                   ev           v1           true         Event
+limitranges              limits       v1           true         LimitRange
+namespaces               ns           v1           false        Namespace
+nodes                    no           v1           false        Node
+persistentvolumeclaims   pvc          v1           true         PersistentVolumeClaim
+persistentvolumes        pv           v1           false        PersistentVolume
+pods                     po           v1           true         Pod
+...
+```
+#### Kinds aka Object Schemas
+The word kind pops up here and there periodically. For instance, in the kubectl api-resources output, you could see that persistentvolumes resource has a corresponding PersistentVolume kind.
+
+Turns out, in Kubernetes, a kind is the name of an object schema. Like the one you'd typically describe using a JSON schema vocabulary. In other words, a kind refers to a particular data structure, i.e. a certain composition of attributes and properties.
+
+
 
 
 ## Serwisy 
