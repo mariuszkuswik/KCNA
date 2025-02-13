@@ -87,15 +87,11 @@ Similar to blue/green deployments, red/black deployments involve two identical p
 
 # Kubernetes
 ## Kubernetes packaging
-## two ways to package, deploy, and manage a Kubernetes application?
-- Kubernetes operators and Helm charts are tools that stir up confusion in the industry -- they seem to fill the same role, but they do slightly different things.
-- [When to use Kubernetes operators vs. Helm charts](https://www.techtarget.com/searchitoperations/tip/When-to-use-Kubernetes-operators-vs-Helm-charts)
+- [When to use Kubernetes operators vs. Helm charts](https://www.techtarget.com/searchitoperations/tip/When-to-use-Kubernetes-operators-vs-Helm-charts) 
+  
+TL;DR; Helm is great for simple applications, packaging, and quick deployments using templated YAML manifests. Operators are better for complex applications with custom configurations and automation requirements, essentially encapsulating operational expertise into code. You can even use both together! 
 
 ### Helm Charts  
-- [HelmCharts](https://helm.sh/docs/topics/charts/)
-- [When to use Kubernetes operators vs. Helm charts](https://www.techtarget.com/searchitoperations/tip/When-to-use-Kubernetes-operators-vs-Helm-charts)
-- Helm is a packaging format that works well with simple applications like stateless microservices and REST-based APIs with states stored externally in the cloud.
-  
 Helm is a package manager designed specifically for Kubernetes and improves the management of the YAML manifests required to create Kubernetes projects. At the heart of Helm is the packaging format called charts. Each chart comprises one or more Kubernetes manifests -- and a given chart can have child charts and dependent charts, as well.
   
 Thus, Helm can tackle the complexities of dependency management for a Kubernetes project. Rather than an IT admin simply listing the files to install via kubectl, a single command can install an entire application, and Helm will pull the required dependencies and apply the manifests.
@@ -103,8 +99,7 @@ Thus, Helm can tackle the complexities of dependency management for a Kubernetes
 Helm also retains a release history of all deployed charts, so IT teams can go back to a previous release if something goes wrong.
 
 ### Kubernetes operators
-- [When to use Kubernetes operators vs. Helm charts](https://www.techtarget.com/searchitoperations/tip/When-to-use-Kubernetes-operators-vs-Helm-charts)
-- However, as time progresses and developer teams unlock the full potential of the platform, the application becomes complex and grows in tandem with its additional requirements -- like statefulness -- and requires more complex logic. This complexity creates challenges for authoring those Helm charts-templatized YAML manifests; at this point, it is time to adopt the powerful operator pattern supported in Kubernetes.
+However, as time progresses and developer teams unlock the full potential of the platform, the application becomes complex and grows in tandem with its additional requirements -- like statefulness -- and requires more complex logic. This complexity creates challenges for authoring those Helm charts-templatized YAML manifests; at this point, it is time to adopt the powerful operator pattern supported in Kubernetes.
    
 Operators are geared toward site reliability engineering teams to manage the complex runbooks that orchestrate the deployment of a complex application, along with automating mundane tasks for the Kubernetes platform.
   
