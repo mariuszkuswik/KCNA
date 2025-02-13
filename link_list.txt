@@ -33,7 +33,7 @@
 34. https://www.examtopics.com/discussions/linux-foundation/view/136911-exam-kcna-topic-1-question-34-discussion/
 35. https://www.examtopics.com/discussions/linux-foundation/view/132343-exam-kcna-topic-1-question-35-discussion/
 36. https://www.examtopics.com/discussions/linux-foundation/view/136912-exam-kcna-topic-1-question-36-discussion/
-37. https://www.examtopics.com/discussions/nutanix/view/114174-exam-nca-topic-1-question-37-discussion/
+37. https://www.examtopics.com/discussions/linux-foundation/view/129239-exam-kcna-topic-1-question-37-discussion/ 
 38. https://www.examtopics.com/discussions/linux-foundation/view/135366-exam-kcna-topic-1-question-38-discussion/
 39. https://www.examtopics.com/discussions/linux-foundation/view/136913-exam-kcna-topic-1-question-39-discussion/ 
 40. https://www.examtopics.com/discussions/linux-foundation/view/130945-exam-kcna-topic-1-question-40-discussion/
@@ -42,7 +42,7 @@
 43. https://www.examtopics.com/discussions/linux-foundation/view/132540-exam-kcna-topic-1-question-43-discussion/
 44. https://www.examtopics.com/discussions/linux-foundation/view/140799-exam-kcna-topic-1-question-44-discussion/
 45. https://www.examtopics.com/discussions/linux-foundation/view/147797-exam-kcna-topic-1-question-45-discussion/
-46. 
+46. https://www.examtopics.com/discussions/linux-foundation/view/132543-exam-kcna-topic-1-question-46-discussion/ 
 47. https://www.examtopics.com/discussions/linux-foundation/view/133402-exam-kcna-topic-1-question-47-discussion/
 48. https://www.examtopics.com/discussions/linux-foundation/view/147798-exam-kcna-topic-1-question-48-discussion/
 49. https://www.examtopics.com/discussions/linux-foundation/view/139360-exam-kcna-topic-1-question-49-discussion/
@@ -55,14 +55,14 @@
 58. https://www.examtopics.com/discussions/linux-foundation/view/148293-exam-kcna-topic-1-question-58-discussion/
 59. https://www.examtopics.com/discussions/linux-foundation/view/135371-exam-kcna-topic-1-question-59-discussion/
 60. https://www.examtopics.com/discussions/linux-foundation/view/135372-exam-kcna-topic-1-question-60-discussion/
-61. a
-62. a
+61. https://www.examtopics.com/discussions/linux-foundation/view/143005-exam-kcna-topic-1-question-61-discussion/
+62. https://www.examtopics.com/discussions/linux-foundation/view/154427-exam-kcna-topic-1-question-62-discussion/
 63. https://www.examtopics.com/discussions/linux-foundation/view/139400-exam-kcna-topic-1-question-63-discussion/
 64. https://www.examtopics.com/discussions/linux-foundation/view/152691-exam-kcna-topic-1-question-64-discussion/
 65. https://www.examtopics.com/discussions/linux-foundation/view/127939-exam-kcna-topic-1-question-65-discussion/
 66. https://www.examtopics.com/discussions/linux-foundation/view/135374-exam-kcna-topic-1-question-66-discussion/
 68. https://www.examtopics.com/discussions/linux-foundation/view/129528-exam-kcna-topic-1-question-68-discussion/
-69. a 
+69. https://www.examtopics.com/discussions/linux-foundation/view/154429-exam-kcna-topic-1-question-69-discussion/ 
 70. a
 71. https://www.examtopics.com/discussions/linux-foundation/view/139950-exam-kcna-topic-1-question-71-discussion/
 72. https://www.examtopics.com/discussions/linux-foundation/view/141758-exam-kcna-topic-1-question-72-discussion/
@@ -82,11 +82,11 @@
 86. https://www.examtopics.com/discussions/linux-foundation/view/135368-exam-kcna-topic-1-question-86-discussion/
 87. https://www.examtopics.com/discussions/linux-foundation/view/154441-exam-kcna-topic-1-question-87-discussion/
 88. a
-89.  https://www.examtopics.com/discussions/linux-foundation/view/152761-exam-kcna-topic-1-question-89-discussion/
-90.
+89. https://www.examtopics.com/discussions/linux-foundation/view/152761-exam-kcna-topic-1-question-89-discussion/
+90. a
 91. a
 92. https://www.examtopics.com/discussions/linux-foundation/view/154442-exam-kcna-topic-1-question-92-discussion/
-93. 
+93. a
 94. a
 95. a
 96. https://www.examtopics.com/discussions/linux-foundation/view/128036-exam-kcna-topic-1-question-96-discussion/
@@ -95,7 +95,7 @@
 99. https://www.examtopics.com/discussions/linux-foundation/view/150236-exam-kcna-topic-1-question-99-discussion/
 100. a
 101. 
-102.
+102. https://www.examtopics.com/discussions/linux-foundation/view/154444-exam-kcna-topic-1-question-102-discussion/
 103.
 104. https://www.examtopics.com/discussions/linux-foundation/view/154445-exam-kcna-topic-1-question-104-discussion/
 105. a
