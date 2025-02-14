@@ -98,16 +98,23 @@ Determines where to place pods on nodes. Places them in a scheduling a queue
 An application on worker nodes that provides routing and filtering rules for ingress (incoming) traffic to pods.
 
 ### Network Policy
-Acts as a virtual firewall as the namespace-level or pod-level
+Acts as a virtual firewall at the namespace-level or pod-level
 
 ### ConfigMap
 allows you to decouple environment-specific configuration from your container images, so that your applications are easily portable. Used to store non-confidential data in key-value pair
 
 ### StatefulSet
+Stateful Sets are used when you need traffic to be sent to specific pods.
 provides guarantees about the ordering and uniqueness of these Pods
+  
+Stateful Set will always have:
+- a unique and predictable name and address
+- ordinal index number assigned to each pod
+- a persistent volume attached, with a persistent link from pod to the storage
+    - If a pod is rescheduled the original Persistent Volume (PV) will be mounted to ensure data integrity and consistency.
+- Stateful Set pods will always start in the same order and terminate in reverse order
 
-Think of databases where you have to determine read and write order or limit the amount of containers
-StatefulSets are hard, when you can host your db externally from K8s cluster
+StatefulSets currently require a “headless” service to manage the identities
 
 ### ReplicaSets
 ReplicaSet is a way to maintain a desired amount of redundant pods (replicas) to provide a guarantee of availability.
