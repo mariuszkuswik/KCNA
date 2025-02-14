@@ -87,3 +87,55 @@ What vendor-agnostic CNCF project provides a set of tools, APIs, and SDKs to cre
 Poprawne: OpenTelemetry
 OpenTelemetry is a collection of tools, APIs, and SDKs. It is used to instrument, generate, collect, and export telemetry data (metrics, logs, and traces) to help you analyze your software’s performance and behavior.
 
+
+Which kubectl command can be used to list all available API groups?
+- kubectl api-resources
+- kubectl api-versions
+- kubectl api-groups
+- There is no such kubectl command
+	
+
+Poprawne:
+- kubectl api-versions
+
+it is specifically designed to list all the API versions that are available on the server, which include the groups and versions in the format <group>/<version>. This command helps users understand the different API versions and groups that their Kubernetes cluster supports, enabling them to use the appropriate API version for their resources and operations.
+
+To list the available API groups and their versions you can run kubectl with the “api-versions” option:
+
+```shell
+kubectl api-versions |more
+admissionregistration.k8s.io/v1beta1
+apiextensions.k8s.io/v1beta1
+apiregistration.k8s.io/v1
+apiregistration.k8s.io/v1beta1
+...
+```
+
+
+What are two ways to package, deploy, and manage a Kubernetes application?
+(Choose 2)
+- Terraform
+- Helm Charts
+- Kubernetes operators
+- Kubectl
+Poprawne:
+- Helm Charts
+- Kubernetes operators
+
+Kubernetes operators and Helm charts are tools that stir up confusion in the industry -- they seem to fill the same role, but they do slightly different things.
+
+https://searchitoperations.techtarget.com/tip/When-to-use-Kubernetes-operators-vs-Helm-charts
+
+
+
+
+Which CNCF project is a Distributed Tracing Platform?
+- DataDog
+- Jaeger
+- Zipkin
+- Prometheus
+Poprawne: 
+	
+Jaeger, inspired by Dapper and OpenZipkin, is a distributed tracing platform created by Uber Technologies and donated to Cloud Native Computing Foundation. It can be used for monitoring microservices-based distributed systems:
+
+https://github.com/jaegertracing/jaeger
