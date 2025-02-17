@@ -103,7 +103,6 @@ TargetPort -
 
 
 
-
 ### Ingress
 Translates HTTP/S rules to point to services
 
@@ -267,10 +266,33 @@ There are different ways to implement networking in Kubernetes, but also three i
 - No Network Address Translation (NAT).
   
 To implement networking, you can choose from a variety of network vendors like:
-- Project Calico
+- Project Calico - open-source network and network security solution for containers, VMs, native host-based workloads
+
+Calico Network Policies extends the base functionality of Network Policies:
+• policies can be applied to any object
+• the rules can contain the specific action
+• you can use ports, port ranges, protocols, HTTP/ICMP attributes, IPs or subnets, any selectors as a source/target of the rules
+• you can control traffic flows via DNAT settings and policies for traffic forwarding
+
+
+**Encryption In-Transit** - Data that is secure when moving between locations
+Algorithms: TLS, SSL  
+**Encryption At-Rest** - Data that is secure when residing on storage or within a database
+Algorithms: AES, RSA  
+**Transport Layer Security (TLS)** - An encryption protocol for data integrity between two or more communicating computer application.  
+**Secure Sockets Layers (SSL)** - An encryption protocol for data integrity between two or more communicating computer application  
+
+
 - Weave
 - Cilium
 
+
+**The Container Networking Interface (CNI)** - is a specification (open standard) for writing plugins to configure networking interfaces for linux containers  
+A Service Mesh manages service-to-service communication for microservice architectures.  
+A service mesh is an infrastructure layer that can provide the following:  
+- Reliability (Traffic Management, Retries, Load Balancing)
+- Observability (Metrics, Traces)
+- Security (TLS Certifications, Identity)
 
 ### Kubernetes API Basics - Resources, Kinds, and Objects
 - [Working with kubernetes API](https://iximiuz.com/en/series/working-with-kubernetes-api/)
@@ -305,14 +327,100 @@ The word kind pops up here and there periodically. For instance, in the kubectl 
 
 Turns out, in Kubernetes, a kind is the name of an object schema. Like the one you'd typically describe using a JSON schema vocabulary. In other words, a kind refers to a particular data structure, i.e. a certain composition of attributes and properties.
 
+## Security 
+- The 4C's of Cloud Native security are Cloud, Clusters, Containers, and Code
+- Depth in Defense - a series of defensive mechanisms are layered in order to protect valuable data and information.
+The Cloud Layer is also known as the base layer.
+
+There are two parts to Cluster Layer security
+
+1. Components of the cluster
+Securing configurable cluster components
+- Controlling access to the Kubernetes API
+  - Use Transport Layer Security (TLS) for all API traffic
+  - API Authentication
+  - API Authorization
+- Controlling access to the Kubelet
+- Controlling the capabilities of a workload or user at runtime
+  - Limiting resource usage on a cluster
+  - Controlling what privileges containers run with
+  - Preventing containers from loading unwanted kernel modules
+  - Restricting network access
+  - Restricting cloud metadata API access
+  - Controlling which nodes pods may access
+- Protecting cluster components from compromise
+  - Restrict access to etcd
+  - Enable audit logging
+  - Restrict access to alpha or beta features
+  - Rotate infrastructure credentials frequently
+  - Review third party integrations before enabling them
+  - Encrypt secrets at rest
+  - Receiving alerts for security updates and reporting vulnerabilities
+
+2. Components in the cluster
+Securing the applications running within the cluster
+- RBAC Authorization (Access to the Kubernetes API)
+- Authentication
+- Application secrets management (and encrypting them in etcd at rest)
+Ensuring that pods meet defined Pod Security Standards
+- Quality of Service (and Cluster resource management)
+- Network Policies
+- TLS for Kubernetes Ingress
+Container Layer
+- Container Vulnerability Scanning and OS Dependency Security
+- Image Signing and Enforcement
+- Disallow privileged users
+- Use container runtime with stronger isolation
+Code Layer
+Application code is one of the primary attack surfaces over which you have the most control
+- Access over TLS only
+- Limiting port ranges of communication
+- 3rd Party Dependency Security
+- Static Code Analysis
+- Dynamic probing attacks
+Authentication, Authorization and Accounting (AAA) framework for Identity management systems.
+Authentication — to identify
+- Static passwords
+- One-time password (OTP) — MFA/UFA
+- Digital certificates (x.509)
+Authorization — to get permission
+- Role Based Access Controls (RBAC)
+Accounting (auditing) —to log and audit trail
+- Audit Policies
+- Audit Backends (where the logs will be stored)
 
 
+
+A Secret is similar to a ConfigMap with the exception that they can be encrypted
+By default, Secrets are unencrypted in etcd store.
+
+How to keep Secrets safe:
+- Enable Encryption at Rest for Secrets
+- Enable or configure RBAC rules that restrict reading data in Secrets
+- Use mechanisms such as RBAC to limit which principals are allowed to create new Secrets or replace existing ones
+
+Kubernetes provides a certificates.k8s.io API, which lets you provision TLS certificates signed by a Certificate Authority (CA) that you control. These CA and
+certificates can be used by your workloads to establish trust.
+  
+What is a x.509 certificate?  
+A standard defined by the International Telecommunication Union (ITU) for public key certifications.
+X.509 certificates are used in many Internet protocol:
+- SSL/TLS and HTTPS
+- Signed and encrypted email
+- Code Signing and Document Signing
+A certificate contains
+- An identity — hostname, organization or individual
+- A public key — RSA, DSA, ECDA etc…
 
 ## Serwisy 
 ### CoreDNS 
 - [Coredns website](https://coredns.io/)
 - [Understanding CoreDNS YouTube](https://www.youtube.com/watch?v=qRiLmLACYSY)
 CoreDNS has been the default name Domain Name System (DNS) since K8s 1.3
+
+CoreDNS is the default DNS server for Kuberentes and ensures pods and services haves Fully Qualified Domain Name (FQDN). Without CoreDNS the cluster
+communication would cease to work.
+
 
 ### Kube-dns
 - [KubeDNS](https://kubernetes.io/docs/concepts/services-networking/dns-pod-service/)
@@ -340,12 +448,37 @@ https://kubernetes.io/docs/concepts/overview/components/#kube-controller-manager
 API server is a component of the Kubernetes control plane that exposes the Kubernetes API.
 https://kubernetes.io/docs/concepts/overview/components/#kube-apiserver
 
-### Kube Proxy
-kube-proxy is a network proxy that runs on each node in your cluster, implementing part of the Kubernetes Service concept.
-https://kubernetes.io/docs/concepts/overview/components/#kube-proxy
+### Proxy 
+proxy - A proxy a server application that acts as an intermediary between a client requesting a resource and the server providing that resource
+
+There are many kinds of proxies you will encounter in Kubernetes:
+- Kubectl proxy — proxies from a localhost address to the Kubernetes apiserver
+- Apiserver proxy — a bastion built into the apiserver, connects a user outside of the cluster to cluster IPs which otherwise might not be reachable
+
+- Kube proxy — kube-proxy is a network proxy that runs on each node in your cluster.
+https://kubernetes.io/docs/concepts/overview/components/#kube-proxy  
+It is designed to load **balance traffic to pods.**
+Kube-proxy can run in three modes:
+  1. iptables (default). — Suited for simple use cases
+  2. Ipvs — Suites for 1000+ services.
+  3. Userspace (legacy) — Not recommended for use
+
+- Proxy/Load balancer in front of API servers — acts as load balancer if there are several apiserver
+- Cloud Load Balancers — for external cluster traffic to reach pods
+- Forward Proxy: A bunch of servers egressing traffic have to pass through the proxy first
+- Reverse Proxy: Ingress traffic trying to reach a collection of servers
+
+
+
+## Probes - are used to detect the state of a container
+The kubelet uses **liveness probes** to know when to restart a container.
+The kubelet uses **readiness probes** to know when a container is ready to start accepting traffic.
+The kubelet uses **startup probes** to know when a container application has started.
+iptables is a user-space utility program that allows a system administrator to configure the IP packet filter rules of the Linux kernel firewall
+• iptables applies to IPv4
+• ip6tables to IPv6
 
 ## Kubectl - cheat sheet 
-
 - ```kubectl get pods``` - obtain/list pods in current namespace
 - ```kubectl get pods -A``` OR ```kubectl get pods --all-namespaces``` - obtain pods in all namespaces
 - ```kubectl api-resources``` - obtain API resources that are retrievable using the kubect commands
@@ -472,6 +605,17 @@ IAM w Kubernetesie obejmuje:
 3. **Gdzie** (np. w danym namespace).
 
 ### **RBAC - Role-Based Access Control**
+
+To enable RBAC, start the API server with the --authorization-mode flag
+```Kube-apiserver –authorization-mode=RBAC``` - enable RBAC
+With Kubernetes RBAC there are only Allow Rules, Everything is Deny by default.
+
+The RBAC API declares four kinds of Kubernetes object: Role and RoleBinding, ClusterRole and ClusterRoleBinding.
+
+A Role is a set of permissions for a particular namespace
+A ClusterRole is a set of permissions across all namespace
+Role Binding and Cluster Role Binding, link Permissions to to Subjects (an Identity).
+
 RBAC to mechanizm zarządzania dostępem oparty na rolach, który umożliwia przypisywanie uprawnień użytkownikom lub usługom w Kubernetesie.
 
 #### **Kluczowe komponenty RBAC**
@@ -593,6 +737,7 @@ The smallest deployable units in Kubernetes, often managed by higher-level contr
 - The smallest deployable units in Kubernetes
 - Can be created and managed directly, though it's usually better to use controllers
 
+
 ### TODO
 # A Kubernetes developer wants to prevent a job from living after a certain amount of time when it has finished execution. 
 - [TTL-after-finished Controller](https://kubernetes.io/docs/concepts/workloads/controllers/ttlafterfinished/)
@@ -629,3 +774,8 @@ In Kubernetes, two primary ways to attach metadata to objects are **Labels** and
      ```
 
 Both labels and annotations are defined under the `metadata` section of Kubernetes objects and serve different purposes in managing and organizing resources within a cluster.
+
+### Cluster Autoscaling 
+Cluster Auto Scaling (Cluster Autoscaler or Karpenter)
+Add or remove Nodes (compute servers) based on demand
+
