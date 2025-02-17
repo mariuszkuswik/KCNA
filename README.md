@@ -47,7 +47,7 @@ Loki is a cloud-native log aggregation system that uses label-based indexing for
 ### Argo
 - [Argo CD vs Flux](https://rajputvaibhav.medium.com/argo-cd-vs-flux-cd-right-gitops-tool-for-your-kubernetes-cluster-c71cff489d26)
 Argo comes with a powerful UI that helps visualize relations between different objects and monitor them better while with Flux you rely completely on CLI. You can add on the web UI to Flux but it still stays experimental.
-Ma WEB UI
+- Both a CLI and Web UI
 
 ### Jenkins X
 - [Jenkins X](https://jenkins-x.io/)
@@ -56,7 +56,22 @@ Jenkins X is opinionated and built to work better with technologies like Docker 
 ### Flux
 - [Argo CD vs Flux](https://rajputvaibhav.medium.com/argo-cd-vs-flux-cd-right-gitops-tool-for-your-kubernetes-cluster-c71cff489d26)
 Flux is a GitOps tool for Kubernetes that automates deployments by syncing cluster state with Git repositories. It continuously monitors Git for changes and applies them to the cluster, enabling automated, version-controlled infrastructure management.
-Nie ma WEB UI
+- Nie ma WEB UI
+- Supports Helm and Kustomization
+- Automation of Container Updates
+
+### Jenkins
+Jenkins is an open-source popular and mature CI/CD tool for any kind of workload.
+Jenkins can be used to deploy applications on to Kubernetes.
+Jenkins is written in Java and have many plugins for any use case.
+
+### CloudBees 
+CloudBees is the commercial distribution of Jenkins and Jenkins X for large and compliance first organizations
+CloudBees acquired InfraDNA, InfraDNA organization created Jenkins
+
+# CircleCI
+CircleCI is a propriety fully managed CI/CD service to make deployments easy and seamless
+CircleCI can support deploying applications to Kubernetes
 
 ## Deployment strategy 
 ### Blue/Green
@@ -68,8 +83,29 @@ In this method, the existing version of the application is taken down, and the n
 ### Canary
 Canary deployments involve releasing the new version of an application to a small subset of the user base initially, rather than rolling it out to all users at once. This strategy allows developers and operations teams to monitor the performance and stability of the new release and ensure it behaves as expected under real-world conditions. If the new version proves to be stable and effective, it can then be gradually rolled out to the rest of the user base.
 
-### Red/Black deployment
+### A/B, Red/Black deployment
 Similar to blue/green deployments, red/black deployments involve two identical production environments: one that is active (red) and one that is idle (black). Once the new version is ready, traffic is switched from the red environment to the black environment. This strategy is designed for fast rollbacks and zero downtime but, like blue/green deployments, does not target a small subset of users initially; it switches the entire user base to the new version at once.
+
+
+### Dark Launches 
+Dark launches – Similar to A/B Testing, except you use a feature flag to rollout new features, and rollback by turning off the feature in the software instead
+of reverting infrastructure changes
+
+
+### Rollout 
+Rollout is when you replace or update servers with new version of an application
+
+
+## Availability 
+Availability is the quality of being able to be used or obtained.
+If there is not enough capacity (memory, CPU, bandwidth) to meet the demand of traffic then users can experience degraded, delayed experience or no access
+to services at all.  
+Two important values:  
+maxSurge:  
+- The amount of pods that can be added
+maxUnavailable :  
+- The amount of pods that can be unavailable
+
 
 ## Serverless
 A serverless service could have all or most of the following characteristics:
@@ -119,6 +155,15 @@ Open Telemetry standardizes the way telemetry data (metrics, logs and traces) ar
 The **Open Telemetry collector** is an agent installed on the target machine, or as a dedicate server and is Vendor-agnostic way to receive, process and export
 telemetry data
 
+### Klog
+Klog
+- Klog is the Kubernetes logging library.
+- klog generates log messages for the Kubernetes system components.
+
+### Kustomize
+Kustomize provides more flexibility when writing Kubernetes configuration files by allowing you to overlay (override) to “patch” configurations.
+- Kustomize is built into KubeCTL
+Kustomization file defined what will be overwritten in the base components
 
 
 # Kubernetes
