@@ -10,7 +10,7 @@
 - Prometheus deals exclusively with time-series metrics.
 - Prometheus is a self-contained system with its own storage and query language (PromQL).
 
-### Opentelemetry 
+### OpenteTemetry 
 - [Prometheus vs OpenTelemetry](https://signoz.io/blog/opentelemetry-vs-prometheus/)
 - OpenTelemetry supports metrics, distributed traces, and logs.
 - jest bardziej kompleksowy od Prometheusa, potrafi to samo + wspiera metrics, traces, and logs.
@@ -39,6 +39,7 @@ Zipkin is a distributed tracing system. It helps gather timing data needed to tr
 - Grafana is a visualization tool.
 
 ### Loki
+Loki is a cloud-native log aggregation system that uses label-based indexing for efficient storage and querying. It's designed for scalability and cost-effectiveness, integrating seamlessly with Grafana and other observability tools. Loki is particularly well-suited for containerized environments and high-volume logging scenarios.
 
 ## CI/CD
 ### Which CNCF project for continuous integration and continuous delivery (CI/CD) comes with both a CLI and Web UI?
@@ -53,7 +54,7 @@ Jenkins X is opinionated and built to work better with technologies like Docker 
 
 ### Flux
 - [Argo CD vs Flux](https://rajputvaibhav.medium.com/argo-cd-vs-flux-cd-right-gitops-tool-for-your-kubernetes-cluster-c71cff489d26)
-Flux is a more direct approach to GitOps with lesser human interference. 
+Flux is a GitOps tool for Kubernetes that automates deployments by syncing cluster state with Git repositories. It continuously monitors Git for changes and applies them to the cluster, enabling automated, version-controlled infrastructure management.
 Nie ma WEB UI
 
 ## Deployment strategy 
@@ -408,6 +409,8 @@ Storage class contains:
 
 
 ## Service Mesh
+- [Tech with Nana - Service Mesh and Istio](https://www.youtube.com/watch?v=16fgzklcF7Y)
+
 Service Mesh is a solution for managing communication between individual microservices in a microservice application. It addresses several challenges that arise when moving from a monolithic to a microservices architecture:
 
 1. **Service Communication**: Microservices need to know how to talk to each other, requiring endpoint configuration for each service[1].
