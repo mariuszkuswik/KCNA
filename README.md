@@ -71,6 +71,56 @@ Canary deployments involve releasing the new version of an application to a smal
 ### Red/Black deployment
 Similar to blue/green deployments, red/black deployments involve two identical production environments: one that is active (red) and one that is idle (black). Once the new version is ready, traffic is switched from the red environment to the black environment. This strategy is designed for fast rollbacks and zero downtime but, like blue/green deployments, does not target a small subset of users initially; it switches the entire user base to the new version at once.
 
+## Serverless
+A serverless service could have all or most of the following characteristics:
+- Highly elastic and scalable
+- highly available
+- Highly durable
+- Secure by default
+
+
+### Knative
+Kubernetes-based platform to deploy and manage modern serverless workloads.  
+Knative is a project to create a standard set of building blocks for Kubernetes to enable serverless development patterns.  
+
+Knative generally is composed of two parts:
+- Knative Serving
+  - Take containerized code and deploy it with relative ease.
+  - Scale to zero costs
+- Knative Eventing
+  - Trigger serverless functions based on Kubernetes API events
+  - Loop in other event sources to trigger serverless functions
+
+Knative defines its own set of Kubernetes Objects as Kubernetes **Custom Resource Definitions (CRDs).**  
+Knative has its own CLI called kn, used alongside Kubectl.
+
+### Function as a Service (FaaS) 
+Allows developers to focus on just writing pieces of code (functions)  
+Has event-driven integration trigger functions based on event data or to emit event data
+Generally multiple functions are orchestrated together to create a serverless app  
+Functions generally only run when needed
+
+### OpenFaas 
+OpenFaas runs serverless functions anywhere Docker runs. Deploys to Kubernetes or OpenShift
+Makes it easy for developers to deploy event-driven functions and microservices to Kubernetes without repetitive, boiler-plate coding
+
+### Faasd 
+Faasd is a light-weight version of OpenFaaS that doesn’t need Kubernetes to run.  
+It can run on a single underpowered machine. It uses Containerd
+
+### Traces
+A history of request that is travels through multiple
+Apps/services so we can pinpoint performance or failure.
+
+### Open Telemetry (OTEL) 
+is a collection of open-source tools, APIs and SDKs to instrument, generate, collect, and export telemetry data.  
+Open Telemetry standardizes the way telemetry data (metrics, logs and traces) are generated and collected
+
+The **Open Telemetry collector** is an agent installed on the target machine, or as a dedicate server and is Vendor-agnostic way to receive, process and export
+telemetry data
+
+
+
 # Kubernetes
 ## Kubernetes Components Overview
 ### Service
@@ -474,41 +524,40 @@ Kube-proxy can run in three modes:
     - ip6tables to IPv6
 
 ## Kubectl - cheat sheet 
-- ```kubectl get pods``` - obtain/list pods in current namespace
-- ```kubectl get pods -A``` OR ```kubectl get pods --all-namespaces``` - obtain pods in all namespaces
-- ```kubectl api-resources``` - obtain API resources that are retrievable using the kubect commands
-- ```kubectl run nginx --image=nginx``` - run a pod named nginx using the nginx image
-- ```kubectl create deploy kcna --image=nginx``` - create a deployment named "kcna" with the nginx image
-- ```kubectl create deploy kcna --image=nginx --replicas=5``` -  create a deployment named "kcna" with the nginx image that deploys 5 pods (replicas)
-- ```kubectl api-resources``` -  It provides a comprehensive list of all the resource types available in the cluster along with their names, shortnames, API groups, namespaced status, and kind. It's a helpful command for understanding the resources available for use in Kubernetes but does not directly list the API groups alone.
-- ```kubectl api-version``` -  it is specifically designed to list all the API versions that are available on the server, which include the groups and versions in the format <group>/<version>. This command helps users understand the different API versions and groups that their Kubernetes cluster supports, enabling them to use the appropriate API version for their resources and operations.
+- get
+  - ```kubectl get pods``` - obtain/list pods in current namespace
+  - ```kubectl get pods -A``` OR ```kubectl get pods --all-namespaces``` - obtain pods in all namespaces
+- run
+  - ```kubectl run nginx --image=nginx``` - run a pod named nginx using the nginx image
+- create
+  - ```kubectl create deploy kcna --image=nginx``` - create a deployment named "kcna" with the nginx image
+  - ```kubectl create deploy kcna --image=nginx --replicas=5``` -  create a deployment named "kcna" with the nginx image that deploys 5 pods (replicas)
+- ```kubectl api-resources``` -  It provides a comprehensive list of all the resource types available in the cluster along with their names, shortnames, API groups, namespaced status, and kind.  
+**It's a helpful command for understanding the resources available for use in Kubernetes but does not directly list the API groups alone.**
+- ```kubectl api-version``` -  **it is specifically designed to list all the API versions that are available on the server, which include the groups and versions in the format \<group>/\<version>.**  
+This command helps users understand the different API versions and groups that their Kubernetes cluster supports, enabling them to use the appropriate API version for their resources and operations.
+- scale 
+  - ```kubectl scale --replicas=3 deploy/my-ap```
+    - update the amount of replicas in the state of deployment object
+    - perform a deploy
+- autoscale 
+  - ```Kubectl autoscale rc foo --min=1 --max=5 --cpu-percent=80``` - create a HorizontalPodAutoscaler
 
-To list the available API groups and their versions you can run kubectl with the “api-versions” option:
-
-kubectl api-versions |more
-admissionregistration.k8s.io/v1beta1
-apiextensions.k8s.io/v1beta1
-apiregistration.k8s.io/v1
-apiregistration.k8s.io/v1beta1
-...
 
 
 
 
 
 ## Storage
-
 ### Rook 
-Rook provides guarantees about the ordering and uniqueness of these Pods
-It automates the tasks of a storage administrator: deployment, bootstrapping, configuration, provisioning, scaling, upgrading, migration, disaster recovery,
-monitoring, and resource management.
+Rook provides guarantees about the ordering and uniqueness of these Pods  
+It automates the tasks of a storage administrator: deployment, bootstrapping, configuration, provisioning, scaling, upgrading, migration, disaster recovery, monitoring, and resource management.
 
 ### MinIO 
-MinIO offers high-performance, S3 compatible object storage.
-Native to Kubernetes, MinIO is the only object storage suite available on every public cloud, every Kubernetes distribution, the private cloud and the edge.
-MinIO is software-defined and is 100% open source under GNU AGPL v3.
-Kubernetes supports many types of volumes. A Pod can use any number of volume types simultaneously
-
+MinIO offers high-performance, S3 compatible object storage.  
+Native to Kubernetes, MinIO is the only object storage suite available on every public cloud, every Kubernetes distribution, the private cloud and the edge.  
+MinIO is software-defined and is 100% open source under GNU AGPL v3.  
+Kubernetes supports many types of volumes. A Pod can use any number of volume types simultaneously.  
 
 ## Ephemeral Volumes
 A volume that’s only exists as long as the pod exists.
@@ -519,9 +568,9 @@ maps several existing volume sources into the same directory
 
 ## Storage Class can be used by many Persistent Volumes.
 Storage class contains:
-• Provisioner – who is storage? Eg. Amazon EBS
-• Parameters – what type of storage of Amazon EBS to use
-• reclaimPolicy — If the pod is gone does the volume remain?
+- Provisioner – who is storage? Eg. Amazon EBS
+- Parameters – what type of storage of Amazon EBS to use
+- reclaimPolicy — If the pod is gone does the volume remain?
 
 ## Persistent Volume Claim (PVC)
 ### TODO - opisać PVC
@@ -739,6 +788,40 @@ The smallest deployable units in Kubernetes, often managed by higher-level contr
 - TTL property within Deployment file
 
 
+# CNCF - Cloud native computing foundation
+
+The CNCF is composed of three main bodies:
+- Governing Board (GB) - Marketing Committee
+  - responsible for marketing
+  - other business oversight
+  - budget decisions
+- Technical Oversight Committee (TOC) - Special Interest Groups (SIGs) - **provides technical leadership to the cloud native community**
+  - defining and maintaining the technical vision for the Cloud Native Computing Foundation,
+  - approving new projects and creating a conceptual architecture for the projects,
+  - aligning projects and removing or archiving projects,
+  - accepting feedback from end user committee and mapping to projects,
+  - aligning interfaces to components under management (code reference implementations before standardizing), and
+  - defining common practices to be implemented across CNCF projects.
+- End User Community (EUC) - End User SIGs, User Groups
+  - Providing feedback from companies and startups to improve cloud-native ecosystem
+
+---
+
+Special Interest Groups (SIGs) are specialized committees that work under (report to) the TOC.  
+SIGs include around:
+- Traffic
+- Observability
+- Governance
+- App Delivery
+- Core and Applied Architectures
+- Security  
+  
+CNCF End Users are:
+- Individual or organizations that use cloud-native technologies
+- But they do not sell cloud-native services
+
+
+
 # Losowe
 In Kubernetes, two primary ways to attach metadata to objects are **Labels** and **Annotations**:
 
@@ -772,3 +855,5 @@ Both labels and annotations are defined under the `metadata` section of Kubernet
 Cluster Auto Scaling (Cluster Autoscaler or Karpenter)
 Add or remove Nodes (compute servers) based on demand
 
+### Kubernetes Event-driven Autoscaling (KEDA) 
+Kubernetes Event-driven Autoscaling (KEDA) allows you scale based on event data.
