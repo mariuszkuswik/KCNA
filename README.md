@@ -32,11 +32,11 @@ Zipkin is a distributed tracing system. It helps gather timing data needed to tr
 
 ### Datadog 
 - [Datadog - stronka](https://www.datadoghq.com/)
-- Paid monitoring system!
+Paid monitoring system!
 
 ### Grafana
 - [Grafana](https://grafana.com/grafana/)
-- Grafana is a visualization tool.
+Grafana is a visualization tool.
 
 ### Loki
 Loki is a cloud-native log aggregation system that uses label-based indexing for efficient storage and querying. It's designed for scalability and cost-effectiveness, integrating seamlessly with Grafana and other observability tools. Loki is particularly well-suited for containerized environments and high-volume logging scenarios.
@@ -73,12 +73,11 @@ Similar to blue/green deployments, red/black deployments involve two identical p
 # Kubernetes
 ## Kubernetes Components Overview
 ### Service
-A static IP address and DNS name for a set of pods (persists an address even if a pod dies) and a load balancer
+A static IP address and DNS name for a set of pods (persists an address even if a pod dies) and a load balancer.  
 A “service” can also mean a container that continuously runs.
 
 Kubernetes Services has following **service types**:
-- ClusterIP - is the default service type for a K8 service.  
-It is used for internal traffic. External traffic will not reach the service.  
+- ClusterIP - is the default service type for a K8 service. It is used for internal traffic. External traffic will not reach the service.  
 Traffic will be randomly distributed to any targeted pods.    
 **When to use ClusterIP**:  
   - Debugging
@@ -90,15 +89,12 @@ Traffic will be randomly distributed to any targeted pods.
 - LoadBalancer  - similar to nodeport except leverages Cloud Service Provider’s (CSPs) load balancer
 - ExternalName  - a special service that does not have selectors and uses DNS names instead
 
----
 K8s Service allows you set a Traffic policies to determine how ingress traffic is routed.
 There are 2 types of Traffic policies:
-1. External Traffic Policy
-how traffic from external sources is routed and has two valid values:
+1. External Traffic Policy - how traffic from external sources is routed and has two valid values:
 - Cluster – route external traffic to all ready endpoints
 - Local - only route to ready node-local endpoints
-2. Internal Traffic Policy
-how traffic from internal sources is routed (has the same two values as External)
+2. Internal Traffic Policy - how traffic from internal sources is routed (has the same two values as External)
 ---
 
 NodePort - allows you to expose a port for Virtual Machines running pods that the Service is managing
@@ -213,11 +209,9 @@ Contains different non-terminating control loops that manage the state of the cl
 **Namespaces** - Kubernetes also has a concept of *namespaces*, which are not to be confused with kernel namespaces that are used to isolate containers. A Kubernetes namespace can be used to divide a cluster into multiple virtual clusters, which can be used for multi-tenancy when multiple teams share a cluster. **Please note that Kubernetes namespaces are not suitable for strong isolation and should more be viewed like a directory on a computer where you can organize objects and manage which user has access to which folder.**
 
 ## Kubernetes API 
-The core of the Kubernetes control plane is the API server.
-Without it, communication with the cluster is not possible, every user and every component of the cluster itself needs the api-server.
-The Kubernetes API lets you query and manipulates the state of API objects in Kubernetes (for example: Pods, Namespaces, ConfigMaps, and Events).
-The API server is a component of the Kubernetes control plane that exposes the Kubernetes API. The API server is the front end for the Kubernetes control plane.
-The main implementation of a Kubernetes API server is kube-apiserver. 
+The core of the Kubernetes control plane is the API server. Without it, communication with the cluster is not possible, every user and every component of the cluster itself needs the api-server. The Kubernetes API lets you query and manipulates the state of API objects in Kubernetes (for example: Pods, Namespaces, ConfigMaps, and Events).  
+The API server is a component of the Kubernetes control plane that exposes the Kubernetes API. The API server is the front end for the Kubernetes control plane.  
+The main implementation of a Kubernetes API server is **kube-apiserver**.   
 kube-apiserver is designed to scale horizontally—that is, it scales by deploying more instances. 
 You can run several instances of kube-apiserver and balance traffic between those instances.
 Everything has to go through the API Server.  
@@ -226,7 +220,6 @@ You can interact with the API Server in three ways:
 - UI*
 - API
 - CLI KubeCTL
-
 
 ![Access Control Overview](./pictures/AccessControlOverview.png)
 
