@@ -3,6 +3,7 @@
 - [What is GitOps by RedHat](https://www.redhat.com/en/topics/devops/what-is-gitops)
 - [GitOps vs DevOps by RedHat](https://www.redhat.com/en/topics/devops/what-is-gitops#gitops-vs-devops)
 - [KCNA Github](https://github.com/walidshaari/Kubernetes-and-Cloud-Native-Associate#kubernetes-fundamentals---46)
+- [RH - A sysadmin's guide to basic Kubernetes components](https://www.redhat.com/en/blog/kubernetes-components)
 
 ## Monitoring
 ### Prometheus 
@@ -194,7 +195,7 @@ Similar to a microservice architecture you would choose for your own application
 ### Control plane nodes typically host the following services...  
 - **API Server - kube-apiserver** - This is the centerpiece of Kubernetes. All other components interact with the api-server and this is where users would access the cluster.
 - **etcd** - A Key/Value database which holds the state of the cluster. [etcd](https://etcd.io/) is a standalone project and not an official part of Kubernetes.
-- **Seceduler - kube-scheduler** - determines where to start a pod on worker node, the kube-scheduler chooses a worker node that could fit, based on different properties like CPU and memory.
+- **Secheduler - kube-scheduler** - determines where to start a pod on worker node, the kube-scheduler chooses a worker node that could fit, based on different properties like CPU and memory.
 - **Controller Manager - kube-controller-manager** - detect state changes (if pod crashes, restart it).   
 Contains different non-terminating control loops that manage the state of the cluster. For example, one of these control loops can make sure that a desired number of your application is available all the time.
 - **Cloud controller manager - cloud-controller-manager (optional)** - Integrates with the cloud provider, can be used to interact with the API of cloud providers, to create external resources like load balancers, storage or security groups.
@@ -266,7 +267,7 @@ There are different ways to implement networking in Kubernetes, but also three i
 - No Network Address Translation (NAT).
   
 To implement networking, you can choose from a variety of network vendors like:
-- Project Calico - open-source network and network security solution for containers, VMs, native host-based workloads
+### Project Calico - open-source network and network security solution for containers, VMs, native host-based workloads
 
 Calico Network Policies extends the base functionality of Network Policies:
 • policies can be applied to any object
@@ -283,10 +284,10 @@ Algorithms: AES, RSA
 **Secure Sockets Layers (SSL)** - An encryption protocol for data integrity between two or more communicating computer application  
 
 
-- Weave
-- Cilium
+### Weave
+### Cilium
 
-
+---
 **The Container Networking Interface (CNI)** - is a specification (open standard) for writing plugins to configure networking interfaces for linux containers  
 A Service Mesh manages service-to-service communication for microservice architectures.  
 A service mesh is an infrastructure layer that can provide the following:  
@@ -392,14 +393,15 @@ Accounting (auditing) —to log and audit trail
 
 
 A Secret is similar to a ConfigMap with the exception that they can be encrypted
-By default, Secrets are unencrypted in etcd store.
+By default,   
+**Secrets are unencrypted in etcd store.**
 
 How to keep Secrets safe:
 - Enable Encryption at Rest for Secrets
 - Enable or configure RBAC rules that restrict reading data in Secrets
 - Use mechanisms such as RBAC to limit which principals are allowed to create new Secrets or replace existing ones
 
-Kubernetes provides a certificates.k8s.io API, which lets you provision TLS certificates signed by a Certificate Authority (CA) that you control. These CA and
+Kubernetes provides a ```certificates.k8s.io``` API, which lets you provision TLS certificates signed by a Certificate Authority (CA) that you control. These CA and
 certificates can be used by your workloads to establish trust.
   
 What is a x.509 certificate?  
@@ -414,69 +416,62 @@ A certificate contains
 
 ## Serwisy 
 ### CoreDNS 
+CoreDNS is the default DNS server for Kuberentes and ensures pods and services haves Fully Qualified Domain Name (FQDN). Without CoreDNS the cluster communication would cease to work.
+
 - [Coredns website](https://coredns.io/)
 - [Understanding CoreDNS YouTube](https://www.youtube.com/watch?v=qRiLmLACYSY)
-CoreDNS has been the default name Domain Name System (DNS) since K8s 1.3
-
-CoreDNS is the default DNS server for Kuberentes and ensures pods and services haves Fully Qualified Domain Name (FQDN). Without CoreDNS the cluster
-communication would cease to work.
-
 
 ### Kube-dns
-- [KubeDNS](https://kubernetes.io/docs/concepts/services-networking/dns-pod-service/)
+[KubeDNS](https://kubernetes.io/docs/concepts/services-networking/dns-pod-service/)
 
 ### Kubelet
 An agent that runs on each node in the cluster. It makes sure that containers are running in a Pod.
-
-- [Kubelet](https://kubernetes.io/docs/concepts/overview/components/#kubelet)
-## What are two Kubernetes components that are essential for worker nodes?
+[Kubelet](https://kubernetes.io/docs/concepts/overview/components/#kubelet)
 
 ### Scheduler 
-- [Scheduler](https://kubernetes.io/docs/concepts/scheduling-eviction/kube-scheduler/)
+[Scheduler](https://kubernetes.io/docs/concepts/scheduling-eviction/kube-scheduler/)
 A scheduler watches for newly created Pods that have no Node assigned. For every Pod that the scheduler discovers, the scheduler becomes responsible for finding the best Node for that Pod to run on. The scheduler reaches this placement decision taking into account the scheduling principles described below.
 
 ### Controller Manager
 Control plane component that runs controller processes.
-https://kubernetes.io/docs/concepts/overview/components/#kube-controller-manager
-
+[Kube docs - controller manager](https://kubernetes.io/docs/concepts/overview/components/#kube-controller-manager)
 
 ### Cloud Controller Manager
 A Kubernetes control plane component that embeds cloud-specific control logic. The cloud controller manager lets you link your cluster into your cloud provider's API, and separates out the components that interact with that cloud platform from components that only interact with your cluster.
-https://kubernetes.io/docs/concepts/overview/components/#kube-controller-manager
+[Kube docs - cloud controller manager](https://kubernetes.io/docs/concepts/overview/components/#kube-controller-manager)
 
 ### The API server
 API server is a component of the Kubernetes control plane that exposes the Kubernetes API.
 https://kubernetes.io/docs/concepts/overview/components/#kube-apiserver
 
 ### Proxy 
-proxy - A proxy a server application that acts as an intermediary between a client requesting a resource and the server providing that resource
+A proxy is a server application that acts as an intermediary between a client requesting a resource and the server providing that resource
 
 There are many kinds of proxies you will encounter in Kubernetes:
 - Kubectl proxy — proxies from a localhost address to the Kubernetes apiserver
 - Apiserver proxy — a bastion built into the apiserver, connects a user outside of the cluster to cluster IPs which otherwise might not be reachable
 
-- Kube proxy — kube-proxy is a network proxy that runs on each node in your cluster.
-https://kubernetes.io/docs/concepts/overview/components/#kube-proxy  
-It is designed to load **balance traffic to pods.**
-Kube-proxy can run in three modes:
+- Kube proxy (optional) — kube-proxy is a network proxy that runs on each node in your cluster.
+[Kube docs - kube proxy](https://kubernetes.io/docs/concepts/overview/components/#kube-proxy)  
+It is designed to load **balance traffic to pods.**  
+Kube-proxy can run in three modes:  
   1. iptables (default). — Suited for simple use cases
   2. Ipvs — Suites for 1000+ services.
   3. Userspace (legacy) — Not recommended for use
 
 - Proxy/Load balancer in front of API servers — acts as load balancer if there are several apiserver
 - Cloud Load Balancers — for external cluster traffic to reach pods
-- Forward Proxy: A bunch of servers egressing traffic have to pass through the proxy first
-- Reverse Proxy: Ingress traffic trying to reach a collection of servers
-
-
+- Forward Proxy - A bunch of servers egressing traffic have to pass through the proxy first
+- Reverse Proxy - Ingress traffic trying to reach a collection of servers
 
 ## Probes - are used to detect the state of a container
-The kubelet uses **liveness probes** to know when to restart a container.
-The kubelet uses **readiness probes** to know when a container is ready to start accepting traffic.
-The kubelet uses **startup probes** to know when a container application has started.
-iptables is a user-space utility program that allows a system administrator to configure the IP packet filter rules of the Linux kernel firewall
-• iptables applies to IPv4
-• ip6tables to IPv6
+- The kubelet uses **liveness probes** to know when to restart a container.  
+- The kubelet uses **readiness probes** to know when a container is ready to start accepting traffic.  
+- The kubelet uses **startup probes** to know when a container application has started.  
+  
+  iptables is a user-space utility program that allows a system administrator to configure the IP packet filter rules of the Linux kernel firewall  
+    - iptables applies to IPv4
+    - ip6tables to IPv6
 
 ## Kubectl - cheat sheet 
 - ```kubectl get pods``` - obtain/list pods in current namespace
@@ -485,9 +480,7 @@ iptables is a user-space utility program that allows a system administrator to c
 - ```kubectl run nginx --image=nginx``` - run a pod named nginx using the nginx image
 - ```kubectl create deploy kcna --image=nginx``` - create a deployment named "kcna" with the nginx image
 - ```kubectl create deploy kcna --image=nginx --replicas=5``` -  create a deployment named "kcna" with the nginx image that deploys 5 pods (replicas)
-
 - ```kubectl api-resources``` -  It provides a comprehensive list of all the resource types available in the cluster along with their names, shortnames, API groups, namespaced status, and kind. It's a helpful command for understanding the resources available for use in Kubernetes but does not directly list the API groups alone.
-
 - ```kubectl api-version``` -  it is specifically designed to list all the API versions that are available on the server, which include the groups and versions in the format <group>/<version>. This command helps users understand the different API versions and groups that their Kubernetes cluster supports, enabling them to use the appropriate API version for their resources and operations.
 
 To list the available API groups and their versions you can run kubectl with the “api-versions” option:
