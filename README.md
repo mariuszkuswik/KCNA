@@ -73,8 +73,39 @@ Similar to blue/green deployments, red/black deployments involve two identical p
 ## Kubernetes Components Overview
 ### Service
 A static IP address and DNS name for a set of pods (persists an address even if a pod dies) and a load balancer
-
 A “service” can also mean a container that continuously runs.
+
+Kubernetes Services has following **service types**:
+- ClusterIP - is the default service type for a K8 service.  
+It is used for internal traffic. External traffic will not reach the service.  
+Traffic will be randomly distributed to any targeted pods.    
+**When to use ClusterIP**:  
+  - Debugging
+  - Testing
+  - Internal traffic
+  - Internal Dashboards  
+- Headless - send traffic to very specific pod, when you have stateful pods eg. Database
+- NodePort - allows you to expose a port for Virtual Machines running pods that the Service is managing. 
+- LoadBalancer  - similar to nodeport except leverages Cloud Service Provider’s (CSPs) load balancer
+- ExternalName  - a special service that does not have selectors and uses DNS names instead
+
+---
+K8s Service allows you set a Traffic policies to determine how ingress traffic is routed.
+There are 2 types of Traffic policies:
+1. External Traffic Policy
+how traffic from external sources is routed and has two valid values:
+- Cluster – route external traffic to all ready endpoints
+- Local - only route to ready node-local endpoints
+2. Internal Traffic Policy
+how traffic from internal sources is routed (has the same two values as External)
+---
+
+NodePort - allows you to expose a port for Virtual Machines running pods that the Service is managing
+Port - Port exposes the Kubernetes service on the specified port within the cluster. Other pods within the cluster can communicate with this server on the specified port.
+TargetPort - 
+
+
+
 
 ### Ingress
 Translates HTTP/S rules to point to services
@@ -196,13 +227,9 @@ You can interact with the API Server in three ways:
 - CLI KubeCTL
 
 
-
-
-
 ![Access Control Overview](./pictures/AccessControlOverview.png)
 
 **Access Control Overview**, retrieved from the [Kubernetes documentation](https://kubernetes.io/docs/concepts/security/controlling-access/)
-
 
 Before a request is processed by Kubernetes, it has to go through three stages:
 - **Authentication** - **The requester needs to present a means of identity to authenticate against the API.** Commonly done with a digital signed certificate (X.509) or with an external identity management system. Kubernetes users are always externally managed. Service Accounts can be used to authenticate technical users.
@@ -324,6 +351,14 @@ kube-proxy is a network proxy that runs on each node in your cluster, implementi
 https://kubernetes.io/docs/concepts/overview/components/#kube-proxy
 
 ## Kubectl - cheat sheet 
+
+- ```kubectl get pods``` - obtain/list pods in current namespace
+- ```kubectl get pods -A``` OR ```kubectl get pods --all-namespaces``` - obtain pods in all namespaces
+- ```kubectl api-resources``` - obtain API resources that are retrievable using the kubect commands
+- ```kubectl run nginx --image=nginx``` - run a pod named nginx using the nginx image
+- ```kubectl create deploy kcna --image=nginx``` - create a deployment named "kcna" with the nginx image
+- ```kubectl create deploy kcna --image=nginx --replicas=5``` -  create a deployment named "kcna" with the nginx image that deploys 5 pods (replicas)
+
 - ```kubectl api-resources``` -  It provides a comprehensive list of all the resource types available in the cluster along with their names, shortnames, API groups, namespaced status, and kind. It's a helpful command for understanding the resources available for use in Kubernetes but does not directly list the API groups alone.
 
 - ```kubectl api-version``` -  it is specifically designed to list all the API versions that are available on the server, which include the groups and versions in the format <group>/<version>. This command helps users understand the different API versions and groups that their Kubernetes cluster supports, enabling them to use the appropriate API version for their resources and operations.
@@ -336,6 +371,82 @@ apiextensions.k8s.io/v1beta1
 apiregistration.k8s.io/v1
 apiregistration.k8s.io/v1beta1
 ...
+
+
+
+
+
+## Storage
+
+### Rook 
+Rook provides guarantees about the ordering and uniqueness of these Pods
+It automates the tasks of a storage administrator: deployment, bootstrapping, configuration, provisioning, scaling, upgrading, migration, disaster recovery,
+monitoring, and resource management.
+
+### MinIO 
+MinIO offers high-performance, S3 compatible object storage.
+Native to Kubernetes, MinIO is the only object storage suite available on every public cloud, every Kubernetes distribution, the private cloud and the edge.
+MinIO is software-defined and is 100% open source under GNU AGPL v3.
+Kubernetes supports many types of volumes. A Pod can use any number of volume types simultaneously
+
+
+## Ephemeral Volumes
+A volume that’s only exists as long as the pod exists.
+Intended for temporary data storage.
+
+## Projected Volumes
+maps several existing volume sources into the same directory
+
+## Storage Class can be used by many Persistent Volumes.
+Storage class contains:
+• Provisioner – who is storage? Eg. Amazon EBS
+• Parameters – what type of storage of Amazon EBS to use
+• reclaimPolicy — If the pod is gone does the volume remain?
+
+## Persistent Volume Claim (PVC)
+### TODO - opisać PVC
+
+
+## Service Mesh
+Service Mesh is a solution for managing communication between individual microservices in a microservice application. It addresses several challenges that arise when moving from a monolithic to a microservices architecture:
+
+1. **Service Communication**: Microservices need to know how to talk to each other, requiring endpoint configuration for each service[1].
+2. **Security**: Within a Kubernetes cluster, communication between microservices is often insecure, using HTTP or other non-encrypted protocols[1].
+3. **Retry Logic**: Each microservice needs retry logic to ensure robustness in case of connection issues[1].
+4. **Metrics and Monitoring**: Developers need to add monitoring and tracing logic to each service[1].
+
+## Service Mesh Solution
+
+Service Mesh addresses these challenges by:
+
+1. **Sidecar Pattern**: Extracting non-business logic into a small sidecar application that acts as a proxy[1].
+2. **Control Plane**: Automatically injecting proxies into microservice pods[1].
+3. **Traffic Split**: Enabling easy configuration of traffic routing, such as canary deployments[1].
+
+## Istio Architecture
+
+Istio is an implementation of Service Mesh with the following components:
+
+1. **Data Plane**: Consists of Envoy proxies injected into each microservice pod[1].
+2. **Control Plane**: Managed by istiod, which configures and manages the Envoy proxies[1].
+3. **Istio Ingress Gateway**: Acts as an entry point into the Kubernetes cluster[1].
+
+## Istio Configuration
+
+Istio is configured using Kubernetes Custom Resource Definitions (CRDs), including:
+
+1. **Virtual Service**: Configures traffic routing to specific services[1].
+2. **Destination Rule**: Configures policies for traffic after routing[1].
+3. **Gateway**: Configures the Istio Ingress Gateway[1].
+
+## Key Istio Features
+
+1. **Dynamic Service Discovery**: Automatically detects and registers new microservices[1].
+2. **Security**: Acts as a Certificate Authority, enabling mutual TLS between services[1].
+3. **Metrics and Tracing**: Automatically gathers metrics and tracing data from proxies[1].
+4. **Traffic Management**: Enables advanced routing and traffic splitting capabilities[1].
+
+By implementing Service Mesh with Istio, developers can focus on business logic while the infrastructure handles complex networking, security, and monitoring tasks.
 
 
 ## Kubernetes packaging
