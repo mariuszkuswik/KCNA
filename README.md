@@ -206,7 +206,29 @@ Translates HTTP/S rules to point to services
 The API Server allows users to interact with K8s components using the KubeCTL or by sending HTTP requests.
 
 ### Kubelet
-Kubelet is an agent installed on all nodes. Kublelet allows users to interact with nodes via the API Server and KubeCTL
+Kubelet is an agent installed on all nodes  (including both control plane and worker nodes). 
+Kublelet allows users to interact with nodes via the API Server and KubeCTL
+
+#### Kubelet Responsibilities
+The Kubelet performs the following tasks:  
+- Continuously monitors for pod changes.
+- Configures the Container Runtime to:
+  - Pull container images.
+  - Create namespaces.
+  - Run containers.
+- Uses PodSpec files to determine which images to pull and which containers to run.
+
+#### Kubelet's Communication and Interfaces
+Communication with the API Server:
+- Sends back HTTP requests to the API server for container logs and execution requests.
+- Interacts with Other Interfaces:
+  - Container Runtime Interface (CRI) for container runtime operations, using gRPC.
+  - Container Storage Interface (CSI) for storage provisioning, also via gRPC.
+  - Container Network Interface (CNI) for network provisioning, typically through binaries.
+
+#### Key Points to Remember
+- Kubelet is essential for ensuring that containers run as specified.
+- It monitors and manages pod states, and uses standard interfaces for storage, runtime, and networking to maintain seamless communication and operation.
 
 ### Cloud Controller Manager
 Allows you to link a Cloud Service Provider (CSP) eg. AWS, Azure GCP to leverage cloud services.
@@ -572,11 +594,17 @@ Kube-proxy can run in three modes:
 - get
   - ```kubectl get pods``` - obtain/list pods in current namespace
   - ```kubectl get pods -A``` OR ```kubectl get pods --all-namespaces``` - obtain pods in all namespaces
+  - ```kubectl get pods --selector env=development``` OR ```kubectl get pods -l env=development``` - get pods with labels 
 - run
   - ```kubectl run nginx --image=nginx``` - run a pod named nginx using the nginx image
 - create
-  - ```kubectl create deploy kcna --image=nginx``` - create a deployment named "kcna" with the nginx image
-  - ```kubectl create deploy kcna --image=nginx --replicas=5``` -  create a deployment named "kcna" with the nginx image that deploys 5 pods (replicas)
+  - deployment 
+    - ```kubectl create deploy kcna --image=nginx``` - create a deployment named "kcna" with the nginx image
+    - ```kubectl create deploy kcna --image=nginx --replicas=5``` -  create a deployment named "kcna" with the nginx image that deploys 5 pods (replicas)
+  - job
+    - ```kubectl create job hello --image=busybox --echo "Hello World"``` 
+  - cronjob 
+    - ```kubectl create cronjob hello --image=busybox --schedule="*/5 * * * *" -- echo "Hello World"``` - cronjob uses cron-like expresion
 - ```kubectl api-resources``` -  It provides a comprehensive list of all the resource types available in the cluster along with their names, shortnames, API groups, namespaced status, and kind.  
 **It's a helpful command for understanding the resources available for use in Kubernetes but does not directly list the API groups alone.**
 - ```kubectl api-version``` -  **it is specifically designed to list all the API versions that are available on the server, which include the groups and versions in the format \<group>/\<version>.**  
@@ -865,6 +893,27 @@ CNCF End Users are:
 - Individual or organizations that use cloud-native technologies
 - But they do not sell cloud-native services
 
+# Distributions 
+
+## Minikube
+
+
+## K3s and K3d
+K3s is a lightweight tool designed to run production-level Kubernetes workloads for low-resourced and remotely located IoT and Edge devices and Bare metal.  
+K3s does not use kubelet, but it runs kubelet on the host machine and uses the host’s scheduling mechanism to run containers  
+
+k3s can have tighter security deployment than k8s because of their small attack surface area.
+
+### K3d is a platform-agnostic, lightweight wrapper that runs K3s in a docker container. 
+It helps run and scale single or multi-node K3S clusters quickly without further setup while maintaining a high availability mode.
+
+## Kind
+Primarily designed to test Kubernetes, Kind (Kubernetes in Docker) helps you run Kubernetes clusters locally and in CI pipelines using Docker containers as “nodes”.
+
+It is an open-source CNCF certified Kubernetes installer that supports highly available multi-node clusters and builds Kubernetes release builds from its source.
+
+
+## MicroK8s
 
 
 # Losowe
