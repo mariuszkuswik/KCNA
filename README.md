@@ -629,7 +629,9 @@ This command helps users understand the different API versions and groups that t
     - update the amount of replicas in the state of deployment object
     - perform a deploy
 - autoscale 
-  - ```Kubectl autoscale rc foo --min=1 --max=5 --cpu-percent=80``` - create a HorizontalPodAutoscaler
+  - ```kubectl autoscale rc foo --min=1 --max=5 --cpu-percent=80``` - create a HorizontalPodAutoscaler
+- expose
+  - ```kubectl expose deployment my-app --type=NodePort --name=my-service --port=80 --targetport=8080 --nodeport=3000``` - expose deployment outside of the cluster 
 
 ## Storage
 Container Storage Interface (CSI) standardizes how Container Orchestrator Systems (COS) access various storage providers   
@@ -1003,3 +1005,9 @@ Add or remove Nodes (compute servers) based on demand
 
 ### Kubernetes Event-driven Autoscaling (KEDA) 
 Kubernetes Event-driven Autoscaling (KEDA) allows you scale based on event data.
+
+
+## BusyBox
+BusyBox combines tiny versions of many common UNIX utilities into a single small executable  
+It’s The Swiss Army knife of Embedded Linux, as the single executable replaces basic functions of more than 300 common commands  
+BusyBox can be used to interactively debug Services to ensure they are working.  
