@@ -197,8 +197,6 @@ NodePort - allows you to expose a port for Virtual Machines running pods that th
 Port - Port exposes the Kubernetes service on the specified port within the cluster. Other pods within the cluster can communicate with this server on the specified port.
 TargetPort - 
 
-
-
 ### Ingress
 Translates HTTP/S rules to point to services
 
@@ -618,10 +616,11 @@ This command helps users understand the different API versions and groups that t
 
 
 
-
-
-
 ## Storage
+Container Storage Interface (CSI) standardizes how Container Orchestrator Systems (COS) access various storage providers 
+
+
+
 ### Rook 
 Rook provides guarantees about the ordering and uniqueness of these Pods  
 It automates the tasks of a storage administrator: deployment, bootstrapping, configuration, provisioning, scaling, upgrading, migration, disaster recovery, monitoring, and resource management.
@@ -894,26 +893,43 @@ CNCF End Users are:
 - But they do not sell cloud-native services
 
 # Distributions 
-
 ## Minikube
-
+Minikube sets up a local single-node Kubernetes cluster on macOS, Linux, and Windows for learning purposes.
+- Supports the latest Kubernetes release
+- Cross-platform
+- Deploy as a VM, a container, or on bare-metal
+- Multiple container runtimes
+- Docker API endpoint for blazing fast image pushes
+- Advanced features such as LoadBalancer, filesystem mounts, and FeatureGates
+- Addons for easily installed Kubernetes applications
+- Supports common CI environments
 
 ## K3s and K3d
+- K3s - runs in VMs
 K3s is a lightweight tool designed to run production-level Kubernetes workloads for low-resourced and remotely located IoT and Edge devices and Bare metal.  
 K3s does not use kubelet, but it runs kubelet on the host machine and uses the host’s scheduling mechanism to run containers  
-
+  
 k3s can have tighter security deployment than k8s because of their small attack surface area.
 
 ### K3d is a platform-agnostic, lightweight wrapper that runs K3s in a docker container. 
+- K3d - runs in container
 It helps run and scale single or multi-node K3S clusters quickly without further setup while maintaining a high availability mode.
 
 ## Kind
+- Runs in containers
 Primarily designed to test Kubernetes, Kind (Kubernetes in Docker) helps you run Kubernetes clusters locally and in CI pipelines using Docker containers as “nodes”.
-
 It is an open-source CNCF certified Kubernetes installer that supports highly available multi-node clusters and builds Kubernetes release builds from its source.
 
 
 ## MicroK8s
+Canonical is the company that publishers of Ubuntu
+MicroK8s is created by Canonical and is **installed using Snap**.
+  
+It is optimized for quick and easy installation of single and multi-node clusters on multiple operating systems, including macOS, Linux, and Windows (as long as you have snap).
+It is ideal for running Kubernetes in the cloud, local development environments, and Edge and IoT devices
+Microk8s is modular in design, you start with nothing and can enable addons to quickly use exactly what you need
+
+
 
 
 # Losowe
