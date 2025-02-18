@@ -69,7 +69,7 @@ Jenkins is written in Java and have many plugins for any use case.
 CloudBees is the commercial distribution of Jenkins and Jenkins X for large and compliance first organizations
 CloudBees acquired InfraDNA, InfraDNA organization created Jenkins
 
-# CircleCI
+### CircleCI
 CircleCI is a propriety fully managed CI/CD service to make deployments easy and seamless
 CircleCI can support deploying applications to Kubernetes
 
@@ -168,8 +168,8 @@ Kustomization file defined what will be overwritten in the base components
 
 # Kubernetes
 ## Kubernetes Components Overview
-### Service
-A static IP address and DNS name for a set of pods (persists an address even if a pod dies) and a load balancer.  
+### Services
+Service - A static IP address and DNS name for a set of pods (persists an address even if a pod dies) and a load balancer.  
 A “service” can also mean a container that continuously runs.
 
 Kubernetes Services has following **service types**:
@@ -181,21 +181,38 @@ Traffic will be randomly distributed to any targeted pods.
   - Internal traffic
   - Internal Dashboards  
 - Headless - send traffic to very specific pod, when you have stateful pods eg. Database
-- NodePort - allows you to expose a port for Virtual Machines running pods that the Service is managing. 
-- LoadBalancer  - similar to nodeport except leverages Cloud Service Provider’s (CSPs) load balancer
-- ExternalName  - a special service that does not have selectors and uses DNS names instead
-
+- NodePort - external service, allows you to use worker node IP address
+- LoadBalancer - similar to nodeport except leverages Cloud Service Provider’s (CSPs) load balancer
+- ExternalName - ExternalName Services is the same as ClusterIP Service with the exception of instead returning a StaticIP it returns a CNAME record. 
+  - What is a CNAME record? - Canonical Name (CName) record is a DNS record that maps one domain name (an alias) to another name (canonical name)
+  
 K8s Service allows you set a Traffic policies to determine how ingress traffic is routed.
 There are 2 types of Traffic policies:
-1. External Traffic Policy - how traffic from external sources is routed and has two valid values:
+1. External Traffic Policy - how traffic from external sources is routed:
 - Cluster – route external traffic to all ready endpoints
 - Local - only route to ready node-local endpoints
-2. Internal Traffic Policy - how traffic from internal sources is routed (has the same two values as External)
+2. Internal Traffic Policy - how traffic from internal sources is routed (has the same two values as External)  
+  
+If the traffic policy is Local and there are no node-local endpoints, then kube-proxy does not forward any traffic for the relevant Service
 ---
 
+### TODO - zapytać perplexity o co tu właściwie chodzi, czy to coś dla NodePort, czy co?
 NodePort - allows you to expose a port for Virtual Machines running pods that the Service is managing
 Port - Port exposes the Kubernetes service on the specified port within the cluster. Other pods within the cluster can communicate with this server on the specified port.
 TargetPort - 
+
+Port
+Port exposes the Kubernetes service on the specified port within the cluster.
+Other pods within the cluster can communicate with this server on the specified port.
+
+TargetPort
+Target Port is the port on which the service will send requests to, that your pod will be listening on.
+Your application in the container will need to be listening on this port also.
+
+NodePort
+NodePort exposes a service externally to the cluster by means of the target node's IP address and the NodePort.
+NodePort is the default setting if the port field is not specified.
+
 
 ### Ingress
 Translates HTTP/S rules to point to services
@@ -614,12 +631,9 @@ This command helps users understand the different API versions and groups that t
 - autoscale 
   - ```Kubectl autoscale rc foo --min=1 --max=5 --cpu-percent=80``` - create a HorizontalPodAutoscaler
 
-
-
 ## Storage
-Container Storage Interface (CSI) standardizes how Container Orchestrator Systems (COS) access various storage providers 
-
-
+Container Storage Interface (CSI) standardizes how Container Orchestrator Systems (COS) access various storage providers   
+Container Orchestrator Systems (f.e. Kubernetes) ->  CSI -> Storage Providers (f.e. Google Cloud Storage, AWS EBS)
 
 ### Rook 
 Rook provides guarantees about the ordering and uniqueness of these Pods  
@@ -631,22 +645,47 @@ Native to Kubernetes, MinIO is the only object storage suite available on every 
 MinIO is software-defined and is 100% open source under GNU AGPL v3.  
 Kubernetes supports many types of volumes. A Pod can use any number of volume types simultaneously.  
 
-## Ephemeral Volumes
+### Volumes
+#### Persistent Volumes
+Attaching an external storage to a pod.  
+The data will persist even if the pod is terminated. 
+
+#### Ephemeral Volumes
 A volume that’s only exists as long as the pod exists.
 Intended for temporary data storage.
 
-## Projected Volumes
-maps several existing volume sources into the same directory
+#### Projected Volumes
+Maps several existing volume sources into the same directory
 
-## Storage Class can be used by many Persistent Volumes.
-Storage class contains:
+#### Volume Snapshot
+Archiving a volume configuration and its data for tollbacks or backup
+
+### Storage classes
+A storage class is a way of defining a class of storage that is backed by a provisioner.  
+Storage Class can be used by many Persistent Volumes.  
+Storage class contains:  
 - Provisioner – who is storage? Eg. Amazon EBS
 - Parameters – what type of storage of Amazon EBS to use
 - reclaimPolicy — If the pod is gone does the volume remain?
 
-## Persistent Volume Claim (PVC)
-### TODO - opisać PVC
+### Persistent Volume Claim (PVC)
+A Persistent Volume Claim (PVC) is used to decouple Persistent Volumes from pods.  
+A PVC asked for a type of storage, and if a PV that meets the criteria is matched, the PV is Claimed and Bound.  
 
+PVCs are similar to a Pod requesting resources from a Node.  
+- Pods consume node resources
+    - PVCs consume PV resources
+- Pods can request specific levels of resources (CPU and Memory)
+    - PVCs can request specific size and access modes (e.g., they can be mounted ReadWriteOnce, ReadOnlyMany or ReadWriteMany, see AccessModes).
+
+### ConfigMaps
+A ConfigMap is an API object used to store non-confidential data in key-value pairs for pods  
+Pods can consume ConfigMaps as:  
+- environment variables
+- command-line arguments
+- configuration files in a volume
+  
+A ConfigMap allows you to decouple environment-specific configuration from your container images, so that your applications are easily portable.
 
 ## Service Mesh
 - [Tech with Nana - Service Mesh and Istio](https://www.youtube.com/watch?v=16fgzklcF7Y)
@@ -928,9 +967,6 @@ MicroK8s is created by Canonical and is **installed using Snap**.
 It is optimized for quick and easy installation of single and multi-node clusters on multiple operating systems, including macOS, Linux, and Windows (as long as you have snap).
 It is ideal for running Kubernetes in the cloud, local development environments, and Edge and IoT devices
 Microk8s is modular in design, you start with nothing and can enable addons to quickly use exactly what you need
-
-
-
 
 # Losowe
 In Kubernetes, two primary ways to attach metadata to objects are **Labels** and **Annotations**:
