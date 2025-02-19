@@ -213,12 +213,13 @@ NodePort
 NodePort exposes a service externally to the cluster by means of the target node's IP address and the NodePort.
 NodePort is the default setting if the port field is not specified.
 
-
 ### Ingress
 Translates HTTP/S rules to point to services
 
 ### API Server
-The API Server allows users to interact with K8s components using the KubeCTL or by sending HTTP requests.
+The API Server allows users to interact with K8s components using the KubeCTL or by sending HTTP requests.  
+API server is a component of the Kubernetes control plane that exposes the Kubernetes API.   
+[Kubernetes docs API Server](https://kubernetes.io/docs/concepts/overview/components/#kube-apiserver)
 
 ### Kubelet
 Kubelet is an agent installed on all nodes  (including both control plane and worker nodes). 
@@ -244,12 +245,6 @@ Communication with the API Server:
 #### Key Points to Remember
 - Kubelet is essential for ensuring that containers run as specified.
 - It monitors and manages pod states, and uses standard interfaces for storage, runtime, and networking to maintain seamless communication and operation.
-
-### Cloud Controller Manager
-Allows you to link a Cloud Service Provider (CSP) eg. AWS, Azure GCP to leverage cloud services.
-
-### Controller Manager
-A control loop that watches the state of the cluster and will change the current state back to the desired state.
 
 ### Scheduler
 Determines where to place pods on nodes. Places them in a scheduling a queue
@@ -325,12 +320,19 @@ From a high-level perspective, Kubernetes clusters consist of two different serv
 Similar to a microservice architecture you would choose for your own application, Kubernetes incorporates multiple smaller services that need to be installed on the nodes.
 
 ### Control plane nodes typically host the following services...  
-- **API Server - kube-apiserver** - This is the centerpiece of Kubernetes. All other components interact with the api-server and this is where users would access the cluster.
+- **API Server - kube-apiserver** - This is the centerpiece of Kubernetes. All other components interact with the api-server and this is where users would access the cluster.  
+[Kubernetes API Docs](https://kubernetes.io/docs/concepts/overview/components/#kube-apiserver)  
 - **etcd** - A Key/Value database which holds the state of the cluster. [etcd](https://etcd.io/) is a standalone project and not an official part of Kubernetes.
 - **Secheduler - kube-scheduler** - determines where to start a pod on worker node, the kube-scheduler chooses a worker node that could fit, based on different properties like CPU and memory.
 - **Controller Manager - kube-controller-manager** - detect state changes (if pod crashes, restart it).   
-Contains different non-terminating control loops that manage the state of the cluster. For example, one of these control loops can make sure that a desired number of your application is available all the time.
+A control loop that watches the state of the cluster and will change the current state back to the desired state.   
+Contains different non-terminating control loops that manage the state of the cluster. For example, one of these control loops can make sure that a desired number of your application is available all the time.  
+[Kube docs - controller manager](https://kubernetes.io/docs/concepts/overview/components/#kube-controller-manager)
 - **Cloud controller manager - cloud-controller-manager (optional)** - Integrates with the cloud provider, can be used to interact with the API of cloud providers, to create external resources like load balancers, storage or security groups.
+A Kubernetes control plane component that embeds cloud-specific control logic. The cloud controller manager lets you link your cluster into your cloud provider's API, and separates out the components that interact with that cloud platform from components that only interact with your cluster.
+[Kube docs - cloud controller manager](https://kubernetes.io/docs/concepts/overview/components/#kube-controller-manager)
+- **kubelet** - An agent that runs on each node in the cluster. It makes sure that containers are running in a Pod. The kubelet talks to the api-server and the container runtime to handle the final stage of starting containers.  
+[Kubelet](https://kubernetes.io/docs/concepts/overview/components/#kubelet)  
 
 ### Components of worker nodes  
 - **container runtime** - The container runtime is responsible for running the containers on the worker node. For a long time, Docker was the most popular choice, but is now replaced in favor of other runtimes like [containerd](https://containerd.io/).
@@ -402,11 +404,10 @@ To implement networking, you can choose from a variety of network vendors like:
 ### Project Calico - open-source network and network security solution for containers, VMs, native host-based workloads
 
 Calico Network Policies extends the base functionality of Network Policies:
-• policies can be applied to any object
-• the rules can contain the specific action
-• you can use ports, port ranges, protocols, HTTP/ICMP attributes, IPs or subnets, any selectors as a source/target of the rules
-• you can control traffic flows via DNAT settings and policies for traffic forwarding
-
+- policies can be applied to any object
+- the rules can contain the specific action
+- you can use ports, port ranges, protocols, HTTP/ICMP attributes, IPs or subnets, any selectors as a source/target of the rules
+- you can control traffic flows via DNAT settings and policies for traffic forwarding
 
 **Encryption In-Transit** - Data that is secure when moving between locations
 Algorithms: TLS, SSL  
@@ -414,7 +415,6 @@ Algorithms: TLS, SSL
 Algorithms: AES, RSA  
 **Transport Layer Security (TLS)** - An encryption protocol for data integrity between two or more communicating computer application.  
 **Secure Sockets Layers (SSL)** - An encryption protocol for data integrity between two or more communicating computer application  
-
 
 ### Weave
 ### Cilium
@@ -456,17 +456,17 @@ pods                     po           v1           true         Pod
 ...
 ```
 #### Kinds aka Object Schemas
-The word kind pops up here and there periodically. For instance, in the kubectl api-resources output, you could see that persistentvolumes resource has a corresponding PersistentVolume kind.
-
-Turns out, in Kubernetes, a kind is the name of an object schema. Like the one you'd typically describe using a JSON schema vocabulary. In other words, a kind refers to a particular data structure, i.e. a certain composition of attributes and properties.
+The word kind pops up here and there periodically. For instance, in the kubectl api-resources output, you could see that persistentvolumes resource has a corresponding PersistentVolume kind.  
+  
+Turns out, in Kubernetes, a kind is the name of an object schema. Like the one you'd typically describe using a JSON schema vocabulary. In other words, a kind refers to a particular data structure, i.e. a certain composition of attributes and properties.  
 
 ## Security 
 - The 4C's of Cloud Native security are Cloud, Clusters, Containers, and Code
-- Depth in Defense - a series of defensive mechanisms are layered in order to protect valuable data and information.
-The Cloud Layer is also known as the base layer.
-
-There are two parts to Cluster Layer security
-
+- Depth in Defense - a series of defensive mechanisms are layered in order to protect valuable data and information.  
+The Cloud Layer is also known as the base layer.  
+  
+There are two parts to Cluster Layer security  
+  
 1. Components of the cluster
 Securing configurable cluster components
 - Controlling access to the Kubernetes API
@@ -491,38 +491,36 @@ Securing configurable cluster components
   - Receiving alerts for security updates and reporting vulnerabilities
 
 2. Components in the cluster
-Securing the applications running within the cluster
-- RBAC Authorization (Access to the Kubernetes API)
-- Authentication
-- Application secrets management (and encrypting them in etcd at rest)
-Ensuring that pods meet defined Pod Security Standards
-- Quality of Service (and Cluster resource management)
-- Network Policies
-- TLS for Kubernetes Ingress
-Container Layer
-- Container Vulnerability Scanning and OS Dependency Security
-- Image Signing and Enforcement
-- Disallow privileged users
-- Use container runtime with stronger isolation
-Code Layer
-Application code is one of the primary attack surfaces over which you have the most control
-- Access over TLS only
-- Limiting port ranges of communication
-- 3rd Party Dependency Security
-- Static Code Analysis
-- Dynamic probing attacks
-Authentication, Authorization and Accounting (AAA) framework for Identity management systems.
-Authentication — to identify
-- Static passwords
-- One-time password (OTP) — MFA/UFA
-- Digital certificates (x.509)
-Authorization — to get permission
-- Role Based Access Controls (RBAC)
-Accounting (auditing) —to log and audit trail
-- Audit Policies
-- Audit Backends (where the logs will be stored)
-
-
+- Securing the applications running within the cluster
+  - RBAC Authorization (Access to the Kubernetes API)
+  - Authentication
+  - Application secrets management (and encrypting them in etcd at rest)
+- Ensuring that pods meet defined Pod Security Standards
+  - Quality of Service (and Cluster resource management)
+  - Network Policies
+  - TLS for Kubernetes Ingress
+- Container Layer
+  - Container Vulnerability Scanning and OS Dependency Security
+  - Image Signing and Enforcement
+  - Disallow privileged users
+  - Use container runtime with stronger isolation
+- Code Layer
+- Application code is one of the primary attack surfaces over which you have the most control
+  - Access over TLS only
+  - Limiting port ranges of communication
+  - 3rd Party Dependency Security
+  - Static Code Analysis
+  - Dynamic probing attacks
+- Authentication, Authorization and Accounting (AAA) framework for Identity management systems.
+- Authentication — to identify
+  - Static passwords
+  - One-time password (OTP) — MFA/UFA
+  - Digital certificates (x.509)
+- Authorization — to get permission
+  - Role Based Access Controls (RBAC)
+- Accounting (auditing) —to log and audit trail
+  - Audit Policies
+  - Audit Backends (where the logs will be stored)
 
 A Secret is similar to a ConfigMap with the exception that they can be encrypted
 By default,   
@@ -531,12 +529,11 @@ By default,
 How to keep Secrets safe:
 - Enable Encryption at Rest for Secrets
 - Enable or configure RBAC rules that restrict reading data in Secrets
-- Use mechanisms such as RBAC to limit which principals are allowed to create new Secrets or replace existing ones
-
-Kubernetes provides a ```certificates.k8s.io``` API, which lets you provision TLS certificates signed by a Certificate Authority (CA) that you control. These CA and
-certificates can be used by your workloads to establish trust.
+- Use mechanisms such as RBAC to limit which principals are allowed to create new Secrets or replace existing ones  
   
-What is a x.509 certificate?  
+Kubernetes provides a ```certificates.k8s.io``` API, which lets you provision TLS certificates signed by a Certificate Authority (CA) that you control. These CA and certificates can be used by your workloads to establish trust.  
+    
+### What is a x.509 certificate?  
 A standard defined by the International Telecommunication Union (ITU) for public key certifications.
 X.509 certificates are used in many Internet protocol:
 - SSL/TLS and HTTPS
@@ -545,36 +542,23 @@ X.509 certificates are used in many Internet protocol:
 A certificate contains
 - An identity — hostname, organization or individual
 - A public key — RSA, DSA, ECDA etc…
-
+  
 ## Serwisy 
 ### CoreDNS 
-CoreDNS is the default DNS server for Kuberentes and ensures pods and services haves Fully Qualified Domain Name (FQDN). Without CoreDNS the cluster communication would cease to work.
+CoreDNS is the default DNS server for Kuberentes and ensures pods and services haves Fully Qualified Domain Name (FQDN). Without CoreDNS the cluster communication would cease to work.  
 
 - [Coredns website](https://coredns.io/)
 - [Understanding CoreDNS YouTube](https://www.youtube.com/watch?v=qRiLmLACYSY)
 
-### Kube-dns
-[KubeDNS](https://kubernetes.io/docs/concepts/services-networking/dns-pod-service/)
-
-### Kubelet
-An agent that runs on each node in the cluster. It makes sure that containers are running in a Pod.
-[Kubelet](https://kubernetes.io/docs/concepts/overview/components/#kubelet)
+The kube-dns service (or its modern replacement, CoreDNS) doesn't run on a specific node. As a Kubernetes service, it's a cluster-wide abstraction that can direct traffic to DNS pods running on any node in the cluster.   
+The actual DNS pods (e.g., CoreDNS pods) that provide the DNS functionality:  
+1. Are typically deployed as a Deployment or ReplicaSet
+2. Can run on any worker node in the cluster
+3. Are usually scheduled by the Kubernetes scheduler for high availability
 
 ### Scheduler 
 [Scheduler](https://kubernetes.io/docs/concepts/scheduling-eviction/kube-scheduler/)
 A scheduler watches for newly created Pods that have no Node assigned. For every Pod that the scheduler discovers, the scheduler becomes responsible for finding the best Node for that Pod to run on. The scheduler reaches this placement decision taking into account the scheduling principles described below.
-
-### Controller Manager
-Control plane component that runs controller processes.
-[Kube docs - controller manager](https://kubernetes.io/docs/concepts/overview/components/#kube-controller-manager)
-
-### Cloud Controller Manager
-A Kubernetes control plane component that embeds cloud-specific control logic. The cloud controller manager lets you link your cluster into your cloud provider's API, and separates out the components that interact with that cloud platform from components that only interact with your cluster.
-[Kube docs - cloud controller manager](https://kubernetes.io/docs/concepts/overview/components/#kube-controller-manager)
-
-### The API server
-API server is a component of the Kubernetes control plane that exposes the Kubernetes API.
-https://kubernetes.io/docs/concepts/overview/components/#kube-apiserver
 
 ### Proxy 
 A proxy is a server application that acts as an intermediary between a client requesting a resource and the server providing that resource
@@ -597,9 +581,9 @@ Kube-proxy can run in three modes:
 - Reverse Proxy - Ingress traffic trying to reach a collection of servers
 
 ## Probes - are used to detect the state of a container
-- The kubelet uses **liveness probes** to know when to restart a container.  
-- The kubelet uses **readiness probes** to know when a container is ready to start accepting traffic.  
-- The kubelet uses **startup probes** to know when a container application has started.  
+- **liveness probes** - The kubelet uses to know when to restart a container.  
+- **readiness probes** - The kubelet uses to know when a container is ready to start accepting traffic.  
+- **startup probes** - The kubelet uses to know when a container application has started.  
   
   iptables is a user-space utility program that allows a system administrator to configure the IP packet filter rules of the Linux kernel firewall  
     - iptables applies to IPv4
@@ -634,6 +618,9 @@ This command helps users understand the different API versions and groups that t
   - ```kubectl expose deployment my-app --type=NodePort --name=my-service --port=80 --targetport=8080 --nodeport=3000``` - expose deployment outside of the cluster 
 - top
   - ```kubectl top pod POD_NAME --sort-by=cpu``` -  show metrics for a given pod and sort it by 'cpu'
+- logs
+  - ```kubectl logs my-pod``` - dump pod logs (stdout)
+  - ```kubectl logs -l name=myLabel``` - dump pod logs, with label name=myLabel (stdout)
 
 ## Storage
 Container Storage Interface (CSI) standardizes how Container Orchestrator Systems (COS) access various storage providers   
