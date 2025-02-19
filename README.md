@@ -355,15 +355,6 @@ Before a request is processed by Kubernetes, it has to go through three stages:
 
 Like many other APIs, the Kubernetes API is implemented as a RESTful interface that is exposed over HTTPS. Through the API, a user or service can create, modify, delete or retrieve resources that reside in Kubernetes.
 
-## Running Containers on Kubernetes
-When you create a Pod object in Kubernetes, several components are involved in that process, until you get containers running a node.
-
-Here is an example using containerd:
-![containerd example](./pictures/containerd_example.png)
-**Running Containers in Kubernetes**
-
-
-
 
 - [Working with kubernetes API](https://iximiuz.com/en/series/working-with-kubernetes-api/)
 #### Resources and Verbs
@@ -396,6 +387,18 @@ pods                     po           v1           true         Pod
 The word kind pops up here and there periodically. For instance, in the kubectl api-resources output, you could see that persistentvolumes resource has a corresponding PersistentVolume kind.  
   
 Turns out, in Kubernetes, a kind is the name of an object schema. Like the one you'd typically describe using a JSON schema vocabulary. In other words, a kind refers to a particular data structure, i.e. a certain composition of attributes and properties.  
+
+## Running Containers on Kubernetes
+When you create a Pod object in Kubernetes, several components are involved in that process, until you get containers running a node.
+
+Here is an example using containerd:
+![containerd example](./pictures/containerd_example.png)
+**Running Containers in Kubernetes**
+
+
+
+
+
 
 ### Container Runtimes 
 - **containerd** is a lightweight and performant implementation to run containers. Arguably the most popular container runtime right now. It is used by all major cloud providers for the Kubernetes As A Service products.
