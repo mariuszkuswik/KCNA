@@ -362,6 +362,41 @@ Here is an example using containerd:
 ![containerd example](./pictures/containerd_example.png)
 **Running Containers in Kubernetes**
 
+
+
+
+- [Working with kubernetes API](https://iximiuz.com/en/series/working-with-kubernetes-api/)
+#### Resources and Verbs
+[Kubernetes API structure and terminology](https://iximiuz.com/en/posts/kubernetes-api-structure-and-terminology/)
+Since it's a RESTful land, we'll be operating in terms of resources (loosely, objects of a certain structure) and verbs (actions on these objects).
+
+When resources are discussed, it's important to differentiate a resource as a certain kind of objects from a resource as a particular instance of some kind. 
+Thus, **Kubernetes API endpoints are officially named resource types** to avoid ambiguity with the resource instances. 
+However, in the wild, **endpoints are often called just resources**, and the actual meaning of the word is derived from the context.
+
+For extensibility reasons, **resource types are organized into API groups**, and the groups are versioned independently from each other:
+
+```shell
+$ kubectl api-resources
+NAME                     SHORTNAMES   APIVERSION   NAMESPACED   KIND
+bindings                              v1           true         Binding
+componentstatuses        cs           v1           false        ComponentStatus
+configmaps               cm           v1           true         ConfigMap
+endpoints                ep           v1           true         Endpoints
+events                   ev           v1           true         Event
+limitranges              limits       v1           true         LimitRange
+namespaces               ns           v1           false        Namespace
+nodes                    no           v1           false        Node
+persistentvolumeclaims   pvc          v1           true         PersistentVolumeClaim
+persistentvolumes        pv           v1           false        PersistentVolume
+pods                     po           v1           true         Pod
+...
+```
+#### Kinds aka Object Schemas
+The word kind pops up here and there periodically. For instance, in the kubectl api-resources output, you could see that persistentvolumes resource has a corresponding PersistentVolume kind.  
+  
+Turns out, in Kubernetes, a kind is the name of an object schema. Like the one you'd typically describe using a JSON schema vocabulary. In other words, a kind refers to a particular data structure, i.e. a certain composition of attributes and properties.  
+
 ### Container Runtimes 
 - **containerd** is a lightweight and performant implementation to run containers. Arguably the most popular container runtime right now. It is used by all major cloud providers for the Kubernetes As A Service products.
 Jest to projekt open-source rozwijany przez CNCF (Cloud Native Computing Foundation) i używany jako backend przez Dockera oraz inne systemy, takie jak Kubernetes. Containerd obsługuje standard OCI (Open Container Initiative), co zapewnia kompatybilność z różnymi runtime'ami kontenerów, takimi jak runc czy Kata Containers.
@@ -428,38 +463,6 @@ A service mesh is an infrastructure layer that can provide the following:
 - Observability (Metrics, Traces)
 - Security (TLS Certifications, Identity)
 
-### Kubernetes API Basics - Resources, Kinds, and Objects
-- [Working with kubernetes API](https://iximiuz.com/en/series/working-with-kubernetes-api/)
-#### Resources and Verbs
-[Kubernetes API structure and terminology](https://iximiuz.com/en/posts/kubernetes-api-structure-and-terminology/)
-Since it's a RESTful land, we'll be operating in terms of resources (loosely, objects of a certain structure) and verbs (actions on these objects).
-
-When resources are discussed, it's important to differentiate a resource as a certain kind of objects from a resource as a particular instance of some kind. 
-Thus, **Kubernetes API endpoints are officially named resource types** to avoid ambiguity with the resource instances. 
-However, in the wild, **endpoints are often called just resources**, and the actual meaning of the word is derived from the context.
-
-For extensibility reasons, **resource types are organized into API groups**, and the groups are versioned independently from each other:
-
-```shell
-$ kubectl api-resources
-NAME                     SHORTNAMES   APIVERSION   NAMESPACED   KIND
-bindings                              v1           true         Binding
-componentstatuses        cs           v1           false        ComponentStatus
-configmaps               cm           v1           true         ConfigMap
-endpoints                ep           v1           true         Endpoints
-events                   ev           v1           true         Event
-limitranges              limits       v1           true         LimitRange
-namespaces               ns           v1           false        Namespace
-nodes                    no           v1           false        Node
-persistentvolumeclaims   pvc          v1           true         PersistentVolumeClaim
-persistentvolumes        pv           v1           false        PersistentVolume
-pods                     po           v1           true         Pod
-...
-```
-#### Kinds aka Object Schemas
-The word kind pops up here and there periodically. For instance, in the kubectl api-resources output, you could see that persistentvolumes resource has a corresponding PersistentVolume kind.  
-  
-Turns out, in Kubernetes, a kind is the name of an object schema. Like the one you'd typically describe using a JSON schema vocabulary. In other words, a kind refers to a particular data structure, i.e. a certain composition of attributes and properties.  
 
 ## Security 
 - The 4C's of Cloud Native security are Cloud, Clusters, Containers, and Code
