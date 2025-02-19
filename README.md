@@ -216,10 +216,6 @@ NodePort is the default setting if the port field is not specified.
 ### Ingress
 Translates HTTP/S rules to point to services
 
-### API Server
-The API Server allows users to interact with K8s components using the KubeCTL or by sending HTTP requests.  
-API server is a component of the Kubernetes control plane that exposes the Kubernetes API.   
-[Kubernetes docs API Server](https://kubernetes.io/docs/concepts/overview/components/#kube-apiserver)
 
 ### Kubelet
 Kubelet is an agent installed on all nodes  (including both control plane and worker nodes). 
@@ -245,12 +241,6 @@ Communication with the API Server:
 #### Key Points to Remember
 - Kubelet is essential for ensuring that containers run as specified.
 - It monitors and manages pod states, and uses standard interfaces for storage, runtime, and networking to maintain seamless communication and operation.
-
-### Scheduler
-Determines where to place pods on nodes. Places them in a scheduling a queue
-
-### Kube Proxy
-An application on worker nodes that provides routing and filtering rules for ingress (incoming) traffic to pods.
 
 ### Network Policy
 Acts as a virtual firewall at the namespace-level or pod-level
@@ -321,7 +311,8 @@ The worker nodes are where applications run in your cluster. This is the only jo
 ### Node components (all nodes)
 - **kubelet** - An agent that runs on each node in the cluster. It makes sure that containers are running in a Pod. The kubelet talks to the api-server and the container runtime to handle the final stage of starting containers.  
 [Kubelet](https://kubernetes.io/docs/concepts/overview/components/#kubelet)  
-- **kube-proxy (optional)** - A network proxy that handles inside and outside communication of your cluster. Instead of managing traffic flow on its own, the kube-proxy tries to rely on the networking capabilities of the underlying operating system if possible.
+- **kube-proxy (optional)** - An application that provides routing and filtering rules for ingress (incoming) traffic to pods.  
+A network proxy that handles inside and outside communication of your cluster. Instead of managing traffic flow on its own, the kube-proxy tries to rely on the networking capabilities of the underlying operating system if possible.
 - **container runtime** - The container runtime is responsible for running the containers on the worker node. For a long time, Docker was the most popular choice, but is now replaced in favor of other runtimes like [containerd](https://containerd.io/).
 
 ### Control plane nodes components 
@@ -343,9 +334,9 @@ A Kubernetes control plane component that embeds cloud-specific control logic. T
 
 ## Kubernetes API 
 The core of the Kubernetes control plane is the API server. Without it, communication with the cluster is not possible, every user and every component of the cluster itself needs the api-server. The Kubernetes API lets you query and manipulates the state of API objects in Kubernetes (for example: Pods, Namespaces, ConfigMaps, and Events).  
-The API server is a component of the Kubernetes control plane that exposes the Kubernetes API. The API server is the front end for the Kubernetes control plane.  
-The main implementation of a Kubernetes API server is **kube-apiserver**.   
-kube-apiserver is designed to scale horizontally—that is, it scales by deploying more instances. 
+**The API server is a component of the Kubernetes control plane** that exposes the Kubernetes API. The API server is the front end for the Kubernetes control plane.  
+**The main implementation of a Kubernetes API server is kube-apiserver**.   
+**kube-apiserver is designed to scale horizontally—that is, it scales by deploying more instances.** 
 You can run several instances of kube-apiserver and balance traffic between those instances.
 Everything has to go through the API Server.  
   
@@ -386,6 +377,18 @@ Kata Containers to projekt open-source łączący lekkość tradycyjnych kontene
 LXC is a well-known Linux container runtime that consists of tools, templates, and library and language bindings. It's pretty low level, very flexible and covers just about every containment feature supported by the upstream kernel.
 
 ## Networking
+### Ingress
+[Kube docs - Ingress](https://kubernetes.io/docs/concepts/services-networking/ingress/)  
+  
+Ingress exposes HTTP and HTTPS routes from outside the cluster to services within the cluster. Traffic routing is controlled by rules defined on the Ingress resource.  
+
+![Ingress schema](https://mermaid.live/edit#pako:eNqNkstuwyAQRX8F4U0r2VHqPlSRKqt0UamLqlnaWWAYJygYLB59KMm_Fxcix-qmGwbuXA7DwAEzzQETXKutof0Ovb4vaoUQkwKUu6pi3FwXM_QSHGBt0VFFt8DRU2OWSGrKUUMlVQwMmhVLEV1Vcm9-aUksiuXRaO_CEhkv4WjBfAgG1TrGaLa-iaUw6a0DcwGI-WgOsF7zm-pN881fvRx1UDzeiFq7ghb1kgqFWiElyTjnuXVG74FkbdumefEpuNuRu_4rZ1pqQ7L5fL6YQPaPNiFuywcG9_-ihNyUkm6YSONWkjVNM8WUIyaeOJLO3clTB_KhL8NQDmVe-OJjxgZM5FhFiiFTK5zjDkxHBQ9_4zB4a-x20EGNSZhyaKmXrg7f5hSsvufUwTMXThtMWiot5Jh6p9ffimHijIezaSVoeN0uiqcfMJvf7w)
+
+
+## DNS - CoreDNS?
+### TODO - opisać
+
+
 Kubernetes distinguishes between four different networking problems that need to be solved:
 
 1. **Container-to-Container communications** - Can be solved by the Pod concept.
