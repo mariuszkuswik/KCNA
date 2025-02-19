@@ -308,22 +308,28 @@ Every request relies on state data (remembers) All databases are stateful
 
 
 ## Kubernetes - architektura
+### Kubernetes components
 [Kubernetes components](https://kubernetes.io/docs/concepts/overview/components/)
 From a high-level perspective, Kubernetes clusters consist of two different server node types that make up a cluster:
-- Control plane node(s)
-    These are the brains of the operation. Control plane nodes contain various components which manage the cluster and control various tasks like deployment, scheduling and self-healing of containerized workloads.
-- Worker nodes
-    The worker nodes are where applications run in your cluster. This is the only job of worker nodes and they don’t have any further logic implemented. Their behavior, like if they should start a container, is completely controlled by the control plane node.
+- **Control plane node(s)**  
+These are the brains of the operation. Control plane nodes contain various components which manage the cluster and control various tasks like deployment, scheduling and self-healing of containerized workloads.
+- **Worker nodes**  
+The worker nodes are where applications run in your cluster. This is the only job of worker nodes and they don’t have any further logic implemented. Their behavior, like if they should start a container, is completely controlled by the control plane node.
 
 ![Kubernetes architecture](./pictures/KubernetesArchitecture.png)
-**Kubernetes architecture**
-Similar to a microservice architecture you would choose for your own application, Kubernetes incorporates multiple smaller services that need to be installed on the nodes.
 
-### Control plane nodes typically host the following services...  
+### Node components (all nodes)
+- **kubelet** - An agent that runs on each node in the cluster. It makes sure that containers are running in a Pod. The kubelet talks to the api-server and the container runtime to handle the final stage of starting containers.  
+[Kubelet](https://kubernetes.io/docs/concepts/overview/components/#kubelet)  
+- **kube-proxy (optional)** - A network proxy that handles inside and outside communication of your cluster. Instead of managing traffic flow on its own, the kube-proxy tries to rely on the networking capabilities of the underlying operating system if possible.
+- **container runtime** - The container runtime is responsible for running the containers on the worker node. For a long time, Docker was the most popular choice, but is now replaced in favor of other runtimes like [containerd](https://containerd.io/).
+
+### Control plane nodes components 
 - **API Server - kube-apiserver** - This is the centerpiece of Kubernetes. All other components interact with the api-server and this is where users would access the cluster.  
 [Kubernetes API Docs](https://kubernetes.io/docs/concepts/overview/components/#kube-apiserver)  
 - **etcd** - A Key/Value database which holds the state of the cluster. [etcd](https://etcd.io/) is a standalone project and not an official part of Kubernetes.
 - **Secheduler - kube-scheduler** - determines where to start a pod on worker node, the kube-scheduler chooses a worker node that could fit, based on different properties like CPU and memory.
+[Kube docs - kube-scheduler](https://kubernetes.io/docs/concepts/scheduling-eviction/kube-scheduler/)
 - **Controller Manager - kube-controller-manager** - detect state changes (if pod crashes, restart it).   
 A control loop that watches the state of the cluster and will change the current state back to the desired state.   
 Contains different non-terminating control loops that manage the state of the cluster. For example, one of these control loops can make sure that a desired number of your application is available all the time.  
@@ -331,13 +337,6 @@ Contains different non-terminating control loops that manage the state of the cl
 - **Cloud controller manager - cloud-controller-manager (optional)** - Integrates with the cloud provider, can be used to interact with the API of cloud providers, to create external resources like load balancers, storage or security groups.
 A Kubernetes control plane component that embeds cloud-specific control logic. The cloud controller manager lets you link your cluster into your cloud provider's API, and separates out the components that interact with that cloud platform from components that only interact with your cluster.
 [Kube docs - cloud controller manager](https://kubernetes.io/docs/concepts/overview/components/#kube-controller-manager)
-- **kubelet** - An agent that runs on each node in the cluster. It makes sure that containers are running in a Pod. The kubelet talks to the api-server and the container runtime to handle the final stage of starting containers.  
-[Kubelet](https://kubernetes.io/docs/concepts/overview/components/#kubelet)  
-
-### Components of worker nodes  
-- **container runtime** - The container runtime is responsible for running the containers on the worker node. For a long time, Docker was the most popular choice, but is now replaced in favor of other runtimes like [containerd](https://containerd.io/).
-- **kubelet** - A small agent that runs on every worker node in the cluster. The kubelet talks to the api-server and the container runtime to handle the final stage of starting containers.
-- **kube-proxy** - A network proxy that handles inside and outside communication of your cluster. Instead of managing traffic flow on its own, the kube-proxy tries to rely on the networking capabilities of the underlying operating system if possible.
 
 ---
 **Namespaces** - Kubernetes also has a concept of *namespaces*, which are not to be confused with kernel namespaces that are used to isolate containers. A Kubernetes namespace can be used to divide a cluster into multiple virtual clusters, which can be used for multi-tenancy when multiple teams share a cluster. **Please note that Kubernetes namespaces are not suitable for strong isolation and should more be viewed like a directory on a computer where you can organize objects and manage which user has access to which folder.**
@@ -356,7 +355,6 @@ You can interact with the API Server in three ways:
 - CLI KubeCTL
 
 ![Access Control Overview](./pictures/AccessControlOverview.png)
-
 **Access Control Overview**, retrieved from the [Kubernetes documentation](https://kubernetes.io/docs/concepts/security/controlling-access/)
 
 Before a request is processed by Kubernetes, it has to go through three stages:
@@ -555,10 +553,6 @@ The actual DNS pods (e.g., CoreDNS pods) that provide the DNS functionality:
 1. Are typically deployed as a Deployment or ReplicaSet
 2. Can run on any worker node in the cluster
 3. Are usually scheduled by the Kubernetes scheduler for high availability
-
-### Scheduler 
-[Scheduler](https://kubernetes.io/docs/concepts/scheduling-eviction/kube-scheduler/)
-A scheduler watches for newly created Pods that have no Node assigned. For every Pod that the scheduler discovers, the scheduler becomes responsible for finding the best Node for that Pod to run on. The scheduler reaches this placement decision taking into account the scheduling principles described below.
 
 ### Proxy 
 A proxy is a server application that acts as an intermediary between a client requesting a resource and the server providing that resource
