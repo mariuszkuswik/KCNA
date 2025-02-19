@@ -632,6 +632,8 @@ This command helps users understand the different API versions and groups that t
   - ```kubectl autoscale rc foo --min=1 --max=5 --cpu-percent=80``` - create a HorizontalPodAutoscaler
 - expose
   - ```kubectl expose deployment my-app --type=NodePort --name=my-service --port=80 --targetport=8080 --nodeport=3000``` - expose deployment outside of the cluster 
+- top
+  - ```kubectl top pod POD_NAME --sort-by=cpu``` -  show metrics for a given pod and sort it by 'cpu'
 
 ## Storage
 Container Storage Interface (CSI) standardizes how Container Orchestrator Systems (COS) access various storage providers   
