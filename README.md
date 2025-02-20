@@ -312,7 +312,14 @@ The worker nodes are where applications run in your cluster. This is the only jo
 - **kubelet** - An agent that runs on each node in the cluster. It makes sure that containers are running in a Pod. The kubelet talks to the api-server and the container runtime to handle the final stage of starting containers.  
 [Kubelet](https://kubernetes.io/docs/concepts/overview/components/#kubelet)  
 - **kube-proxy (optional)** - An application that provides routing and filtering rules for ingress (incoming) traffic to pods.  
-A network proxy that handles inside and outside communication of your cluster. Instead of managing traffic flow on its own, the kube-proxy tries to rely on the networking capabilities of the underlying operating system if possible.
+kube-proxy maintains network rules on nodes. These network rules allow network communication to your Pods from network sessions inside or outside of your cluster.
+
+kube-proxy uses the operating system packet filtering layer (if there is one and it's available). Otherwise, kube-proxy forwards the traffic itself.  
+Kube-proxy can run in three modes:  
+1. iptables (default). — Suited for simple use cases
+2. Ipvs — Suites for 1000+ services.
+3. Userspace (legacy) — Not recommended for use
+
 - **container runtime** - The container runtime is responsible for running the containers on the worker node. For a long time, Docker was the most popular choice, but is now replaced in favor of other runtimes like [containerd](https://containerd.io/).
 
 ### Control plane nodes components 
@@ -420,13 +427,57 @@ LXC is a well-known Linux container runtime that consists of tools, templates, a
   
 Ingress exposes HTTP and HTTPS routes from outside the cluster to services within the cluster. Traffic routing is controlled by rules defined on the Ingress resource.  
 
+
 ![Ingress schema](./pictures/networking-objects/ingress.svg)
 
 
-## DNS - CoreDNS?
-### TODO - opisać
+### DNS - CoreDNS
+**Note:**  
+The CoreDNS Service is named **kube-dns** (legacy name of DNS) in the metadata.name field.
+The intent is to ensure greater interoperability with workloads that relied on the legacy kube-dns Service name to resolve addresses internal to the cluster. 
+  
+DNS is a built-in Kubernetes service launched automatically using the addon manager cluster add-on.
+  
+If you are running CoreDNS as a Deployment, it will typically be exposed as a Kubernetes Service with a static IP address. The kubelet passes DNS resolver information to each container with the ```--cluster-dns=<dns-service-ip>``` flag.  
+  
+CoreDNS is a general-purpose authoritative DNS server that can serve as cluster DNS, complying with the DNS specifications.
+  
+CoreDNS is a flexible and extensible DNS server that serves as the default DNS system in Kubernetes clusters. 
+Its primary function is to provide DNS name resolution and service discovery within the Kubernetes cluster.
 
+#### Key Features of CoreDNS in Kubernetes
+1. Service name resolution: CoreDNS allows pods to access services using DNS names instead of IP addresses, greatly simplifying communication within the cluster.
+2. Automatic updates: CoreDNS detects changes in services (creation, modification, deletion) through the Kubernetes API, allowing it to maintain up-to-date DNS data for all services in the cluster.
+3. Query forwarding: For queries about external domains, CoreDNS can forward them to public DNS resolvers.
+4. Caching: CoreDNS can cache DNS query results, which speeds up responses to repeated requests.
 
+#### Configuration and Customization
+CoreDNS in Kubernetes can be customized using a ConfigMap. For example, you can configure stub domains:
+
+```yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: coredns-custom
+  namespace: kube-system
+data:
+  test.server: |
+    abc.com:53 {
+      errors
+      cache 30
+      forward . 1.2.3.4
+    }
+```
+
+#### Monitoring and Troubleshooting
+Monitoring CoreDNS is crucial for ensuring smooth communication between services. In case of DNS resolution problems, you should check:
+1. CoreDNS configuration (ConfigMap)
+2. Network policies that may be blocking traffic on UDP port 53
+3. Location of CoreDNS pods in the cluster
+  
+CoreDNS uses the "forward" plugin to forward queries to upstream DNS servers, using a random algorithm to select a server.
+  
+### Kubernetes Networking in general
 Kubernetes distinguishes between four different networking problems that need to be solved:
 
 1. **Container-to-Container communications** - Can be solved by the Pod concept.
@@ -457,6 +508,55 @@ Algorithms: AES, RSA
 
 ### Weave
 ### Cilium
+
+### Load Balancing
+
+Load Balancing is a networking component, where traffic flows through the load balancer, and the load balancer decides how to distribute the traffic to multiple targets eg. (compute nodes) based on a set of rules. 
+  
+Ingress and Service K8s both have load balancing.
+  
+- External Load Balancer
+  - Load balancing control
+  - By third-party service
+- Ingress
+  - load balancing algorithm
+  - backend weight scheme
+- Service
+  - persistent sessions
+  - dynamic weights
+- Internal Load Balancing (iptables / ipvs)
+  - Load balancing to containers within pods.
+  - Randomly distributed
+
+### Probes - are used to detect the state of a container
+- **liveness probes** - The kubelet uses to know when to restart a container.  
+- **readiness probes** - The kubelet uses to know when a container is ready to start accepting traffic.  
+- **startup probes** - The kubelet uses to know when a container application has started.  
+  
+  iptables is a user-space utility program that allows a system administrator to configure the IP packet filter rules of the Linux kernel firewall  
+    - iptables applies to IPv4
+    - ip6tables to IPv6
+
+### Proxy 
+A proxy is a server application that acts as an intermediary between a client requesting a resource and the server providing that resource
+
+There are many kinds of proxies you will encounter in Kubernetes:
+- Kubectl proxy — proxies from a localhost address to the Kubernetes apiserver
+- Apiserver proxy — a bastion built into the apiserver, connects a user outside of the cluster to cluster IPs which otherwise might not be reachable
+
+- Kube proxy (optional) — kube-proxy is a network proxy that runs on each node in your cluster.
+[Kube docs - kube proxy](https://kubernetes.io/docs/concepts/overview/components/#kube-proxy)  
+It is designed to load **balance traffic to pods.**  
+Kube-proxy can run in three modes:  
+  1. iptables (default). — Suited for simple use cases
+  2. Ipvs — Suites for 1000+ services.
+  3. Userspace (legacy) — Not recommended for use
+
+- Proxy/Load balancer in front of API servers — acts as load balancer if there are several apiserver
+- Cloud Load Balancers — for external cluster traffic to reach pods
+- Forward Proxy - A bunch of servers egressing traffic have to pass through the proxy first
+- Reverse Proxy - Ingress traffic trying to reach a collection of servers
+
 
 ---
 **The Container Networking Interface (CNI)** - is a specification (open standard) for writing plugins to configure networking interfaces for linux containers  
@@ -562,35 +662,6 @@ The actual DNS pods (e.g., CoreDNS pods) that provide the DNS functionality:
 1. Are typically deployed as a Deployment or ReplicaSet
 2. Can run on any worker node in the cluster
 3. Are usually scheduled by the Kubernetes scheduler for high availability
-
-### Proxy 
-A proxy is a server application that acts as an intermediary between a client requesting a resource and the server providing that resource
-
-There are many kinds of proxies you will encounter in Kubernetes:
-- Kubectl proxy — proxies from a localhost address to the Kubernetes apiserver
-- Apiserver proxy — a bastion built into the apiserver, connects a user outside of the cluster to cluster IPs which otherwise might not be reachable
-
-- Kube proxy (optional) — kube-proxy is a network proxy that runs on each node in your cluster.
-[Kube docs - kube proxy](https://kubernetes.io/docs/concepts/overview/components/#kube-proxy)  
-It is designed to load **balance traffic to pods.**  
-Kube-proxy can run in three modes:  
-  1. iptables (default). — Suited for simple use cases
-  2. Ipvs — Suites for 1000+ services.
-  3. Userspace (legacy) — Not recommended for use
-
-- Proxy/Load balancer in front of API servers — acts as load balancer if there are several apiserver
-- Cloud Load Balancers — for external cluster traffic to reach pods
-- Forward Proxy - A bunch of servers egressing traffic have to pass through the proxy first
-- Reverse Proxy - Ingress traffic trying to reach a collection of servers
-
-## Probes - are used to detect the state of a container
-- **liveness probes** - The kubelet uses to know when to restart a container.  
-- **readiness probes** - The kubelet uses to know when a container is ready to start accepting traffic.  
-- **startup probes** - The kubelet uses to know when a container application has started.  
-  
-  iptables is a user-space utility program that allows a system administrator to configure the IP packet filter rules of the Linux kernel firewall  
-    - iptables applies to IPv4
-    - ip6tables to IPv6
 
 ## Kubectl - cheat sheet 
 - get
