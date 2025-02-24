@@ -422,7 +422,6 @@ Kata Containers to projekt open-source łączący lekkość tradycyjnych kontene
 LXC is a well-known Linux container runtime that consists of tools, templates, and library and language bindings. It's pretty low level, very flexible and covers just about every containment feature supported by the upstream kernel.
 
 ## Networking
-
 ### Cluster Networking
 [Kubernetes networking model](https://sookocheff.com/post/kubernetes/understanding-kubernetes-networking-model/)
 #### General ceoncepts
@@ -458,22 +457,84 @@ Within the manifest file, containerPort is used to define the local port for the
 **A Service creates a virtualized IP (static IP)** and then uses iptables which is installed on the Node to Network Address Translation (NAT) and Load Balancing to other pods.  
 
 ### Egress - Routing traffic to the Internet
-**How pod traffic exits** to the internet will be network specific.
+Kubernetes uses Container Network Interface (CNI) plugins to establish networking for pods, including egress traffic.    
+
+**Definition**: Egress in Kubernetes refers to the outbound network traffic that flows from pods within a cluster to external endpoints or services.
+
+**Control mechanisms**: Kubernetes provides several ways to manage and control egress traffic:
+- **Network Policies**: These allow you to define rules specifying which external endpoints pods can access.
+- **Egress Gateways**: Often implemented using service mesh solutions like Istio, these direct outbound traffic through a specific proxy before reaching its destination.
+- **NAT (Network Address Translation)**: Used to handle outgoing connections from pods to external networks.
   
-So in the case of AWS pods use the Amazon VPC Container Network Interface (CNI) plugin to be able to talk to your Virtual Private Cloud (VPC) and then egress out to the Internet Gateway (IGW) via route tables.
-  
+**Implementation**: How egress traffic is handled depends on the Kubernetes network implementation or CNI (Container Network Interface) plugin used in the cluster.
+
 ### Ingress - Routing Internet traffic to Kubernetes
 [Kube docs - Ingress](https://kubernetes.io/docs/concepts/services-networking/ingress/)  
-Ingress is divided into two solutions that work on different parts of the network stack: (1) a Service LoadBalancer and (2) an Ingress controller.
 
-Ingress exposes HTTP and HTTPS routes from outside the cluster to services within the cluster. Traffic routing is controlled by rules defined on the Ingress resource.  
-
-From there a Service could be using:
-- K8s Service with Type Load Balancer
-  - This will work with Cloud Controller Manager to implement a solution that works with a T4 (UDP/TCP) Load Balancer  
+Ingress exposes HTTP and HTTPS routes from outside the cluster to services within the cluster. Traffic routing is controlled by rules defined on the Ingress resource.
   
-- K8s Ingress
-  - It will use a Ingress Controller to work with a Cloud Service Provider load balancer eg. T4 or T7 (application load balancer)
+Here is a simple example where an Ingress sends all its traffic to one Service:
+![Ingress schema](./pictures/networking-objects/ingress.svg)
+  
+The core distinction is this: **Ingress** is a *declarative configuration*, while an **Ingress Controller** is the *implementation* that makes the configuration a reality.
+1.  **Ingress (Resource)**
+    *   An Ingress is a Kubernetes API object. Think of it as a set of *rules* that define how external HTTP/HTTPS traffic should be routed to Services within your cluster.
+    *   These rules include things like hostnames, paths, and which Service should handle requests matching those criteria.
+    *   Creating an Ingress resource alone does *nothing* until an Ingress Controller is present. It's like writing a blueprint for a building; the blueprint is useless without someone to build the actual structure.
+    *   Key configurations include:
+        *   Host: The domain name for which the traffic will be routed
+        *   Paths: The HTTP paths to match
+        *   Backend: The Kubernetes Service and port to which matching traffic is sent
+        *   TLS: configuration for encryption
+
+2.  **Ingress Controller**
+    *   An Ingress Controller is a piece of software (typically deployed as a pod within your Kubernetes cluster) that watches for Ingress resources.
+    *   When it detects a new or updated Ingress resource, it reads the rules defined in that resource and configures an actual load balancer (which could be a software load balancer running within the cluster, or a cloud provider's external load balancer) to route traffic accordingly.
+    *   The Ingress Controller is responsible for:
+        *   Configuring the load balancer (whether that's Nginx, HAProxy, Traefik, or a cloud provider's load balancer).
+        *   Handling SSL/TLS termination (if configured in the Ingress resource).
+        *   Monitoring the health of backend Services.
+        *   Routing traffic based on the rules defined in the Ingress resource.
+
+3.  **Ingress Traffic**
+    *   Ingress traffic is the actual HTTP(S) traffic that comes *from* outside the cluster, *to* the services running inside the cluster.
+    *   The Ingress Controller is responsible for correctly directing this traffic based on the rules you define in the Ingress resources.
+
+**Analogy**:
+
+*   Think of a traffic cop (Ingress Controller) who directs cars (Ingress Traffic) according to a set of traffic laws (Ingress Resources). The laws themselves don't do anything until the cop enforces them.
+
+**In summary:**
+
+*   You *define* how you want to route external traffic using **Ingress resources.**
+*   An **Ingress Controller** *implements* those routing rules, configuring a load balancer to direct traffic to the correct Services.
+*   **Ingress Traffic** is the actual external traffic being routed.
+
+
+#### Ingress resource
+```yaml
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: minimal-ingress
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+spec:
+  ingressClassName: nginx-example
+  rules:
+  - http:
+      paths:
+      - path: /testpath
+        pathType: Prefix
+        backend:
+          service:
+            name: test
+            port:
+              number: 80
+```
+  
+**You must have an Ingress controller to satisfy an Ingress. Only creating an Ingress resource has no effect!**
+
 
 
 ##### Layer 7 Ingress: Ingress Controller
@@ -485,9 +546,6 @@ If you set the Service’s type field to NodePort, the Kubernetes master will al
 That is, any traffic directed to the Node’s port will be forwarded on to the service using iptables rules.       
   
 To expose a Node’s port to the Internet you use an Ingress object. An Ingress is a higher-level HTTP load balancer that maps HTTP requests to Kubernetes Services.   
-  
-![Ingress schema](./pictures/networking-objects/ingress.svg)
-
 
 ### DNS - CoreDNS
 **Note:**  
