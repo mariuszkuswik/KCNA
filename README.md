@@ -557,6 +557,11 @@ Kube-proxy can run in three modes:
 - Forward Proxy - A bunch of servers egressing traffic have to pass through the proxy first
 - Reverse Proxy - Ingress traffic trying to reach a collection of servers
 
+### Service Mesh 
+
+#### Envoy 
+
+#### Istio
 
 ---
 **The Container Networking Interface (CNI)** - is a specification (open standard) for writing plugins to configure networking interfaces for linux containers  
