@@ -11,7 +11,7 @@
 - Prometheus deals exclusively with time-series metrics.
 - Prometheus is a self-contained system with its own storage and query language (PromQL).
 
-### OpenteTemetry 
+### OpenTemetry 
 - [Prometheus vs OpenTelemetry](https://signoz.io/blog/opentelemetry-vs-prometheus/)
 - OpenTelemetry supports metrics, distributed traces, and logs.
 - jest bardziej kompleksowy od Prometheusa, potrafi to samo + wspiera metrics, traces, and logs.
