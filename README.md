@@ -535,8 +535,6 @@ spec:
   
 **You must have an Ingress controller to satisfy an Ingress. Only creating an Ingress resource has no effect!**
 
-
-
 ##### Layer 7 Ingress: Ingress Controller
 Layer 7 network Ingress operates on the HTTP/HTTPS protocol range of the network stack and is built on top of Services.   
 
@@ -689,67 +687,18 @@ A service mesh is an infrastructure layer that can provide the following:
 
 
 ## Security 
-- The 4C's of Cloud Native security are Cloud, Clusters, Containers, and Code
+### 4C's of Cloud Native Security
+The 4C's of Cloud Native security are **Cloud > Clusters > Containers > Code** 
+   
+![4Cs of security layer](./pictures/ClusterNetworking/4Cs_of_security.png)
+
 - Depth in Defense - a series of defensive mechanisms are layered in order to protect valuable data and information.  
 The Cloud Layer is also known as the base layer.  
   
+
 There are two parts to Cluster Layer security  
   
-1. Components of the cluster
-Securing configurable cluster components
-- Controlling access to the Kubernetes API
-  - Use Transport Layer Security (TLS) for all API traffic
-  - API Authentication
-  - API Authorization
-- Controlling access to the Kubelet
-- Controlling the capabilities of a workload or user at runtime
-  - Limiting resource usage on a cluster
-  - Controlling what privileges containers run with
-  - Preventing containers from loading unwanted kernel modules
-  - Restricting network access
-  - Restricting cloud metadata API access
-  - Controlling which nodes pods may access
-- Protecting cluster components from compromise
-  - Restrict access to etcd
-  - Enable audit logging
-  - Restrict access to alpha or beta features
-  - Rotate infrastructure credentials frequently
-  - Review third party integrations before enabling them
-  - Encrypt secrets at rest
-  - Receiving alerts for security updates and reporting vulnerabilities
-
-2. Components in the cluster
-- Securing the applications running within the cluster
-  - RBAC Authorization (Access to the Kubernetes API)
-  - Authentication
-  - Application secrets management (and encrypting them in etcd at rest)
-- Ensuring that pods meet defined Pod Security Standards
-  - Quality of Service (and Cluster resource management)
-  - Network Policies
-  - TLS for Kubernetes Ingress
-- Container Layer
-  - Container Vulnerability Scanning and OS Dependency Security
-  - Image Signing and Enforcement
-  - Disallow privileged users
-  - Use container runtime with stronger isolation
-- Code Layer
-- Application code is one of the primary attack surfaces over which you have the most control
-  - Access over TLS only
-  - Limiting port ranges of communication
-  - 3rd Party Dependency Security
-  - Static Code Analysis
-  - Dynamic probing attacks
-- Authentication, Authorization and Accounting (AAA) framework for Identity management systems.
-- Authentication — to identify
-  - Static passwords
-  - One-time password (OTP) — MFA/UFA
-  - Digital certificates (x.509)
-- Authorization — to get permission
-  - Role Based Access Controls (RBAC)
-- Accounting (auditing) —to log and audit trail
-  - Audit Policies
-  - Audit Backends (where the logs will be stored)
-
+### Secrets
 A Secret is similar to a ConfigMap with the exception that they can be encrypted
 By default,   
 **Secrets are unencrypted in etcd store.**
@@ -771,7 +720,7 @@ A certificate contains
 - An identity — hostname, organization or individual
 - A public key — RSA, DSA, ECDA etc…
   
-## Serwisy 
+## Services 
 ### CoreDNS 
 CoreDNS is the default DNS server for Kuberentes and ensures pods and services haves Fully Qualified Domain Name (FQDN). Without CoreDNS the cluster communication would cease to work.  
 
