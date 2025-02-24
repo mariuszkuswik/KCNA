@@ -422,12 +422,70 @@ Kata Containers to projekt open-source łączący lekkość tradycyjnych kontene
 LXC is a well-known Linux container runtime that consists of tools, templates, and library and language bindings. It's pretty low level, very flexible and covers just about every containment feature supported by the upstream kernel.
 
 ## Networking
-### Ingress
-[Kube docs - Ingress](https://kubernetes.io/docs/concepts/services-networking/ingress/)  
+
+### Cluster Networking
+[Kubernetes networking model](https://sookocheff.com/post/kubernetes/understanding-kubernetes-networking-model/)
+#### General ceoncepts
+Kubernetes has the following opinions about cluster networking:
+- all Pods can communicate with all other Pods without using NAT
+- all Nodes can communicate with all Pods without using NAT.
+- the IP that a Pod sees itself as, is the same IP that others see it as
   
+NATs are and can be used in Kubernetes, even though of the above contradiction
+  
+There are 4 broad types of network communication for clusters:
+- Container-to-Container
+- Pod-to-Pod
+- Pod-to-Service
+- External-to-Service
+
+
+**Routing** allows multiple networks to communicate independently and yet remain separate using a Router.  
+  
+**Bridging** connects two separate networks as if they were a single network using a Bridge.  
+
+#### Container to Container Networking
+Containers all in the same pod have the same IP address and port space.  
+Containers can communicate with each other via localhost via different ports.  
+  
+![Network in pod](./pictures/ClusterNetworking/network-in-pod.png)
+  
+Within the manifest file, containerPort is used to define the local port for the container
+
+### Pod to Service Networking
+**When a pod dies its IP Address changes** and this can make communication hard if you are relying on the IP address for communication.  
+  
+**A Service creates a virtualized IP (static IP)** and then uses iptables which is installed on the Node to Network Address Translation (NAT) and Load Balancing to other pods.  
+
+### Egress - Routing traffic to the Internet
+**How pod traffic exits** to the internet will be network specific.
+  
+So in the case of AWS pods use the Amazon VPC Container Network Interface (CNI) plugin to be able to talk to your Virtual Private Cloud (VPC) and then egress out to the Internet Gateway (IGW) via route tables.
+  
+### Ingress - Routing Internet traffic to Kubernetes
+[Kube docs - Ingress](https://kubernetes.io/docs/concepts/services-networking/ingress/)  
+Ingress is divided into two solutions that work on different parts of the network stack: (1) a Service LoadBalancer and (2) an Ingress controller.
+
 Ingress exposes HTTP and HTTPS routes from outside the cluster to services within the cluster. Traffic routing is controlled by rules defined on the Ingress resource.  
 
+From there a Service could be using:
+- K8s Service with Type Load Balancer
+  - This will work with Cloud Controller Manager to implement a solution that works with a T4 (UDP/TCP) Load Balancer  
+  
+- K8s Ingress
+  - It will use a Ingress Controller to work with a Cloud Service Provider load balancer eg. T4 or T7 (application load balancer)
 
+
+##### Layer 7 Ingress: Ingress Controller
+Layer 7 network Ingress operates on the HTTP/HTTPS protocol range of the network stack and is built on top of Services.   
+
+The first step to enabling Ingress is to open a port on your Service using the NodePort Service type in Kubernetes. 
+If you set the Service’s type field to NodePort, the Kubernetes master will allocate a port from a range you specify, and each Node will proxy that port (the same port number on every Node) into your Service.   
+
+That is, any traffic directed to the Node’s port will be forwarded on to the service using iptables rules.       
+  
+To expose a Node’s port to the Internet you use an Ingress object. An Ingress is a higher-level HTTP load balancer that maps HTTP requests to Kubernetes Services.   
+  
 ![Ingress schema](./pictures/networking-objects/ingress.svg)
 
 
