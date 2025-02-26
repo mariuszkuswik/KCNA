@@ -894,17 +894,11 @@ IAM w Kubernetesie obejmuje:
 
 ### **RBAC - Role-Based Access Control**
 
-To enable RBAC, start the API server with the --authorization-mode flag
-```Kube-apiserver –authorization-mode=RBAC``` - enable RBAC
-With Kubernetes RBAC there are only Allow Rules, Everything is Deny by default.
-
+To enable RBAC, start the API server with the --authorization-mode flag  
+```Kube-apiserver –authorization-mode=RBAC``` - enable RBAC  
+With Kubernetes RBAC there are only Allow Rules, Everything is Deny by default.  
+  
 The RBAC API declares four kinds of Kubernetes object: Role and RoleBinding, ClusterRole and ClusterRoleBinding.
-
-A Role is a set of permissions for a particular namespace
-A ClusterRole is a set of permissions across all namespace
-Role Binding and Cluster Role Binding, link Permissions to to Subjects (an Identity).
-
-RBAC to mechanizm zarządzania dostępem oparty na rolach, który umożliwia przypisywanie uprawnień użytkownikom lub usługom w Kubernetesie.
 
 #### **Kluczowe komponenty RBAC**
 1. **Role**: Definiuje uprawnienia dla zasobów w obrębie jednego namespace.
@@ -915,9 +909,11 @@ RBAC to mechanizm zarządzania dostępem oparty na rolach, który umożliwia prz
 4. **ClusterRoleBinding**: Przypisuje ClusterRole na poziomie całego klastra.
 
 #### **Proces RBAC**
-1. **Uwierzytelnianie (Authentication)**: Weryfikacja tożsamości użytkownika za pomocą certyfikatów X.509, tokenów lub innych metod.
+1. **Authentication (Uwierzytelnianie)**: Weryfikacja tożsamości użytkownika za pomocą certyfikatów X.509, tokenów lub innych metod.
 2. **Autoryzacja (Authorization)**: Sprawdzanie, czy użytkownik ma odpowiednie uprawnienia zdefiniowane w Role/ClusterRole.
 3. **Admission Control**: Ostateczna walidacja i modyfikacja żądań zgodnie z politykami.
+
+![RBAC](./pictures/Security/RBAC.png)
 
 #### **Przykład definicji RBAC w YAML**
 ```yaml
