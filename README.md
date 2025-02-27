@@ -106,14 +106,12 @@ maxSurge:
 maxUnavailable :  
 - The amount of pods that can be unavailable
 
-
 ## Serverless
 A serverless service could have all or most of the following characteristics:
 - Highly elastic and scalable
 - highly available
 - Highly durable
 - Secure by default
-
 
 ### Knative
 Kubernetes-based platform to deploy and manage modern serverless workloads.  
@@ -463,6 +461,8 @@ Kubernetes uses Container Network Interface (CNI) plugins to establish networkin
 
 **Control mechanisms**: Kubernetes provides several ways to manage and control egress traffic:
 - **Network Policies**: These allow you to define rules specifying which external endpoints pods can access.
+  -You can define Ingress rules (permitted traffic entering a pod)
+  -You can define Egress rules (permitted traffic to exit a pod)
 - **Egress Gateways**: Often implemented using service mesh solutions like Istio, these direct outbound traffic through a specific proxy before reaching its destination.
 - **NAT (Network Address Translation)**: Used to handle outgoing connections from pods to external networks.
   
