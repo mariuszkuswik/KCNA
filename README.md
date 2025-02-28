@@ -6,18 +6,48 @@
 - [RH - A sysadmin's guide to basic Kubernetes components](https://www.redhat.com/en/blog/kubernetes-components)
 
 ## Monitoring
-### Prometheus 
+### Traces and Spans
+**A trace** is a data/execution path through the system, and can be thought of as a directed acyclic graph (DAG) of spans  
+Trace to cała ścieżka, złożona ze span-ów
+**A span** represents a logical unit of work in Jaeger that has an operation name, the start time of the operation, and the duration.  
+Span to pojedyńcze wystąpienie/przystanek (?)
+  
+Spans may be nested and ordered to model causal relationships.
+
+
+```
+Causal relationships between Spans in a single Trace
+
+
+        [Span A]  ←←←(the root span)
+            |
+     +------+------+
+     |             |
+ [Span B]      [Span C] ←←←(Span C is a `ChildOf` Span A)
+     |             |
+ [Span D]      +---+-------+
+               |           |
+           [Span E]    [Span F] >>> [Span G] >>> [Span H]
+                                       ↑
+                                       ↑
+                                       ↑
+                         (Span G `FollowsFrom` Span F)
+
+```
+
+### Monitoring tools
+#### Prometheus 
 - [Prometheus vs OpenTelemetry](https://signoz.io/blog/opentelemetry-vs-prometheus/)
 - Prometheus deals exclusively with time-series metrics.
 - Prometheus is a self-contained system with its own storage and query language (PromQL).
 
-### OpenTemetry 
+#### OpenTemetry 
 - [Prometheus vs OpenTelemetry](https://signoz.io/blog/opentelemetry-vs-prometheus/)
 - OpenTelemetry supports metrics, distributed traces, and logs.
 - jest bardziej kompleksowy od Prometheusa, potrafi to samo + wspiera metrics, traces, and logs.
 - OpenTelemetry uses a vendor-neutral, pluggable design allowing integration with various backends.
 
-### Jaeger - tracing
+#### Jaeger - tracing
 - [Jaeger - docsy](https://www.jaegertracing.io/docs/2.2/)
 - Jaeger, inspired by Dapper and OpenZipkin, is a distributed tracing platform created by Uber Technologies and donated to Cloud Native Computing Foundation. 
 - It can be used for monitoring microservices-based distributed systems:
@@ -27,20 +57,40 @@
     - Track down root causes
     - Analyze service dependencies
 
-### Zipkin - tracing
+#### Zipkin - tracing
 - [Zipkin](https://zipkin.io/)
 Zipkin is a distributed tracing system. It helps gather timing data needed to troubleshoot latency problems in service architectures. Features include both the collection and lookup of this data.
 
-### Datadog 
+#### Datadog 
 - [Datadog - stronka](https://www.datadoghq.com/)
 Paid monitoring system!
 
-### Grafana
+#### Grafana
 - [Grafana](https://grafana.com/grafana/)
 Grafana is a visualization tool.
 
-### Loki
+#### Loki
 Loki is a cloud-native log aggregation system that uses label-based indexing for efficient storage and querying. It's designed for scalability and cost-effectiveness, integrating seamlessly with Grafana and other observability tools. Loki is particularly well-suited for containerized environments and high-volume logging scenarios.
+
+### Cost management
+- Label Resources
+    - Visualize Costs Prometheus and Grafana
+- Finding Idle And Unallocated Resources
+    - Visualize Idle CPU, Memory and Storage Prometheus and Grafana
+- Workload Rightsizing
+    - VerticalPodAutoscaler — adjusting CPU, Mem of Pods
+    - HorizontalPodAutoscaler — add remove pods to meet the demand
+- Cluster Downsizing Opportunities
+    - ClusterAutosscaler Add or remove Nodes to meet the demand
+- Using Free Trials Of Kubernetes Cost Tools eg. Kubecost
+- Estimate future costs, use a Load-Testing — eg. SpeedScale, K6, JMeter, Gatling
+    - What does a 15 node EKS cluster cost for the year?
+- Utilization waste (running but not using or not live)
+    - Serverless Architect that Scales to Zero when no traffic for a period of time.
+- Technical debt
+    - Evaluate architecture to reduce amount of pods
+    - Evaluate cloud-native technologies
+
 
 ## CI/CD
 ### Which CNCF project for continuous integration and continuous delivery (CI/CD) comes with both a CLI and Web UI?
@@ -884,6 +934,10 @@ However, as time progresses and developer teams unlock the full potential of the
 Operators are geared toward site reliability engineering teams to manage the complex runbooks that orchestrate the deployment of a complex application, along with automating mundane tasks for the Kubernetes platform.
   
 Kubernetes operators build on custom resources and controllers. In plain terms, an IT admin can define their resources in Kubernetes and publish logic -- via an operator -- that can handle CRUD operations for the custom resource. These custom resources can model a complex application or a standard templatized application; the operators maintain the resource's lifecycle.
+
+
+### Kustomize
+
 
 ## IAM w Kubernetesie
 ### **IAM w Kubernetesie**
